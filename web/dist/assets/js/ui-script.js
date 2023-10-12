@@ -129,37 +129,71 @@
     };
     window.uiJSScrollBlock = scrollBlock;
 
+    // elFocus
+    var elFocus = ($el) => {
+        var setTabindex = false;
+
+        if (!$el.attr('tabindex')) {
+            $el.attr('tabindex', '0');
+            setTabindex = true;
+        }
+
+        $el.focus();
+
+        if (setTabindex) {
+            $el.removeAttr('tabindex');
+        }
+    };
+
     // layer
     var uiLayer = {
         zIndex: 10000,
         open: function (target, opener, speed) {
             var _ = uiLayer;
             var $html = $('html');
+            var $body = $('body');
             var $layer = $('[data-layer="' + target + '"]');
+            var $layerContainer = null;
+            var $layers = $('[data-layer]');
+            var $label = null;
+            var $inElements = null;
+            var $preOpenLayers = null;
+            var $preOpenLayersContainer = null;
+            var $ohterElements = null;
+            var $preLayersElements = null;
             var timer = null;
             var hasScrollBlock = true;
             var isFocus = true;
             var isCycleFocus = true;
             var speed = typeof speed === 'number' ? speed : 350;
-            var $label = null;
             var hashCode = '';
             var labelID = '';
-            var $layers = $('[data-layer]');
-            var $preOpenLayers = $layers.filter('.js-layer-opened').not($layer);
+            var display = 'block';
             var notOhterElements =
-                'script, link, style, base, meta, br, [aria-hidden], [inert], .js-not-inert, .js-not-inert *, [data-ui-js], [data-layer], [data-layer] *, option, ul, dl, table, thead, tbody, tfoot, tr, colgroup, col, :empty, .popup_wrapper, .popup_wrapper *';
-            var $ohterElements = $('body *').filter(function () {
-                var $this = $(this);
-                return !$this.is(notOhterElements) && $this.is(':visible');
-            });
-            var $preLayersElements = $preOpenLayers.find('*').not(notOhterElements);
+                'script, link, style, base, meta, br, [aria-hidden], [inert], .jsNotInert, .jsNotInert *, [data-ui-js], option, ul, dl, table, thead, tbody, tfoot, tr, colgroup, col, :empty:not([tabindex])';
 
-            $layers.parents().each(function () {
-                $ohterElements = $ohterElements.not($(this));
-            });
+            if ($layer.length && !$layer.hasClass('jsLayerOpened')) {
+                $layer.trigger('layerBeforeOpened');
 
-            if ($layer.length && !$layer.hasClass('js-layer-opened')) {
+                if (!$layer.parent().is($body)) {
+                    $body.append($layer);
+                }
+
+                $layerContainer = $layer.find('.layerContainer');
                 $label = $layer.find('h1, h2, h3, h4, h5, h6, p').eq(0);
+                $inElements = $layer.find('[data-ui-js="hidden"]');
+                $preOpenLayers = $layers.filter('.jsLayerOpened').not($layer);
+                $preOpenLayersContainer = $preOpenLayers.find('.layerContainer');
+                $ohterElements = $('body *').filter(function () {
+                    var $this = $(this);
+                    return !$this.is('[data-layer]') && !$this.closest('[data-layer]').length && !$this.is(notOhterElements) && $this.is(':visible');
+                });
+                $preLayersElements = $preOpenLayers.find('*').filter(function () {
+                    var $this = $(this);
+                    return !$this.is(notOhterElements);
+                });
+                timer = $layer.data('timer') || timer;
+
                 hashCode = (function () {
                     var code = $layer.data('uiJSHashCode');
                     if (!(typeof code === 'string')) {
@@ -170,69 +204,23 @@
                 })();
                 hasScrollBlock = (function () {
                     var val = $layer.data('scroll-block');
-                    return typeof val === 'boolean' ? val : true;
+                    return typeof val === 'boolean' ? val : hasScrollBlock;
                 })();
                 isFocus = (function () {
                     var val = $layer.data('focus');
-                    return typeof val === 'boolean' ? val : true;
+                    return typeof val === 'boolean' ? val : isFocus;
                 })();
                 isCycleFocus = (function () {
                     var val = $layer.data('cycle-focus');
-                    return typeof val === 'boolean' ? val : true;
+                    return typeof val === 'boolean' ? val : isCycleFocus;
+                })();
+                display = (function () {
+                    var val = $layer.data('layer-display');
+                    return typeof val === 'string' ? val : display;
                 })();
 
                 _.zIndex++;
-                $layer.trigger('layerBeforeOpened').attr('role', 'dialog').attr('aria-hidden', 'true').css('visibility', 'hidden').attr('hidden', '');
-                if ($label.length) {
-                    labelID = (function () {
-                        var id = $label.attr('id');
-                        if (!(typeof id === 'string' && id.length)) {
-                            id = target + '-' + hashCode;
-                            $label.attr('id', id);
-                        }
-                        return id;
-                    })();
-                    $layer.attr('aria-labelledby', labelID);
-                }
-                $html.addClass('js-html-layer-opened js-html-layer-opened-' + target);
-
-                $ohterElements.attr('aria-hidden', 'true').attr('inert', '').attr('data-ui-js', 'hidden');
-                $preLayersElements.attr('aria-hidden', 'true').attr('inert', '').attr('data-ui-js', 'hidden');
-                $preOpenLayers.attr('aria-hidden', 'true').attr('inert', '').removeAttr('aria-modal');
-
-                if (isCycleFocus && !$layer.children('.js-loop-focus').length) {
-                    $('<div class="js-loop-focus" tabindex="0"></div>')
-                        .on('focusin.uiLayer', function () {
-                            $layer.focus();
-                        })
-                        .appendTo($layer);
-                }
-
-                $layer
-                    .stop()
-                    .removeClass('js-layer-closed')
-                    .css({
-                        display: 'block',
-                        zIndex: _.zIndex,
-                    })
-                    .animate(
-                        {
-                            opacity: 1,
-                        },
-                        speed,
-                        function () {
-                            if (isFocus) {
-                                $layer.focus();
-                            }
-                            $layer.removeClass('js-layer-animated').trigger('layerAfterOpened');
-                        }
-                    )
-                    .attr('tabindex', '0')
-                    .attr('aria-hidden', 'false')
-                    .attr('aria-modal', 'true')
-                    .css('visibility', 'visible')
-                    .removeAttr('hidden')
-                    .data('layerIndex', $('.js-layer-opened').length);
+                clearTimeout(timer);
 
                 if (hasScrollBlock) {
                     scrollBlock.block();
@@ -242,152 +230,223 @@
                     $layer.data('layerOpener', $(opener));
                 }
 
+                $layerContainer.attr('role', 'dialog').attr('aria-hidden', 'true').css('visibility', 'hidden').attr('hidden', '');
+
+                if ($label.length) {
+                    labelID = (function () {
+                        var id = $label.attr('id');
+                        if (!(typeof id === 'string' && id.length)) {
+                            id = target + '_' + hashCode;
+                            $label.attr('id', id);
+                        }
+                        return id;
+                    })();
+                    $layerContainer.attr('aria-labelledby', labelID);
+                }
+
+                $layer.removeAttr('aria-hidden').removeAttr('inert');
+                $inElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+                $ohterElements.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
+                $preLayersElements.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
+                $preOpenLayersContainer.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
+                $preOpenLayers.attr('aria-hidden', 'true');
+
+                if (!userAgentCheck.isAndroid && !userAgentCheck.isIos) {
+                    $ohterElements.attr('inert', '');
+                    $preLayersElements.attr('inert', '');
+                    $preOpenLayersContainer.attr('inert', '');
+                    $preOpenLayers.attr('inert', '');
+                }
+
+                if (isCycleFocus) {
+                    if (!$layer.children('.jsLayerBeforeLoopFocus').length) {
+                        $('<div class="jsLayerBeforeLoopFocus" tabindex="0"></div>')
+                            .on('focusin.uiLayer', function () {
+                                var $lastChild = (function () {
+                                    var $el = $layerContainer.find(':last-child');
+                                    var length = $el.length;
+                                    return length ? $el.eq(length - 1) : null;
+                                })();
+
+                                if ($lastChild) {
+                                    elFocus($lastChild);
+                                } else {
+                                    $layerContainer.focus();
+                                }
+                            })
+                            .prependTo($layer);
+                    }
+
+                    if (!$layer.children('.jsLayerAfterLoopFocus').length) {
+                        $('<div class="jsLayerAfterLoopFocus" tabindex="0"></div>')
+                            .on('focusin.uiLayer', function () {
+                                $layerContainer.focus();
+                            })
+                            .appendTo($layer);
+                    }
+                }
+
+                $layer.stop().removeClass('jsLayerClosed').css({
+                    display: display,
+                    zIndex: _.zIndex,
+                });
+                $layerContainer.attr('tabindex', '0').attr('aria-hidden', 'false').attr('aria-modal', 'true').css('visibility', 'visible').removeAttr('hidden');
+
                 timer = setTimeout(function () {
                     clearTimeout(timer);
-                    $layer.addClass('js-layer-opened js-layer-animated').trigger('layerOpened');
+
+                    $html.addClass('jsHtmlLayerOpened jsHtmlLayerOpened_' + target);
+                    $layer
+                        .addClass('jsLayerOpened jsLayerAnimated')
+                        .animate(
+                            {
+                                opacity: 1,
+                            },
+                            speed,
+                            function () {
+                                if (isFocus) {
+                                    $layerContainer.focus();
+                                }
+                                $layer.removeClass('jsLayerAnimated').trigger('layerAfterOpened');
+                            }
+                        )
+                        .trigger('layerOpened');
                 }, 0);
+
+                $layer.data('timer', timer);
             }
         },
         close: function (target, speed) {
             var $html = $('html');
             var $layer = $('[data-layer="' + target + '"]');
+            var $layerContainer = null;
             var $opener = $layer.data('layerOpener');
             var $allOpener = $('[data-layer-open="' + target + '"]');
-            var isScrollBlock = $html.hasClass(scrollBlock.className.block);
             var timer = null;
             var speed = typeof speed === 'number' ? speed : 350;
+            var display = 'block';
+            var isOpenerFocusToAfterClose = (function () {
+                var val = $layer.data('opener-focus-to-after-close');
+                return typeof val === 'boolean' ? val : true;
+            })();
 
-            if ($layer.length && $layer.hasClass('js-layer-opened')) {
-                if ($allOpener && $allOpener.length) {
-                    $allOpener.removeClass('js-layer-opener-active');
-                }
+            if ($layer.length && $layer.hasClass('jsLayerOpened')) {
+                $layer.trigger('layerBeforeClosed');
 
-                $layer
-                    .trigger('layerBeforeClosed')
-                    .stop()
-                    .removeClass('js-layer-opened')
-                    .addClass('js-layer-closed js-layer-animated')
-                    .css('display', 'block')
-                    .data('layerIndex', null)
-                    .attr('aria-hidden', 'true')
-                    .removeAttr('aria-modal')
-                    .animate(
-                        {
-                            opacity: 0,
-                        },
-                        speed,
-                        function () {
-                            var $ohterElements = $('body').find('[data-ui-js="hidden"]');
-                            var $preOpenLayers = $('[data-layer].js-layer-opened').not($layer);
-                            var $preOpenLayerHasScrollBlock = $preOpenLayers.not(function () {
-                                var val = $(this).data('scroll-block');
-                                return typeof val === 'boolean' ? val : false;
-                            });
-                            var preOpenLayersHigherZIndex = (function () {
-                                var array = [];
-                                $preOpenLayers.each(function () {
-                                    var zIndex = $(this).css('z-index');
-                                    array.push(zIndex);
-                                });
-                                array.sort();
-                                return array[array.length - 1];
-                            })();
-                            var $preOpenLayer = $preOpenLayers.filter(function () {
-                                var zIndex = $(this).css('z-index');
+                $layerContainer = $layer.find('.layerContainer');
+                timer = $layer.data('timer') || timer;
+                display = (function () {
+                    var val = $layer.data('layer-display');
+                    return typeof val === 'string' ? val : display;
+                })();
 
-                                return zIndex === preOpenLayersHigherZIndex;
-                            });
-                            var $preOpenLayerOhterElements = $preOpenLayer.find('[data-ui-js="hidden"]');
-                            var $openerClosest = null;
+                clearTimeout(timer);
 
-                            $(this).css('display', 'none').css('visibility', 'hidden').attr('hidden', '').removeClass('js-layer-closed');
-
-                            $html.removeClass('js-html-layer-closed-animate js-html-layer-opened-' + target);
-
-                            if ($preOpenLayer.length) {
-                                $preOpenLayerOhterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
-                                $preOpenLayer.attr('aria-hidden', 'false').removeAttr('inert').attr('aria-modal', 'true');
-                            }
-
-                            if (!$preOpenLayers.length) {
-                                $html.removeClass('js-html-layer-opened');
-                                $ohterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
-                            }
-
-                            if (!$preOpenLayerHasScrollBlock.length && isScrollBlock) {
-                                scrollBlock.clear();
-                            }
-
-                            if ($opener && $opener.length) {
-                                if ($preOpenLayers.length) {
-                                    $openerClosest = $opener.closest($preOpenLayers);
-                                    if ($openerClosest.length && $openerClosest.hasClass('js-layer-opened')) {
-                                        $opener.focus();
-                                    }
-                                } else {
-                                    $opener.focus();
-                                }
-                                $layer.data('layerOpener', null);
-                            } else {
-                                $html.attr('tabindex', '0').focus().removeAttr('tabindex');
-                            }
-
-                            $layer.removeClass('js-layer-animated').trigger('layerAfterClosed');
-                        }
-                    )
-                    .trigger('layerClosed');
+                $layer.stop().css('display', display);
+                $layerContainer.attr('aria-hidden', 'true').removeAttr('aria-modal').attr('hidden', '');
 
                 timer = setTimeout(function () {
                     clearTimeout(timer);
-                    $html.addClass('js-html-layer-closed-animate');
-                }, 0);
-            }
-        },
-        checkFocus: function (e) {
-            var $layer = $('[data-layer]')
-                .not(':hidden')
-                .not(function () {
-                    var val = $(this).data('scroll-block');
-                    if (typeof val === 'boolean' && !val) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-            var $target = $(e.target);
-            var $closest = $target.closest('[data-layer]');
-            var lastIndex = (function () {
-                var index = 0;
-                $layer.each(function () {
-                    var crrI = $(this).data('layerIndex');
-                    if (crrI > index) {
-                        index = crrI;
-                    }
-                });
-                return index;
-            })();
-            var checkLayer =
-                $layer.length && !($target.is($layer) && $target.data('layerIndex') === lastIndex) && !($closest.length && $closest.is($layer) && $closest.data('layerIndex') === lastIndex);
 
-            if (checkLayer) {
-                $layer
-                    .filter(function () {
-                        return $(this).data('layerIndex') === lastIndex;
-                    })
-                    .focus();
+                    $html.addClass('jsHtmlLayerClosedAnimate');
+
+                    if ($allOpener && $allOpener.length) {
+                        $allOpener.removeClass('jsLayerOpenerActive');
+                    }
+
+                    $layer
+                        .addClass('jsLayerClosed jsLayerAnimated')
+                        .removeClass('jsLayerOpened')
+                        .animate(
+                            {
+                                opacity: 0,
+                            },
+                            speed,
+                            function () {
+                                var $preOpenLayers = $('[data-layer].jsLayerOpened').not($layer);
+                                var $preOpenLayer = (function () {
+                                    if (!$preOpenLayers.length) return null;
+
+                                    var higherZIndex = (() => {
+                                        var arr = [];
+                                        for (var i = 0; i < $preOpenLayers.length; i++) {
+                                            arr.push($preOpenLayers.eq(i).css('z-index'));
+                                        }
+                                        arr.sort();
+                                        return arr[arr.length - 1];
+                                    })();
+
+                                    return $preOpenLayers.filter(function () {
+                                        var zIndex = $(this).css('z-index');
+
+                                        return zIndex === higherZIndex;
+                                    });
+                                })();
+                                var $preOpenLayerContainer = $preOpenLayer && $preOpenLayer.length ? $preOpenLayer.find('.layerContainer') : null;
+                                var $preOpenLayerOhterElements = $preOpenLayer ? $preOpenLayer.find('[data-ui-js="hidden"]') : null;
+                                var $ohterElements = null;
+                                var isPreOpenLayerHasScrollBlock = (function () {
+                                    if (!$preOpenLayer || !$preOpenLayer.length) return true;
+
+                                    var val = $preOpenLayer.data('scroll-block');
+
+                                    return typeof val === 'boolean' ? val : true;
+                                })();
+                                var isScrollBlock = $html.hasClass(scrollBlock.className.block);
+
+                                if ($preOpenLayer && $preOpenLayer.length) {
+                                    $preOpenLayerOhterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+                                    $preOpenLayerContainer.removeAttr('inert').attr('aria-hidden', 'false').attr('aria-modal', 'true');
+                                    $preOpenLayer.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+                                } else {
+                                    $ohterElements = $('body').find('[data-ui-js="hidden"]');
+
+                                    $html.removeClass('jsHtmlLayerOpened');
+                                    $ohterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+                                }
+
+                                if (!$preOpenLayers.length || (!isPreOpenLayerHasScrollBlock && isScrollBlock)) {
+                                    scrollBlock.clear();
+                                } else if (isPreOpenLayerHasScrollBlock && !isScrollBlock) {
+                                    scrollBlock.block();
+                                }
+
+                                if ($opener && $opener.length) {
+                                    if (isOpenerFocusToAfterClose) {
+                                        if ($preOpenLayer && $preOpenLayer.length) {
+                                            if ($opener.closest('[data-layer]').is($preOpenLayer)) {
+                                                elFocus($opener);
+                                            }
+                                        } else {
+                                            elFocus($opener);
+                                        }
+                                    }
+                                    $layer.data('layerOpener', null);
+                                } else {
+                                    elFocus($html);
+                                }
+
+                                $html.removeClass('jsHtmlLayerClosedAnimate jsHtmlLayerOpened_' + target);
+                                $layerContainer.css('visibility', 'hidden');
+                                $layer.css('display', 'none').removeClass('jsLayerClosed jsLayerAnimated').trigger('layerAfterClosed');
+                            }
+                        )
+                        .trigger('layerClosed');
+                }, 0);
+
+                $layer.data('timer', timer);
             }
         },
     };
     window.uiJSLayer = uiLayer;
 
-    $doc.on('focusin.uiLayer', uiLayer.checkFocus)
-        .on('click.uiLayer', '[data-role="layerClose"]', function () {
-            var $this = $(this);
-            var $layer = $this.closest('[data-layer]');
-            if ($layer.length) {
-                uiLayer.close($layer.attr('data-layer'));
-            }
-        })
+    $doc.on('click.uiLayer', '[data-role="layerClose"]', function () {
+        var $this = $(this);
+        var $layer = $this.closest('[data-layer]');
+        if ($layer.length) {
+            uiLayer.close($layer.attr('data-layer'));
+        }
+    })
         .on('click.uiLayer', '[data-layer-open]', function (e) {
             var $this = $(this);
             var layer = $this.attr('data-layer-open');
@@ -398,11 +457,11 @@
             })();
 
             if ($layer.length) {
-                if (isToggle && $layer.hasClass('js-layer-opened')) {
+                if (isToggle && $layer.hasClass('jsLayerOpened')) {
                     uiLayer.close(layer);
                 } else {
                     if (isToggle) {
-                        $this.addClass('js-layer-opener-active');
+                        $this.addClass('jsLayerOpenerActive');
                     }
                     uiLayer.open(layer);
                     $layer.data('layerOpener', $this);
@@ -426,6 +485,129 @@
             var timer = $this.data('layer-timer');
             clearTimeout(timer);
         });
+
+    // alert
+    function uiAlert(customOption) {
+        var defaultOption = {
+            title: '',
+            message: '',
+            buttons: [{}],
+        };
+        var defaultButtonsOption = {
+            text: '확인',
+            type: '', // secondary
+            html: function (options, triggerClassName) {
+                var html = '';
+                var type = options.type.length ? 'uiBasicButton--' + options.type : '';
+
+                html += '<button type="button" class="uiButton uiBasicButton uiBasicButton--medium ' + type + ' ' + triggerClassName + '">';
+                html += '<span class="uiBasicButton__text">' + options.text + '</span>';
+                html += '</button>';
+
+                return html;
+            },
+            callback: function (closeFn) {
+                closeFn();
+            },
+        };
+        var options = $.extend({}, defaultOption, customOption);
+        var hashCode = uiGetHashCode();
+        var html = '';
+        var triggerClassName = 'jsUiAlertButton';
+        var $buttons = [];
+        var $layer = null;
+        var layerName = 'uiAlert_' + hashCode;
+        var closeFn = function () {
+            uiLayer.close(layerName);
+        };
+        var buttonsCallback = [];
+        var $lastFocus = $(':focus');
+
+        $.each(options, function (key, val) {
+            if (key === 'buttons') {
+                $.each(val, function (i, button) {
+                    options.buttons[i] = $.extend({}, defaultButtonsOption, button);
+
+                    var $el = $(
+                        '<li class="uiButtons__item">' +
+                            options.buttons[i].html(
+                                {
+                                    text: options.buttons[i].text,
+                                    type: options.buttons[i].type,
+                                },
+                                triggerClassName
+                            ) +
+                            '</li>'
+                    );
+
+                    $el.find('.' + triggerClassName).on('click.uiAlert', function () {
+                        options.buttons[i].callback(closeFn);
+                    });
+
+                    buttonsCallback[i] = function () {
+                        options.buttons[i].callback(closeFn);
+                    };
+
+                    $buttons.push($el);
+                });
+            }
+        });
+
+        html += '<div class="layerWrap layerWrap--alert" data-layer="' + layerName + '">';
+        html += '    <div class="layerContainer">';
+        html += '        <section class="uiAlert">';
+
+        if (options.title.length || options.message.length) {
+            html += '            <div class="uiAlert__body">';
+            html += '                <div class="uiAlert__bodyInner">';
+            if (options.title.length) {
+                html += '                    <h2 class="uiAlert__title">' + options.title.replace(/\n/g, '<br />') + '</h2>';
+            }
+            if (options.message.length) {
+                html += '                    <p class="uiAlert__message">' + options.message.replace(/\n/g, '<br />') + '</p>';
+            }
+            html += '                </div>';
+            html += '            </div>';
+        }
+
+        html += '            <div class="uiAlert__foot">';
+        html += '                <div class="uiButtons uiButtons--noMargin">';
+        html += '                    <ul class="uiButtons__list"></ul>';
+        html += '                </div>';
+        html += '            </div>';
+        html += '        </section>';
+        html += '    </div>';
+        html += '</div>';
+
+        $layer = $(html);
+
+        var $buttonList = $layer.find('.uiAlert__foot .uiButtons__list');
+
+        $.each($buttons, function (i, $el) {
+            $buttonList.append($el);
+        });
+
+        $layer.on('layerAfterClosed.uiAlert', function () {
+            $layer.remove();
+        });
+
+        $('body').append($layer);
+
+        uiLayer.open(layerName, $lastFocus);
+
+        return {
+            title: options.title,
+            message: options.message,
+            layerName: layerName,
+            $layer: $layer,
+            close: closeFn,
+            clear: function () {
+                uiLayer.close(layerName, 0);
+            },
+            buttonsCallback: buttonsCallback,
+        };
+    }
+    window.uiJSAlert = uiAlert;
 
     // fixBarSet
     function fixBarSet() {
