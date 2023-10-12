@@ -844,12 +844,12 @@ body,
 .uiCheckBox.uiToggleCheckBox > span {
     display: block;
     padding: 17px 24px 17px 52px;
-    background: #f3f4f6;
-    border: 1px solid #f3f4f6;
+    background: var(--systemGray100);
+    border: 1px solid var(--systemGray100);
     border-radius: 11px;
     font-size: 16px;
     font-weight: 500;
-    color: #9ca3af;
+    color: var(--systemGray400);
     transition: all 0.3s ease-out;
 }
 .uiCheckBox.uiToggleCheckBox > span::before,
@@ -860,9 +860,9 @@ body,
     height: 20px;
 }
 .uiCheckBox.uiToggleCheckBox > input[type='checkbox']:checked + span {
-    color: #1c64f2;
-    border-color: #1c64f2;
-    background-color: #ebf5ff;
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: var(--primary50);
 }
 
 .uiRadioButton {
@@ -893,9 +893,9 @@ body,
     height: 18px;
     top: 0;
     left: 0;
-    border: 1px solid #9ca3af;
+    border: 1px solid var(--systemGray400);
     border-radius: 50%;
-    background: #fff;
+    background: var(--white);
 }
 .uiRadioButton > span::after {
     width: 10px;
@@ -903,15 +903,15 @@ body,
     left: 5px;
     top: 5px;
     transform: scale(0);
-    background: #1c64f2;
+    background: var(--primary);
     border: 0 none;
     transition: all 0.3s ease-out;
 }
 .uiRadioButton > input[type='radio']:checked + span::before {
-    border-color: #1c64f2;
+    border-color: var(--primary);
 }
 .uiRadioButton > input[type='radio']:checked + span::after {
-    border-color: #1c64f2;
+    border-color: var(--primary);
     transform: scale(1);
 }
 .uiRadioButton + .uiRadioButton {
