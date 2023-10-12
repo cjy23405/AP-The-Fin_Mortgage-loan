@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>레이어 팝업 가이드</title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- favicon -->
+        <link rel="icon" href="./dist/assets/images/common/favicon.ico" type="image/x-icon" />
+        <!-- //favicon -->
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="./dist/assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/page-style.css" />
+        <style>
+            b {
+                margin-left: 10px;
+            }
+            h1.testTitle {
+                font-size: 30px;
+                margin: 50px 50px;
+            }
+            h2.testTitle {
+                margin: 0;
+                font-size: 22px;
+            }
+            .testSection {
+                border-top: 2px solid #ccc;
+                padding: 50px;
+            }
+            .testCode {
+                border: 2px solid #ccc;
+                margin: 10px 0;
+                background: #fff;
+                padding: 10px;
+            }
+            .testCode:before {
+                content: 'ex.';
+                display: block;
+                font-size: 12px;
+            }
+            .testDescription {
+                margin: 10px 0;
+                padding: 0 12px;
+            }
+            .testLinks {
+                margin-left: -20px;
+            }
+            .testLinks:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
+            .testLinks a {
+                display: block;
+                margin: 20px 0 0 20px;
+                float: left;
+                padding: 5px 15px;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                background: #333;
+            }
+            .testLinks + h2 {
+                margin-top: 20px;
+            }
+        </style>
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <div style="display: table"></div>
+
+            <h1 class="testTitle">레이어 팝업</h1>
+            <div class="testSection">
+                <h2 class="testTitle">레이어 타입</h2>
+                <div class="testLinks">
+                    <a href="" data-layer-open="test-init">최소한의 구조</a>
+                    <a href="" data-layer-open="test-basic">기본형</a>
+                    <a href="" data-layer-open="test-basic-full">기본형 Full</a>
+                </div>
+            </div>
+
+            <!-- layer: 최소한의 구조 -->
+            <div class="layer-wrap" data-layer="test-init">
+                <div class="layer-container">
+                    // contents
+                    <button type="button" data-role="layerClose">close</button>
+                </div>
+            </div>
+            <!-- //layer: 최소한의 구조 -->
+
+            <!-- layer: 기본형 -->
+            <div class="layer-wrap" data-layer="test-basic">
+                <div class="layer-container">
+                    <section class="ui-layer">
+                        <div class="ui-layer__head">
+                            <div class="layer-header">
+                                <div class="layer-header__left">
+                                    <h2 class="layer-header__title">타이틀</h2>
+                                </div>
+                                <div class="layer-header__right">
+                                    <!--
+                                    <button type="button" class="uiButton layer-header__button layer-header__button--close" data-role="layerClose">
+                                        <span class="forA11y">레이어 닫기</span>
+                                    </button>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-layer__body">
+                            <div class="ui-layer__body-inner">
+                                // contents
+                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                            </div>
+                        </div>
+                        <div class="ui-layer__foot">
+                            <div class="uiButtons uiButtons--noMargin">
+                                <ul class="uiButtons__list">
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- //layer: 기본형 -->
+
+            <!-- layer: 기본형 Full -->
+            <div class="layer-wrap layer-wrap--full" data-layer="test-basic-full">
+                <div class="layer-container">
+                    <section class="ui-layer ui-layer--full">
+                        <div class="ui-layer__head">
+                            <div class="layer-header">
+                                <div class="layer-header__left">
+                                    <h2 class="layer-header__title">타이틀</h2>
+                                </div>
+                                <div class="layer-header__right">
+                                    <!--
+                                    <button type="button" class="uiButton layer-header__button layer-header__button--close" data-role="layerClose">
+                                        <span class="forA11y">레이어 닫기</span>
+                                    </button>
+                                    -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-layer__body">
+                            <div class="ui-layer__body-inner">
+                                // contents
+                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                            </div>
+                        </div>
+                        <div class="ui-layer__foot">
+                            <div class="uiButtons uiButtons--noMargin">
+                                <ul class="uiButtons__list">
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- //layer: 기본형 Full -->
+
+            <div class="testSection">
+                <h2 class="testTitle">layer</h2>
+                <div class="testCode">
+                    &lt;div class="layer-wrap"
+                    <mark>data-layer="layer-name"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-layer="layer-name" 속성으로 해당 객체를 레이어 팝업으로 지정</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">auto close timer</h2>
+                <div class="testCode">
+                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    <mark>data-layer-timer-close="3000"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-layer-timer-close="3000" 속성으로 레이어가 자동으로 닫히는 시간을 지정 1000 = 1초</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">focus to layer - disabled</h2>
+                <div class="testCode">
+                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    <mark>data-focus="false"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-focus="false" 속성으로 레이어가 열릴 때 포커스 가게 하는 기능 비활성화</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">scroll block - disabled</h2>
+                <div class="testCode">
+                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    <mark>data-scroll-block="false"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-scroll-block="false" 속성으로 레이어가 열릴 때 페이지 스크롤이 막히는 기능을 비활성화</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">cycle focus - disabled</h2>
+                <div class="testCode">
+                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    <mark>data-cycle-focus="false"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-cycle-focus="false" 속성으로 레이어 포커스 순환 기능을 비활성화</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">opener</h2>
+                <div class="testCode">&lt;a href="" <mark>data-layer-open="layer-name"</mark>&gt;레이어 열기&lt;/a&gt;</div>
+                <div class="testDescription">data-layer-open="layer-name" 속성으로 대상 레이어 지정</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">toggle opener</h2>
+                <div class="testCode">&lt;a href=""data-layer-open="layer-name" <mark>data-toggle="true"</mark>&gt;레이어 열기&lt;/a&gt;</div>
+                <div class="testDescription">data-toggle="true" 속성으로 오프너 토글 기능 활성화</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">closer</h2>
+                <div class="testCode">&lt;button type="button" <mark>data-role="layerClose"</mark>&gt;레이어 닫기&lt;/button&gt;</div>
+                <div class="testDescription">data-role="layerClose" 속성을 대상 레이어 안에 객체 중 아무거나에 넣어두면 그 객체가 닫기 버튼 기능을 함.</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">function</h2>
+                <div class="testCode">uiJSLayer.open('layer-name' [, opener] [, speed]);</div>
+                <div class="testDescription">
+                    스크립트로 별도로 레이어를 열 때 사용<br />
+                    opener : string | HTMLElement | jQuery Selector : 해당 레이어를 닫을 때 포커스가 돌아 갈 객체를 지정 (기본 값 : null)<br />
+                    speed : number : 레이어가 닫히는 애니메이션 속도 지정 (기본 값 : 350)
+                </div>
+                <div class="testCode">uiJSLayer.close('layer-name' [, speed]);</div>
+                <div class="testDescription">
+                    스크립트로 별도로 레이어를 닫을 때 사용<br />
+                    speed : number : 레이어가 닫히는 애니메이션 속도 지정 (기본 값 : 350)
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">event</h2>
+                <div class="testCode">$('[data-layer="layer-name"]').on('layerBeforeOpened', function(){...});</div>
+                <div class="testDescription">레이어가 열리기 직전에 발생</div>
+                <div class="testCode">$('[data-layer="layer-name"]').on('layerOpened', function(){...});</div>
+                <div class="testDescription">레이어가 열릴 때 발생</div>
+                <div class="testCode">$('[data-layer="layer-name"]').on('layerAfterOpened', function(){...});</div>
+                <div class="testDescription">레이어가 열리는 애니메이션이 끝난 후 발생</div>
+                <div class="testCode">$('[data-layer="layer-name"]').on('layerBeforeClosed', function(){...});</div>
+                <div class="testDescription">레이어가 닫히기 직전에 발생</div>
+                <div class="testCode">$('[data-layer="layer-name"]').on('layerClosed', function(){...});</div>
+                <div class="testDescription">레이어가 닫힐 때 발생</div>
+                <div class="testCode">$('[data-layer="layer-name"]').on('layerAfterClosed', function(){...});</div>
+                <div class="testDescription">레이어가 닫히는 애니메이션이 끝난 후 발생</div>
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="./dist/assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="./dist/assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>

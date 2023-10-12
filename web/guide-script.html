@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>스크립트 가이드</title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- favicon -->
+        <link rel="icon" href="./dist/assets/images/common/favicon.ico" type="image/x-icon" />
+        <!-- //favicon -->
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="./dist/assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/page-style.css" />
+        <style>
+            b {
+                margin-left: 10px;
+            }
+            h1.testTitle {
+                font-size: 30px;
+                margin: 50px 50px;
+            }
+            h2.testTitle {
+                margin: 0 0 20px;
+                font-size: 22px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid #888;
+            }
+            h3.testTitle {
+                margin: 0 0 10px;
+                font-size: 18px;
+            }
+            h4.testTitle {
+                margin: 0 0 10px;
+                font-size: 16px;
+            }
+            .testSection {
+                border-top: 2px solid #ccc;
+                padding: 50px;
+            }
+            .testSectionSub + .testSectionSub {
+                margin-top: 20px;
+                border-top: 2px dashed #ccc;
+                padding-top: 20px;
+            }
+            .testSectionChild {
+                margin: 20px;
+            }
+            .testCode {
+                border: 2px solid #ccc;
+                margin: 10px 0;
+                background: #fff;
+                padding: 10px;
+            }
+            .testCode:before {
+                content: 'ex.';
+                display: block;
+                font-size: 12px;
+            }
+            .testDescription {
+                margin: 10px 0;
+                padding: 0 12px;
+            }
+            .testLinks {
+                margin-left: -20px;
+            }
+            .testLinks:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
+            .testLinks a {
+                display: block;
+                margin: 20px 0 0 20px;
+                float: left;
+                padding: 5px 15px;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                background: #333;
+            }
+            .testLinks + h2.testTitle {
+                margin-top: 20px;
+            }
+        </style>
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <div style="display: table"></div>
+
+            <h1 class="testTitle">Script</h1>
+
+            <div class="testSection">
+                <h2 class="testTitle">uiJSCommon</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">uiJSCommon($root);</h3>
+                    <div class="testDescription">
+                        ui 기능 관련 init 함수 (탭, 아코디언 등)<br />
+                        $root 인자는 선택값이며, 디폴트 $(document) 이다.<br />
+                        $root 안에 있는 객체들만 init을 적용한다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">uiJSResize</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">uiJSResize();</h3>
+                    <div class="testDescription">ui 기능 관련 resize 함수</div>
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">userAgentCheck</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">userAgentCheck.ieMode;</h3>
+                    <div class="testDescription">익스플로러 버전</div>
+                </div>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">userAgentCheck.isIos;</h3>
+                    <div class="testDescription">ios 여부</div>
+                </div>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">userAgentCheck.isAndroid;</h3>
+                    <div class="testDescription">Android 여부</div>
+                </div>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">userAgentCheck.androidVersion;</h3>
+                    <div class="testDescription">Android 버전</div>
+                </div>
+            </div>
+
+            <!--
+            <div class="testSection">
+                <style>
+                    .test- {
+                        position: relative;
+                    }
+                </style>
+                <h2 class="testTitle">.AAAAAA()</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    //
+
+                    <script type="module">
+                        //
+                    </script>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="./dist/assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="./dist/assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="./dist/assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>

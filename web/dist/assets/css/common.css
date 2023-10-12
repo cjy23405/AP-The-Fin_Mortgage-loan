@@ -1,0 +1,205 @@
+@charset "utf-8";
+
+@import '../fonts/Pretendard/style.css';
+
+:root {
+    --pageMinWidth: 280px;
+
+    --fontFamilyDefault: 'Pretendard', '맑은고딕', 'Malgun Gothic', 'Apple Gothic', sans-serif;
+
+    --lineHeightDefault: 1.3;
+    --lineHeightLabel: 1;
+
+    --black: #000;
+    --blackRgb: 0, 0, 0;
+
+    --white: #fff;
+    --whiteRgb: 255, 255, 255;
+
+    --theFinBlack: #17181a;
+    --theFinBlackRgb: 23, 24, 26;
+
+    --primary10: #390c00;
+    --primary10Rgb: 57, 12, 0;
+    --primary20: #5d1900;
+    --primary20Rgb: 93, 25, 0;
+    --primary30: #832700;
+    --primary30Rgb: 131, 39, 0;
+    --primary40: #962e01;
+    --primary40Rgb: 150, 46, 1;
+    --primary50: #b44011;
+    --primary50Rgb: 180, 64, 17;
+    --primary60: #c85226;
+    --primary60Rgb: 200, 82, 38;
+    --primary70: #ea6a3c;
+    --primary70Rgb: 234, 106, 60;
+    --primary80: #ff8b64;
+    --primary80Rgb: 255, 139, 100;
+    --primary90: #ffb59d;
+    --primary90Rgb: 255, 181, 157;
+    --primary100: #ffdbd0;
+    --primary100Rgb: 255, 219, 208;
+    --primary110: #ffede8;
+    --primary110Rgb: 255, 237, 232;
+    --primary120: #fff8f5;
+    --primary120Rgb: 255, 248, 245;
+
+    --systemGrays10: #172733;
+    --systemGrays10Rgb: 23, 39, 51;
+    --systemGrays20: #303c44;
+    --systemGrays20Rgb: 48, 60, 68;
+    --systemGrays30: #455057;
+    --systemGrays30Rgb: 69, 80, 87;
+    --systemGrays40: #59656d;
+    --systemGrays40Rgb: 89, 101, 109;
+    --systemGrays50: #6f7a81;
+    --systemGrays50Rgb: 111, 122, 129;
+    --systemGrays60: #858f96;
+    --systemGrays60Rgb: 133, 143, 150;
+    --systemGrays70: #858f96;
+    --systemGrays70Rgb: 155, 164, 171;
+    --systemGrays80: #b0b9c0;
+    --systemGrays80Rgb: 155, 164, 171;
+    --systemGrays90: #c7cfd5;
+    --systemGrays90Rgb: 199, 207, 213;
+    --systemGrays100: #dde3e7;
+    --systemGrays100Rgb: 221, 227, 231;
+    --systemGrays110: #eef2f5;
+    --systemGrays110Rgb: 238, 242, 245;
+    --systemGrays120: #f5f7f9;
+    --systemGrays120Rgb: 245, 247, 249;
+
+    --systemStateError: #ba1a1a;
+    --systemStateErrorRgb: 186, 26, 26;
+}
+
+/* init */
+html,
+body,
+pre,
+button,
+select,
+textarea,
+[type='button'],
+[type='submit'],
+[type='text'],
+[type='password'],
+[type='search'],
+[type='email'],
+[type='url'],
+[type='number'],
+[type='tel'],
+[type='file'],
+[type='date'],
+[type='time'] {
+    font-family: var(--fontFamilyDefault);
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    color: var(--theFinBlack);
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+button:focus:not(:focus-visible),
+[type='button']:focus:not(:focus-visible),
+[type='submit']:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+    outline: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+@-moz-document url-prefix() {
+    select {
+        text-indent: -2px;
+    }
+}
+
+/* script style */
+.isScrollBlocking,
+.isScrollBlocking body,
+.isScrollBlocking #wrap {
+    overflow: hidden;
+}
+.isScrollBlocking #wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.isScrollBlocking.isScrollbarsWidth #wrap {
+    margin-right: 17px;
+}
+.closeText {
+    display: none;
+}
+.jsUiAccordion__opener.jsAccordionActive .openText {
+    display: none;
+}
+.jsUiAccordion__opener.jsAccordionActive .closeText {
+    display: inline;
+}
+
+/* reset style */
+.uiButton {
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    overflow: visible;
+}
+.uiButton[type='submit'] {
+    filter: chroma(color=#000000);
+}
+.uiButton::-moz-focus-inner {
+    padding: 0;
+    border: none;
+}
+.uiButton[disabled] {
+    cursor: default;
+    opacity: 1;
+}
+.uiRadio,
+.uiCheckbox {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+    width: 13px;
+    height: 13px;
+}
+.uiFieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* hidden text style */
+.forA11y {
+    display: block;
+    margin: 0;
+    position: absolute;
+    z-index: -1;
+    width: 1px;
+    height: 1px;
+    color: transparent;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=0)';
+    filter: alpha(opacity=0);
+    background: none;
+}
+caption.forA11y {
+    display: table-caption;
+    margin: 0 0 -1px;
+    position: static;
+}
