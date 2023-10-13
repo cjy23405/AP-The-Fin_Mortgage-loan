@@ -79,46 +79,39 @@
             <div class="testSection">
                 <h2 class="testTitle">레이어 타입</h2>
                 <div class="testLinks">
-                    <a href="" data-layer-open="test-init">최소한의 구조</a>
-                    <a href="" data-layer-open="test-basic">기본형</a>
-                    <a href="" data-layer-open="test-basic-full">기본형 Full</a>
+                    <a href="" data-layer-open="testInit">최소한의 구조</a>
+                    <a href="" data-layer-open="testToast">토스트형</a>
+                    <a href="" data-layer-open="testToastFix">토스트형 높이 고정</a>
+                    <a href="" data-layer-open="testAlert">얼럿형</a>
                 </div>
             </div>
 
             <!-- layer: 최소한의 구조 -->
-            <div class="layer-wrap" data-layer="test-init">
-                <div class="layer-container">
+            <div class="layerWrap" data-layer="testInit">
+                <div class="layerContainer">
                     // contents
+                    <a href="" data-layer-open="testToast">토스트형</a>
                     <button type="button" data-role="layerClose">close</button>
                 </div>
             </div>
             <!-- //layer: 최소한의 구조 -->
 
-            <!-- layer: 기본형 -->
-            <div class="layer-wrap" data-layer="test-basic">
-                <div class="layer-container">
-                    <section class="ui-layer">
-                        <div class="ui-layer__head">
-                            <div class="layer-header">
-                                <div class="layer-header__left">
-                                    <h2 class="layer-header__title">타이틀</h2>
-                                </div>
-                                <div class="layer-header__right">
-                                    <!--
-                                    <button type="button" class="uiButton layer-header__button layer-header__button--close" data-role="layerClose">
-                                        <span class="forA11y">레이어 닫기</span>
-                                    </button>
-                                    -->
-                                </div>
-                            </div>
+            <!-- layer: 토스트형 -->
+            <div class="layerWrap layerWrap--toast" data-layer="testToast" data-layer-display="flex">
+                <div class="layerContainer">
+                    <section class="toastLayer">
+                        <div class="toastLayer__head">
+                            <h2 class="toastLayer__title">타이틀</h2>
                         </div>
-                        <div class="ui-layer__body">
-                            <div class="ui-layer__body-inner">
+                        <div class="toastLayer__body">
+                            <div class="toastLayer__bodyInner">
                                 // contents
+                                <a href="" data-layer-open="testToastFix">토스트형 높이 고정</a>
+                                <a href="" data-layer-open="testAlert" data-role="layerClose">얼럿형</a>
                                 <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
                             </div>
                         </div>
-                        <div class="ui-layer__foot">
+                        <div class="toastLayer__foot">
                             <div class="uiButtons uiButtons--noMargin">
                                 <ul class="uiButtons__list">
                                     <li class="uiButtons__item">
@@ -137,33 +130,22 @@
                     </section>
                 </div>
             </div>
-            <!-- //layer: 기본형 -->
+            <!-- //layer: 토스트형 -->
 
-            <!-- layer: 기본형 Full -->
-            <div class="layer-wrap layer-wrap--full" data-layer="test-basic-full">
-                <div class="layer-container">
-                    <section class="ui-layer ui-layer--full">
-                        <div class="ui-layer__head">
-                            <div class="layer-header">
-                                <div class="layer-header__left">
-                                    <h2 class="layer-header__title">타이틀</h2>
-                                </div>
-                                <div class="layer-header__right">
-                                    <!--
-                                    <button type="button" class="uiButton layer-header__button layer-header__button--close" data-role="layerClose">
-                                        <span class="forA11y">레이어 닫기</span>
-                                    </button>
-                                    -->
-                                </div>
-                            </div>
+            <!-- layer: 토스트형 높이 고정 -->
+            <div class="layerWrap layerWrap--toastFix" data-layer="testToastFix" data-layer-display="flex">
+                <div class="layerContainer">
+                    <section class="toastLayer toastLayer--fix">
+                        <div class="toastLayer__head">
+                            <h2 class="toastLayer__title">타이틀</h2>
                         </div>
-                        <div class="ui-layer__body">
-                            <div class="ui-layer__body-inner">
+                        <div class="toastLayer__body">
+                            <div class="toastLayer__bodyInner">
                                 // contents
-                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                                <a href="" data-layer-open="testAlert">얼럿형</a>
                             </div>
                         </div>
-                        <div class="ui-layer__foot">
+                        <div class="toastLayer__foot">
                             <div class="uiButtons uiButtons--noMargin">
                                 <ul class="uiButtons__list">
                                     <li class="uiButtons__item">
@@ -182,26 +164,61 @@
                     </section>
                 </div>
             </div>
-            <!-- //layer: 기본형 Full -->
+            <!-- //layer: 토스트형 높이 고정 -->
+
+            <!-- layer: 얼럿형 -->
+            <div class="layerWrap layerWrap--alert" data-layer="testAlert" data-dim-close="false">
+                <div class="layerContainer">
+                    <section class="uiAlert">
+                        <div class="uiAlert__body">
+                            <div class="uiAlert__bodyInner">
+                                <h2 class="uiAlert__title">타이틀</h2>
+                                <p class="uiAlert__message">
+                                    여기에 내용이 표시될 예정입니다.<br />
+                                    두 줄일 경우는 이렇게<br />
+                                    세 줄일 경우는 이렿게 표시됩니다.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="uiAlert__foot">
+                            <div class="uiButtons uiButtons--noMargin">
+                                <ul class="uiButtons__list">
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--medium" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- //layer: 얼럿형 -->
 
             <div class="testSection">
                 <h2 class="testTitle">layer</h2>
                 <div class="testCode">
-                    &lt;div class="layer-wrap"
-                    <mark>data-layer="layer-name"</mark>&gt;<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &lt;div class="layerWrap"
+                    <mark>data-layer="layerName"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
                     &lt;/div&gt;
                 </div>
-                <div class="testDescription">data-layer="layer-name" 속성으로 해당 객체를 레이어 팝업으로 지정</div>
+                <div class="testDescription">data-layer="layerName" 속성으로 해당 객체를 레이어 팝업으로 지정</div>
             </div>
 
             <div class="testSection">
                 <h2 class="testTitle">auto close timer</h2>
                 <div class="testCode">
-                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    &lt;div class="layerWrap" data-layer="layerName"
                     <mark>data-layer-timer-close="3000"</mark>&gt;<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
                     &lt;/div&gt;
                 </div>
@@ -211,9 +228,9 @@
             <div class="testSection">
                 <h2 class="testTitle">focus to layer - disabled</h2>
                 <div class="testCode">
-                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    &lt;div class="layerWrap" data-layer="layerName"
                     <mark>data-focus="false"</mark>&gt;<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
                     &lt;/div&gt;
                 </div>
@@ -223,9 +240,9 @@
             <div class="testSection">
                 <h2 class="testTitle">scroll block - disabled</h2>
                 <div class="testCode">
-                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    &lt;div class="layerWrap" data-layer="layerName"
                     <mark>data-scroll-block="false"</mark>&gt;<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
                     &lt;/div&gt;
                 </div>
@@ -235,9 +252,9 @@
             <div class="testSection">
                 <h2 class="testTitle">cycle focus - disabled</h2>
                 <div class="testCode">
-                    &lt;div class="layer-wrap" data-layer="layer-name"
+                    &lt;div class="layerWrap" data-layer="layerName"
                     <mark>data-cycle-focus="false"</mark>&gt;<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layer-container"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
                     &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
                     &lt;/div&gt;
                 </div>
@@ -245,14 +262,38 @@
             </div>
 
             <div class="testSection">
+                <h2 class="testTitle">dim close - disabled</h2>
+                <div class="testCode">
+                    &lt;div class="layerWrap" data-layer="layerName"
+                    <mark>data-dim-close="false"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-dim-close="false" 속성으로 딤 영역 클릭시 닫힘 기능을 비활성화</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">opener focus to after close - disabled</h2>
+                <div class="testCode">
+                    &lt;div class="layerWrap" data-layer="layerName"
+                    <mark>data-opener-focus-to-after-close="false"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-opener-focus-to-after-close="false" 속성으로 레이어 닫힌 후 오프너로 포커스 돌아가는 기능을 비활성화</div>
+            </div>
+
+            <div class="testSection">
                 <h2 class="testTitle">opener</h2>
-                <div class="testCode">&lt;a href="" <mark>data-layer-open="layer-name"</mark>&gt;레이어 열기&lt;/a&gt;</div>
-                <div class="testDescription">data-layer-open="layer-name" 속성으로 대상 레이어 지정</div>
+                <div class="testCode">&lt;a href="" <mark>data-layer-open="layerName"</mark>&gt;레이어 열기&lt;/a&gt;</div>
+                <div class="testDescription">data-layer-open="layerName" 속성으로 대상 레이어 지정</div>
             </div>
 
             <div class="testSection">
                 <h2 class="testTitle">toggle opener</h2>
-                <div class="testCode">&lt;a href=""data-layer-open="layer-name" <mark>data-toggle="true"</mark>&gt;레이어 열기&lt;/a&gt;</div>
+                <div class="testCode">&lt;a href=""data-layer-open="layerName" <mark>data-toggle="true"</mark>&gt;레이어 열기&lt;/a&gt;</div>
                 <div class="testDescription">data-toggle="true" 속성으로 오프너 토글 기능 활성화</div>
             </div>
 
@@ -264,13 +305,13 @@
 
             <div class="testSection">
                 <h2 class="testTitle">function</h2>
-                <div class="testCode">uiJSLayer.open('layer-name' [, opener] [, speed]);</div>
+                <div class="testCode">uiJSLayer.open('layerName' [, opener] [, speed]);</div>
                 <div class="testDescription">
                     스크립트로 별도로 레이어를 열 때 사용<br />
                     opener : string | HTMLElement | jQuery Selector : 해당 레이어를 닫을 때 포커스가 돌아 갈 객체를 지정 (기본 값 : null)<br />
                     speed : number : 레이어가 닫히는 애니메이션 속도 지정 (기본 값 : 350)
                 </div>
-                <div class="testCode">uiJSLayer.close('layer-name' [, speed]);</div>
+                <div class="testCode">uiJSLayer.close('layerName' [, speed]);</div>
                 <div class="testDescription">
                     스크립트로 별도로 레이어를 닫을 때 사용<br />
                     speed : number : 레이어가 닫히는 애니메이션 속도 지정 (기본 값 : 350)
@@ -279,17 +320,17 @@
 
             <div class="testSection">
                 <h2 class="testTitle">event</h2>
-                <div class="testCode">$('[data-layer="layer-name"]').on('layerBeforeOpened', function(){...});</div>
+                <div class="testCode">$('[data-layer="layerName"]').on('layerBeforeOpened', function(){...});</div>
                 <div class="testDescription">레이어가 열리기 직전에 발생</div>
-                <div class="testCode">$('[data-layer="layer-name"]').on('layerOpened', function(){...});</div>
+                <div class="testCode">$('[data-layer="layerName"]').on('layerOpened', function(){...});</div>
                 <div class="testDescription">레이어가 열릴 때 발생</div>
-                <div class="testCode">$('[data-layer="layer-name"]').on('layerAfterOpened', function(){...});</div>
+                <div class="testCode">$('[data-layer="layerName"]').on('layerAfterOpened', function(){...});</div>
                 <div class="testDescription">레이어가 열리는 애니메이션이 끝난 후 발생</div>
-                <div class="testCode">$('[data-layer="layer-name"]').on('layerBeforeClosed', function(){...});</div>
+                <div class="testCode">$('[data-layer="layerName"]').on('layerBeforeClosed', function(){...});</div>
                 <div class="testDescription">레이어가 닫히기 직전에 발생</div>
-                <div class="testCode">$('[data-layer="layer-name"]').on('layerClosed', function(){...});</div>
+                <div class="testCode">$('[data-layer="layerName"]').on('layerClosed', function(){...});</div>
                 <div class="testDescription">레이어가 닫힐 때 발생</div>
-                <div class="testCode">$('[data-layer="layer-name"]').on('layerAfterClosed', function(){...});</div>
+                <div class="testCode">$('[data-layer="layerName"]').on('layerAfterClosed', function(){...});</div>
                 <div class="testDescription">레이어가 닫히는 애니메이션이 끝난 후 발생</div>
             </div>
         </div>

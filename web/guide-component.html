@@ -98,9 +98,9 @@
                 <div class="testSectionSub">
                     <h3 class="testTitle">Title</h3>
 
-                    <p class="titleLarge">.titleLarge ( font-size: 22px / line-height: 1.3 )</p>
-                    <p class="titleMedium">.titleMedium ( font-size: 18px / line-height: 1.3 )</p>
-                    <p class="titleSmall">.titleSmall ( font-size: 14px / line-height: 1.3 )</p>
+                    <p class="titleLarge">.titleLarge ( font-size: 20px / line-height: 1.3 / font-weight: 600 )</p>
+                    <p class="titleMedium">.titleMedium ( font-size: 18px / line-height: 1.3 / font-weight: 500 )</p>
+                    <p class="titleSmall">.titleSmall ( font-size: 14px / line-height: 1.3 / font-weight: 500 )</p>
                 </div>
 
                 <div class="testSectionSub">
@@ -116,11 +116,11 @@
                 <div class="testSectionSub">
                     <h3 class="testTitle">Label</h3>
 
-                    <p class="textLabelLarge">.textLabelLarge ( font-size: 20px / line-height: 1 )</p>
-                    <p class="textLabelMedium">.textLabelMedium ( font-size: 18px / line-height: 1 )</p>
-                    <p class="textLabel1">.textLabel1 ( font-size: 14px / line-height: 1 )</p>
-                    <p class="textLabel2">.textLabel2 ( font-size: 12px / line-height: 1 )</p>
-                    <p class="textLabel3">.textLabel3 ( font-size: 11px / line-height: 1 )</p>
+                    <p class="textLabelLarge">.textLabelLarge ( font-size: 20px / line-height: 1 / font-weight: 500 )</p>
+                    <p class="textLabelMedium">.textLabelMedium ( font-size: 18px / line-height: 1 / font-weight: 500 )</p>
+                    <p class="textLabel1">.textLabel1 ( font-size: 14px / line-height: 1 / font-weight: 500 )</p>
+                    <p class="textLabel2">.textLabel2 ( font-size: 12px / line-height: 1 / font-weight: 500 )</p>
+                    <p class="textLabel3">.textLabel3 ( font-size: 11px / line-height: 1 / font-weight: 500 )</p>
                 </div>
 
                 <div class="testSectionSub">
@@ -140,7 +140,7 @@
                 <div class="testSectionSub">
                     <h3 class="testTitle">Colors</h3>
 
-                    <div class="colorEmphasis">.colorEmphasis ( primary 40 )</div>
+                    <div class="colorEmphasis">.colorEmphasis ( primary 600 )</div>
                 </div>
 
                 <div class="testSectionSub">
@@ -303,9 +303,26 @@
                 </div>
 
                 <div class="testSectionSub">
+                    <h3 class="testTitle">size medium</h3>
+
+                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium">
+                        <span class="uiBasicButton__text">button</span>
+                    </button>
+                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium" disabled>
+                        <span class="uiBasicButton__text">button</span>
+                    </button>
+                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary">
+                        <span class="uiBasicButton__text">button</span>
+                    </button>
+                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary" disabled>
+                        <span class="uiBasicButton__text">button</span>
+                    </button>
+                </div>
+
+                <div class="testSectionSub">
                     <h3 class="testTitle">ETC</h3>
 
-                    <button type="button" class="uiButton uiBasicButton uiBasicButton--inline-block">.uiBasicButton--inline-block</button>
+                    <button type="button" class="uiButton uiBasicButton uiBasicButton--inlineBlock">.uiBasicButton--inlineBlock</button>
                     <button type="button" class="uiButton uiBasicButton uiBasicButton--auto">.uiBasicButton--auto</button>
                 </div>
             </div>
@@ -483,6 +500,282 @@
                     </div>
                 </div>
             </div>
+
+            <div class="testSection testSection--select">
+                <h2 class="testTitle">select</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <!-- select -->
+                    <div class="uiSelect">
+                        <input type="hidden" data-select-input="selectName001" />
+                        <button type="button" class="uiButton uiSelect__button" title="OOO 선택하기" data-layer-open="selectName001">
+                            <span class="uiSelect__text" data-select-view="selectName001" data-placeholder="placeholder"></span>
+                        </button>
+                        <!-- layer: OOO를 선택해주세요 -->
+                        <div class="layerWrap layerWrap--toast" data-layer="selectName001" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="toastLayer">
+                                    <div class="toastLayer__head">
+                                        <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                    </div>
+                                    <div class="toastLayer__body">
+                                        <div class="toastLayer__bodyInner">
+                                            <div class="uiSelectOptions">
+                                                <ul class="uiSelectOptions__list">
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName001"
+                                                            data-select-value="value 1"
+                                                            data-select-text="selected text 1"
+                                                            disabled
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 1</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName001"
+                                                            data-select-value="value 2"
+                                                            data-select-text="selected text 2"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 2</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName001"
+                                                            data-select-value="value 3"
+                                                            data-select-text="selected text 3"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 3</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName001"
+                                                            data-select-value="value 4"
+                                                            data-select-text="selected text 4"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 4</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName001"
+                                                            data-select-value="value 5"
+                                                            data-select-text="selected text 5"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 5</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: OOO를 선택해주세요 -->
+                    </div>
+                    <!-- //select -->
+
+                    <!-- select -->
+                    <div class="uiSelect">
+                        <input type="hidden" data-select-input="selectName002" />
+                        <button type="button" class="uiButton uiSelect__button" title="OOO 선택하기" data-layer-open="selectName002">
+                            <span class="uiSelect__text" data-select-view="selectName002" data-placeholder="placeholder"></span>
+                        </button>
+                        <!-- layer: OOO를 선택해주세요 -->
+                        <div class="layerWrap layerWrap--toast" data-layer="selectName002" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="toastLayer">
+                                    <div class="toastLayer__head">
+                                        <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                    </div>
+                                    <div class="toastLayer__body">
+                                        <div class="toastLayer__bodyInner">
+                                            <div class="uiSelectOptions">
+                                                <ul class="uiSelectOptions__list">
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName002"
+                                                            data-select-value="value 1"
+                                                            data-select-text="selected text 1"
+                                                            disabled
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 1</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName002"
+                                                            data-select-value="value 2"
+                                                            data-select-text="selected text 2"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 2</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button isSelectActive"
+                                                            data-select-option="selectName002"
+                                                            data-select-value="value 3"
+                                                            data-select-text="selected text 3"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 3</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName002"
+                                                            data-select-value="value 4"
+                                                            data-select-text="selected text 4"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 4</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName002"
+                                                            data-select-value="value 5"
+                                                            data-select-text="selected text 5"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 5</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: OOO를 선택해주세요 -->
+                    </div>
+                    <!-- //select -->
+
+                    <!-- select -->
+                    <div class="uiSelect">
+                        <input type="hidden" data-select-input="selectName003" />
+                        <button type="button" class="uiButton uiSelect__button" title="OOO 선택하기" data-layer-open="selectName003" disabled>
+                            <span class="uiSelect__text" data-select-view="selectName003" data-placeholder="placeholder"></span>
+                        </button>
+                        <!-- layer: OOO를 선택해주세요 -->
+                        <div class="layerWrap layerWrap--toast" data-layer="selectName003" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="toastLayer">
+                                    <div class="toastLayer__head">
+                                        <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                    </div>
+                                    <div class="toastLayer__body">
+                                        <div class="toastLayer__bodyInner">
+                                            <div class="uiSelectOptions">
+                                                <ul class="uiSelectOptions__list">
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName003"
+                                                            data-select-value="value 1"
+                                                            data-select-text="selected text 1"
+                                                            disabled
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 1</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button isSelectActive"
+                                                            data-select-option="selectName003"
+                                                            data-select-value="value 2"
+                                                            data-select-text="selected text 2"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 2</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName003"
+                                                            data-select-value="value 3"
+                                                            data-select-text="selected text 3"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 3</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName003"
+                                                            data-select-value="value 4"
+                                                            data-select-text="selected text 4"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 4</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button
+                                                            type="button"
+                                                            class="uiButton uiSelectOptions__button"
+                                                            data-select-option="selectName003"
+                                                            data-select-value="value 5"
+                                                            data-select-text="selected text 5"
+                                                        >
+                                                            <span class="uiSelectOptions__text">option text 5</span>
+                                                            <span class="uiSelectOptions__sub">sub text</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: OOO를 선택해주세요 -->
+                    </div>
+                    <!-- //select -->
+                </div>
+            </div>
+
             <div class="testSection testSection--checkBox">
                 <h2 class="testTitle">CheckBox</h2>
 

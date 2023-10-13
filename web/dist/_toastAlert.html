@@ -42,32 +42,20 @@
 
                 <!-- contents -->
                 <article class="contentsWrap">
-                    <div class="pageContents pageContents--페이지이름">
-                        컨텐츠 영역<br /><br />
-                        필요한 경우 "<strong>.pageContents</strong>" 에 "<strong>pageContents--페이지이름</strong>" 식으로 멀티 클래스 값을 추가하여 페이지별 스타일 제어<br /><br />
-
-                        <div style="height: 1500px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
-
-                        <!-- fix buttons -->
-                        <div class="fixBottomWrap">
-                            <div class="fixBottomWrap__area">
-                                <div class="uiButtons uiButtons--noMargin">
-                                    <ul class="uiButtons__list">
-                                        <li class="uiButtons__item">
-                                            <a href="" class="uiBasicButton uiBasicButton--secondary">
-                                                <span class="uiBasicButton__text">button</span>
-                                            </a>
-                                        </li>
-                                        <li class="uiButtons__item">
-                                            <a href="" class="uiBasicButton">
-                                                <span class="uiBasicButton__text">button</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <div class="pageContents">
+                        <div class="uiButtons uiButtons--noMargin">
+                            <ul class="uiButtons__list">
+                                <li class="uiButtons__item">
+                                    <button
+                                        type="button"
+                                        class="uiButton uiBasicButton"
+                                        onclick="uiJSToastAlert('#globalToastAlert', '토스트 안내 메세지\n줄바꿈은 \\n 이용\n세 줄일 경우는 이렿게 표시됩니다');"
+                                    >
+                                        <span class="uiBasicButton__text">토스트 얼럿</span>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-                        <!-- //fix buttons -->
                     </div>
                 </article>
                 <!-- //contents -->
