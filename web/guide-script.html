@@ -135,6 +135,53 @@
                 </div>
             </div>
 
+            <div class="testSection">
+                <h2 class="testTitle">uiJSAlert</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">uiJSAlert(options);</h3>
+                    <div class="testDescription">
+                        디자인 얼럿 함수<br />
+                        사용 예제는 [공통 > 얼럿 레이어 팝업] 화면 참고<br /><br />
+                        options : object : 얼럿 옵션 오브젝트<br /><br />
+                        options.title : string : 타이틀 텍스트 : default = ''<br /><br />
+                        options.message : string : 메세지 텍스트 : default = ''<br /><br />
+                        options.buttons : array : 버튼 배열 : default = [{}]<br /><br />
+                        options.buttons[0].text : string : 버튼 텍스트 : default = '확인'<br /><br />
+                        options.buttons[0].type : string : 버튼 스타일 (secondary) : default = ''<br /><br />
+                        options.buttons[0].callback : function : 버튼을 클릭 했을때 실행 할 함수 : default = function (closeFn) { closeFn(); }<br /><br />
+                        options.buttons[0].html : function : 버튼 html 만드는 함수
+                        <div class="testCode">
+                            // options.buttons[0].html default<br /><br />
+
+                            function (options, triggerClassName) {<br />
+                            &nbsp;&nbsp;var html = '';<br />
+                            &nbsp;&nbsp;var type = options.type.length ? 'uiBasicButton--' + options.type : '';<br /><br />
+
+                            &nbsp;&nbsp;html += &lt;button type="button" class="uiButton uiBasicButton uiBasicButton--medium ' + type + ' ' + triggerClassName + '"&gt;'; // triggerClassName 값으로
+                            해당 요소를 클릭 요소로 지정<br />
+                            &nbsp;&nbsp;html += '&lt;span class="uiBasicButton__text"&gt;' + options.text + '&lt;/span&gt;';<br />
+                            &nbsp;&nbsp;html += '&lt;/button&gt;';<br /><br />
+
+                            &nbsp;&nbsp;return html;<br />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">uiJSToastAlert</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">uiJSToastAlert(wrap, message);</h3>
+                    <div class="testDescription">
+                        토스트 얼럿 함수<br />
+                        사용 예제는 [공통 > 토스트 얼럿] 화면 참고<br />
+                        wrap: string | HTMLElement | jQuerySelector : 토스트를 띄울 요소<br />
+                        message : string : 얼럿 메세지 (줄바꿈은 \n 이용)
+                    </div>
+                </div>
+            </div>
+
             <!--
             <div class="testSection">
                 <style>

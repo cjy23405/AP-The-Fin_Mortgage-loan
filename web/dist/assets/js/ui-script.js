@@ -655,6 +655,46 @@
     }
     window.uiJSAlert = uiAlert;
 
+    // toast alert
+    function toastAlert(wrap, message) {
+        var $wrap = $(wrap);
+        var $inner = (function () {
+            var $el = $wrap.find('.uiToastAlert__inner');
+            if (!$el.length) {
+                $wrap.append('<div class="uiToastAlert__inner"></div>');
+                $el = $wrap.find('.uiToastAlert__inner');
+            }
+            return $el;
+        })();
+        var $message = $('<p class="uiToastAlert__text" aria-role="alert" aria-live="assertive">' + message.replace(/\n/g, '<br />') + '</p>');
+
+        $message.css('opacity', 0);
+        $inner.append($message);
+        $message.animate({ opacity: 1 }, 300, function () {
+            var timer = setTimeout(function () {
+                $message.prop('translateY', 0).animate(
+                    {
+                        translateY: -100,
+                        opacity: 0,
+                    },
+                    {
+                        duration: 300,
+                        step: function (now, fx) {
+                            if (fx.prop === 'translateY') {
+                                $message.css('transform', 'translateY(' + now + '%)');
+                            }
+                        },
+                        complete: function () {
+                            $message.remove();
+                            clearTimeout(timer);
+                        },
+                    }
+                );
+            }, 3000);
+        });
+    }
+    window.uiJSToastAlert = toastAlert;
+
     // fixBarSet
     function fixBarSet() {
         var $layoutWrap = $('.layoutWrap');
