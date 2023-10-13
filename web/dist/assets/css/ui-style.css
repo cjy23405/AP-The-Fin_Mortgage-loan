@@ -47,24 +47,27 @@
     margin: 0;
     font-size: 32px;
     line-height: var(--lineHeightDefault);
+    font-weight: 400;
 }
 .headlineMedium {
     margin: 0;
     font-size: 28px;
     line-height: var(--lineHeightDefault);
+    font-weight: 400;
 }
 .headlineSmall {
     margin: 0;
     font-size: 24px;
     line-height: var(--lineHeightDefault);
+    font-weight: 400;
 }
 
 /* title */
 .titleLarge {
     margin: 0;
-    font-size: 22px;
+    font-size: 20px;
     line-height: var(--lineHeightDefault);
-    font-weight: 400;
+    font-weight: 600;
 }
 .titleMedium {
     margin: 0;
@@ -111,26 +114,31 @@
     margin: 0;
     font-size: 20px;
     line-height: var(--lineHeightLabel);
+    font-weight: 500;
 }
 .textLabelMedium {
     margin: 0;
     font-size: 18px;
     line-height: var(--lineHeightLabel);
+    font-weight: 500;
 }
 .textLabel1 {
     margin: 0;
     font-size: 14px;
     line-height: var(--lineHeightLabel);
+    font-weight: 500;
 }
 .textLabel2 {
     margin: 0;
     font-size: 12px;
     line-height: var(--lineHeightLabel);
+    font-weight: 500;
 }
 .textLabel3 {
     margin: 0;
     font-size: 11px;
     line-height: var(--lineHeightLabel);
+    font-weight: 500;
 }
 
 /* fontWeight */
@@ -164,7 +172,7 @@
 
 /* color */
 .colorEmphasis.colorEmphasis {
-    color: var(--primary40);
+    color: var(--primary600);
 }
 
 /* align */
@@ -327,15 +335,15 @@ button.uiInputBlock__input {
     width: 100%;
     min-height: 54px;
     border-radius: 11px;
-    padding: 8px 24px;
+    padding: 7px 24px;
     font-size: 18px;
     line-height: var(--lineHeightDefault);
     font-weight: 500;
     text-align: center;
     text-decoration: none;
     color: var(--white);
-    border: 1px solid var(--primary40);
-    background: var(--primary40);
+    border: 1px solid var(--primary600);
+    background: var(--primary600);
 }
 .uiBasicButton__text {
     display: block;
@@ -347,61 +355,70 @@ button.uiInputBlock__input {
 .uiBasicButton.isActive .onText {
     display: inline;
 }
+.uiBasicButton:hover,
+.uiBasicButton:active {
+    border-color: var(--primary800);
+    background-color: var(--primary800);
+}
 .uiBasicButton[disabled],
 .uiBasicButton.uiBasicButton--disabled {
-    color: var(--systemGrays80);
-    border-color: var(--systemGrays100);
-    background-color: var(--systemGrays100);
+    color: var(--white);
+    border-color: var(--primary200);
+    background-color: var(--primary200);
 }
-.uiBasicButton[disabled]:hover,
-.uiBasicButton.uiBasicButton--disabled:hover {
-    opacity: 1;
+.uiBasicButton--secondary,
+.uiBasicButton--secondary:hover,
+.uiBasicButton--secondary:active,
+.uiBasicButton--secondary[disabled],
+.uiBasicButton--secondary.uiBasicButton--disabled {
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
-.uiBasicButton--secondary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+.uiBasicButton--secondary[disabled],
+.uiBasicButton--secondary.uiBasicButton--disabled {
+    opacity: 0.3;
 }
 /*
 .uiBasicButton--tertiary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--quaternary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--quinary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--senary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--septenary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--octonary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--nonary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 .uiBasicButton--denary {
-    color: var(--systemGrays50);
-    border-color: var(--systemGrays110);
-    background-color: var(--systemGrays110);
+    color: var(--systemGray500);
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
 }
 */
 
@@ -427,7 +444,7 @@ button.uiInputBlock__input {
 
 /* uiButtons */
 .uiButtons {
-    margin-top: 24px;
+    margin-top: 20px;
 }
 .uiButtons__list {
     list-style: none;
@@ -610,16 +627,16 @@ button.uiInputBlock__input {
     align-items: stretch;
     max-height: 100%;
     box-sizing: border-box;
-    border-radius: 12px 12px 0 0;
+    border-radius: 16px 16px 0 0;
     background-color: var(--white);
 }
 .toastLayer__head {
     flex: none;
-    padding: 42px 24px 6px;
+    padding: 22px 24px 2px;
 }
 .toastLayer__foot {
     flex: none;
-    padding: 12px 24px 24px;
+    padding: 12px 24px 20px;
 }
 .toastLayer__body {
     display: flex;
@@ -632,7 +649,7 @@ button.uiInputBlock__input {
 }
 .toastLayer__bodyInner {
     box-sizing: border-box;
-    padding: 0 24px 12px;
+    padding: 14px 24px 12px;
 }
 .toastLayer__bodyInner::before,
 .toastLayer__bodyInner::after {
@@ -640,20 +657,20 @@ button.uiInputBlock__input {
     display: table;
 }
 .toastLayer__body:first-child {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
 .toastLayer__body:first-child .toastLayer__bodyInner {
-    padding-top: 24px;
+    padding-top: 20px;
 }
 .toastLayer__body:last-child .toastLayer__bodyInner {
-    padding-bottom: 24px;
+    padding-bottom: 20px;
 }
 .toastLayer__title {
     margin: 0;
-    font-size: 18px;
+    font-size: 20px;
     line-height: var(--lineHeightDefault);
-    font-weight: 500;
+    font-weight: 600;
 }
 .layerWrap--toastFix .toastLayer {
     height: 100%;
