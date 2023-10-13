@@ -857,7 +857,7 @@ body,
     box-sizing: border-box;
 }
 
-/* LHO */
+/* ########## LHO ########## */
 
 .uiCheckBox {
     position: relative;
@@ -1001,4 +1001,90 @@ body,
     margin-top: 16px;
 }
 
-/* CJY */
+/* ########## CJY ########## */
+
+/* uiSelect */
+.uiSelect {
+    position: relative;
+}
+.uiSelect__button {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--systemGray200);
+    transition: border-bottom-color 0.25s;
+}
+.uiSelect__button::after {
+    content: '';
+    display: block;
+    flex: none;
+    width: 24px;
+    height: 24px;
+    background: url('../images/icon/keyboard_arrow_down.svg') no-repeat 50% 50% / 100% 100%;
+    transition: transform 0.25s;
+}
+.uiSelect__text {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    font-size: 20px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.uiSelect__text:empty::before {
+    content: attr(data-placeholder);
+    color: var(--systemGray400);
+}
+.uiSelect__button[disabled] {
+    opacity: 0.3;
+}
+.uiSelect__button.jsLayerOpenerActive {
+    padding-bottom: 6px;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--primary600);
+}
+.uiSelect__button.jsLayerOpenerActive::after {
+    transform: rotate(180deg);
+}
+
+/* uiSelectOptions */
+.uiSelectOptions {
+    margin: 0 -24px;
+}
+.uiSelectOptions__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.uiSelectOptions__item + .uiSelectOptions__item {
+    margin-top: 20px;
+}
+.uiSelectOptions__button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 24px;
+}
+.uiSelectOptions__text {
+    display: block;
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+}
+.uiSelectOptions__sub {
+    display: block;
+    font-size: 14px;
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray500);
+    margin-left: 20px;
+}
+.uiSelectOptions__button[disabled] .uiSelectOptions__text,
+.uiSelectOptions__button[disabled] .uiSelectOptions__sub {
+    color: var(--systemGray400);
+}

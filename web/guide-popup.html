@@ -167,7 +167,7 @@
             <!-- //layer: 토스트형 높이 고정 -->
 
             <!-- layer: 얼럿형 -->
-            <div class="layerWrap layerWrap--alert" data-layer="testAlert">
+            <div class="layerWrap layerWrap--alert" data-layer="testAlert" data-dim-close="false">
                 <div class="layerContainer">
                     <section class="uiAlert">
                         <div class="uiAlert__body">
@@ -259,6 +259,18 @@
                     &lt;/div&gt;
                 </div>
                 <div class="testDescription">data-cycle-focus="false" 속성으로 레이어 포커스 순환 기능을 비활성화</div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">dim close - disabled</h2>
+                <div class="testCode">
+                    &lt;div class="layerWrap" data-layer="layerName"
+                    <mark>data-dim-close="false"</mark>&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="layerContainer"&gt;<br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br />
+                    &lt;/div&gt;
+                </div>
+                <div class="testDescription">data-dim-close="false" 속성으로 딤 영역 클릭시 닫힘 기능을 비활성화</div>
             </div>
 
             <div class="testSection">

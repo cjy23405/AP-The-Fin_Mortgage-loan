@@ -148,6 +148,17 @@
     // layer
     var uiLayer = {
         zIndex: 10000,
+        classNames: {
+            beforeLoop: 'jsLayerBeforeLoopFocus',
+            afterLoop: 'jsLayerAfterLoopFocus',
+            opened: 'jsLayerOpened',
+            closed: 'jsLayerClosed',
+            animated: 'jsLayerAnimated',
+            htmlOpened: 'jsHtmlLayerOpened',
+            htmlClosedAnimated: 'jsHtmlLayerClosedAnimated',
+            openerActive: 'jsLayerOpenerActive',
+            allOpenerActive: 'jsLayerAllOpenerActive',
+        },
         open: function (target, opener, speed) {
             var _ = uiLayer;
             var $html = $('html');
@@ -161,10 +172,13 @@
             var $preOpenLayersContainer = null;
             var $ohterElements = null;
             var $preLayersElements = null;
+            var $opener = Boolean(opener) && $(opener).length ? $(opener) : null;
+            var $allOpener = $('[data-layer-open="' + target + '"]');
             var timer = null;
             var hasScrollBlock = true;
             var isFocus = true;
             var isCycleFocus = true;
+            var isDimClose = true;
             var speed = typeof speed === 'number' ? speed : 350;
             var hashCode = '';
             var labelID = '';
@@ -172,7 +186,7 @@
             var notOhterElements =
                 'script, link, style, base, meta, br, [aria-hidden], [inert], .jsNotInert, .jsNotInert *, [data-ui-js], option, ul, dl, table, thead, tbody, tfoot, tr, colgroup, col, :empty:not([tabindex])';
 
-            if ($layer.length && !$layer.hasClass('jsLayerOpened')) {
+            if ($layer.length && !$layer.hasClass(_.classNames.opened)) {
                 $layer.trigger('layerBeforeOpened');
 
                 if (!$layer.parent().is($body)) {
@@ -182,7 +196,7 @@
                 $layerContainer = $layer.find('.layerContainer');
                 $label = $layer.find('h1, h2, h3, h4, h5, h6, p').eq(0);
                 $inElements = $layer.find('[data-ui-js="hidden"]');
-                $preOpenLayers = $layers.filter('.jsLayerOpened').not($layer);
+                $preOpenLayers = $layers.filter('.' + _.classNames.opened).not($layer);
                 $preOpenLayersContainer = $preOpenLayers.find('.layerContainer');
                 $ohterElements = $('body *').filter(function () {
                     var $this = $(this);
@@ -214,6 +228,10 @@
                     var val = $layer.data('cycle-focus');
                     return typeof val === 'boolean' ? val : isCycleFocus;
                 })();
+                isDimClose = (function () {
+                    var val = $layer.data('dim-close');
+                    return typeof val === 'boolean' ? val : isDimClose;
+                })();
                 display = (function () {
                     var val = $layer.data('layer-display');
                     return typeof val === 'string' ? val : display;
@@ -226,9 +244,7 @@
                     scrollBlock.block();
                 }
 
-                if (Boolean(opener) && $(opener).length) {
-                    $layer.data('layerOpener', $(opener));
-                }
+                $layer.data('layerOpener', $opener);
 
                 $layerContainer.attr('role', 'dialog').attr('aria-hidden', 'true').css('visibility', 'hidden').attr('hidden', '');
 
@@ -259,8 +275,8 @@
                 }
 
                 if (isCycleFocus) {
-                    if (!$layer.children('.jsLayerBeforeLoopFocus').length) {
-                        $('<div class="jsLayerBeforeLoopFocus" tabindex="0"></div>')
+                    if (!$layer.children('.' + _.classNames.beforeLoop).length) {
+                        $('<div class="' + _.classNames.beforeLoop + '" tabindex="0"></div>')
                             .on('focusin.uiLayer', function () {
                                 var $lastChild = (function () {
                                     var $el = $layerContainer.find(':last-child');
@@ -277,8 +293,8 @@
                             .prependTo($layer);
                     }
 
-                    if (!$layer.children('.jsLayerAfterLoopFocus').length) {
-                        $('<div class="jsLayerAfterLoopFocus" tabindex="0"></div>')
+                    if (!$layer.children('.' + _.classNames.afterLoop).length) {
+                        $('<div class="' + _.classNames.afterLoop + '" tabindex="0"></div>')
                             .on('focusin.uiLayer', function () {
                                 $layerContainer.focus();
                             })
@@ -286,7 +302,23 @@
                     }
                 }
 
-                $layer.stop().removeClass('jsLayerClosed').css({
+                if (isDimClose) {
+                    $body.off('click.uiLayer_' + target).on('click.uiLayer_' + target, function (e) {
+                        var $target = $(e.target);
+                        var $closest = $target.closest('[data-layer]');
+
+                        if (!$layer.data('containerClick') && !($target.is('[data-layer]') && !$target.is($layer)) && !($closest.length && !$closest.is($layer))) {
+                            uiLayer.close(target);
+                        }
+
+                        $layer.data('containerClick', false);
+                    });
+                    $layerContainer.off('click.uiLayer_' + target).on('click.uiLayer_' + target, function (e) {
+                        $layer.data('containerClick', true);
+                    });
+                }
+
+                $layer.stop().removeClass(_.classNames.closed).css({
                     display: display,
                     zIndex: _.zIndex,
                 });
@@ -295,9 +327,16 @@
                 timer = setTimeout(function () {
                     clearTimeout(timer);
 
-                    $html.addClass('jsHtmlLayerOpened jsHtmlLayerOpened_' + target);
+                    if ($opener && $opener.length) {
+                        $opener.addClass(_.classNames.openerActive);
+                    }
+                    if ($allOpener.length) {
+                        $allOpener.addClass(_.classNames.allOpenerActive);
+                    }
+
+                    $html.addClass(_.classNames.htmlOpened + ' ' + _.classNames.htmlOpened + '_' + target);
                     $layer
-                        .addClass('jsLayerOpened jsLayerAnimated')
+                        .addClass(_.classNames.opened + ' ' + _.classNames.animated)
                         .animate(
                             {
                                 opacity: 1,
@@ -307,7 +346,7 @@
                                 if (isFocus) {
                                     $layerContainer.focus();
                                 }
-                                $layer.removeClass('jsLayerAnimated').trigger('layerAfterOpened');
+                                $layer.removeClass(_.classNames.animated).trigger('layerAfterOpened');
                             }
                         )
                         .trigger('layerOpened');
@@ -317,7 +356,9 @@
             }
         },
         close: function (target, speed) {
+            var _ = uiLayer;
             var $html = $('html');
+            var $body = $('body');
             var $layer = $('[data-layer="' + target + '"]');
             var $layerContainer = null;
             var $opener = $layer.data('layerOpener');
@@ -330,7 +371,7 @@
                 return typeof val === 'boolean' ? val : true;
             })();
 
-            if ($layer.length && $layer.hasClass('jsLayerOpened')) {
+            if ($layer.length && $layer.hasClass(_.classNames.opened)) {
                 $layer.trigger('layerBeforeClosed');
 
                 $layerContainer = $layer.find('.layerContainer');
@@ -342,28 +383,31 @@
 
                 clearTimeout(timer);
 
+                $body.off('click.uiLayer_' + target);
+                $layerContainer.off('click.uiLayer_' + target);
+
                 $layer.stop().css('display', display);
                 $layerContainer.attr('aria-hidden', 'true').removeAttr('aria-modal').attr('hidden', '');
 
                 timer = setTimeout(function () {
                     clearTimeout(timer);
 
-                    $html.addClass('jsHtmlLayerClosedAnimate');
+                    $html.addClass(_.classNames.htmlClosedAnimated);
 
                     if ($allOpener && $allOpener.length) {
-                        $allOpener.removeClass('jsLayerOpenerActive');
+                        $allOpener.removeClass(_.classNames.openerActive + ' ' + _.classNames.allOpenerActive);
                     }
 
                     $layer
-                        .addClass('jsLayerClosed jsLayerAnimated')
-                        .removeClass('jsLayerOpened')
+                        .addClass(_.classNames.closed + ' ' + _.classNames.animated)
+                        .removeClass(_.classNames.opened)
                         .animate(
                             {
                                 opacity: 0,
                             },
                             speed,
                             function () {
-                                var $preOpenLayers = $('[data-layer].jsLayerOpened').not($layer);
+                                var $preOpenLayers = $('[data-layer].' + _.classNames.opened).not($layer);
                                 var $preOpenLayer = (function () {
                                     if (!$preOpenLayers.length) return null;
 
@@ -401,7 +445,7 @@
                                 } else {
                                     $ohterElements = $('body').find('[data-ui-js="hidden"]');
 
-                                    $html.removeClass('jsHtmlLayerOpened');
+                                    $html.removeClass(_.classNames.htmlOpened);
                                     $ohterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
                                 }
 
@@ -426,9 +470,12 @@
                                     elFocus($html);
                                 }
 
-                                $html.removeClass('jsHtmlLayerClosedAnimate jsHtmlLayerOpened_' + target);
+                                $html.removeClass(_.classNames.htmlClosedAnimated + ' ' + _.classNames.htmlOpened + '_' + target);
                                 $layerContainer.css('visibility', 'hidden');
-                                $layer.css('display', 'none').removeClass('jsLayerClosed jsLayerAnimated').trigger('layerAfterClosed');
+                                $layer
+                                    .css('display', 'none')
+                                    .removeClass(_.classNames.closed + ' ' + _.classNames.animated)
+                                    .trigger('layerAfterClosed');
                             }
                         )
                         .trigger('layerClosed');
@@ -457,14 +504,13 @@
             })();
 
             if ($layer.length) {
-                if (isToggle && $layer.hasClass('jsLayerOpened')) {
+                if (isToggle && $layer.hasClass(_.classNames.opened)) {
                     uiLayer.close(layer);
                 } else {
                     if (isToggle) {
                         $this.addClass('jsLayerOpenerActive');
                     }
-                    uiLayer.open(layer);
-                    $layer.data('layerOpener', $this);
+                    uiLayer.open(layer, $this);
                 }
             }
 
@@ -553,7 +599,7 @@
             }
         });
 
-        html += '<div class="layerWrap layerWrap--alert" data-layer="' + layerName + '">';
+        html += '<div class="layerWrap layerWrap--alert" data-layer="' + layerName + '" data-dim-close="false">';
         html += '    <div class="layerContainer">';
         html += '        <section class="uiAlert">';
 
@@ -658,6 +704,40 @@
         $fixBar.css('margin-left', -scrollX);
     }
 
+    // select
+    var uiSelect = {
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+
+            $root.find('[data-select-option].isSelectActive').each(function () {
+                uiSelect.optionSelected($(this));
+            });
+        },
+        optionSelected: function ($selected) {
+            var name = $selected.attr('data-select-option');
+            var $layer = $selected.closest('[data-layer]');
+            var $input = $('[data-select-view="' + name + '"]');
+            var $view = $('[data-select-view="' + name + '"]');
+            var $options = $('[data-select-option="' + name + '"]');
+            var selectedText = $selected.attr('data-select-text');
+            var selectedVal = $selected.attr('data-select-value');
+
+            $options.removeAttr('title').removeClass('isSelectActive');
+            $selected.eq(0).attr('title', '선택됨').addClass('isSelectActive');
+            $view.text(selectedText);
+            $input.val(selectedVal);
+
+            if ($layer.length) {
+                uiLayer.close($layer.attr('data-layer'));
+            }
+        },
+    };
+    $doc.on('click.uiSelect', '[data-select-option]', function () {
+        uiSelect.optionSelected($(this));
+    });
+
     // common js
     function uiJSCommon($root) {
         if (!$root) {
@@ -666,6 +746,8 @@
 
         checkScrollbars();
         fixBarSet();
+
+        uiSelect.init($root);
     }
     window.uiJSCommon = uiJSCommon;
 
@@ -753,7 +835,10 @@
         }
     }
     $doc.on('layerOpened.layerOpenedScrollToStart', '.layerWrap', function () {
-        layerOpenedScrollToStart($(this), '.uiLayer__body');
+        var $this = $(this);
+
+        $this.scrollTop(0).scrollLeft(0);
+        layerOpenedScrollToStart($this, '.toastLayer__body');
     });
 
     function checkboxGroup(e) {
