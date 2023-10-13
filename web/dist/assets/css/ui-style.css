@@ -918,4 +918,193 @@ body,
     margin-top: 16px;
 }
 
+.stepListItems {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.stepListItems li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 34px;
+    min-height: 47px;
+
+    counter-increment: step-counter;
+}
+.stepListItems li::before {
+    content: counter(step-counter);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+    background: var(--primary100);
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary600);
+
+    z-index: 1;
+}
+.stepListItems li strong {
+    display: flex;
+    align-items: center;
+    height: 22px;
+}
+.stepListItems li strong[class*='icon_']::before {
+    content: '';
+    background: transparent no-repeat center / 100% auto;
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+}
+.stepListItems li span {
+    color: var(--systemGray500);
+}
+.stepListItems li + li {
+    margin-top: 24px;
+}
+.stepListItems li + li::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    width: 0;
+    height: 55px;
+    transform: translateY(-100%);
+    border: 1px dashed var(--primary100);
+}
+.stepListItems_primarybox {
+    background: var(--primary50);
+    padding: 20px 38px;
+    border-radius: 10px;
+}
+.stepListItems_primarybox li {
+    padding-left: 30px;
+    min-height: 38px;
+}
+.stepListItems_primarybox li::before {
+    width: 20px;
+    height: 20px;
+    background: var(--primary500);
+    color: var(--white);
+    font-size: 14px;
+}
+.stepListItems_primarybox li strong {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--systemGray600);
+    height: 20px;
+}
+.stepListItems_primarybox li span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--systemGray500);
+}
+
+.stepListItems_primarybox li + li::after {
+    left: 10px;
+    border-color: var(--primary500);
+    border-style: dashed;
+}
+.stepListItems + .stepListItems {
+    margin-top: 40px;
+}
+
+.infoListBox {
+    background: var(--systemGray100);
+    padding: 24px 24px 80px;
+    color: var(--systemGray500);
+}
+.infoListBox > h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500px;
+}
+.infoListBox > ul {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.infoListBox > ul > li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 12px;
+    font-weight: 400;
+}
+.infoListBox > ul > li::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 2px;
+    height: 2px;
+    background: var(--systemGray500);
+}
+.infoListBox > ul > li strong {
+    font-weight: 700;
+}
+
+.bankListBox {
+    padding: 20px;
+}
+.bankListBox > h3 {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    border-bottom: 1px solid var(--systemGray200);
+}
+.bankListBox > ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 0;
+    justify-content: space-between;
+    list-style: none;
+    margin-top: 20px;
+}
+.bankListBox > ul > li {
+    width: 142px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+.bankListBox > ul > li[class*='icon_']::before {
+    content: '';
+    width: 28px;
+    height: 28px;
+    margin-right: 4px;
+    background: transparent no-repeat center center / 100% auto;
+}
+/* TODO: 은행 아이콘 적용 방식 확인 */
+.bankListBox > ul > li.icon_bank_1::before {
+    background-image: url(../images/icon/bank/shinhan.svg);
+}
+.bankListBox > ul > li.icon_bank_2::before {
+    background-image: url(../images/icon/bank/nh.svg);
+}
+.bankListBox > ul > li.icon_bank_3::before {
+    background-image: url(../images/icon/bank/woori.svg);
+}
+.bankListBox > ul > li.icon_bank_4::before {
+    background-image: url(../images/icon/bank/comp.svg);
+}
+.bankListBox > ul > li.icon_bank_5::before {
+    background-image: url(../images/icon/bank/gwangju.svg);
+}
+.bankListBox + .bankListBox {
+    margin-top: 50px;
+}
+
 /* CJY */
