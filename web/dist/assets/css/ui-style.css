@@ -943,8 +943,8 @@ body,
     height: 20px;
 }
 .uiCheckBox.uiToggleCheckBox > input[type='checkbox']:checked + span {
-    color: var(--primary);
-    border-color: var(--primary);
+    color: var(--primary600);
+    border-color: var(--primary600);
     background-color: var(--primary50);
 }
 
@@ -986,19 +986,349 @@ body,
     left: 5px;
     top: 5px;
     transform: scale(0);
-    background: var(--primary);
+    background: var(--primary600);
     border: 0 none;
     transition: all 0.3s ease-out;
 }
 .uiRadioButton > input[type='radio']:checked + span::before {
-    border-color: var(--primary);
+    border-color: var(--primary600);
 }
 .uiRadioButton > input[type='radio']:checked + span::after {
-    border-color: var(--primary);
+    border-color: var(--primary600);
     transform: scale(1);
 }
 .uiRadioButton + .uiRadioButton {
     margin-top: 16px;
+}
+
+.stepListItems {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.stepListItems li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 34px;
+    min-height: 47px;
+
+    counter-increment: step-counter;
+}
+.stepListItems li::before {
+    content: counter(step-counter);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+    background: var(--primary100);
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--primary600);
+
+    z-index: 1;
+}
+.stepListItems li strong {
+    display: flex;
+    align-items: center;
+    height: 22px;
+}
+.stepListItems li strong[class*='icon_']::before {
+    content: '';
+    background: transparent no-repeat center / 100% auto;
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+}
+.stepListItems li span {
+    color: var(--systemGray500);
+}
+.stepListItems li + li {
+    margin-top: 24px;
+}
+.stepListItems li + li::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 0;
+    width: 0;
+    height: 55px;
+    transform: translateY(-100%);
+    border: 1px dashed var(--primary100);
+}
+.stepListItems_primarybox {
+    background: var(--primary50);
+    padding: 20px 38px;
+    border-radius: 10px;
+}
+.stepListItems_primarybox li {
+    padding-left: 30px;
+    min-height: 38px;
+}
+.stepListItems_primarybox li::before {
+    width: 20px;
+    height: 20px;
+    background: var(--primary500);
+    color: var(--white);
+    font-size: 14px;
+}
+.stepListItems_primarybox li strong {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 600;
+    color: var(--systemGray600);
+    height: 20px;
+}
+.stepListItems_primarybox li span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--systemGray500);
+}
+
+.stepListItems_primarybox li + li::after {
+    left: 10px;
+    border-color: var(--primary500);
+    border-style: dashed;
+}
+.stepListItems + .stepListItems {
+    margin-top: 40px;
+}
+
+.infoListBox {
+    background: var(--systemGray100);
+    padding: 24px 24px 80px;
+    color: var(--systemGray500);
+}
+.infoListBox > h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500px;
+}
+.infoListBox > ul {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+}
+.infoListBox > ul > li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 12px;
+    font-weight: 400;
+}
+.infoListBox > ul > li::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 5px;
+    width: 2px;
+    height: 2px;
+    background: var(--systemGray500);
+}
+.infoListBox > ul > li strong {
+    font-weight: 700;
+}
+
+.bankListBox {
+    padding: 20px;
+}
+.bankListBox > h3 {
+    margin: 0;
+    padding-bottom: 20px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1;
+    border-bottom: 1px solid var(--systemGray200);
+}
+.bankListBox > ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 0;
+    justify-content: space-between;
+    list-style: none;
+    margin-top: 20px;
+}
+.bankListBox > ul > li {
+    width: 142px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+/* TODO: 은행 아이콘 적용 방식 확인 */
+.iconBank::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 28px;
+    margin-right: 4px;
+    background: transparent no-repeat center center / 100% auto;
+}
+.iconBank.iconBank_32::before {
+    width: 32px;
+    height: 32px;
+}
+.iconBank.iconBank_40::before {
+    width: 40px;
+    height: 40px;
+}
+.iconBank.iconBank_shinhan::before {
+    background-image: url(../images/icon/bank/shinhan.svg);
+}
+.iconBank.iconBank_nh::before {
+    background-image: url(../images/icon/bank/nh.svg);
+}
+.iconBank.iconBank_woori::before {
+    background-image: url(../images/icon/bank/woori.svg);
+}
+.iconBank.iconBank_comp::before {
+    background-image: url(../images/icon/bank/comp.svg);
+}
+.iconBank.iconBank_gwangju::before {
+    background-image: url(../images/icon/bank/gwangju.svg);
+}
+.bankListBox + .bankListBox {
+    margin-top: 50px;
+}
+
+.prodInfoList {
+    font-size: 14px;
+    line-height: 18px;
+}
+.prodInfoList dt {
+    font-weight: 500;
+}
+.prodInfoList dd {
+    color: var(--systemGray500);
+    margin: 0;
+}
+.prodInfoList dd + dt {
+    margin-top: 16px;
+}
+
+.cardAptInfo {
+    /* height: 144px; */
+    border: 1px solid var(--systemGray200);
+    border-radius: 10px;
+}
+.cardAptInfo .myAptRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--systemGray200);
+}
+.cardAptInfo .myAptRow .flexBox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+.cardAptInfo .myAptRow .flexBox small {
+    padding: 0 6px;
+    line-height: 18px;
+    border: 1px solid var(--primary500);
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--primary500);
+}
+.cardAptInfo .myAptRow .flexBox strong {
+    font-weight: 600;
+    line-height: 1.1;
+}
+.cardAptInfo .myAptRow .flexBox span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: var(--systemGray500);
+}
+
+.cardAptInfo .myAptRow > button {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--systemGray700);
+    display: flex;
+    align-items: center;
+}
+.cardAptInfo .myAptRow > button::after {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: url(../images/icon/keyboard_arrow_right.svg) no-repeat center / 100% auto;
+}
+.cardAptInfo .averageRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.cardAptInfo .averageRow span {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--systemGray500);
+}
+.cardAptInfo .averageRow strong {
+    font-weight: 600;
+}
+.cardAptInfo .myAptRow .uiButton {
+}
+.bankListBox_rounded {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--white);
+    border-radius: 11px;
+}
+.bankListBox_rounded > .flexBox {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    margin-left: 16px;
+}
+.bankListBox_rounded > span::before {
+    margin-right: 0;
+}
+.bankListBox_rounded > .flexBox > strong {
+    font-weight: 500;
+    line-height: 21px;
+}
+.bankListBox_rounded > .flexBox > span {
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--systemGray500);
+}
+.bankListBox_rounded > .flexBox > p {
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--systemGray500);
+    margin: 8px 0 0;
+}
+.bankListBox_rounded.bankListBox_gray {
+    background-color: var(--systemGray100);
+    align-items: center;
+}
+.bankListBox_rounded.bankListBox_gray > .flexBox {
+    margin-left: 10px;
+}
+.bankListBox_rounded.bankListBox_gray > .flexBox > span {
+    font-size: 13px;
+    line-height: 1;
+    color: var(--systemGray700);
+}
+.bankListBox_rounded.bankListBox_gray > .flexBox > strong {
+    margin-top: 6px;
+}
+
+.bankListBox_rounded + .bankListBox_rounded {
+    margin-top: 20px;
 }
 
 /* ########## CJY ########## */
