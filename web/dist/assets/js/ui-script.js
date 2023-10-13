@@ -756,6 +756,23 @@
         layerOpenedScrollToStart($(this), '.uiLayer__body');
     });
 
+    function checkboxGroup(e) {
+        var checkElem = $(e.target);
+        var currentState = checkElem.is(':checked');
+        var isHeader = checkElem.closest('.uiCheckBoxHeader').length == 1;
+        var groupElem = checkElem.closest('.uiCheckBoxGroup');
+        if (isHeader) {
+            groupElem.find('.uiCheckBoxBody input[type=checkbox]').prop('checked', currentState);
+        } else {
+            var isCheckAll = groupElem.find('.uiCheckBoxBody input[type=checkbox]').not(':checked').length == 0;
+
+            groupElem.find('.uiCheckBoxHeader input[type=checkbox]').prop('checked', isCheckAll);
+        }
+    }
+    $doc.on('change.checkboxGroup', '.uiCheckBoxGroup input[type=checkbox]', function (e) {
+        checkboxGroup(e);
+    });
+
     // dom ready
     $(function () {
         var $html = $('html');

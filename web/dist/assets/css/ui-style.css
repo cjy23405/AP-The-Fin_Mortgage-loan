@@ -842,4 +842,146 @@ body,
 
 /* LHO */
 
+.uiCheckBox {
+    position: relative;
+    display: block;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+.uiCheckBox > span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    padding-left: 32px;
+}
+.uiCheckBox > span::before,
+.uiCheckBox > span::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+    background: url(../images/icon/icon_check_unchecked.svg) no-repeat center / 100% auto;
+}
+.uiCheckBox > span::after {
+    background-image: url(../images/icon/icon_check_checked.svg);
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+.uiCheckBox > input[type='checkbox'] {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+.uiCheckBox > input[type='checkbox']:checked + span::after {
+    opacity: 1;
+}
+.uiCheckBox + .uiCheckBox {
+    margin-top: 16px;
+}
+.uiCheckBox.uiCheckBox_circle > span::before {
+    background-image: url(../images/icon/icon_check_circle_unchecked.svg);
+}
+.uiCheckBox.uiCheckBox_circle > span::after {
+    background-image: url(../images/icon/icon_check_circle_checked.svg);
+}
+.uiCheckBox.uiCheckBox_circleLine > span::before {
+    background-size: 20px auto;
+    background-image: url(../images/icon/icon_check_circleLine_unchecked.svg);
+}
+.uiCheckBox.uiCheckBox_circleLine > span::after {
+    background-size: 20px auto;
+    background-image: url(../images/icon/icon_check_circleLine_checked.svg);
+}
+.uiCheckBoxGroup .uiCheckBoxHeader {
+    padding: 16px;
+    background: #f5f7f9;
+    border-radius: 11px;
+}
+.uiCheckBoxGroup .uiCheckBoxHeader .uiCheckBox > span {
+    font-size: 16px;
+}
+.uiCheckBoxGroup .uiCheckBoxBody {
+    padding: 16px 0 24px;
+}
+.uiCheckBox.uiToggleCheckBox > span {
+    display: block;
+    padding: 17px 24px 17px 52px;
+    background: var(--systemGray100);
+    border: 1px solid var(--systemGray100);
+    border-radius: 11px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--systemGray400);
+    transition: all 0.3s ease-out;
+}
+.uiCheckBox.uiToggleCheckBox > span::before,
+.uiCheckBox.uiToggleCheckBox > span::after {
+    top: 19px;
+    left: 24px;
+    width: 20px;
+    height: 20px;
+}
+.uiCheckBox.uiToggleCheckBox > input[type='checkbox']:checked + span {
+    color: var(--primary);
+    border-color: var(--primary);
+    background-color: var(--primary50);
+}
+
+.uiRadioButton {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+}
+.uiRadioButton > input[type='radio'] {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+.uiRadioButton > span {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 24px;
+}
+.uiRadioButton > span::before,
+.uiRadioButton > span::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 0;
+    left: 0;
+    border: 1px solid var(--systemGray400);
+    border-radius: 50%;
+    background: var(--white);
+}
+.uiRadioButton > span::after {
+    width: 10px;
+    height: 10px;
+    left: 5px;
+    top: 5px;
+    transform: scale(0);
+    background: var(--primary);
+    border: 0 none;
+    transition: all 0.3s ease-out;
+}
+.uiRadioButton > input[type='radio']:checked + span::before {
+    border-color: var(--primary);
+}
+.uiRadioButton > input[type='radio']:checked + span::after {
+    border-color: var(--primary);
+    transform: scale(1);
+}
+.uiRadioButton + .uiRadioButton {
+    margin-top: 16px;
+}
+
 /* CJY */
