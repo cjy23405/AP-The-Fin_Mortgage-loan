@@ -1461,7 +1461,7 @@
         optionSelected: function ($selected) {
             var name = $selected.attr('data-select-option');
             var $layer = $selected.closest('[data-layer]');
-            var $input = $('[data-select-view="' + name + '"]');
+            var $input = $('[data-select-input="' + name + '"]');
             var $view = $('[data-select-view="' + name + '"]');
             var $options = $('[data-select-option="' + name + '"]');
             var selectedText = $selected.attr('data-select-text');
