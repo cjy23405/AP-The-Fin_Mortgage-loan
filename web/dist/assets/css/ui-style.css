@@ -770,11 +770,18 @@ body,
 
 /* pageContents */
 .pageContents {
-    padding: 16px 20px 48px;
+    padding: 20px 24px 72px;
     box-sizing: border-box;
 }
 
 /* LHO */
+
+.pageContents > h2 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0;
+}
 
 .uiCheckBox {
     position: relative;
@@ -1010,7 +1017,7 @@ body,
 }
 
 .stepListItems_primarybox li + li::after {
-    left: 10px;
+    left: 9px;
     border-color: var(--primary500);
     border-style: dashed;
 }
@@ -1026,7 +1033,7 @@ body,
 .infoListBox > h3 {
     margin: 0;
     font-size: 14px;
-    font-weight: 500px;
+    font-weight: 500;
 }
 .infoListBox > ul {
     margin: 6px 0 0;

@@ -1,6 +1,9 @@
 @charset "utf-8";
 
 /* pageContents--aaaa */
-.pageContents--aaaa {
+.pageContents--HRL_05_001 .visImage {
     /* Properties */
+    background: url(../images/illustration/hrl05001.png) no-repeat bottom center;
+    margin: 60px 0 20px;
+    height: 140px;
 }
