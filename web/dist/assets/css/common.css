@@ -295,6 +295,15 @@ label {
 .isScrollBlocking.isScrollbarsWidth #wrap {
     margin-right: 17px;
 }
+.jsUiAccordion__layer {
+    display: none;
+    height: 0;
+}
+.jsUiAccordion__layer::before,
+.jsUiAccordion__layer::after {
+    content: '';
+    display: table;
+}
 .closeText {
     display: none;
 }
@@ -303,6 +312,14 @@ label {
 }
 .jsUiAccordion__opener.jsAccordionActive .closeText {
     display: inline;
+}
+[data-checkbox-tab-panel],
+[data-tab]:not(.jsTabpanelOpened) {
+    display: none;
+}
+[role='button'],
+[role='tab'] {
+    cursor: pointer;
 }
 
 /* reset style */

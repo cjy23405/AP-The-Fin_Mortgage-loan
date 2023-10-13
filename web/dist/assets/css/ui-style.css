@@ -355,10 +355,10 @@ button.uiInputBlock__input {
 .uiBasicButton.isActive .onText {
     display: inline;
 }
-.uiBasicButton:hover,
 .uiBasicButton:active {
     border-color: var(--primary800);
     background-color: var(--primary800);
+    -webkit-tap-highlight-color: transparent;
 }
 .uiBasicButton[disabled],
 .uiBasicButton.uiBasicButton--disabled {
@@ -367,13 +367,13 @@ button.uiInputBlock__input {
     background-color: var(--primary200);
 }
 .uiBasicButton--secondary,
-.uiBasicButton--secondary:hover,
 .uiBasicButton--secondary:active,
 .uiBasicButton--secondary[disabled],
 .uiBasicButton--secondary.uiBasicButton--disabled {
     color: var(--systemGray500);
     border-color: var(--systemGray100);
     background-color: var(--systemGray100);
+    -webkit-tap-highlight-color: initial;
 }
 .uiBasicButton--secondary[disabled],
 .uiBasicButton--secondary.uiBasicButton--disabled {

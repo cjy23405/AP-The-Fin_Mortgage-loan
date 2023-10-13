@@ -57,6 +57,677 @@
     var $win = $(window);
     var $doc = $(document);
 
+    // UiAccordion
+    var UiAccordion = function (target, option) {
+        var _ = this;
+        var $wrap = $(target).eq(0);
+
+        _.className = {
+            opened: 'jsAccordionOpened',
+            active: 'jsAccordionActive',
+            animated: 'jsAccordionAnimated',
+        };
+        _.options = option;
+        _.wrap = $wrap;
+        _.init();
+        _.on();
+    };
+    $.extend(UiAccordion.prototype, {
+        init: function () {
+            var _ = this;
+
+            _.hashCode = uiGetHashCode();
+            _.getElements();
+
+            if (_.layer.length && _.item.length && _.item.filter('[data-initial-open]').length) {
+                _.item.each(function () {
+                    var $this = $(this);
+                    if ($this.attr('data-initial-open') === 'true') {
+                        _.open($this, 0);
+                    }
+                });
+            }
+
+            _.options.onInit();
+        },
+        getElements: function () {
+            var _ = this;
+
+            if (_.options.opener) {
+                if (typeof _.options.opener === 'string') {
+                    _.opener = _.wrap.find(_.options.opener);
+                } else {
+                    _.opener = _.options.opener;
+                }
+            }
+
+            if (_.options.layer) {
+                if (typeof _.options.layer === 'string') {
+                    _.layer = _.wrap.find(_.options.layer);
+                } else {
+                    _.layer = _.options.layer;
+                }
+            }
+
+            if (_.options.item) {
+                if (typeof _.options.item === 'string') {
+                    _.item = _.wrap.find(_.options.item);
+                } else {
+                    _.item = _.options.item;
+                }
+            }
+        },
+        on: function () {
+            var _ = this;
+
+            if (_.opener.length && _.layer.length) {
+                _.opener.on('click.uiAccordion' + _.hashCode, function () {
+                    _.toggle($(this).closest(_.item));
+                });
+
+                $doc.on('keydown.uiAccordion' + _.hashCode, function (e) {
+                    if (e.keyCode === 9 && _.blockTabKey) {
+                        e.preventDefault();
+                    }
+                }).on('focusin.uiAccordion' + _.hashCode, function (e) {
+                    var $item = ($(e.target).is(_.layer) || $(e.target).closest(_.layer).length) && $(e.target).closest(_.item);
+
+                    if (_.options.focusInOpen && $item) {
+                        _.open($item, 0);
+                    }
+                });
+            }
+        },
+        off: function () {
+            var _ = this;
+
+            if (_.opener.length && _.layer.length) {
+                _.opener.off('click.uiAccordion' + _.hashCode);
+                $doc.off('keydown.uiAccordion' + _.hashCode).off('focusin.uiAccordion' + _.hashCode);
+            }
+        },
+        toggle: function ($item) {
+            var _ = this;
+
+            if ($item.hasClass(_.className.opened)) {
+                _.close($item);
+            } else {
+                _.open($item);
+            }
+        },
+        open: function ($item, speed) {
+            var _ = this;
+            var $layer = null;
+            var $opener = null;
+            var beforeH = 0;
+            var afterH = 0;
+            speed = speed instanceof Number ? Number(speed) : typeof speed === 'number' ? speed : _.options.speed;
+
+            if (!$item.hasClass(_.className.opened)) {
+                $layer = $item.find(_.layer);
+                $layer.stop().css('display', 'block');
+                beforeH = $layer.height();
+                $layer.css('height', 'auto');
+                $opener = $item.find(_.opener);
+                $item.addClass(_.className.opened);
+                $opener.addClass(_.className.active);
+                $layer.addClass(_.className.opened);
+                afterH = $layer.height();
+                if (beforeH === afterH) {
+                    speed = 0;
+                }
+                if (speed > 0) {
+                    $item.addClass(_.className.animated);
+                }
+                $layer
+                    .css('height', beforeH)
+                    .animate(
+                        {
+                            height: afterH,
+                        },
+                        speed,
+                        function () {
+                            $item.removeClass(_.className.animated);
+                            $layer
+                                .css({
+                                    height: 'auto',
+                                })
+                                .trigger('uiAccordionAfterOpened');
+                        }
+                    )
+                    .trigger('uiAccordionOpened', [beforeH, afterH]);
+
+                if (_.options.once) {
+                    _.item.not($item).each(function () {
+                        _.close($(this));
+                    });
+                }
+            }
+        },
+        close: function ($item, speed) {
+            var _ = this;
+            var $layer = null;
+            var $opener = null;
+            var beforeH = 0;
+            var itemBeforeH = 0;
+            var afterH = 0;
+            speed = speed instanceof Number ? Number(speed) : typeof speed === 'number' ? speed : _.options.speed;
+
+            if ($item.hasClass(_.className.opened)) {
+                _.blockTabKey = true;
+                $layer = $item.find(_.layer);
+                $layer.stop().css('display', 'block');
+                beforeH = $layer.height();
+                itemBeforeH = $item.height();
+                $item.css('height', itemBeforeH);
+                $layer.css('height', '');
+                $opener = $item.find(_.opener);
+                $item.removeClass(_.className.opened);
+                $opener.removeClass(_.className.active);
+                $layer.removeClass(_.className.opened);
+                afterH = $layer.height();
+                if (beforeH === afterH) {
+                    speed = 0;
+                }
+                if (speed > 0) {
+                    $item.addClass(_.className.animated);
+                }
+                $item.css('height', '');
+                $layer
+                    .css('height', beforeH)
+                    .animate(
+                        {
+                            height: afterH,
+                        },
+                        speed,
+                        function () {
+                            $item.removeClass(_.className.animated);
+                            $layer
+                                .css({
+                                    display: '',
+                                    height: '',
+                                })
+                                .trigger('uiAccordionAfterClosed');
+                            _.blockTabKey = false;
+                        }
+                    )
+                    .trigger('uiAccordionClosed', [beforeH, afterH]);
+            }
+        },
+        allClose: function () {
+            var _ = this;
+
+            _.item.each(function () {
+                _.close($(this));
+            });
+        },
+        update: function (newOptions) {
+            var _ = this;
+
+            _.off();
+            $.extend(_.options, newOptions);
+            _.getElements();
+            _.on();
+        },
+    });
+    $.fn.uiAccordion = function (custom) {
+        var defaultOption = {
+            item: null,
+            opener: null,
+            layer: null,
+            once: false,
+            speed: 500,
+            focusInOpen: true,
+            onInit: function () {},
+        };
+        var other = [];
+
+        custom = custom || {};
+
+        $.each(arguments, function (i) {
+            if (i > 0) {
+                other.push(this);
+            }
+        });
+
+        this.each(function () {
+            var options = {};
+            var uiAccordion = this.uiAccordion;
+
+            if (typeof custom === 'object' && !uiAccordion) {
+                options = $.extend({}, defaultOption, custom);
+                this.uiAccordion = new UiAccordion(this, options);
+            } else if (typeof custom === 'string' && uiAccordion) {
+                switch (custom) {
+                    case 'allClose':
+                        uiAccordion.allClose();
+                        break;
+                    case 'close':
+                        uiAccordion.close(other[0], other[1]);
+                        break;
+                    case 'open':
+                        uiAccordion.open(other[0], other[1]);
+                        break;
+                    case 'update':
+                        uiAccordion.update(other[0]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        return this;
+    };
+
+    // UiTabPanel
+    var UiTabPanel = function (target, option) {
+        var _ = this;
+        var $wrap = $(target).eq(0);
+
+        _.className = {
+            active: 'jsTabpanelActive',
+            opened: 'jsTabpanelOpened',
+        };
+        _.options = option;
+        _.wrap = $wrap;
+        _.crrTarget = '';
+        _.init();
+        _.on();
+    };
+    $.extend(UiTabPanel.prototype, {
+        init: function () {
+            var _ = this;
+            var initialOpen = typeof _.options.initialOpen === 'string' && _.options.initialOpen;
+
+            if (_.options.opener) {
+                if (typeof _.options.opener === 'string') {
+                    _.opener = _.wrap.find(_.options.opener);
+                } else {
+                    _.opener = _.options.opener;
+                }
+            }
+
+            _.openerItems = _.opener;
+
+            _.openerList = (function () {
+                var $list = _.wrap;
+                var eachBreak = false;
+
+                if (_.opener && _.opener.length >= 2) {
+                    _.opener
+                        .eq(0)
+                        .parents()
+                        .each(function () {
+                            var $this = $(this);
+                            _.opener
+                                .eq(1)
+                                .parents()
+                                .each(function () {
+                                    var $secondThis = $(this);
+                                    var $children = $this.children();
+
+                                    if ($this.is($secondThis)) {
+                                        $list = $this;
+                                        eachBreak = true;
+
+                                        if ($children.filter(_.opener).length <= 0) {
+                                            _.openerItems = $this.children().filter(function () {
+                                                if ($(this).find(_.opener).length) {
+                                                    return true;
+                                                } else {
+                                                    return false;
+                                                }
+                                            });
+                                        }
+
+                                        return false;
+                                    }
+                                });
+
+                            if (eachBreak) {
+                                return false;
+                            }
+                        });
+                }
+
+                return $list;
+            })();
+
+            if (_.options.item) {
+                if (typeof _.options.item === 'string') {
+                    _.item = _.wrap.find(_.options.item);
+                } else {
+                    _.item = _.options.item;
+                }
+            }
+
+            if (_.opener.length && _.item.length) {
+                _.hashCode = uiGetHashCode();
+
+                if (!initialOpen) {
+                    initialOpen = _.opener.eq(0).attr('data-tab-open');
+                }
+
+                if (_.options.a11y) {
+                    _.initA11y();
+                }
+
+                _.open(initialOpen, false);
+            }
+        },
+        on: function () {
+            var _ = this;
+            var openerFocus = false;
+            var $focusOpener = null;
+            var itemClickCheck = false;
+
+            if (_.opener.length && _.item.length) {
+                if (!_.openerItems.is(_.opener)) {
+                    _.openerItems.on('click.uiTabPanel' + _.hashCode, function (e) {
+                        var $this = $(this);
+                        var $target = $(e.target);
+
+                        if ($target.is($this)) {
+                            itemClickCheck = true;
+                            $target.find(_.opener).trigger('click');
+                        }
+                    });
+                }
+                _.opener.on('click.uiTabPanel' + _.hashCode, function (e) {
+                    var $this = $(this);
+                    var target = $this.attr('data-tab-open');
+
+                    _.open(target);
+
+                    if ($this.is('a')) {
+                        e.preventDefault();
+                    }
+
+                    if (itemClickCheck) {
+                        e.stopPropagation();
+                        itemClickCheck = false;
+                    }
+                });
+                $doc.on('focusin.uiTabPanel' + _.hashCode, function (e) {
+                    var $panel = ($(e.target).is(_.item) && $(e.target)) || ($(e.target).closest(_.item).length && $(e.target).closest(_.item));
+
+                    if ($panel && !$panel.is(':hidden')) {
+                        _.open($panel.attr('data-tab'));
+                    }
+                });
+                _.openerItems
+                    .on('focus.uiTabPanel' + _.hashCode, function () {
+                        openerFocus = true;
+                        $focusOpener = $(this);
+                    })
+                    .on('blur.uiTabPanel' + _.hashCode, function () {
+                        openerFocus = false;
+                        $focusOpener = null;
+                    });
+                $doc.on('keydown.uiTabPanel' + _.hashCode, function (e) {
+                    var keyCode = e.keyCode;
+                    if (_.options.a11y && openerFocus) {
+                        if ([13, 32, 35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
+                            e.preventDefault();
+                        }
+                    }
+                }).on('keyup.uiTabPanel' + _.hashCode, function (e) {
+                    var keyCode = e.keyCode;
+                    var target = $focusOpener && $focusOpener.attr('data-tab-open');
+                    if (_.options.a11y && openerFocus) {
+                        switch (keyCode) {
+                            case 35:
+                                _.goEnd();
+                                break;
+                            case 36:
+                                _.goStart();
+                                break;
+                            case 37:
+                                _.prev();
+                                break;
+                            case 38:
+                                _.prev();
+                                break;
+                            case 39:
+                                _.next();
+                                break;
+                            case 40:
+                                _.next();
+                                break;
+                            case 13:
+                                _.open(target);
+                                break;
+                            case 32:
+                                _.open(target);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+            }
+        },
+        open: function (target, focus) {
+            var _ = this;
+            target = String(target);
+            focus = focus instanceof Boolean ? (String(focus) === 'false' ? false : null) : focus;
+            var $opener = _.opener.filter('[data-tab-open="' + target + '"]');
+            var $panel = _.item.filter('[data-tab="' + target + '"]');
+
+            if (!$panel.hasClass(_.className.opened)) {
+                if (_.options.a11y) {
+                    _.setActiveA11y(target, focus);
+                }
+
+                _.crrTarget = target;
+                _.opener.not($opener).removeClass(_.className.active);
+                _.item.not($panel).removeClass(_.className.opened);
+                $opener.addClass(_.className.active);
+                $panel.addClass(_.className.opened).trigger('uiTabPanelChange', [$opener, $panel, _.opener, _.item]);
+            }
+        },
+        indexOpen: function (i, focus) {
+            var _ = this;
+            target = Number(i);
+            var target = _.opener.eq(i).attr('data-tab-open');
+
+            _.open(target, focus);
+        },
+        next: function () {
+            var _ = this;
+            var length = _.opener.length;
+            var i = _.opener.index(_.opener.filter('[data-tab-open="' + _.crrTarget + '"]')) + 1;
+            if (i >= length) {
+                i = 0;
+            }
+            _.indexOpen(i);
+        },
+        prev: function () {
+            var _ = this;
+            var length = _.opener.length;
+            var i = _.opener.index(_.opener.filter('[data-tab-open="' + _.crrTarget + '"]')) - 1;
+            if (i < 0) {
+                i = length - 1;
+            }
+            _.indexOpen(i);
+        },
+        goStart: function () {
+            var _ = this;
+            _.indexOpen(0);
+        },
+        goEnd: function () {
+            var _ = this;
+            _.indexOpen(_.opener.length - 1);
+        },
+        initA11y: function () {
+            var _ = this;
+
+            _.opener.each(function (i) {
+                var $this = $(this);
+                var target = $this.attr('data-tab-open');
+                var $item = (function () {
+                    var $item = $this.closest(_.openerItems);
+
+                    if ($item.length) {
+                        return $item;
+                    } else {
+                        return $this;
+                    }
+                })();
+                var $replaceWith = $this;
+
+                $item
+                    .attr('role', 'tab')
+                    .attr('id', 'tabpanel-opener-' + target + '-' + _.hashCode)
+                    .attr('aria-controls', 'tabpanel-' + target + '-' + _.hashCode);
+
+                if (!$this.is($item)) {
+                    $replaceWith = $(
+                        $this
+                            .get(0)
+                            .outerHTML.replace(/^<[a-zA-Z]+/, '<span')
+                            .replace(/\/[a-zA-Z]+>$/, '/span>')
+                    );
+
+                    $this.replaceWith($replaceWith);
+
+                    _.opener[i] = $replaceWith.get(0);
+                }
+            });
+
+            _.item.each(function () {
+                var $this = $(this);
+                var target = $this.attr('data-tab');
+
+                $this
+                    .attr('role', 'tabpanel')
+                    .attr('id', 'tabpanel-' + target + '-' + _.hashCode)
+                    .attr('aria-labelledby', 'tabpanel-opener-' + target + '-' + _.hashCode);
+            });
+
+            _.openerList.attr('role', 'tablist');
+        },
+        setActiveA11y: function (target, focus) {
+            var _ = this;
+
+            focus = focus === false ? false : true;
+
+            _.opener.each(function () {
+                var $this = $(this);
+                var crrTarget = $this.attr('data-tab-open');
+                var $item = (function () {
+                    var $item = $this.closest(_.openerItems);
+
+                    if ($item.length) {
+                        return $item;
+                    } else {
+                        return $this;
+                    }
+                })();
+
+                if (crrTarget === target) {
+                    $item.attr('tabindex', '0').attr('aria-selected', 'true');
+                    if (focus) {
+                        $item.focus();
+                    }
+                } else {
+                    $item.attr('tabindex', '-1').attr('aria-selected', 'false');
+                }
+            });
+
+            _.item.each(function () {
+                var $this = $(this);
+                var crrTarget = $this.attr('data-tab');
+
+                if (crrTarget === target) {
+                    $this.removeAttr('hidden');
+                } else {
+                    $this.attr('hidden', '');
+                }
+            });
+        },
+        addA11y: function () {
+            var _ = this;
+
+            if (!_.options.a11y) {
+                _.options.a11y = true;
+                _.initA11y();
+                _.setActiveA11y(_.crrTarget);
+            }
+        },
+        clearA11y: function () {
+            var _ = this;
+
+            if (_.options.a11y) {
+                _.options.a11y = false;
+                _.opener.removeAttr('role').removeAttr('id').removeAttr('aria-controls').removeAttr('tabindex').removeAttr('aria-selected');
+
+                _.item.removeAttr('role').removeAttr('id').removeAttr('aria-labelledby').removeAttr('hidden');
+
+                _.wrap.removeAttr('role');
+            }
+        },
+    });
+    $.fn.uiTabPanel = function (custom) {
+        var defaultOption = {
+            item: null,
+            opener: null,
+            initialOpen: null,
+            a11y: false,
+        };
+        var other = [];
+
+        custom = custom || {};
+
+        $.each(arguments, function (i) {
+            if (i > 0) {
+                other.push(this);
+            }
+        });
+
+        this.each(function () {
+            var options = {};
+            var uiTabPanel = this.uiTabPanel;
+
+            if (typeof custom === 'object' && !uiTabPanel) {
+                options = $.extend({}, defaultOption, custom);
+                this.uiTabPanel = new UiTabPanel(this, options);
+            } else if (typeof custom === 'string' && uiTabPanel) {
+                switch (custom) {
+                    case 'addA11y':
+                        uiTabPanel.addA11y();
+                        break;
+                    case 'clearA11y':
+                        uiTabPanel.clearA11y();
+                        break;
+                    case 'open':
+                        uiTabPanel.open(other[0], other[1]);
+                        break;
+                    case 'indexOpen':
+                        uiTabPanel.indexOpen(other[0], other[1]);
+                        break;
+                    case 'next':
+                        uiTabPanel.next();
+                        break;
+                    case 'prev':
+                        uiTabPanel.prev();
+                        break;
+                    case 'goStart':
+                        uiTabPanel.goStart();
+                        break;
+                    case 'goEnd':
+                        uiTabPanel.goEnd();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        return this;
+    };
+
     // scrollbars width
     var scrollbarsWidth = {
         width: 0,
@@ -810,16 +1481,281 @@
         uiSelect.optionSelected($(this));
     });
 
+    // checkbox group
+    var checkboxGroup = {
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $($root.find('[data-checkbox-group-child]').get().reverse()).each(function () {
+                checkboxGroup.update($(this));
+            });
+        },
+        on: function () {
+            $doc.on('change.uiJSCheckboxGroup', '[data-checkbox-group], [data-checkbox-group-child]', function (e, eventBy) {
+                checkboxGroup.update($(this), eventBy);
+            });
+        },
+        update: function ($input, eventBy) {
+            var parentName = $input.attr('data-checkbox-group');
+            var childName = $input.attr('data-checkbox-group-child');
+
+            if (typeof childName === 'string' && childName.length) {
+                checkboxGroup.updateChild(childName, eventBy);
+            }
+            if (typeof parentName === 'string' && parentName.length) {
+                checkboxGroup.updateParent(parentName, eventBy);
+            }
+        },
+        updateParent: function (name, eventBy) {
+            var $parent = $('[data-checkbox-group=' + name + ']').not('[disabled]');
+            var $child = $('[data-checkbox-group-child=' + name + ']').not('[disabled]');
+            var checked = $parent.is(':checked');
+
+            if (!(typeof eventBy === 'string' && eventBy === 'checkboxGroupUpdateChild')) {
+                $child.each(function () {
+                    var $thisChild = $(this);
+                    var beforeChecked = $thisChild.is(':checked');
+
+                    if (checked) {
+                        $thisChild.prop('checked', true).attr('checked', '');
+                    } else {
+                        $thisChild.prop('checked', false).removeAttr('checked');
+                    }
+
+                    var afterChecked = $thisChild.is(':checked');
+
+                    if (beforeChecked !== afterChecked) {
+                        $thisChild.trigger('change');
+                    }
+                });
+            }
+        },
+        updateChild: function (name, eventBy) {
+            var $parent = $('[data-checkbox-group=' + name + ']').not('[disabled]');
+            var $child = $('[data-checkbox-group-child=' + name + ']').not('[disabled]');
+            var length = $child.length;
+            var checkedLength = $child.filter(':checked').length;
+
+            $parent.each(function () {
+                var $thisParent = $(this);
+                var beforeChecked = $thisParent.is(':checked');
+
+                if (length === checkedLength) {
+                    $thisParent.prop('checked', true).attr('checked', '');
+                } else {
+                    $thisParent.prop('checked', false).removeAttr('checked');
+                }
+
+                var afterChecked = $thisParent.is(':checked');
+
+                if (beforeChecked !== afterChecked) {
+                    $thisParent.trigger('change', 'checkboxGroupUpdateChild');
+                }
+            });
+        },
+    };
+    checkboxGroup.on();
+
+    // area disabled
+    var areaDisabled = {
+        className: {
+            disabled: 'isAreaDisabled',
+        },
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $root.find('[data-area-disabled]').each(function () {
+                var $this = $(this);
+                areaDisabled.eventCall($this);
+            });
+        },
+        eventCall: function ($this) {
+            var isRadio = $this.attr('type') === 'radio';
+            var name = $this.attr('name');
+
+            if (isRadio) {
+                $('[name="' + name + '"]')
+                    .not($this)
+                    .each(function () {
+                        areaDisabled.update($(this));
+                    });
+            }
+
+            areaDisabled.update($this);
+        },
+        update: function ($input) {
+            var target = $input.attr('data-area-disabled');
+            var $sameInput = $('[data-area-disabled="' + target + '"]').not($input);
+            var $target = $('[data-area-disabled-target="' + target + '"]');
+            var selector = 'input, select, button, textarea, fieldset, optgroup';
+            var isChecked = $input.is(':checked') || $sameInput.filter(':checked').length;
+
+            if ($input.attr('data-area-disabled-type') === 'multi') {
+                isChecked = $input.is(':checked') && $sameInput.length === $sameInput.filter(':checked').length;
+            }
+
+            $target.each(function () {
+                var $this = $(this);
+                var isReverse = $this.attr('data-area-disabled-reverse') === 'true';
+                var isDisabled = isReverse ? !isChecked : isChecked;
+
+                if (isDisabled) {
+                    $this.removeClass(areaDisabled.className.disabled);
+                    if ($this.is(selector)) {
+                        $this.prop('disabled', false).removeAttr('disabled');
+                    }
+                    $this.find(selector).prop('disabled', false).removeAttr('disabled');
+                } else {
+                    $this.addClass(areaDisabled.className.disabled);
+                    if ($this.is(selector)) {
+                        $this.prop('disabled', true).attr('disabled', '');
+                    }
+                    $this.find(selector).prop('disabled', true).attr('disabled', '');
+                }
+            });
+        },
+    };
+    $doc.on('change.areaDisabled', '[data-area-disabled]', function () {
+        var $this = $(this);
+        areaDisabled.eventCall($this);
+    });
+
+    // checkbox tab
+    var checkboxTab = {
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $root.find('[data-checkbox-tab]:not(:checked)').each(function () {
+                checkboxTab.update($(this));
+            });
+            $root.find('[data-checkbox-tab]:checked').each(function () {
+                checkboxTab.update($(this));
+            });
+        },
+        update: function ($input) {
+            var name = $input.data('checkbox-tab');
+            var $panels = $('[data-checkbox-tab-panel]');
+            var $panel = $panels.filter(function () {
+                var $this = $(this);
+                var val = $this.attr('data-checkbox-tab-panel');
+                var array = val.replace(/\s/g, '').split(',');
+
+                return array.indexOf(name) >= 0;
+            });
+            var isChecked = $input.is(':checked');
+
+            if (isChecked) {
+                $panel.addClass('is-opened').show();
+            } else {
+                $panel.removeClass('is-opened').css('display', 'none');
+            }
+
+            $panel.trigger('checkboxTabChange');
+        },
+    };
+    $doc.on('change.checkboxTab', '[data-checkbox-tab]', function () {
+        var $this = $(this);
+        var group = $this.attr('data-checkbox-tab-group');
+        var $groupSiblings = $('[data-checkbox-tab-group="' + group + '"]');
+        var name = $this.attr('name');
+        var $siblings = $('[name="' + name + '"]').not($this);
+
+        if (typeof group === 'string') {
+            $groupSiblings.not(':checked').each(function () {
+                checkboxTab.update($(this));
+            });
+            $groupSiblings.filter(':checked').each(function () {
+                checkboxTab.update($(this));
+            });
+        } else {
+            if ($this.is('[type="radio"]')) {
+                $siblings.each(function () {
+                    checkboxTab.update($(this));
+                });
+            }
+            checkboxTab.update($this);
+        }
+    });
+
     // common js
     function uiJSCommon($root) {
         if (!$root) {
             $root = $doc;
         }
 
+        // set
         checkScrollbars();
         fixBarSet();
+        checkboxGroup.init($root);
+        areaDisabled.init($root);
+        checkboxTab.init($root);
 
+        // select
         uiSelect.init($root);
+
+        // accordion
+        $root.find('.jsUiAccordion').each(function () {
+            var $this = $(this);
+            var once = $this.attr('data-once') === 'true';
+            var focusInOpen = !($this.attr('data-focus-open') === 'false');
+            var filter = function () {
+                var $thisItem = $(this);
+                var $wrap = $thisItem.closest('.jsUiAccordion');
+
+                if ($wrap.is($this)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+            var $items = $this.find('.jsUiAccordion__item').filter(filter);
+            var $openers = $this.find('.jsUiAccordion__opener').filter(filter);
+            var $layers = $this.find('.jsUiAccordion__layer').filter(filter);
+
+            if ($this.get(0).uiAccordion) {
+                $this.uiAccordion('update', {
+                    item: $items,
+                    opener: $openers,
+                    layer: $layers,
+                });
+            } else {
+                $this.uiAccordion({
+                    item: $items,
+                    opener: $openers,
+                    layer: $layers,
+                    once: once,
+                    focusInOpen: focusInOpen,
+                });
+            }
+        });
+
+        // tab panel
+        $root.find('.jsUiTabPanel').each(function () {
+            var $this = $(this);
+            var initial = $this.attr('data-initial');
+            var filter = function () {
+                var $thisItem = $(this);
+                var $wrap = $thisItem.closest('.jsUiTabPanel');
+
+                if ($wrap.is($this)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+            var $items = $this.find('[data-tab]').filter(filter);
+            var $openers = $this.find('[data-tab-open]').filter(filter);
+
+            $this.uiTabPanel({
+                a11y: true,
+                item: $items,
+                opener: $openers,
+                initialOpen: initial,
+            });
+        });
     }
     window.uiJSCommon = uiJSCommon;
 
