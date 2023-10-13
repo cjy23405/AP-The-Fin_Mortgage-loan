@@ -149,6 +149,7 @@
     var uiLayer = {
         zIndex: 10000,
         classNames: {
+            notInert: 'jsLayerNotInert',
             beforeLoop: 'jsLayerBeforeLoopFocus',
             afterLoop: 'jsLayerAfterLoopFocus',
             opened: 'jsLayerOpened',
@@ -184,7 +185,11 @@
             var labelID = '';
             var display = 'block';
             var notOhterElements =
-                'script, link, style, base, meta, br, [aria-hidden], [inert], .jsNotInert, .jsNotInert *, [data-ui-js], option, ul, dl, table, thead, tbody, tfoot, tr, colgroup, col, :empty:not([tabindex])';
+                'script, link, style, base, meta, br, [aria-hidden], [inert], [data-ui-js], option, ul, dl, table, thead, tbody, tfoot, tr, colgroup, col, :empty:not([tabindex]), .uiLoading, .uiLoading *, .' +
+                _.classNames.notInert +
+                ', .' +
+                _.classNames.notInert +
+                ' *';
 
             if ($layer.length && !$layer.hasClass(_.classNames.opened)) {
                 $layer.trigger('layerBeforeOpened');
@@ -657,6 +662,7 @@
 
     // toast alert
     function toastAlert(wrap, message) {
+        var $body = $('body');
         var $wrap = $(wrap);
         var $inner = (function () {
             var $el = $wrap.find('.uiToastAlert__inner');
@@ -667,6 +673,10 @@
             return $el;
         })();
         var $message = $('<p class="uiToastAlert__text" aria-role="alert" aria-live="assertive">' + message.replace(/\n/g, '<br />') + '</p>');
+
+        if (!$wrap.parent().is($body)) {
+            $body.append($wrap);
+        }
 
         $message.css('opacity', 0);
         $inner.append($message);
@@ -694,6 +704,28 @@
         });
     }
     window.uiJSToastAlert = toastAlert;
+
+    // loading
+    var loading = {
+        show: function () {
+            var $body = $('body');
+            var $loading = $('.uiLoading');
+
+            if ($loading.length) {
+                if (!$loading.parent().is($body)) {
+                    $body.append($loading);
+                }
+
+                $loading.stop().fadeIn(300);
+            }
+        },
+        hide: function () {
+            var $loading = $('.uiLoading');
+
+            $loading.stop().fadeOut(300);
+        },
+    };
+    window.uiJSLoading = loading;
 
     // fixBarSet
     function fixBarSet() {

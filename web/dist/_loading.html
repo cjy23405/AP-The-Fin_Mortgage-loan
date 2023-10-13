@@ -24,42 +24,6 @@
                 </div>
             </div>
             <!-- //loading -->
-
-            <!-- toast alert -->
-            <div class="uiToastAlert" id="globalToastAlert"></div>
-            <!-- //toast alert -->
-
-            <div class="layoutWrap">
-                <!-- top area -->
-                <div class="fixTopWrap">
-                    <!-- header -->
-                    <header class="header">
-                        <!-- // -->
-                    </header>
-                    <!-- //header -->
-                </div>
-                <!-- //top area -->
-
-                <!-- contents -->
-                <article class="contentsWrap">
-                    <div class="pageContents">
-                        <div class="uiButtons uiButtons--noMargin">
-                            <ul class="uiButtons__list">
-                                <li class="uiButtons__item">
-                                    <button
-                                        type="button"
-                                        class="uiButton uiBasicButton"
-                                        onclick="uiJSToastAlert('#globalToastAlert', '토스트 안내 메세지\n줄바꿈은 \\n 이용\n세 줄일 경우는 이렿게 표시됩니다');"
-                                    >
-                                        <span class="uiBasicButton__text">토스트 얼럿</span>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
-                <!-- //contents -->
-            </div>
         </div>
 
         <!-- script -->
@@ -70,6 +34,15 @@
         <script type="text/javascript" src="./assets/lib/highchart/modules/export-data.js"></script>
         <script type="text/javascript" src="./assets/lib/highchart/modules/accessibility.js"></script>
         <script type="text/javascript" src="./assets/js/ui-script.js"></script>
+        <script>
+            $(function () {
+                uiJSLoading.show();
+
+                setTimeout(function () {
+                    uiJSLoading.hide();
+                }, 5000);
+            });
+        </script>
         <!-- //script -->
     </body>
 </html>

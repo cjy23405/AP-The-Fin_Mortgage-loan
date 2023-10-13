@@ -1122,3 +1122,53 @@ body,
 .uiToastAlert__text + .uiToastAlert__text {
     margin-top: 8px;
 }
+
+/* uiLoading */
+.uiLoading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999;
+    background-color: rgba(var(--blackRgb), 0.3);
+    overflow: hidden;
+    display: none;
+}
+.uiLoading__block {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 123px;
+    height: 123px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 26px;
+    background: rgba(var(--theFinBlackRgb), 0.8);
+    transform: translate(-50%, -50%);
+}
+.uiLoading__object {
+    width: 45px;
+    height: 45px;
+    margin: 0 auto 8px;
+    background: url('../images/common/loading.svg') no-repeat 50% 50% / 100% 100%;
+    animation: uiLoadingAnimate 1s linear infinite;
+}
+.uiLoading__text {
+    font-size: 12px;
+    line-height: var(--lineHeightDefault);
+    color: var(--white);
+    text-align: center;
+}
+.uiLoading__text::before {
+    content: '확인중입니다';
+}
+
+@keyframes uiLoadingAnimate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
