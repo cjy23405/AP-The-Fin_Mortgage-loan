@@ -418,8 +418,6 @@
         },
         on: function () {
             var _ = this;
-            var openerFocus = false;
-            var $focusOpener = null;
             var itemClickCheck = false;
 
             if (_.opener.length && _.item.length) {
@@ -456,26 +454,22 @@
                         _.open($panel.attr('data-tab'));
                     }
                 });
-                _.openerItems
-                    .on('focus.uiTabPanel' + _.hashCode, function () {
-                        openerFocus = true;
-                        $focusOpener = $(this);
-                    })
-                    .on('blur.uiTabPanel' + _.hashCode, function () {
-                        openerFocus = false;
-                        $focusOpener = null;
-                    });
                 $doc.on('keydown.uiTabPanel' + _.hashCode, function (e) {
                     var keyCode = e.keyCode;
-                    if (_.options.a11y && openerFocus) {
+                    var isFocus = Boolean(_.openerItems.filter(':focus').length);
+
+                    if (_.options.a11y && isFocus) {
                         if ([13, 32, 35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
                             e.preventDefault();
                         }
                     }
                 }).on('keyup.uiTabPanel' + _.hashCode, function (e) {
                     var keyCode = e.keyCode;
-                    var target = $focusOpener && $focusOpener.attr('data-tab-open');
-                    if (_.options.a11y && openerFocus) {
+                    var $focusOpener = _.openerItems.filter(':focus');
+                    var isFocus = Boolean($focusOpener.length);
+                    var target = isFocus ? $focusOpener.attr('data-tab-open') : '';
+
+                    if (_.options.a11y && isFocus) {
                         switch (keyCode) {
                             case 35:
                                 _.goEnd();
