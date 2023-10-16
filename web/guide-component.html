@@ -801,28 +801,50 @@
                     <div class="uiCheckBoxGroup">
                         <div class="uiCheckBoxHeader">
                             <label class="uiCheckBox uiCheckBox_circle">
-                                <input type="checkbox" name="" />
-                                <span>전체선택</span>
+                                <input type="checkbox" name="" data-checkbox-group="testCheckboxGroupA" />
+                                <span>약관에 모두 동의</span>
                             </label>
                         </div>
-                        <div class="uiCheckBoxBody">
-                            <label class="uiCheckBox">
-                                <input type="checkbox" name="checkbox1" />
-                                <span>[필수] 대출모집 약관 및 개인정보 동의</span>
-                            </label>
-                            <label class="uiCheckBox">
-                                <input type="checkbox" name="checkbox1" />
-                                <span>[필수] 대출모집 약관 및 개인정보 동의</span>
-                            </label>
-                            <label class="uiCheckBox">
-                                <input type="checkbox" name="checkbox1" />
-                                <span>[필수] 대출모집 약관 및 개인정보 동의</span>
-                            </label>
-                            <label class="uiCheckBox">
-                                <input type="checkbox" name="checkbox1" />
-                                <span>[필수] 대출모집 약관 및 개인정보 동의</span>
-                            </label>
-                        </div>
+                        <ul class="uiCheckBoxBody jsUiAccordion">
+                            <li class="jsUiAccordion__item">
+                                <label class="uiCheckBox">
+                                    <input type="checkbox" name="" data-checkbox-group-child="testCheckboxGroupA" />
+                                    <span>[필수] 대출모집 약관 및 개인정보 동의</span>
+                                </label>
+                                <button type="button" class="uiButton jsUiAccordion__opener">
+                                    <span class="forA11y">
+                                        대출모집 약관 및 개인정보 동의 하위약관
+                                        <span class="openText">열기</span>
+                                        <span class="closeText">닫기</span>
+                                    </span>
+                                </button>
+                                <div class="jsUiAccordion__layer">
+                                    <div class="uiCheckBoxButtons">
+                                        <a href="#">서비스 이용약관</a>
+                                        <a href="#">개인정보 취급방침 동의</a>
+                                        <a href="#">제 3자 개인정보 제공 동의</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="jsUiAccordion__item">
+                                <label class="uiCheckBox">
+                                    <input type="checkbox" name="" data-checkbox-group-child="testCheckboxGroupA" />
+                                    <span>[필수] 휴대폰 본인확인 서비스 이용 약관</span>
+                                </label>
+                                <button type="button" class="uiButton jsUiAccordion__opener">
+                                    <span class="forA11y">
+                                        대출모집 약관 및 개인정보 동의 하위약관
+                                        <span class="openText">열기</span>
+                                        <span class="closeText">닫기</span>
+                                    </span>
+                                </button>
+                                <div class="jsUiAccordion__layer">
+                                    <div class="uiCheckBoxButtons">
+                                        <a href="#">금융기관 필수 항목 동의</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 

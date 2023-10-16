@@ -67,7 +67,7 @@
     margin: 0;
     font-size: 20px;
     line-height: var(--lineHeightDefault);
-    font-weight: 600;
+    font-weight: 700;
 }
 .titleMedium {
     margin: 0;
@@ -334,7 +334,7 @@ button.uiInputBlock__input {
     box-sizing: border-box;
     width: 100%;
     min-height: 54px;
-    border-radius: 11px;
+    border-radius: 8px;
     padding: 7px 24px;
     font-size: 18px;
     line-height: var(--lineHeightDefault);
@@ -489,6 +489,14 @@ button.uiInputBlock__input {
 .uiButtons--full .uiButtons__item + .uiButtons__item {
     margin-left: 0;
     margin-top: 8px;
+}
+
+/* uiTextButton */
+.uiTextButton {
+    display: block;
+    text-align: center;
+    margin: 0 auto 20px;
+    color: var(--systemGray500);
 }
 
 /* flexBox */
@@ -833,7 +841,7 @@ body,
     min-width: var(--pageMinWidth);
     box-sizing: border-box;
     padding: 10px 20px 20px;
-    background-color: var(--white);
+    /* background-color: var(--white); */
 }
 
 /* header */
@@ -859,11 +867,39 @@ body,
 
 /* ########## LHO ########## */
 
+section + .divide {
+    display: block;
+    height: 16px;
+    background: var(--systemGray100);
+
+    margin: 30px 0;
+    padding: 0;
+    border: 0 none;
+}
+.pageContents > section + .divide {
+    margin: 30px -24px;
+}
+
 .pageContents > h2 {
     font-size: 20px;
     font-weight: 600;
     line-height: 1.3;
     margin: 0;
+}
+.pageContents h3 {
+    margin: 0;
+}
+.pageContents h2 + p,
+.pageContents h3 + p {
+    font-weight: 500;
+    line-height: 22.4px;
+    margin-top: 5px;
+    color: var(--systemGray500);
+    display: flex;
+    line-height: 1;
+}
+.pageContents h3 strong {
+    color: var(--primary600);
 }
 
 .uiCheckBox {
@@ -930,6 +966,53 @@ body,
 }
 .uiCheckBoxGroup .uiCheckBoxBody {
     padding: 16px 0 24px;
+    list-style: none;
+    margin: 0 0 0 14px;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li {
+    position: relative;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li + li {
+    margin-top: 16px;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox span {
+    display: block;
+    padding-right: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li > .uiButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li > .uiButton::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url(../images/icon/icon_expand.png) no-repeat;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li.jsAccordionOpened > .uiButton::before {
+    transform: rotate(180deg);
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0 6px 30px;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a {
+    font-size: 14px;
+    line-height: 18.2px;
+    color: var(--systemGray700);
+    text-decoration: none;
+
+    background: url(../images/icon/icon_linkarrow.png) no-repeat center right;
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a + a {
+    margin-top: 16px;
 }
 .uiCheckBox.uiToggleCheckBox > span {
     display: block;
@@ -953,6 +1036,13 @@ body,
     color: var(--primary600);
     border-color: var(--primary600);
     background-color: var(--primary50);
+}
+.uiCheckBox.uiCheckBox__hidden span {
+    padding: 0;
+}
+.uiCheckBox.uiCheckBox__hidden span::before,
+.uiCheckBox.uiCheckBox__hidden span::after {
+    background: none;
 }
 
 .uiRadioButton {
@@ -1054,6 +1144,15 @@ body,
     height: 22px;
     margin-right: 6px;
 }
+.stepListItems li strong.icon_reg::before {
+    background-image: url(../images/icon/icon_reg.png);
+}
+.stepListItems li strong.icon_apartment::before {
+    background-image: url(../images/icon/icon_apartment.png);
+}
+.stepListItems li strong.icon_balance::before {
+    background-image: url(../images/icon/icon_balance.png);
+}
 .stepListItems li span {
     color: var(--systemGray500);
 }
@@ -1128,6 +1227,7 @@ body,
     padding-left: 20px;
     font-size: 12px;
     font-weight: 400;
+    line-height: 22.4px;
 }
 .infoListBox > ul > li::before {
     content: '';
@@ -1141,9 +1241,28 @@ body,
 .infoListBox > ul > li strong {
     font-weight: 700;
 }
+.infoListBox.grayInfoBox {
+    background-color: #f5f7f9;
+}
+.infoListBox.grayInfoBox > ul > li {
+    font-size: 14px;
+}
+.infoListBox.grayInfoBox > ul > li::before {
+    top: 8px;
+}
+.grayInfoBox .grayInfoBox__title {
+    position: absolute;
+    font-size: 16px;
+    color: var(--systemGray700);
+    top: 16px;
+    left: 36px;
+}
 
 .bankListBox {
     padding: 20px;
+}
+.titleMedium + .bankListBox {
+    margin-top: 10px;
 }
 .bankListBox > h3 {
     margin: 0;
@@ -1206,9 +1325,23 @@ body,
     margin-top: 50px;
 }
 
+.icon::before {
+    content: '';
+    display: inline-block;
+    background: transparent no-repeat center / 100% auto;
+}
+.icon.icon_apartment::before {
+    background-image: url(../images/icon/icon_apartment_gray.png);
+}
+.icon.icon_18::before {
+    width: 18px;
+    height: 18px;
+}
+
 .prodInfoList {
     font-size: 14px;
     line-height: 18px;
+    margin: 0;
 }
 .prodInfoList dt {
     font-weight: 500;
@@ -1336,6 +1469,315 @@ body,
 
 .bankListBox_rounded + .bankListBox_rounded {
     margin-top: 20px;
+}
+
+.grayInfoBox {
+    position: relative;
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background: var(--systemGray50) url(../images/icon/icon_infocircle.png) no-repeat 14px 16px;
+
+    padding: 44px 16px 16px;
+}
+.grayInfoBox strong {
+    font-weight: 500;
+}
+.grayInfoBox span {
+    font-size: 14px;
+    color: var(--systemGray500);
+    margin-top: 10px;
+}
+.grayInfoBox.grayInfoBox__noIcon {
+    background-image: none;
+    padding: 20px;
+}
+
+.layerContentBottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 36px 24px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+h2 + .infoTxt {
+    padding-left: 20px;
+    margin-top: 10px;
+    line-height: 16px;
+    color: var(--systemGray500);
+
+    background: url(../images/icon/icon_infocircle.png) no-repeat left center / 16px 16px;
+}
+
+.noContentBox {
+    margin: 150px 0 0;
+    padding: 100px 45px 0;
+    background: url(../images/icon/icon_timeover.png) no-repeat center top / 80px auto;
+}
+.noContentBox p {
+    text-align: center;
+    margin: 0;
+}
+.noContentBox p strong {
+    color: var(--primary600);
+    font-weight: 600;
+}
+
+.uiCheckWithBankList,
+.uiRadioWithBankList {
+    margin-top: 30px;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Header,
+.uiRadioWithBankList .uiRadioWithBankList__Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.uiRadioWithBankList .uiRadioWithBankList__Header {
+    justify-content: flex-start;
+    gap: 0 4px;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Header span {
+    font-size: 13px;
+    line-height: 1;
+    color: var(--systemGray700);
+}
+.uiRadioWithBankList .uiRadioWithBankList__Header span {
+    color: var(--systemGray700);
+}
+.uiCheckWithBankList .uiCheckWithBankList__Body,
+.uiRadioWithBankList .uiRadioWithBankList__Body {
+    list-style: none;
+    margin: 20px 0 0;
+    padding: 0;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Body li + li,
+.uiRadioWithBankList .uiRadioWithBankList__Body li + li {
+    margin-top: 30px;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Body label,
+.uiRadioWithBankList .uiRadioWithBankList__Body label {
+    display: flex;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Body label span,
+.uiRadioWithBankList .uiRadioWithBankList__Body label span {
+    position: relative;
+    flex: 1;
+    font-size: 13px;
+    line-height: 1;
+    color: var(--systemGray700);
+    padding: 0 20px 0 4px;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Body label span::before,
+.uiCheckWithBankList .uiCheckWithBankList__Body label span::after {
+    width: 20px;
+    height: 20px;
+    right: 0;
+    top: 5px;
+    left: auto;
+}
+.uiRadioWithBankList .uiRadioWithBankList__Body label span::before {
+    width: 18px;
+    height: 18px;
+    right: 0;
+    top: 5px;
+    left: auto;
+}
+.uiRadioWithBankList .uiRadioWithBankList__Body label span::after {
+    width: 8px;
+    height: 8px;
+    top: 11px;
+    right: 6px;
+    left: auto;
+}
+.uiCheckWithBankList .uiCheckWithBankList__Body label span strong,
+.uiRadioWithBankList .uiRadioWithBankList__Body label span strong {
+    display: block;
+    font-size: 16px;
+    line-height: 1;
+    margin-top: 8px;
+    color: var(--theFinBlack);
+}
+.uiRadioWithBankList .uiRadioWithBankList__Body label span strong {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+.uiRadioWithBankList.uiRadioWithBankList__disable {
+    margin-top: 0;
+}
+.uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body {
+    opacity: 0.6;
+    pointer-events: none;
+}
+.uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body input[type='radio'] {
+    display: none;
+}
+.uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body span::before,
+.uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body span::after {
+    display: none;
+}
+
+[class*='iconQuestion__']::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(../images/icon/icon_question.png) no-repeat center / 16px auto;
+}
+
+.tabContents {
+    margin-top: 30px;
+}
+.tabContents .tabContents__Header {
+    padding: 4px;
+    background: var(--systemGray100);
+    border-radius: 11px;
+}
+.tabContents .tabContents__Header > ul {
+    list-style: none;
+    display: flex;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+}
+.tabContents .tabContents__Header > ul > li {
+    flex: 1;
+}
+.tabContents .tabContents__Header > ul > li input {
+    display: none;
+}
+.tabContents .tabContents__Header > ul > li label {
+    color: var(--systemGray800);
+    font-weight: 500;
+    height: 37px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tabContents .tabContents__Header > ul > li input:checked + label {
+    background: var(--white);
+}
+.tabContents.tabContents__line {
+    margin: 20px -24px 0;
+}
+.tabContents.tabContents__line .tabContents__Header {
+    background: var(--white);
+    padding: 0;
+}
+.tabContents.tabContents__line .tabContents__Header > ul {
+    gap: 0;
+    border-bottom: 1px solid #efefef;
+}
+.tabContents.tabContents__line .tabContents__Header > ul > li {
+    text-align: center;
+    height: 47px;
+}
+.tabContents.tabContents__line .tabContents__Header > ul > li label {
+    display: inline-block;
+    line-height: 47px;
+    height: 100%;
+    border-radius: 0;
+    border-bottom: 2px solid transparent;
+}
+.tabContents.tabContents__line .tabContents__Header > ul > li input:checked + label {
+    border-color: var(--theFinBlack);
+}
+.tabContents.tabContents__line .tabContentsBodyWrap {
+    padding: 20px 24px;
+}
+
+.loanResultListItems {
+    margin-bottom: 30px;
+}
+.loanResultListItem {
+    display: flex;
+    padding: 20px 0;
+    text-decoration: none;
+    color: var(--theFinBlack);
+    border-bottom: 1px solid var(--systemGray200);
+}
+.loanResultListItem .loanResultInfo {
+    margin-left: 16px;
+    flex: 1;
+    padding-right: 24px;
+
+    background: url(../images/icon/icon_linkarrow.png) no-repeat top right;
+}
+.loanResultListItem .loanResultInfo .loanResultBank {
+    display: flex;
+    align-items: center;
+}
+.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip li {
+    margin-left: 8px;
+    font-size: 11px;
+    line-height: 14px;
+    text-align: center;
+    padding: 2px 6px;
+    border-radius: 9px;
+}
+.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip li.chipBlue {
+    background: var(--primary100);
+    color: var(--primary600);
+}
+.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip li.chipRed {
+    background: var(--systemRed100);
+    color: var(--systemRed600);
+}
+.loanResultListItem .loanResultInfo > span {
+    font-size: 14px;
+    line-height: 18.2px;
+    color: var(--systemGray500);
+}
+.loanResultListItem .loanResultInfo .loanResultData {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+.loanDetailInfo {
+    display: flex;
+    flex-direction: column;
+}
+.loanDetailInfo > .titleLarge {
+    margin-top: 10px;
+    font-weight: 500;
+}
+.loanDetailInfo > .textBodyLarge {
+    margin: 0;
+    color: var(--systemGray700);
+}
+.loanDetailInfo > .loanResultData {
+    display: flex;
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+}
+.loanDetailInfo > .loanResultData > li {
+    flex: 1;
+}
+.loanDetailInfo > .loanResultData > li span {
+    font-size: 14px;
+    color: var(--systemGray600);
+}
+.loanDetailInfo > .loanResultData > li strong {
+    display: block;
+    font-size: 22px;
+    line-height: 28.6px;
+    font-weight: 600;
 }
 
 /* ########## CJY ########## */
