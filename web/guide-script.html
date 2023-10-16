@@ -803,6 +803,37 @@
                 </div>
             </div>
 
+            <div class="testSection">
+                <h2 class="testTitle">콤마 인풋</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <input type="text" pattern="\d*" class="jsCommaInput" />
+
+                    <div class="testDescription">
+                        자동 콤마 생성 인풋에 사용, 소수점 지원
+
+                        <div class="testCode">&lt;input type="text" pattern="\d*" class="<mark>jsCommaInput</mark>" /&gt;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">.invalid()</h2>
+                <div class="testDescription">
+                    인풋 유효성 불가 스타일 넣는 함수<br />
+                    부모 .uiInvalid 를 찾아 해당 객체에 메세지를 append 시킨다.<br />
+                    사용 예제는 컴포넌트 가이드 Form 섹션 참고
+                </div>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">$('input').invalid(isInvalid [, message]);</h3>
+                    <div class="testDescription">
+                        isInvalid : boolean : 유효성 불가 여부 Boolean 값 불가하면 true<br />
+                        message : string : 에러 메세지 (줄바꿈은 \n 이용)
+                    </div>
+                </div>
+            </div>
+
             <!--
             <div class="testSection">
                 <style>
@@ -814,7 +845,13 @@
                 <div class="testSectionSub">
                     <h3 class="testTitle">Default</h3>
 
-                    //
+                    <div class="testDescription">
+                        //
+
+                        <div class="testCode">
+                            //
+                        </div>
+                    </div>
 
                     <script type="module">
                         //

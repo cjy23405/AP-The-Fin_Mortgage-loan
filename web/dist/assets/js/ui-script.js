@@ -1441,6 +1441,38 @@
         $fixBar.css('margin-left', -scrollX);
     }
 
+    // input disabled class
+    function checkDisabledClass($root) {
+        if (!$root) {
+            $root = $doc;
+        }
+
+        var $inputs = $root.find('.uiInput__input');
+
+        $inputs.each(function () {
+            var $this = $(this);
+            var $parent = $this.parent('.uiInput');
+            var disabledClassName = 'isDisabled';
+            var isDisabled = $this.is(':disabled');
+            var disabledHasClass = $parent.hasClass(disabledClassName);
+            var readonlyClassName = 'isReadonly';
+            var isReadonly = $this.is('[readonly]');
+            var readonlyHasClass = $parent.hasClass(readonlyClassName);
+
+            if (isDisabled && !disabledHasClass) {
+                $parent.addClass(disabledClassName);
+            } else if (!isDisabled && disabledHasClass) {
+                $parent.removeClass(disabledClassName);
+            }
+
+            if (isReadonly && !readonlyHasClass) {
+                $parent.addClass(readonlyClassName);
+            } else if (!isReadonly && readonlyHasClass) {
+                $parent.removeClass(readonlyClassName);
+            }
+        });
+    }
+
     // select
     var uiSelect = {
         init: function ($root) {
@@ -1609,6 +1641,8 @@
                     $this.find(selector).prop('disabled', true).attr('disabled', '');
                 }
             });
+
+            checkDisabledClass($target);
         },
     };
     $doc.on('change.areaDisabled', '[data-area-disabled]', function () {
@@ -1674,6 +1708,147 @@
         }
     });
 
+    // comma input
+    var commaInput = {
+        keyCode: null,
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $root.find('.jsCommaInput').each(function () {
+                commaInput.update($(this));
+            });
+        },
+        update: function ($input, keyCode, eventType) {
+            var _ = commaInput;
+
+            if (eventType === 'keydown') {
+                _.keyCode = keyCode;
+            }
+
+            switch (_.keyCode) {
+                case 8:
+                case 37:
+                case 38:
+                case 39:
+                case 40:
+                case 46:
+                    if (eventType === 'keyup') {
+                        _.keyCode = null;
+                    }
+                    return;
+                default:
+                    break;
+            }
+
+            _.keyCode = null;
+
+            var el = $input.get(0);
+            var val = $input.val();
+            var isNegative = Boolean(val.match(/^-/g));
+            var dotI = val.replace(/[^\d\.]/g, '').search(/\./g);
+            var toVal = (function () {
+                var v = val.replace(/[^\d]/g, '');
+                var slice = '';
+
+                if (dotI >= 0) {
+                    slice = v.slice(dotI, v.length);
+                    v = v.slice(0, dotI);
+                }
+
+                v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                return (isNegative ? '-' : '') + (dotI >= 0 ? v + '.' + slice : v);
+            })();
+            var selectionEnd = el.selectionEnd;
+            var slice = (function () {
+                var sliceOrigin = val.slice(selectionEnd, val.length);
+                var sliceDotI = sliceOrigin.replace(/[^\d\.]/g, '').search(/\./g);
+                var v = sliceOrigin.replace(/[^\d]/g, '');
+                var reg = new RegExp(v + '$');
+                var search = val.replace(/[^\d]/g, '').search(reg);
+                var slice = null;
+                var isDot = false;
+
+                if (dotI >= 0 && search >= dotI) {
+                    slice = v;
+                    v = '';
+                } else if (dotI >= 0 && search < dotI) {
+                    slice = v.slice(sliceDotI, v.length);
+                    v = v.slice(0, sliceDotI);
+                    isDot = true;
+                }
+
+                v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+                return isDot ? v + '.' + slice : slice ? slice : v;
+            })();
+            var selectionIndex = (function () {
+                var reg = new RegExp(slice + '$');
+                var length = slice.length;
+                var search = toVal.search(reg);
+
+                if (val.length === selectionEnd) {
+                    return toVal.length + 1;
+                } else if (isNegative && selectionEnd === 0) {
+                    return 0;
+                } else if (length) {
+                    return search;
+                } else {
+                    return 0;
+                }
+            })();
+
+            $input.val(toVal);
+            el.setSelectionRange(selectionIndex, selectionIndex);
+        },
+    };
+    $doc.on('focusin.commaInput focusout.commaInput keydown.commaInput keyup.commaInput change.commaInput input.commaInput', '.jsCommaInput', function (e) {
+        commaInput.update($(this), e.keyCode, e.type);
+    });
+
+    // invalid
+    $.fn.invalid = function (isInvalid, message) {
+        message = typeof message === 'string' ? message : '';
+
+        this.each(function () {
+            var $this = $(this);
+            var $el = (function () {
+                var $uiWrap = $this.closest('.uiInput, .uiSelect');
+                if ($uiWrap.length) {
+                    return $uiWrap;
+                } else {
+                    return $this;
+                }
+            })();
+            var $wrap = $el.closest('.uiInvalid');
+            var $message = $wrap.children('.uiInvalid__message');
+
+            if (typeof isInvalid === 'boolean' && isInvalid) {
+                if (!$message.length) {
+                    $message = $('<p class="uiInvalid__message" aria-role="alert" aria-live="assertive"></p>');
+                    $wrap.append($message);
+                }
+
+                elFocus($this);
+
+                $message.html(message.replace(/\n/g, '<br />'));
+
+                $el.addClass('isInvalid');
+                $wrap.addClass('isShow');
+            } else {
+                if ($message.length) {
+                    $message.remove();
+                }
+
+                $el.removeClass('isInvalid');
+                $wrap.removeClass('isShow');
+            }
+        });
+
+        return $(this);
+    };
+
     // common js
     function uiJSCommon($root) {
         if (!$root) {
@@ -1683,9 +1858,11 @@
         // set
         checkScrollbars();
         fixBarSet();
+        checkDisabledClass($root);
         checkboxGroup.init($root);
         areaDisabled.init($root);
         checkboxTab.init($root);
+        commaInput.init($root);
 
         // select
         uiSelect.init($root);
@@ -1761,26 +1938,31 @@
 
     // area focus
     function areaFocus(area) {
-        $doc.on('focus.areaFocus', area, function () {
+        $doc.on('focusin.areaFocus', area, function () {
             var $this = $(this);
             var timer = $this.data('areaFocusTimer');
 
             clearTimeout(timer);
+
             $this.addClass('isFocus').trigger('areaFocusIn');
-        }).on('blur.areaFocus', area, function () {
+        }).on('focusout.areaFocus', area, function () {
             var $this = $(this);
             var timer = $this.data('areaFocusTimer');
 
             clearTimeout(timer);
+
             $this.data(
                 'areaFocusTimer',
                 setTimeout(function () {
-                    $this.removeClass('isFocus').trigger('areaFocusOut');
+                    var isFocus = $this.find(':focus').length;
+                    if (!isFocus) {
+                        $this.removeClass('isFocus').trigger('areaFocusOut');
+                    }
                 }, 100)
             );
         });
     }
-    areaFocus('.uiInputBlock');
+    areaFocus('.uiInput');
 
     // inputed
     function inputedCheck($input, parent) {
@@ -1795,24 +1977,24 @@
             }
         }
     }
-    $doc.on('focus.inputedCheck blur.inputedCheck keydown.inputedCheck keyup.inputedCheck change.inputedCheck', '.uiInputBlock__input', function () {
-        inputedCheck($(this), '.uiInputBlock');
+    $doc.on('focusin.inputedCheck focusout.inputedCheck keydown.inputedCheck keyup.inputedCheck change.inputedCheck input.commaInput', '.uiInput__input', function (e) {
+        inputedCheck($(this), '.uiInput');
     });
 
     // input delete
-    $doc.on('focus.inputDelete', 'input.uiInputBlock__input, textarea.uiInputBlock__input', function () {
+    $doc.on('focusin.inputDelete', 'input.uiInput__input, textarea.uiInput__input', function () {
         var $this = $(this);
-        var $wrap = $this.closest('.uiInputBlock');
-        var isNoDelete = $wrap.is('.uiInputBlock--noDelete');
+        var $wrap = $this.closest('.uiInput');
+        var isNoDelete = $wrap.is('.uiInput--noDelete');
         var type = $this.attr('type') || '';
         var isText = Boolean(type.match(/text|password|search|email|url|number|tel|date|time/)) || $this.is('textarea');
-        var $delete = $wrap.find('.uiInputBlock__delete');
+        var $delete = $wrap.find('.uiInput__delete');
         var isDisabled = $this.is('[readonly]') || $this.is('[disabled]');
 
         if (isText && !isNoDelete) {
             if (!$delete.length && !isDisabled) {
-                $wrap.addClass('isUseDelete').append('<button type="button" class="uiButton uiInputBlock__delete"><span class="forA11y">입력 내용 지우기</span></button>');
-                $delete = $wrap.find('.uiInputBlock__delete');
+                $wrap.addClass('isUseDelete').append('<button type="button" class="uiButton uiInput__delete"><span class="forA11y">입력 내용 지우기</span></button>');
+                $delete = $wrap.find('.uiInput__delete');
             }
 
             if (isDisabled) {
@@ -1821,11 +2003,11 @@
                 $delete.prop('disabled', false).removeAttr('disabled', '');
             }
         }
-    }).on('click.inputDelete', '.uiInputBlock__delete', function () {
+    }).on('click.inputDelete', '.uiInput__delete', function () {
         var $this = $(this);
-        var $input = $this.closest('.uiInputBlock').find('.uiInputBlock__input');
+        var $input = $this.closest('.uiInput').find('.uiInput__input');
 
-        $input.val('').trigger('focus');
+        $input.val('').focus();
     });
 
     // layer opened scroll to start
