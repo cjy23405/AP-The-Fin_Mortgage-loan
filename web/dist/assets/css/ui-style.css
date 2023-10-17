@@ -67,7 +67,7 @@
     margin: 0;
     font-size: 20px;
     line-height: var(--lineHeightDefault);
-    font-weight: 700;
+    font-weight: 600;
 }
 .titleMedium {
     margin: 0;
@@ -173,6 +173,9 @@
 /* color */
 .colorEmphasis.colorEmphasis {
     color: var(--primary600);
+}
+.colorGray.colorGray {
+    color: var(--systemGray500);
 }
 
 /* align */
@@ -654,9 +657,14 @@ button.uiInput__input {
 /* uiTextButton */
 .uiTextButton {
     display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
     text-align: center;
-    margin: 0 auto 20px;
     color: var(--systemGray500);
+    text-decoration: underline;
 }
 
 /* flexBox */
@@ -1018,6 +1026,11 @@ body,
 .jsFakeBottom {
     flex: none;
 }
+.bottomContents {
+    flex: none;
+    margin-top: auto;
+    padding-top: 10px;
+}
 
 /* fixTopWrap */
 .fixTopWrap {
@@ -1052,17 +1065,17 @@ body,
     position: relative;
     min-width: var(--pageMinWidth);
     box-sizing: border-box;
-    padding: 10px 20px 20px;
-    /* background-color: var(--white); */
+    padding: 10px 24px 20px;
+    background-color: var(--white);
 }
 
 /* header */
 .header {
     position: relative;
     min-width: var(--pageMinWidth);
-    min-height: 50px;
+    min-height: 48px;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 24px;
     background-color: var(--white);
 }
 
@@ -1073,7 +1086,7 @@ body,
 
 /* pageContents */
 .pageContents {
-    padding: 20px 24px 72px;
+    padding: 20px 24px;
     box-sizing: border-box;
 }
 
@@ -2058,6 +2071,27 @@ h2 + .infoTxt {
     border-bottom-color: var(--systemRed700);
 }
 
+/* uiSelect--secondary */
+.uiSelect--secondary .uiSelect__button {
+    min-height: 27px;
+    padding: 0 0 4px;
+}
+.uiSelect--secondary .uiSelect__button::before {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--primary800);
+}
+.uiSelect--secondary .uiSelect__button::after {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/icon/keyboard_arrow_down_blue.svg');
+}
+.uiSelect--secondary .uiSelect__text {
+    font-size: 18px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 600;
+    color: var(--primary800);
+}
+
 /* uiSelectOptions */
 .uiSelectOptions {
     margin: 0 -24px;
@@ -2255,9 +2289,9 @@ h2 + .infoTxt {
     padding-left: 18px;
     background: url('../images/icon/error.svg') no-repeat 0 0 / 16px 16px;
 }
-.uiInvalid.isShow .uiInvalid__message {
+.uiInvalid.isShow > .uiInvalid__message {
     display: block;
 }
-.uiInvalid.isShow .helpText {
+.uiInvalid.isShow > .helpText {
     display: none;
 }

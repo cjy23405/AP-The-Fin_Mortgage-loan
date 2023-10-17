@@ -1382,18 +1382,6 @@
                 }
 
                 $loading.stop().fadeIn(300);
-            } else {
-                // 없으면 기본값 넣기
-                let htmlTemplate = `
-                <div class="uiLoading">
-                    <div class="uiLoading__block">
-                        <div class="uiLoading__object"></div>
-                        <div class="uiLoading__text"></div>
-                    </div>
-                </div>
-                `;
-                $body.append($(htmlTemplate));
-                this.show();
             }
         },
         hide: function () {
@@ -1407,6 +1395,7 @@
     // fixBarSet
     function fixBarSet() {
         var $layoutWrap = $('.layoutWrap');
+        var $contentsWrap = $('.contentsWrap');
         var $top = $('.fixTopWrap');
         var $fakeTop = $('.jsFakeTop');
         var $bottom = $('.fixBottomWrap');
@@ -1427,7 +1416,7 @@
                 $fakeTop.height(topH);
             }
         } else {
-            $('.jsFakeTop').css('height', 0);
+            $fakeTop.css('height', 0);
         }
 
         if ($bottom.length && !$bottom.is(':hidden')) {
@@ -1440,8 +1429,11 @@
             if (!(bottomH === fakeBottomH)) {
                 $fakeBottom.height(bottomH);
             }
+            if (!$contentsWrap.next().is($bottom)) {
+                $contentsWrap.after($bottom);
+            }
         } else {
-            $('.jsFakeBottom').css('height', 0);
+            $fakeBottom.css('height', 0);
         }
     }
 
@@ -1734,12 +1726,13 @@
         update: function ($input, keyCode, eventType) {
             var _ = commaInput;
 
-            if (eventType === 'keydown') {
+            if (eventType === 'keydown' && !_.keyCode) {
                 _.keyCode = keyCode;
             }
 
             switch (_.keyCode) {
                 case 8:
+                case 17:
                 case 37:
                 case 38:
                 case 39:
@@ -1819,6 +1812,87 @@
         commaInput.update($(this), e.keyCode, e.type);
     });
 
+    // convert ten thousand
+    var convertTenThousandInput = {
+        keyCode: null,
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $root.find('[data-convert-ten-thousand]').each(function () {
+                convertTenThousandInput.update($(this));
+            });
+        },
+        update: function ($input) {
+            var name = $input.attr('data-convert-ten-thousand');
+            var $text = $('[data-convert-ten-thousand-text="' + name + '"]');
+            var beforeText = $text.attr('data-convert-ten-thousand-before-text');
+            var unit = ['만', '억', '조', '경', '해', '자', '양', '구', '간', '정', '재', '극'];
+            var val = $input.val();
+            var isNegative = Boolean(val.match(/^-/g));
+            var numString = val.replace(/[^\d]/g, '');
+            var text = '';
+            var reg = new RegExp('\\d{1,4}$');
+            var temp = null;
+
+            for (var i = 0; i < unit.length; i++) {
+                temp = numString.match(reg);
+                numString = numString.replace(reg, '');
+
+                if (temp && temp.length) {
+                    temp[0] = temp[0].replace(/^0+/g, '');
+
+                    if (temp[0].length) {
+                        text = temp[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') + unit[i] + text;
+                    }
+                }
+
+                if (!numString.length) {
+                    break;
+                }
+            }
+
+            if (text.length) {
+                text = (isNegative ? '-' : '') + text + '원';
+            } else if (!text.length && beforeText && beforeText.length) {
+                text = beforeText;
+            }
+
+            $text.text(text);
+        },
+    };
+    $doc.on('focusin.commaInput focusout.commaInput keydown.commaInput keyup.commaInput change.commaInput input.commaInput', '[data-convert-ten-thousand]', function () {
+        convertTenThousandInput.update($(this));
+    });
+
+    // convert year term
+    var convertYearTermInput = {
+        keyCode: null,
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $root.find('[data-convert-year-term]').each(function () {
+                convertYearTermInput.update($(this));
+            });
+        },
+        update: function ($input) {
+            var name = $input.attr('data-convert-year-term');
+            var $text = $('[data-convert-year-term-text="' + name + '"]');
+            var val = $input.val();
+            var text = '';
+
+            if (!val.match(/[^\d]/g) && val.length && val.match(/[1-9]/g)) {
+                text = Number(val) * 12 + '개월';
+            }
+
+            $text.text(text);
+        },
+    };
+    $doc.on('focusin.commaInput focusout.commaInput keydown.commaInput keyup.commaInput change.commaInput input.commaInput', '[data-convert-year-term]', function () {
+        convertYearTermInput.update($(this));
+    });
+
     // invalid
     $.fn.invalid = function (isInvalid, message) {
         message = typeof message === 'string' ? message : '';
@@ -1875,9 +1949,18 @@
         areaDisabled.init($root);
         checkboxTab.init($root);
         commaInput.init($root);
-
-        // select
+        convertTenThousandInput.init($root);
+        convertYearTermInput.init($root);
         uiSelect.init($root);
+
+        $root.find('[data-layer]').each(function () {
+            var $this = $(this);
+            var $body = $('body');
+
+            if (!$this.parent().is($body)) {
+                $body.append($this);
+            }
+        });
 
         // accordion
         $root.find('.jsUiAccordion').each(function () {
