@@ -1454,6 +1454,20 @@
                                     </div>
                                 </li>
                                 <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">타이틀</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <div class="uiInput">
+                                                <input type="text" class="uiInput__input jsDateInput" title="타이틀" placeholder="예) 2023.01.01" id="invalid9" />
+                                            </div>
+                                        </div>
+                                        <p class="helpText">Help_text</p>
+                                    </div>
+                                </li>
+                                <!-- //item -->
                             </ul>
                         </div>
                     </div>
@@ -1461,7 +1475,7 @@
                     <div style="margin-top: 50px">
                         <script>
                             function invalid0() {
-                                $('#invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8').invalid(false);
+                                $('#invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8, #invalid9').invalid(false);
                                 $('#invalid0').invalid(true, 'invalid 0 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
                             }
                             function invalid1() {
@@ -1496,11 +1510,15 @@
                                 $('#invalid0').invalid(false);
                                 $('#invalid8').invalid(true, 'invalid 8 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
                             }
+                            function invalid9() {
+                                $('#invalid0').invalid(false);
+                                $('#invalid9').invalid(true, 'invalid 9 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
+                            }
                         </script>
                         <button type="button" onclick="invalid0()">
                             <span class="ui-basic-button__text">전체 에러 on</span>
                         </button>
-                        <button type="button" onclick="$('#invalid0, #invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8').invalid(false);">
+                        <button type="button" onclick="$('#invalid0, #invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8, #invalid9').invalid(false);">
                             <span class="ui-basic-button__text">전체 에러 off</span>
                         </button>
                         <br />
@@ -1551,6 +1569,12 @@
                         </button>
                         <button type="button" onclick="$('#invalid8').invalid(false)">
                             <span class="ui-basic-button__text">인풋6 에러 off</span>
+                        </button>
+                        <button type="button" onclick="invalid9()">
+                            <span class="ui-basic-button__text">인풋7 에러 on</span>
+                        </button>
+                        <button type="button" onclick="$('#invalid9').invalid(false)">
+                            <span class="ui-basic-button__text">인풋7 에러 off</span>
                         </button>
                     </div>
                 </div>
