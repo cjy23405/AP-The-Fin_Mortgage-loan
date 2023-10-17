@@ -75,6 +75,12 @@
     line-height: var(--lineHeightDefault);
     font-weight: 500;
 }
+.titleDefault {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: var(--lineHeightDefault);
+}
 .titleSmall {
     margin: 0;
     font-size: 14px;
@@ -141,6 +147,11 @@
     font-weight: 500;
 }
 
+.titleLarge + p.subTextGray {
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray500);
+}
+
 /* fontWeight */
 .fontWeightThin.fontWeightThin {
     font-weight: 100;
@@ -173,6 +184,12 @@
 /* color */
 .colorEmphasis.colorEmphasis {
     color: var(--primary600);
+}
+.colorGray500 {
+    color: var(--systemGray500);
+}
+.colorGray700 {
+    color: var(--systemGray700);
 }
 
 /* align */
@@ -653,13 +670,16 @@ button.uiInput__input {
 
 /* uiTextButton */
 .uiTextButton {
-    display: block;
+    /* display: block; */
+    font-size: 14px;
     text-align: center;
     margin: 0 auto 20px;
     color: var(--systemGray500);
 }
 
 /* flexBox */
+
+[class*='__flexBox'],
 .flexBox {
     display: flex;
     align-items: center;
@@ -674,6 +694,12 @@ button.uiInput__input {
 .flexBox__cell--flexible {
     flex: 1;
     min-width: 0;
+}
+[class*='__flexCol'] {
+    flex-direction: column;
+}
+[class*='__flexBetween'] {
+    justify-content: space-between;
 }
 
 /* flexBox--alignTop */
@@ -1073,7 +1099,8 @@ body,
 
 /* pageContents */
 .pageContents {
-    padding: 20px 24px 72px;
+    /* padding: 20px 24px 72px; */
+    padding: 20px 24px 35px;
     box-sizing: border-box;
 }
 
@@ -1084,12 +1111,11 @@ section + .divide {
     height: 16px;
     background: var(--systemGray100);
 
-    margin: 30px 0;
     padding: 0;
     border: 0 none;
 }
 .pageContents > section + .divide {
-    margin: 30px -24px;
+    margin: 0 -24px;
 }
 
 /* .pageContents > h2 {
@@ -1101,7 +1127,7 @@ section + .divide {
 .pageContents h3 {
     margin: 0;
 } */
-.pageContents h2 + p,
+/* .pageContents h2 + p,
 .pageContents h3 + p {
     font-weight: 500;
     line-height: 22.4px;
@@ -1112,7 +1138,7 @@ section + .divide {
 }
 .pageContents h3 strong {
     color: var(--primary600);
-}
+} */
 
 .uiCheckBox {
     position: relative;
@@ -1497,6 +1523,10 @@ section + .divide {
     margin-right: 4px;
     background: transparent no-repeat center center / 100% auto;
 }
+[class*='_box16']::before {
+    width: 16px;
+    height: 16px;
+}
 [class*='_box18']::before {
     width: 18px;
     height: 18px;
@@ -1625,6 +1655,10 @@ section + .divide {
 [class*='icon_apartment']::before {
     background-image: url(../images/icon/icon_apartment.png);
 }
+[class*='icon_apartment_gray']::before {
+    background-image: url(../images/icon/icon_apartment_gray.png);
+}
+
 [class*='icon_reg']::before {
     background-image: url(../images/icon/icon_reg.png);
 }
@@ -1634,10 +1668,13 @@ section + .divide {
 [class*='icon_info']::before {
     background-image: url(../images/icon/icon_infocircle.png);
 }
+[class*='icon_question']::before {
+    background-image: url(../images/icon/icon_question.png);
+}
 /* ICONS */
 .prodInfoList {
     font-size: 14px;
-    line-height: 18px;
+    line-height: var(--lineHeightDefault);
     margin: 0;
 }
 .prodInfoList dt {
@@ -1645,7 +1682,7 @@ section + .divide {
 }
 .prodInfoList dd {
     color: var(--systemGray500);
-    margin: 0;
+    margin: 4px 0 0;
 }
 .prodInfoList dd + dt {
     margin-top: 16px;
@@ -1715,8 +1752,7 @@ section + .divide {
 .cardAptInfo .averageRow strong {
     font-weight: 600;
 }
-.cardAptInfo .myAptRow .uiButton {
-}
+
 .bankListBox_rounded {
     display: flex;
     justify-content: space-between;
@@ -1733,21 +1769,7 @@ section + .divide {
 .bankListBox_rounded > span::before {
     margin-right: 0;
 }
-.bankListBox_rounded > .flexBox > strong {
-    font-weight: 500;
-    line-height: 21px;
-}
-.bankListBox_rounded > .flexBox > span {
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--systemGray500);
-}
-.bankListBox_rounded > .flexBox > p {
-    font-size: 12px;
-    line-height: 16px;
-    color: var(--systemGray500);
-    margin: 8px 0 0;
-}
+
 .bankListBox_rounded.bankListBox_gray {
     background-color: var(--systemGray100);
     align-items: center;
@@ -1758,6 +1780,7 @@ section + .divide {
 .bankListBox_rounded.bankListBox_gray > .flexBox > span {
     font-size: 13px;
     line-height: 1;
+    font-weight: 500;
     color: var(--systemGray700);
 }
 .bankListBox_rounded.bankListBox_gray > .flexBox > strong {
@@ -1770,19 +1793,17 @@ section + .divide {
 
 .grayInfoBox {
     position: relative;
-    margin-top: 20px;
 
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    background: var(--systemGray50);
+    background: var(--systemGray100);
 
     padding: 16px;
 }
 .grayInfoBox > strong {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
 }
 .grayInfoBox > p {
     font-weight: 500;
@@ -1790,9 +1811,7 @@ section + .divide {
     margin: 0;
 }
 .grayInfoBox > span {
-    font-size: 14px;
     color: var(--systemGray500);
-    margin-top: 10px;
 }
 .grayInfoBox.grayInfoBox__noIcon {
     background-image: none;
@@ -1810,33 +1829,22 @@ section + .divide {
     border-top-right-radius: 12px;
 }
 
-h2 + .infoTxt {
-    padding-left: 20px;
-    margin-top: 10px;
-    line-height: 16px;
-    color: var(--systemGray500);
-
-    background: url(../images/icon/icon_infocircle.png) no-repeat left center / 16px 16px;
-}
-
 .noContentBox {
-    margin: 150px 0 0;
+    margin: auto;
     padding: 100px 45px 0;
     background: url(../images/icon/icon_timeover.png) no-repeat center top / 80px auto;
 }
 .noContentBox p {
     text-align: center;
     margin: 0;
+    font-weight: 500;
+    line-height: var(--lineHeightDefault);
 }
 .noContentBox p strong {
     color: var(--primary600);
     font-weight: 600;
 }
 
-.uiCheckWithBankList,
-.uiRadioWithBankList {
-    margin-top: 30px;
-}
 .uiCheckWithBankList .uiCheckWithBankList__Header,
 .uiRadioWithBankList .uiRadioWithBankList__Header {
     display: flex;
@@ -1847,11 +1855,7 @@ h2 + .infoTxt {
     justify-content: flex-start;
     gap: 0 4px;
 }
-.uiCheckWithBankList .uiCheckWithBankList__Header span {
-    font-size: 13px;
-    line-height: 1;
-    color: var(--systemGray700);
-}
+.uiCheckWithBankList .uiCheckWithBankList__Header span,
 .uiRadioWithBankList .uiRadioWithBankList__Header span {
     color: var(--systemGray700);
 }
@@ -1922,17 +1926,15 @@ h2 + .infoTxt {
 .uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body input[type='radio'] {
     display: none;
 }
+.uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body span {
+    font-size: 12px;
+}
+.uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body span strong {
+    font-size: 13px;
+}
 .uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body span::before,
 .uiRadioWithBankList.uiRadioWithBankList__disable .uiRadioWithBankList__Body span::after {
     display: none;
-}
-
-[class*='iconQuestion__']::before {
-    content: '';
-    display: block;
-    width: 16px;
-    height: 16px;
-    background: url(../images/icon/icon_question.png) no-repeat center / 16px auto;
 }
 
 .tabContents {
@@ -1957,7 +1959,7 @@ h2 + .infoTxt {
     display: none;
 }
 .tabContents .tabContents__Header > ul > li label {
-    color: var(--systemGray800);
+    color: var(--systemGray400);
     font-weight: 500;
     height: 37px;
     border-radius: 8px;
@@ -1967,6 +1969,8 @@ h2 + .infoTxt {
 }
 .tabContents .tabContents__Header > ul > li input:checked + label {
     background: var(--white);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+    color: var(--systemGray800);
 }
 .tabContents.tabContents__line {
     margin: 20px -24px 0;
@@ -2075,7 +2079,7 @@ h2 + .infoTxt {
 }
 .loanDetailInfo > .loanResultData > li span {
     font-size: 14px;
-    color: var(--systemGray600);
+    color: var(--systemGray500);
 }
 .loanDetailInfo > .loanResultData > li strong {
     display: block;
