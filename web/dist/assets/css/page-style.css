@@ -1,6 +1,28 @@
 @charset "utf-8";
 
 /* pageContents--aaaa */
-.pageContents--aaaa {
+
+.pageContents--HRL_01_001 .visImage {
     /* Properties */
+    background: url(../images/illustration/hrl01001.png) no-repeat bottom center;
+    margin: 30px 0;
+    height: 262px;
+}
+
+.pageContents--HRL_01_001 .imgConPoint {
+    /* Properties */
+    background: url(../images/illustration/con_point.png) no-repeat bottom center;
+    margin: 30px 0 0;
+    height: 120px;
+}
+
+.pageContents--HRL_05_001 .visImage {
+    /* Properties */
+    background: url(../images/illustration/hrl05001.png) no-repeat bottom center;
+    margin: 60px 0 20px;
+    height: 140px;
+}
+
+.pageContents--HRL_15_002 {
+    background: #f5f7f9;
 }

@@ -1382,6 +1382,18 @@
                 }
 
                 $loading.stop().fadeIn(300);
+            } else {
+                // 없으면 기본값 넣기
+                let htmlTemplate = `
+                <div class="uiLoading">
+                    <div class="uiLoading__block">
+                        <div class="uiLoading__object"></div>
+                        <div class="uiLoading__text"></div>
+                    </div>
+                </div>
+                `;
+                $body.append($(htmlTemplate));
+                this.show();
             }
         },
         hide: function () {
@@ -2023,23 +2035,6 @@
 
         $this.scrollTop(0).scrollLeft(0);
         layerOpenedScrollToStart($this, '.toastLayer__body');
-    });
-
-    function checkboxGroup(e) {
-        var checkElem = $(e.target);
-        var currentState = checkElem.is(':checked');
-        var isHeader = checkElem.closest('.uiCheckBoxHeader').length == 1;
-        var groupElem = checkElem.closest('.uiCheckBoxGroup');
-        if (isHeader) {
-            groupElem.find('.uiCheckBoxBody input[type=checkbox]').prop('checked', currentState);
-        } else {
-            var isCheckAll = groupElem.find('.uiCheckBoxBody input[type=checkbox]').not(':checked').length == 0;
-
-            groupElem.find('.uiCheckBoxHeader input[type=checkbox]').prop('checked', isCheckAll);
-        }
-    }
-    $doc.on('change.checkboxGroup', '.uiCheckBoxGroup input[type=checkbox]', function (e) {
-        checkboxGroup(e);
     });
 
     // dom ready
