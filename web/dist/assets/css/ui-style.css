@@ -904,42 +904,76 @@ button.uiInput__input {
 
 /* row margin */
 .rowGroup.rowGroup {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .rowContentsGroup.rowContentsGroup {
-    margin-top: 32px;
-    margin-bottom: 32px;
-}
-.rowContents.rowContents {
     margin-top: 24px;
     margin-bottom: 24px;
 }
-.rowItemGroup.rowItemGroup {
+.rowContents.rowContents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.rowBlockGroup.rowBlockGroup {
     margin-top: 16px;
     margin-bottom: 16px;
 }
-.rowItem.rowItem {
+.rowBlock.rowBlock {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.rowItemGroup.rowItemGroup {
     margin-top: 8px;
     margin-bottom: 8px;
+}
+.rowItem.rowItem {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.rowChildGroup.rowChildGroup {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.rowChild.rowChild {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.rowTopNone.rowTopNone {
+    margin-top: 0;
+}
+.rowBottomNone.rowBottomNone {
+    margin-bottom: 0;
 }
 .rowGroup.rowGroup:first-child,
 .rowContentsGroup.rowContentsGroup:first-child,
 .rowContents.rowContents:first-child,
+.rowBlockGroup.rowBlockGroup:first-child,
+.rowBlock.rowBlock:first-child,
 .rowItemGroup.rowItemGroup:first-child,
 .rowItem.rowItem:first-child,
+.rowChildGroup.rowChildGroup:first-child,
+.rowChild.rowChild:first-child,
 .forA11y:first-child + .rowGroup.rowGroup,
 .forA11y:first-child + .rowContentsGroup.rowContentsGroup,
 .forA11y:first-child + .rowContents.rowContents,
+.forA11y:first-child + .rowBlockGroup.rowBlockGroup,
+.forA11y:first-child + .rowBlock.rowBlock,
 .forA11y:first-child + .rowItemGroup.rowItemGroup,
-.forA11y:first-child + .rowItem.rowItem {
+.forA11y:first-child + .rowItem.rowItem,
+.forA11y:first-child + .rowChildGroup.rowChildGroup,
+.forA11y:first-child + .rowChild.rowChild {
     margin-top: 0;
 }
 .rowGroup.rowGroup:last-child,
 .rowContentsGroup.rowContentsGroup:last-child,
 .rowContents.rowContents:last-child,
+.rowBlockGroup.rowBlockGroup:last-child,
+.rowBlock.rowBlock:last-child,
 .rowItemGroup.rowItemGroup:last-child,
-.rowItem.rowItem:last-child {
+.rowItem.rowItem:last-child,
+.rowChildGroup.rowChildGroup:last-child,
+.rowChild.rowChild:last-child {
     margin-bottom: 0;
 }
 
