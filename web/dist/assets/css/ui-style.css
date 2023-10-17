@@ -302,7 +302,8 @@ button.uiInput__input {
 .uiInput--disabled .uiInput__input {
     color: var(--theFinBlack);
 }
-.uiInput.isFocus::before {
+.uiInput.isFocus::before,
+.uiInput.isForceFocus::before {
     border-bottom-width: 2px;
     border-bottom-color: var(--primary600);
 }
@@ -332,11 +333,14 @@ button.uiInput__input {
     width: 100%;
     height: 100%;
 }
-.uiInput.isFocus.isInputed .uiInput__delete {
+.uiInput.isFocus.isInputed .uiInput__delete,
+.uiInput.isForceFocus.isInputed .uiInput__delete {
     display: block;
 }
 .uiInput.isFocus.isInputed .uiInput__input[readonly] ~ .uiInput__delete,
-.uiInput.isFocus.isInputed .uiInput__input[disabled] ~ .uiInput__delete {
+.uiInput.isFocus.isInputed .uiInput__input[disabled] ~ .uiInput__delete,
+.uiInput.isForceFocus.isInputed .uiInput__input[readonly] ~ .uiInput__delete,
+.uiInput.isForceFocus.isInputed .uiInput__input[disabled] ~ .uiInput__delete {
     display: none;
 }
 .isInvalid .uiInput::before,
