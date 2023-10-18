@@ -1725,32 +1725,26 @@
         },
         update: function ($input, keyCode, eventType) {
             var _ = commaInput;
+            var ignoreKeyCode = [8, 17, 37, 38, 39, 40, 46];
 
             if (eventType === 'keydown' && !_.keyCode) {
                 _.keyCode = keyCode;
             }
 
-            switch (_.keyCode) {
-                case 8:
-                case 17:
-                case 37:
-                case 38:
-                case 39:
-                case 40:
-                case 46:
-                    if (eventType === 'keyup') {
-                        _.keyCode = null;
-                    }
-                    return;
-                default:
-                    break;
+            if (ignoreKeyCode.indexOf(_.keyCode) >= 0) {
+                if (eventType === 'keyup') {
+                    _.keyCode = null;
+                }
+                return;
             }
 
             _.keyCode = null;
 
+            var commaReg = /\B(?=(\d{3})+(?!\d))/g;
             var el = $input.get(0);
             var val = $input.val();
             var isNegative = Boolean(val.match(/^-/g));
+            var minus = isNegative ? '-' : '';
             var dotI = val.replace(/[^\d\.]/g, '').search(/\./g);
             var toVal = (function () {
                 var v = val.replace(/[^\d]/g, '');
@@ -1761,30 +1755,32 @@
                     v = v.slice(0, dotI);
                 }
 
-                v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                v = v.replace(commaReg, ',');
 
-                return (isNegative ? '-' : '') + (dotI >= 0 ? v + '.' + slice : v);
+                return minus + (dotI >= 0 ? v + '.' + slice : v);
             })();
             var selectionEnd = el.selectionEnd;
             var slice = (function () {
                 var sliceOrigin = val.slice(selectionEnd, val.length);
                 var sliceDotI = sliceOrigin.replace(/[^\d\.]/g, '').search(/\./g);
                 var v = sliceOrigin.replace(/[^\d]/g, '');
-                var reg = new RegExp(v + '$');
+                var reg = new RegExp(v + '$', 'g');
                 var search = val.replace(/[^\d]/g, '').search(reg);
                 var slice = null;
                 var isDot = false;
 
-                if (dotI >= 0 && search >= dotI) {
-                    slice = v;
-                    v = '';
-                } else if (dotI >= 0 && search < dotI) {
-                    slice = v.slice(sliceDotI, v.length);
-                    v = v.slice(0, sliceDotI);
-                    isDot = true;
+                if (dotI >= 0) {
+                    if (search >= dotI) {
+                        slice = (sliceDotI >= 0 ? '.' : '') + v;
+                        v = '';
+                    } else if (search < dotI) {
+                        slice = v.slice(sliceDotI, v.length);
+                        v = v.slice(0, sliceDotI);
+                        isDot = true;
+                    }
                 }
 
-                v = v.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                v = v.replace(commaReg, ',');
 
                 return isDot ? v + '.' + slice : slice ? slice : v;
             })();
@@ -1812,6 +1808,62 @@
         commaInput.update($(this), e.keyCode, e.type);
     });
 
+    // date input
+    var dateInput = {
+        keyCode: null,
+        init: function ($root) {
+            if (!$root) {
+                $root = $doc;
+            }
+            $root.find('.jsDateInput').each(function () {
+                dateInput.update($(this));
+            });
+        },
+        update: function ($input, keyCode, eventType) {
+            var _ = dateInput;
+            var ignoreKeyCode = [8, 17, 37, 38, 39, 40, 46];
+
+            if (eventType === 'keydown' && !_.keyCode) {
+                _.keyCode = keyCode;
+            }
+
+            if (ignoreKeyCode.indexOf(_.keyCode) >= 0) {
+                if (eventType === 'keyup') {
+                    _.keyCode = null;
+                }
+                return;
+            }
+
+            _.keyCode = null;
+
+            var el = $input.get(0);
+            var val = $input.val();
+            var convert = function (str) {
+                return str.replace(/[^\d]/g, '').replace(/^(\d{4})(\d{0,2})(\d{0,2}).*/g, function (match, p1, p2, p3) {
+                    if (p2.length >= 2) {
+                        return p1 + '.' + p2 + '.' + p3;
+                    } else {
+                        return p1 + '.' + p2;
+                    }
+                });
+            };
+            var toVal = convert(val);
+            var selectionEnd = el.selectionEnd;
+            var slice = (function () {
+                var sliceOrigin = val.slice(0, selectionEnd);
+                var v = convert(sliceOrigin);
+                return v;
+            })();
+            var selectionIndex = slice.length;
+
+            $input.val(toVal);
+            el.setSelectionRange(selectionIndex, selectionIndex);
+        },
+    };
+    $doc.on('focusin.dateInput focusout.dateInput keydown.dateInput keyup.dateInput change.dateInput input.dateInput', '.jsDateInput', function (e) {
+        dateInput.update($(this), e.keyCode, e.type);
+    });
+
     // convert ten thousand
     var convertTenThousandInput = {
         keyCode: null,
@@ -1830,6 +1882,7 @@
             var unit = ['만', '억', '조', '경', '해', '자', '양', '구', '간', '정', '재', '극'];
             var val = $input.val();
             var isNegative = Boolean(val.match(/^-/g));
+            var minus = isNegative ? '-' : '';
             var numString = val.replace(/[^\d]/g, '');
             var text = '';
             var reg = new RegExp('\\d{1,4}$');
@@ -1853,7 +1906,7 @@
             }
 
             if (text.length) {
-                text = (isNegative ? '-' : '') + text + '원';
+                text = minus + text + '원';
             } else if (!text.length && beforeText && beforeText.length) {
                 text = beforeText;
             }
@@ -1861,9 +1914,13 @@
             $text.text(text);
         },
     };
-    $doc.on('focusin.commaInput focusout.commaInput keydown.commaInput keyup.commaInput change.commaInput input.commaInput', '[data-convert-ten-thousand]', function () {
-        convertTenThousandInput.update($(this));
-    });
+    $doc.on(
+        'focusin.convertTenThousandInput focusout.convertTenThousandInput keydown.convertTenThousandInput keyup.convertTenThousandInput change.convertTenThousandInput input.convertTenThousandInput',
+        '[data-convert-ten-thousand]',
+        function () {
+            convertTenThousandInput.update($(this));
+        }
+    );
 
     // convert year term
     var convertYearTermInput = {
@@ -1889,9 +1946,13 @@
             $text.text(text);
         },
     };
-    $doc.on('focusin.commaInput focusout.commaInput keydown.commaInput keyup.commaInput change.commaInput input.commaInput', '[data-convert-year-term]', function () {
-        convertYearTermInput.update($(this));
-    });
+    $doc.on(
+        'focusin.convertYearTermInput focusout.convertYearTermInput keydown.convertYearTermInput keyup.convertYearTermInput change.convertYearTermInput input.convertYearTermInput',
+        '[data-convert-year-term]',
+        function () {
+            convertYearTermInput.update($(this));
+        }
+    );
 
     // invalid
     $.fn.invalid = function (isInvalid, message) {
@@ -1949,6 +2010,7 @@
         areaDisabled.init($root);
         checkboxTab.init($root);
         commaInput.init($root);
+        dateInput.init($root);
         convertTenThousandInput.init($root);
         convertYearTermInput.init($root);
         uiSelect.init($root);
