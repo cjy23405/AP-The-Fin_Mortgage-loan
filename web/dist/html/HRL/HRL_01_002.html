@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -32,113 +41,64 @@
                 <!-- //top area -->
 
                 <!-- contents -->
-
-                <!-- 팝업 실행 버튼 샘플 -->
-                <button href="" class="uiBasicButton" data-layer-open="bottomCompareLayer">
-                    <span class="uiBasicButton__text">주택담보대출 비교하기</span>
-                </button>
-                <!-- //팝업 실행 버튼 샘플 -->
-
-                <!-- 팝업 -->
-                <div class="layerWrap" data-layer="bottomCompareLayer">
-                    <div class="layerContainer">
-                        <div class="layerContentBottom">
-                            <div class="uiCheckBoxGroup">
-                                <div class="uiCheckBoxHeader">
-                                    <label class="uiCheckBox uiCheckBox_circle">
-                                        <input type="checkbox" name="" data-checkbox-group="testCheckboxGroupA" data-area-disabled="agreeNextButton" />
-                                        <span>약관에 모두 동의</span>
-                                    </label>
-                                </div>
-                                <ul class="uiCheckBoxBody jsUiAccordion">
-                                    <li class="jsUiAccordion__item">
-                                        <label class="uiCheckBox">
-                                            <input type="checkbox" name="" data-checkbox-group-child="testCheckboxGroupA" />
-                                            <span>[필수] 대출모집 약관 및 개인정보 동의</span>
-                                        </label>
-                                        <button type="button" class="uiButton jsUiAccordion__opener">
-                                            <span class="forA11y">
-                                                대출모집 약관 및 개인정보 동의 하위약관
-                                                <span class="openText">열기</span>
-                                                <span class="closeText">닫기</span>
-                                            </span>
-                                        </button>
-                                        <div class="jsUiAccordion__layer">
-                                            <div class="uiCheckBoxButtons">
-                                                <a href="#">서비스 이용약관</a>
-                                                <a href="#">개인정보 취급방침 동의</a>
-                                                <a href="#">제 3자 개인정보 제공 동의</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="jsUiAccordion__item">
-                                        <label class="uiCheckBox">
-                                            <input type="checkbox" name="" data-checkbox-group-child="testCheckboxGroupA" />
-                                            <span>[필수] 휴대폰 본인확인 서비스 이용 약관</span>
-                                        </label>
-                                        <button type="button" class="uiButton jsUiAccordion__opener">
-                                            <span class="forA11y">
-                                                대출모집 약관 및 개인정보 동의 하위약관
-                                                <span class="openText">열기</span>
-                                                <span class="closeText">닫기</span>
-                                            </span>
-                                        </button>
-                                        <div class="jsUiAccordion__layer">
-                                            <div class="uiCheckBoxButtons">
-                                                <a href="#">금융기관 필수 항목 동의</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="jsUiAccordion__item">
-                                        <label class="uiCheckBox">
-                                            <input type="checkbox" name="" data-checkbox-group-child="testCheckboxGroupA" />
-                                            <span>[필수] 제휴사 개인(신용)정보 수집·이용 위탁동의</span>
-                                        </label>
-                                        <button type="button" class="uiButton jsUiAccordion__opener">
-                                            <span class="forA11y">
-                                                대출모집 약관 및 개인정보 동의 하위약관
-                                                <span class="openText">열기</span>
-                                                <span class="closeText">닫기</span>
-                                            </span>
-                                        </button>
-                                        <div class="jsUiAccordion__layer">
-                                            <div class="uiCheckBoxButtons">
-                                                <a href="#">개인정보 수집 · 이용 · 취급 위탁동의</a>
-                                                <a href="#">본인확인서비스 이용약관(NICE)</a>
-                                                <a href="#">고유식별정보처리 동의</a>
-                                                <a href="#">통신사 이용약관</a>
-                                                <a href="#">개인정보 제 3자 제공 동의</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="jsUiAccordion__item">
-                                        <label class="uiCheckBox">
-                                            <input type="checkbox" name="" data-checkbox-group-child="testCheckboxGroupA" />
-                                            <span>[필수] 제휴사 개인(신용)정보 조회 동의</span>
-                                        </label>
-                                        <button type="button" class="uiButton jsUiAccordion__opener">
-                                            <span class="forA11y">
-                                                대출모집 약관 및 개인정보 동의 하위약관
-                                                <span class="openText">열기</span>
-                                                <span class="closeText">닫기</span>
-                                            </span>
-                                        </button>
-                                        <div class="jsUiAccordion__layer">
-                                            <div class="uiCheckBoxButtons">
-                                                <a href="#">마케팅 수신 동의</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button href="" class="uiBasicButton" data-area-disabled-target="agreeNextButton" disabled>
-                                <span class="uiBasicButton__text">다음</span>
-                            </button>
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <div class="uiButtons uiButtons--noMargin">
+                            <ul class="uiButtons__list">
+                                <li class="uiButtons__item">
+                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="loanPurpose">
+                                        <span class="uiBasicButton__text">대출 목적</span>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-                <!-- //팝업 -->
 
+                        <!-- layer: 대출 목적을 선택해주세요 -->
+                        <div class="layerWrap layerWrap--toast" data-layer="loanPurpose" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="toastLayer">
+                                    <div class="toastLayer__head">
+                                        <h2 class="toastLayer__title">대출 목적을 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="toastLayer__body">
+                                        <div class="toastLayer__bodyInner">
+                                            <div class="uiSelectOptions">
+                                                <ul class="uiSelectOptions__list">
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button">
+                                                            <span class="uiSelectOptions__text">대환대출 (주택담보대출 갈아타기)</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button">
+                                                            <span class="uiSelectOptions__text">주택구입</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button">
+                                                            <span class="uiSelectOptions__text">사업 자금</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button" disabled>
+                                                            <span class="uiSelectOptions__text">생활자금 (준비 중)</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: 대출 목적을 선택해주세요 -->
+                    </div>
+                </article>
                 <!-- //contents -->
             </div>
         </div>
@@ -153,8 +113,7 @@
         <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
         <script>
             $(function () {
-                // 팝업 실행 스크립트 (샘플)
-                uiJSLayer.open('bottomCompareLayer');
+                uiJSLayer.open('loanPurpose');
             });
         </script>
         <!-- //script -->
