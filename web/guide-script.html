@@ -191,6 +191,22 @@
             </div>
 
             <div class="testSection">
+                <h2 class="testTitle">.invalid()</h2>
+                <div class="testDescription">
+                    인풋 유효성 불가 스타일 넣는 함수<br />
+                    부모 .uiInvalid 를 찾아 해당 객체에 메세지를 append 시킨다.<br />
+                    사용 예제는 컴포넌트 가이드 Form 섹션 참고
+                </div>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">$('input').invalid(isInvalid [, message]);</h3>
+                    <div class="testDescription">
+                        isInvalid : boolean : 유효성 불가 여부 Boolean 값 불가하면 true<br />
+                        message : string : 에러 메세지 (줄바꿈은 \n 이용)
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection">
                 <style>
                     .testGuideAccordion {
                         position: relative;
@@ -815,17 +831,66 @@
             </div>
 
             <div class="testSection">
-                <h2 class="testTitle">.invalid()</h2>
-                <div class="testDescription">
-                    인풋 유효성 불가 스타일 넣는 함수<br />
-                    부모 .uiInvalid 를 찾아 해당 객체에 메세지를 append 시킨다.<br />
-                    사용 예제는 컴포넌트 가이드 Form 섹션 참고
-                </div>
+                <h2 class="testTitle">날짜 인풋 (구현 예정)</h2>
                 <div class="testSectionSub">
-                    <h3 class="testTitle">$('input').invalid(isInvalid [, message]);</h3>
+                    <h3 class="testTitle">Default</h3>
+
+                    <input type="text" pattern="\d*" class="jsDateInput" />
+
                     <div class="testDescription">
-                        isInvalid : boolean : 유효성 불가 여부 Boolean 값 불가하면 true<br />
-                        message : string : 에러 메세지 (줄바꿈은 \n 이용)
+                        날짜 포멧으로 변환 해주는 인풋에 사용
+
+                        <div class="testCode">&lt;input type="text" pattern="\d*" class="<mark>jsDateInput</mark>" /&gt;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">금액 한글 전환</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <input type="text" pattern="\d*" class="jsCommaInput" data-convert-ten-thousand="Name" />
+                    <p data-convert-ten-thousand-text="Name" data-convert-ten-thousand-before-text="before_text"></p>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-convert-ten-thousand</h4>
+                        <div class="testCode">&lt;input type="text" pattern="\d*" class="jsCommaInput" <mark>data-convert-ten-thousand="Name"</mark> /&gt;</div>
+                        <div class="testDescription">적용할 인풋에 추가</div>
+                    </div>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-convert-ten-thousand-text</h4>
+                        <div class="testCode">&lt;p <mark>data-convert-ten-thousand-text="Name"</mark> data-convert-ten-thousand-before-text="before_text"&gt;&lt;/p&gt;</div>
+                        <div class="testDescription">출력 될 객체에 추가</div>
+                    </div>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-convert-ten-thousand-before-text</h4>
+                        <div class="testCode">&lt;p data-convert-ten-thousand-text="Name" <mark>data-convert-ten-thousand-before-text="before_text"</mark>&gt;&lt;/p&gt;</div>
+                        <div class="testDescription">출력 값이 없을때 보여질 텍스 필요시 추가</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection">
+                <h2 class="testTitle">"00년" -> "00개월" 로 전환</h2>
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <input type="number" pattern="\d*" data-convert-year-term="Name" />
+                    <p data-convert-year-term-text="Name"></p>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-convert-year-term</h4>
+                        <div class="testCode">&lt;input type="text" pattern="\d*" <mark>data-convert-year-term="Name"</mark> /&gt;</div>
+                        <div class="testDescription">적용할 인풋에 추가</div>
+                    </div>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-convert-year-term-text</h4>
+                        <div class="testCode">&lt;p <mark>data-convert-year-term-text="Name"</mark>&gt;&lt;/p&gt;</div>
+                        <div class="testDescription">출력 될 객체에 추가</div>
                     </div>
                 </div>
             </div>

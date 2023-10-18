@@ -334,6 +334,10 @@ label {
 [role='tab'] {
     cursor: pointer;
 }
+[data-convert-ten-thousand-text]:empty,
+[data-convert-year-term-text]:empty {
+    display: none;
+}
 
 /* reset style */
 .uiButton {
