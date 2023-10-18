@@ -5,14 +5,12 @@
 .pageContents--HRL_01_001 .visImage {
     /* Properties */
     background: url(../images/illustration/hrl01001.png) no-repeat bottom center;
-    margin: 30px 0;
     height: 262px;
 }
 
 .pageContents--HRL_01_001 .imgConPoint {
     /* Properties */
     background: url(../images/illustration/con_point.png) no-repeat bottom center;
-    margin: 30px 0 0;
     height: 120px;
 }
 

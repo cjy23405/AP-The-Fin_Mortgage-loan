@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -36,9 +45,9 @@
                     <h1 class="forA11y">주택담보대출 소개화면</h1>
                     <div class="pageContents pageContents--HRL_01_001">
                         <h2 class="headlineLarge">어떤 목적이든 한 번에,<br />아파트 주택담보대출 비교</h2>
-                        <section>
+                        <section class="rowGroup">
                             <div class="visImage"></div>
-                            <ol class="stepListItems">
+                            <ol class="stepListItems rowGroup">
                                 <li>
                                     <strong class="icon_reg_box22">간단 본인인증</strong>
                                     <span>모바일로 쉽고 빠르게 본인 확인</span>
@@ -54,64 +63,70 @@
                             </ol>
                         </section>
                         <hr class="divide" />
-                        <section>
-                            <h3 class="titleLarge">대환대출 이용시간을 확인해주세요</h3>
-                            <div class="grayInfoBox">
-                                <strong class="icon_info_box18"></strong>
-                                <p>대출 갈아타기(대환대출)는 공휴일을 제외한<br />평일 9시부터 16시까지만 이용 가능해요</p>
-                                <span>그외 다른 목적의 대출은 언제나 알아볼 수 있어요</span>
+                        <section class="rowGroup">
+                            <h3 class="titleLarge fontWeightBold">대환대출 이용시간을 확인해주세요</h3>
+                            <div class="roundBox_grayBox rowContents">
+                                <i class="icon_info_box18"></i>
+                                <p class="titleDefault linePara rowBlock">대출 갈아타기(대환대출)는 공휴일을 제외한<br />평일 9시부터 16시까지만 이용 가능해요</p>
+                                <span class="textLabel1 colorGray">그외 다른 목적의 대출은 언제나 알아볼 수 있어요</span>
                             </div>
                         </section>
                         <hr class="divide" />
-                        <section>
-                            <h3 class="titleLarge">신용점수 걱정하지 마세요</h3>
-                            <p>여러번 조회해도 신용점수에는 영향이 없어요</p>
-                            <div class="imgConPoint"></div>
+                        <section class="rowGroup">
+                            <h3 class="titleLarge fontWeightBold">신용점수 걱정하지 마세요</h3>
+                            <p class="titleDefault linePara rowChildGroup colorGray">여러번 조회해도 신용점수에는 영향이 없어요</p>
+                            <div class="imgConPoint rowGroup"></div>
                         </section>
                         <hr class="divide" />
-                        <section>
-                            <h3 class="titleMedium">제휴 금융기관</h3>
-                            <div class="bankListBox">
-                                <p>은행</p>
-                                <ul>
-                                    <li class="iconBank_shinhan">신한은행</li>
-                                    <li class="iconBank_nh">NH농협은행</li>
-                                    <li class="iconBank_woori">우리은행</li>
-                                    <li class="iconBank_ibk">기업은행</li>
-                                    <li class="iconBank_gwangju">전북은행</li>
-                                </ul>
-                            </div>
-                            <div class="bankListBox">
-                                <p>저축은행</p>
-                                <ul>
-                                    <li class="iconBank_shinhan">신한은행</li>
-                                    <li class="iconBank_nh">NH농협은행</li>
-                                    <li class="iconBank_woori">우리은행</li>
-                                    <li class="iconBank_ibk">기업은행</li>
-                                    <li class="iconBank_gwangju">전북은행</li>
-                                </ul>
+                        <section class="rowGroup">
+                            <h3 class="titleMedium fontWeightSemiBold">제휴 금융기관</h3>
+                            <div class="roundBox_shadowBox_r12 rowContents">
+                                <div class="rowGroup">
+                                    <p class="titleSmall fontWeightSemiBold">은행</p>
+                                    <ul class="bankListBox rowContents">
+                                        <li class="iconBank_shinhan_box30">신한은행</li>
+                                        <li class="iconBank_nh_box30">NH농협은행</li>
+                                        <li class="iconBank_woori_box30">우리은행</li>
+                                        <li class="iconBank_ibk_box30">기업은행</li>
+                                        <li class="iconBank_kakao_box30">전북은행</li>
+                                    </ul>
+                                </div>
+                                <div class="rowGroup">
+                                    <p class="titleSmall fontWeightSemiBold">저축은행</p>
+                                    <ul class="bankListBox rowContents">
+                                        <li class="iconBank_osb_box30">OSB저축은행</li>
+                                        <li class="iconBank_sangsanginsb_box30">상상인저축은행</li>
+                                        <li class="iconBank_jt_box30">JT저축은행</li>
+                                        <li class="iconBank_jtc_box30">JT친애저축은행</li>
+                                        <li class="iconBank_ycbank_box30">융창저축은행</li>
+                                    </ul>
+                                </div>
+                                <div class="rowGroup">
+                                    <p class="titleSmall fontWeightSemiBold">캐피탈</p>
+                                    <ul class="bankListBox rowContents">
+                                        <li class="iconBank_hkcapital_box30">한국캐피탈</li>
+                                        <li class="iconBank_bnk_box30">BNK캐피탈</li>
+                                        <li class="iconBank_kb_box30">KB캐피탈</li>
+                                    </ul>
+                                </div>
                             </div>
                         </section>
                         <!-- fix buttons -->
                         <div class="fixBottomWrap">
                             <div class="fixBottomWrap__area">
                                 <div class="uiButtons uiButtons--noMargin">
-                                    <ul class="uiButtons__list">
-                                        <li class="uiButtons__item">
-                                            <button href="" class="uiBasicButton" data-layer-open="bottomCompareLayer">
-                                                <span class="uiBasicButton__text">주택담보대출 비교하기</span>
-                                            </button>
-                                        </li>
-                                    </ul>
+                                    <button href="" class="uiBasicButton" data-layer-open="bottomCompareLayer">
+                                        <span class="uiBasicButton__text">주택담보대출 비교하기</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                         <!-- //fix buttons -->
                     </div>
                     <div class="contentFooter">
-                        <div class="infoListBox">
-                            <strong class="titleSmall">안내사항</strong>
-                            <ul class="textBody2">
+                        <div class="footerInfoWrap">
+                            <strong class="titleSmall colorGray">안내사항</strong>
+                            <ul class="infoListBox">
                                 <li><strong>(주)에이피더핀은 여러 금융회사와 대출모집업무 위탁계약을 체결한 온라인대출모집법인입니다.</strong> (등록번호 : 제2022-007호)</li>
                                 <li>금융감독원 대출모집법인조회(업무자료 > 금융소비자보호법 > 대출모집법인 조회 > 온라인대출모집법인)에서 신원확인이 가능합니다.</li>
                                 <li>대출비교 제휴사 : 고려저축은행, 융창저축은행, OSB저축은행, 한국캐피탈, JB우리캐피탈</li>

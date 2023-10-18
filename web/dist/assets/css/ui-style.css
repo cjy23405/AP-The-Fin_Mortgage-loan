@@ -147,9 +147,15 @@
     font-weight: 500;
 }
 
-.titleLarge + p.subTextGray {
+/* lineHeight */
+.lineLabel.lineLabel {
+    line-height: var(--lineHeightLabel);
+}
+.lineDefault.lineDefault {
     line-height: var(--lineHeightDefault);
-    color: var(--systemGray500);
+}
+.linePara.linePara {
+    line-height: var(--lineHeightParagraph);
 }
 
 /* fontWeight */
@@ -186,9 +192,6 @@
     color: var(--primary600);
 }
 .colorGray.colorGray {
-    color: var(--systemGray500);
-}
-.colorGray500 {
     color: var(--systemGray500);
 }
 .colorGray700 {
@@ -1207,14 +1210,17 @@ section + .divide {
 }
 .uiCheckBoxGroup .uiCheckBoxHeader {
     padding: 16px;
-    background: #f5f7f9;
-    border-radius: 11px;
+    background: var(--systemGray100);
+    font-weight: 600;
+    line-height: var(--lineHeightLabel);
+    border-radius: 8px;
 }
 .uiCheckBoxGroup .uiCheckBoxHeader .uiCheckBox > span {
     font-size: 16px;
+    font-weight: 600;
 }
 .uiCheckBoxGroup .uiCheckBoxBody {
-    padding: 16px 0 24px;
+    padding: 10px 0;
     list-style: none;
     margin: 0 0 0 14px;
 }
@@ -1222,15 +1228,22 @@ section + .divide {
     position: relative;
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li + li {
-    margin-top: 16px;
+    margin-top: 10px;
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox span {
+    position: relative;
     display: block;
-    padding-right: 24px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    white-space: nowrap;
+    padding-right: 34px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: var(--lineHeightDefault);
+}
+.uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox span::before,
+.uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox span::after {
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li > .uiButton {
     position: absolute;
@@ -1253,15 +1266,17 @@ section + .divide {
     padding: 16px 0 6px 30px;
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a {
-    font-size: 14px;
-    line-height: 18.2px;
-    color: var(--systemGray700);
+    padding-right: 34px;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray500);
     text-decoration: none;
 
     background: url(../images/icon/icon_linkarrow.png) no-repeat center right;
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a + a {
-    margin-top: 16px;
+    margin-top: 10px;
 }
 .uiCheckBox.uiToggleCheckBox > span {
     display: block;
@@ -1444,64 +1459,42 @@ section + .divide {
 }
 
 .infoListBox {
-    background: var(--systemGray100);
-    padding: 24px 24px 80px;
-    color: var(--systemGray500);
-}
-
-.infoListBox > ul {
     margin: 6px 0 0;
     padding: 0;
     list-style: none;
 }
-.infoListBox > ul > li {
+.infoListBox > li {
     position: relative;
     padding-left: 20px;
+    font-size: 14px;
+    line-height: var(--lineHeightParagraph);
+    color: var(--systemGray500);
 }
-.infoListBox > ul > li::before {
+.infoListBox > li::before {
     content: '';
     position: absolute;
     left: 10px;
-    top: 6px;
+    top: 10px;
     width: 2px;
     height: 2px;
     background: var(--systemGray500);
 }
-.infoListBox > ul > li strong {
+.infoListBox > li strong {
     font-weight: 700;
 }
-.infoListBox.grayInfoBox {
-    background-color: #f5f7f9;
+
+.footerInfoWrap {
+    background: var(--systemGray100);
+    padding: 24px 24px 80px;
 }
-.infoListBox.grayInfoBox > ul > li {
-    font-size: 14px;
+.footerInfoWrap .infoListBox li {
+    font-size: 12px;
 }
-.infoListBox.grayInfoBox > ul > li::before {
+.footerInfoWrap .infoListBox li::before {
     top: 8px;
-}
-.grayInfoBox .grayInfoBox__title {
-    position: absolute;
-    font-size: 16px;
-    color: var(--systemGray700);
-    top: 16px;
-    left: 36px;
 }
 
 .bankListBox {
-    padding: 20px;
-}
-.titleMedium + .bankListBox {
-    margin-top: 10px;
-}
-.bankListBox > p {
-    margin: 0;
-    padding-bottom: 20px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1;
-    border-bottom: 1px solid var(--systemGray200);
-}
-.bankListBox > ul {
     margin: 0;
     padding: 0;
     display: flex;
@@ -1509,18 +1502,19 @@ section + .divide {
     gap: 20px 0;
     justify-content: space-between;
     list-style: none;
-    margin-top: 20px;
 }
-.bankListBox > ul > li {
-    width: 142px;
+.bankListBox > li {
+    width: 50%;
     display: flex;
     align-items: center;
+
     font-size: 14px;
     font-weight: 500;
+    line-height: var(--lineHeightLabel);
+    color: var(--systemGray500);
 }
-
-.bankListBox + .bankListBox {
-    margin-top: 50px;
+.bankListBox > li::before {
+    margin-right: 6px;
 }
 /* TODO: 은행 아이콘 적용 방식 확인 */
 /* ICONS */
@@ -1545,6 +1539,11 @@ section + .divide {
 [class*='_box22']::before {
     width: 22px;
     height: 22px;
+}
+[class*='_box30']::before,
+.iconBank_30::before {
+    width: 30px;
+    height: 30px;
 }
 [class*='_box32']::before,
 .iconBank_32::before {
@@ -1802,31 +1801,25 @@ section + .divide {
     margin-top: 20px;
 }
 
-.grayInfoBox {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    background: var(--systemGray100);
-
+[class*='roundBox'] {
     padding: 16px;
+    border-radius: 10px;
+    background: var(--white);
 }
-.grayInfoBox > strong {
-    display: flex;
-    align-items: center;
+[class*='_grayBox'] {
+    background-color: var(--systemGray50);
 }
-.grayInfoBox > p {
-    font-weight: 500;
-    line-height: var(--lineHeightParagraph);
-    margin: 0;
+[class*='_gray2Box'] {
+    background-color: #f5f7f9;
 }
-.grayInfoBox > span {
-    color: var(--systemGray500);
+[class*='_shadowBox'] {
+    border: 1px solid var(--systemGray200);
+    /* box-shadow: 0px 2px 4px -2px #0000000d;  */
+    box-shadow: 0px 4px 6px -1px #0000001a;
+    padding: 30px 16px;
 }
-.grayInfoBox.grayInfoBox__noIcon {
-    background-image: none;
-    padding: 20px;
+[class*='_r12'] {
+    border-radius: 12px;
 }
 
 .layerContentBottom {
@@ -1853,7 +1846,7 @@ section + .divide {
 }
 .noContentBox p strong {
     color: var(--primary600);
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .uiCheckWithBankList .uiCheckWithBankList__Header,

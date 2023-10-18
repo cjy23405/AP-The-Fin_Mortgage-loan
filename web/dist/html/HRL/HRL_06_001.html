@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -77,14 +86,22 @@
                             </div>
                         </section>
                         <section>
-                            <div class="grayInfoBox grayInfoBox__noIcon rowContents">
-                                <strong class="titleDefault">마이데이터로 가져온 대출 계좌정보에서<br />주택담보대출 계좌정보만 보여드려요</strong>
-                                <span class="textBody1 rowBlock">주택 외 부동산 담보대출, 전세자금, 보금자리론 등은 주택담보대출 계좌정보에 포함되지 않아요.</span>
+                            <div class="roundBox_grayBox">
+                                <p class="titleDefault linePara rowBlock">마이데이터로 가져온 대출 계좌정보에서<br />주택담보대출 계좌정보만 보여드려요</p>
+                                <span class="textLabel1 colorGray">주택 외 부동산 담보대출, 전세자금, 보금자리론 등은 주택담보대출 계좌정보에 포함되지 않아요.</span>
                             </div>
-                            <button class="uiBasicButton" data-area-disabled-target="agreeNextButton" disabled onClick="uiJSLoading.show();">
-                                <span class="uiBasicButton__text">다음</span>
-                            </button>
                         </section>
+                        <!-- fix buttons -->
+                        <div class="fixBottomWrap">
+                            <div class="fixBottomWrap__area">
+                                <div class="uiButtons uiButtons--noMargin">
+                                    <button class="uiBasicButton" data-area-disabled-target="agreeNextButton" disabled onClick="uiJSLoading.show();">
+                                        <span class="uiBasicButton__text">다음</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //fix buttons -->
                     </div>
                     <div class="contentFooter"></div>
                 </article>
