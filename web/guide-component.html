@@ -2116,6 +2116,106 @@
                 </div>
             </div>
 
+            <div class="testSection testSection--calculator">
+                <h2 class="testTitle">Calculator</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="uiCalculator">
+                        <ul class="uiCalculator__list">
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">연이자율</div>
+                                <div class="uiCalculator__input">
+                                    <button type="button" class="uiButton uiCalculator__button" title="연이자율 입력하기">4.22%</button>
+                                </div>
+                                <div class="uiCalculator__text">는</div>
+                            </li>
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">대출금액</div>
+                                <div class="uiCalculator__input">
+                                    <button type="button" class="uiButton uiCalculator__button" title="대출금액 입력하기">99억 9,999만원</button>
+                                </div>
+                                <div class="uiCalculator__text">을</div>
+                            </li>
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">대출기간</div>
+                                <div class="uiCalculator__input">
+                                    <button type="button" class="uiButton uiCalculator__button" title="대출기간 입력하기">5년</button>
+                                </div>
+                                <div class="uiCalculator__text">동안</div>
+                            </li>
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">상환방식</div>
+                                <div class="uiCalculator__input">
+                                    <!-- select -->
+                                    <div class="uiSelect uiSelect--secondary">
+                                        <input type="hidden" data-select-input="calculatorMethod" />
+                                        <button type="button" class="uiButton uiSelect__button" title="상환방식 선택하기" data-layer-open="calculatorMethod">
+                                            <span class="uiSelect__text" data-select-view="calculatorMethod"></span>
+                                        </button>
+                                        <!-- layer: 상환방식을 선택해주세요 -->
+                                        <div class="layerWrap layerWrap--toast" data-layer="calculatorMethod" data-layer-display="flex">
+                                            <div class="layerContainer">
+                                                <section class="toastLayer">
+                                                    <div class="toastLayer__head">
+                                                        <h2 class="toastLayer__title">상환방식을 선택해주세요</h2>
+                                                    </div>
+                                                    <div class="toastLayer__body">
+                                                        <div class="toastLayer__bodyInner">
+                                                            <div class="uiSelectOptions">
+                                                                <ul class="uiSelectOptions__list">
+                                                                    <li class="uiSelectOptions__item">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="uiButton uiSelectOptions__button isSelectActive"
+                                                                            data-select-option="calculatorMethod"
+                                                                            data-select-value="value 1"
+                                                                            data-select-text="만기일시"
+                                                                        >
+                                                                            <span class="uiSelectOptions__text">만기일시</span>
+                                                                        </button>
+                                                                    </li>
+                                                                    <li class="uiSelectOptions__item">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="uiButton uiSelectOptions__button"
+                                                                            data-select-option="calculatorMethod"
+                                                                            data-select-value="value 2"
+                                                                            data-select-text="원금균등"
+                                                                        >
+                                                                            <span class="uiSelectOptions__text">원금균등</span>
+                                                                        </button>
+                                                                    </li>
+                                                                    <li class="uiSelectOptions__item">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="uiButton uiSelectOptions__button"
+                                                                            data-select-option="calculatorMethod"
+                                                                            data-select-value="value 3"
+                                                                            data-select-text="원리금균등"
+                                                                        >
+                                                                            <span class="uiSelectOptions__text">원리금균등</span>
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!-- //layer: 상환방식을 선택해주세요 -->
+                                    </div>
+                                    <!-- //select -->
+                                </div>
+                                <div class="uiCalculator__text">로</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <!--
             <div class="testSection testSection--컴포넌트이름">
                 <style>
