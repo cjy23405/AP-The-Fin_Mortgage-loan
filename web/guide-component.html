@@ -610,6 +610,11 @@
                                 <section class="toastLayer">
                                     <div class="toastLayer__head">
                                         <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="toastLayer__body">
                                         <div class="toastLayer__bodyInner">
@@ -699,6 +704,11 @@
                                 <section class="toastLayer">
                                     <div class="toastLayer__head">
                                         <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="toastLayer__body">
                                         <div class="toastLayer__bodyInner">
@@ -788,6 +798,11 @@
                                 <section class="toastLayer">
                                     <div class="toastLayer__head">
                                         <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="toastLayer__body">
                                         <div class="toastLayer__bodyInner">
@@ -881,6 +896,11 @@
                                 <section class="toastLayer">
                                     <div class="toastLayer__head">
                                         <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="toastLayer__body">
                                         <div class="toastLayer__bodyInner">
@@ -970,6 +990,11 @@
                                 <section class="toastLayer">
                                     <div class="toastLayer__head">
                                         <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="toastLayer__body">
                                         <div class="toastLayer__bodyInner">
@@ -1059,6 +1084,11 @@
                                 <section class="toastLayer">
                                     <div class="toastLayer__head">
                                         <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="toastLayer__body">
                                         <div class="toastLayer__bodyInner">
@@ -1209,13 +1239,77 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+
+            <div class="testSection testSection--checkButton">
+                <h2 class="testTitle">CheckButton</h2>
 
                 <div class="testSectionSub">
-                    <h3 class="testTitle">ToggleBox</h3>
-                    <label class="uiCheckBox uiToggleCheckBox">
-                        <input type="checkbox" />
-                        <span>해당 주택에 담보대출이 있어요</span>
-                    </label>
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="uiCheckButton">
+                        <input type="checkbox" class="uiCheckButton__input" id="checkButton001" />
+                        <div class="uiCheckButton__block">
+                            <div class="uiCheckButton__row">
+                                <span class="uiCheckButton__object"></span>
+                                <label for="checkButton001" class="uiCheckButton__label">label<br />2 line label</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uiCheckButton">
+                        <input type="checkbox" class="uiCheckButton__input" id="checkButton002" />
+                        <div class="uiCheckButton__block">
+                            <div class="uiCheckButton__row">
+                                <label for="checkButton002" class="uiCheckButton__label">label<br />2 line label</label>
+                                <span class="uiCheckButton__object"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Align Center</h3>
+
+                    <div class="uiCheckButton uiCheckButton--center">
+                        <input type="checkbox" class="uiCheckButton__input" id="checkButton003" />
+                        <div class="uiCheckButton__block">
+                            <div class="uiCheckButton__row">
+                                <span class="uiCheckButton__object"></span>
+                                <label for="checkButton003" class="uiCheckButton__label">
+                                    <span class="displayBlock alignLeft">label<br />2 line label</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">List</h3>
+
+                    <div class="uiCheckButtons">
+                        <ul class="uiCheckButtons__list">
+                            <li class="uiCheckButtons__item">
+                                <div class="uiCheckButton uiCheckButton--center">
+                                    <input type="radio" class="uiCheckButton__input" name="checkButton004" id="checkButton004_001" />
+                                    <div class="uiCheckButton__block">
+                                        <div class="uiCheckButton__row">
+                                            <label for="checkButton004_001" class="uiCheckButton__label">label</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="uiCheckButtons__item">
+                                <div class="uiCheckButton uiCheckButton--center">
+                                    <input type="radio" class="uiCheckButton__input" name="checkButton004" id="checkButton004_002" />
+                                    <div class="uiCheckButton__block">
+                                        <div class="uiCheckButton__row">
+                                            <label for="checkButton004_002" class="uiCheckButton__label">label<br />2 line label</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -1256,6 +1350,11 @@
                                         <section class="toastLayer">
                                             <div class="toastLayer__head">
                                                 <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                                <div class="toastLayer__headRight">
+                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                        <span class="forA11y">레이어 닫기</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div class="toastLayer__body">
                                                 <div class="toastLayer__bodyInner">
@@ -1363,6 +1462,11 @@
                                         <section class="toastLayer">
                                             <div class="toastLayer__head">
                                                 <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                                <div class="toastLayer__headRight">
+                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                        <span class="forA11y">레이어 닫기</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div class="toastLayer__body">
                                                 <div class="toastLayer__bodyInner">
@@ -1545,6 +1649,11 @@
                                                         <section class="toastLayer">
                                                             <div class="toastLayer__head">
                                                                 <h2 class="toastLayer__title">OOO를 선택해주세요</h2>
+                                                                <div class="toastLayer__headRight">
+                                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                                        <span class="forA11y">레이어 닫기</span>
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             <div class="toastLayer__body">
                                                                 <div class="toastLayer__bodyInner">
@@ -2276,6 +2385,145 @@
                     <h3 class="testTitle">서브 타이틀</h3>
 
                     // 컴포넌트
+                </div>
+            </div>
+
+            <div class="testSection testSection--calculator">
+                <h2 class="testTitle">Calculator</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="uiCalculator">
+                        <ul class="uiCalculator__list">
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">연이자율</div>
+                                <div class="uiCalculator__input">
+                                    <button type="button" class="uiButton uiCalculator__button" title="연이자율 입력하기">4.22%</button>
+                                </div>
+                                <div class="uiCalculator__text">는</div>
+                            </li>
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">대출금액</div>
+                                <div class="uiCalculator__input">
+                                    <button type="button" class="uiButton uiCalculator__button" title="대출금액 입력하기">99억 9,999만원</button>
+                                </div>
+                                <div class="uiCalculator__text">을</div>
+                            </li>
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">대출기간</div>
+                                <div class="uiCalculator__input">
+                                    <button type="button" class="uiButton uiCalculator__button" title="대출기간 입력하기">5년</button>
+                                </div>
+                                <div class="uiCalculator__text">동안</div>
+                            </li>
+                            <li class="uiCalculator__item">
+                                <div class="uiCalculator__title">상환방식</div>
+                                <div class="uiCalculator__input">
+                                    <!-- select -->
+                                    <div class="uiSelect uiSelect--secondary">
+                                        <input type="hidden" data-select-input="calculatorMethod" />
+                                        <button type="button" class="uiButton uiSelect__button" title="상환방식 선택하기" data-layer-open="calculatorMethod">
+                                            <span class="uiSelect__text" data-select-view="calculatorMethod"></span>
+                                        </button>
+                                        <!-- layer: 상환방식을 선택해주세요 -->
+                                        <div class="layerWrap layerWrap--toast" data-layer="calculatorMethod" data-layer-display="flex">
+                                            <div class="layerContainer">
+                                                <section class="toastLayer">
+                                                    <div class="toastLayer__head">
+                                                        <h2 class="toastLayer__title">상환방식을 선택해주세요</h2>
+                                                        <div class="toastLayer__headRight">
+                                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                                <span class="forA11y">레이어 닫기</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="toastLayer__body">
+                                                        <div class="toastLayer__bodyInner">
+                                                            <div class="uiSelectOptions">
+                                                                <ul class="uiSelectOptions__list">
+                                                                    <li class="uiSelectOptions__item">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="uiButton uiSelectOptions__button isSelectActive"
+                                                                            data-select-option="calculatorMethod"
+                                                                            data-select-value="value 1"
+                                                                            data-select-text="만기일시"
+                                                                        >
+                                                                            <span class="uiSelectOptions__text">만기일시</span>
+                                                                        </button>
+                                                                    </li>
+                                                                    <li class="uiSelectOptions__item">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="uiButton uiSelectOptions__button"
+                                                                            data-select-option="calculatorMethod"
+                                                                            data-select-value="value 2"
+                                                                            data-select-text="원금균등"
+                                                                        >
+                                                                            <span class="uiSelectOptions__text">원금균등</span>
+                                                                        </button>
+                                                                    </li>
+                                                                    <li class="uiSelectOptions__item">
+                                                                        <button
+                                                                            type="button"
+                                                                            class="uiButton uiSelectOptions__button"
+                                                                            data-select-option="calculatorMethod"
+                                                                            data-select-value="value 3"
+                                                                            data-select-text="원리금균등"
+                                                                        >
+                                                                            <span class="uiSelectOptions__text">원리금균등</span>
+                                                                        </button>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                        <!-- //layer: 상환방식을 선택해주세요 -->
+                                    </div>
+                                    <!-- //select -->
+                                </div>
+                                <div class="uiCalculator__text">로</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection testSection--basicList">
+                <h2 class="testTitle">basicList</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="basicList">
+                        <ul class="basicList__list">
+                            <li class="basicList__item">
+                                <strong class="fontWeightSemiBold">스팸차단서비스</strong>로 인증번호 수신이 어려울 수 있습니다. 전화 > 더보기 > 설정 > 수신차단 목록에서 SMS 인증 발신
+                                번호(1600-1522)를 제외해주세요.
+                            </li>
+                            <li class="basicList__item">
+                                <strong class="fontWeightSemiBold">통신사 명의도용 알림서비스</strong>로 인증번호 수신이 어려울 수 있습니다. 통신사에 직접 문의하여 해지해주세요.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection testSection--infoText">
+                <h2 class="testTitle">infoText</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <p class="infoText">법정동과 아파트명 사이에 띄어쓰기가 반드시 필요해요</p>
+                    <p class="infoText">
+                        상위 행정구역명을 포함해서 검색할 수도 있어요<br />
+                        (예 : 강남구 잠실아이파크)
+                    </p>
                 </div>
             </div>
 

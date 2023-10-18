@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/page-style.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <!-- // -->
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <div class="uiButtons uiButtons--noMargin">
+                            <ul class="uiButtons__list">
+                                <li class="uiButtons__item">
+                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="loanPurpose">
+                                        <span class="uiBasicButton__text">대출 목적</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- layer: 대출 목적을 선택해주세요 -->
+                        <div class="layerWrap layerWrap--toast" data-layer="loanPurpose" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="toastLayer">
+                                    <div class="toastLayer__head">
+                                        <h2 class="toastLayer__title">대출 목적을 선택해주세요</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="toastLayer__body">
+                                        <div class="toastLayer__bodyInner">
+                                            <div class="uiSelectOptions">
+                                                <ul class="uiSelectOptions__list">
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button">
+                                                            <span class="uiSelectOptions__text">대환대출 (주택담보대출 갈아타기)</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button">
+                                                            <span class="uiSelectOptions__text">주택구입</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button">
+                                                            <span class="uiSelectOptions__text">사업 자금</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiSelectOptions__item">
+                                                        <button type="button" class="uiButton uiSelectOptions__button" disabled>
+                                                            <span class="uiSelectOptions__text">생활자금 (준비 중)</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: 대출 목적을 선택해주세요 -->
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <script>
+            $(function () {
+                uiJSLayer.open('loanPurpose');
+            });
+        </script>
+        <!-- //script -->
+    </body>
+</html>

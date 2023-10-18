@@ -76,6 +76,7 @@
                 <h2 class="testTitle">레이어 타입</h2>
                 <div class="testLinks">
                     <a href="" data-layer-open="testInit">최소한의 구조</a>
+                    <a href="" data-layer-open="testFull">풀팝업형</a>
                     <a href="" data-layer-open="testToast">토스트형</a>
                     <a href="" data-layer-open="testToastFix">토스트형 높이 고정</a>
                     <a href="" data-layer-open="testAlert">얼럿형</a>
@@ -86,11 +87,53 @@
             <div class="layerWrap" data-layer="testInit">
                 <div class="layerContainer">
                     // contents
+                    <a href="" data-layer-open="testFull">풀팝업형</a>
                     <a href="" data-layer-open="testToast">토스트형</a>
                     <button type="button" data-role="layerClose">close</button>
                 </div>
             </div>
             <!-- //layer: 최소한의 구조 -->
+
+            <!-- layer: 풀팝업형 -->
+            <div class="layerWrap layerWrap--full" data-layer="testFull" data-layer-display="flex">
+                <div class="layerContainer">
+                    <section class="fullLayer">
+                        <div class="fullLayer__head">
+                            <h2 class="fullLayer__title">타이틀</h2>
+                            <div class="fullLayer__headRight">
+                                <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
+                                    <span class="forA11y">레이어 닫기</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="fullLayer__body">
+                            <div class="fullLayer__bodyInner">
+                                // contents
+                                <a href="" data-layer-open="testToast">토스트형</a>
+                                <a href="" data-layer-open="testAlert" data-role="layerClose">얼럿형</a>
+                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                            </div>
+                        </div>
+                        <div class="fullLayer__foot">
+                            <div class="uiButtons uiButtons--noMargin">
+                                <ul class="uiButtons__list">
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                    <li class="uiButtons__item">
+                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                            <span class="uiBasicButton__text">button</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- //layer: 풀팝업형 -->
 
             <!-- layer: 토스트형 -->
             <div class="layerWrap layerWrap--toast" data-layer="testToast" data-layer-display="flex">
@@ -98,6 +141,11 @@
                     <section class="toastLayer">
                         <div class="toastLayer__head">
                             <h2 class="toastLayer__title">타이틀</h2>
+                            <div class="toastLayer__headRight">
+                                <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                    <span class="forA11y">레이어 닫기</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="toastLayer__body">
                             <div class="toastLayer__bodyInner">
@@ -134,6 +182,11 @@
                     <section class="toastLayer toastLayer--fix">
                         <div class="toastLayer__head">
                             <h2 class="toastLayer__title">타이틀</h2>
+                            <div class="toastLayer__headRight">
+                                <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                    <span class="forA11y">레이어 닫기</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="toastLayer__body">
                             <div class="toastLayer__bodyInner">
