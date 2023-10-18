@@ -1883,14 +1883,28 @@
             var val = $input.val();
             var isNegative = Boolean(val.match(/^-/g));
             var minus = isNegative ? '-' : '';
-            var numString = val.replace(/[^\d]/g, '');
+            var dotI = val.search(/\./g);
+            var decimal = (function () {
+                if (dotI >= 0) {
+                    return val.slice(dotI, val.length).replace(/[^\d]/g, '');
+                } else {
+                    return '';
+                }
+            })();
+            var num = (function () {
+                if (dotI >= 0) {
+                    return val.slice(0, dotI).replace(/[^\d]/g, '');
+                } else {
+                    return val.replace(/[^\d]/g, '');
+                }
+            })();
             var text = '';
             var reg = new RegExp('\\d{1,4}$');
             var temp = null;
 
             for (var i = 0; i < unit.length; i++) {
-                temp = numString.match(reg);
-                numString = numString.replace(reg, '');
+                temp = num.match(reg);
+                num = num.replace(reg, '');
 
                 if (temp && temp.length) {
                     temp[0] = temp[0].replace(/^0+/g, '');
@@ -1900,8 +1914,16 @@
                     }
                 }
 
-                if (!numString.length) {
+                if (!num.length) {
                     break;
+                }
+            }
+
+            if (decimal.length) {
+                if (text.match('만')) {
+                    text = text.replace('만', '.' + decimal + '만');
+                } else {
+                    text = text + '0.' + decimal + '만';
                 }
             }
 

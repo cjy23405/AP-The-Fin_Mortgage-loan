@@ -477,12 +477,15 @@ button.uiInput__input {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .uiButtons__item {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+.uiButtons__item .uiBasicButton {
+    flex: 1;
 }
 .uiButtons__item + .uiButtons__item {
     margin-left: 8px;
@@ -496,10 +499,16 @@ button.uiInput__input {
 .uiButtons--center .uiButtons__list {
     justify-content: center;
 }
-.uiButtons__item--flex-none,
 .uiButtons--left .uiButtons__item,
 .uiButtons--right .uiButtons__item,
 .uiButtons--center .uiButtons__item {
+    flex: initial;
+    min-width: auto;
+}
+.uiButtons__item--flex-none,
+.uiButtons--left .uiButtons__item--flex-none,
+.uiButtons--right .uiButtons__item--flex-none,
+.uiButtons--center .uiButtons__item--flex-none {
     flex: none;
 }
 
@@ -645,6 +654,7 @@ button.uiInput__input {
     padding: 8px;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0);
 }
 .uiIconButton--search {
     background-image: url('../images/icon/search.svg');
@@ -829,6 +839,13 @@ button.uiInput__input {
     box-sizing: border-box;
     min-height: 42px;
 }
+.fullLayer__headRight {
+    position: absolute;
+    top: 9px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+}
 .fullLayer__title {
     margin: 0;
     font-size: 18px;
@@ -837,14 +854,13 @@ button.uiInput__input {
     text-align: center;
 }
 .fullLayer__button {
+    position: relative;
+    flex: none;
     display: block;
-    position: absolute;
-    top: 9px;
-    right: 16px;
     width: 24px;
     height: 24px;
     box-sizing: border-box;
-    background: url('../images/common/close.svg') no-repeat 50% 50% / 100% 100%;
+    background: no-repeat 50% 50% / 100% 100%;
 }
 .fullLayer__button::before {
     content: '';
@@ -855,6 +871,10 @@ button.uiInput__input {
     padding: 8px;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+.fullLayer__button--close {
+    background-image: url('../images/common/close.svg');
 }
 .fullLayer__body {
     display: flex;
@@ -898,6 +918,44 @@ button.uiInput__input {
 .toastLayer__head {
     flex: none;
     padding: 22px 24px 2px;
+    display: flex;
+    align-items: flex-start;
+}
+.toastLayer__headRight {
+    flex: none;
+    margin-left: auto;
+    padding-left: 8px;
+    display: flex;
+    align-items: center;
+}
+.toastLayer__title {
+    margin: 0;
+    font-size: 20px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 600;
+}
+.toastLayer__button {
+    position: relative;
+    flex: none;
+    display: block;
+    width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    background: no-repeat 50% 50% / 100% 100%;
+}
+.toastLayer__button::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    display: block;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+.toastLayer__button--close {
+    background-image: url('../images/common/close.svg');
 }
 .toastLayer__foot {
     flex: none;
@@ -930,12 +988,6 @@ button.uiInput__input {
 }
 .toastLayer__body:last-child .toastLayer__bodyInner {
     padding-bottom: 20px;
-}
-.toastLayer__title {
-    margin: 0;
-    font-size: 20px;
-    line-height: var(--lineHeightDefault);
-    font-weight: 600;
 }
 .layerWrap--toastFix .toastLayer {
     height: 100%;
@@ -1309,29 +1361,6 @@ section + .divide {
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a + a {
     margin-top: 16px;
-}
-.uiCheckBox.uiToggleCheckBox > span {
-    display: block;
-    padding: 17px 24px 17px 52px;
-    background: var(--systemGray100);
-    border: 1px solid var(--systemGray100);
-    border-radius: 11px;
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--systemGray400);
-    transition: all 0.3s ease-out;
-}
-.uiCheckBox.uiToggleCheckBox > span::before,
-.uiCheckBox.uiToggleCheckBox > span::after {
-    top: 19px;
-    left: 24px;
-    width: 20px;
-    height: 20px;
-}
-.uiCheckBox.uiToggleCheckBox > input[type='checkbox']:checked + span {
-    color: var(--primary600);
-    border-color: var(--primary600);
-    background-color: var(--primary50);
 }
 .uiCheckBox.uiCheckBox__hidden span {
     padding: 0;
@@ -2416,4 +2445,161 @@ h2 + .infoTxt {
 .uiCalculator__button.jsLayerOpenerActive {
     padding-bottom: 2px;
     border-bottom-width: 2px;
+}
+
+/* uiCheckButton */
+.uiCheckButton {
+    position: relative;
+    display: block;
+}
+.uiCheckButton__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.uiCheckButton__block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 54px;
+    box-sizing: border-box;
+    padding: 13px 23px;
+    border-radius: 8px;
+    border: 1px solid var(--systemGray100);
+    background-color: var(--systemGray100);
+    transition: border-color 0.25s, background-color 0.25s;
+}
+.uiCheckButton__row {
+    display: flex;
+    align-items: center;
+}
+.uiCheckButton__object {
+    flex: none;
+    display: block;
+}
+.uiCheckButton__object::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url('../images/icon/icon_check_unchecked.svg') no-repeat 50% 50% / 100% 100%;
+}
+.uiCheckButton__label {
+    display: block;
+    font-size: 16px;
+    line-height: var(--lineHeightLabel);
+    font-weight: 500;
+    color: var(--systemGray400);
+    text-align: left;
+}
+.uiCheckButton__label::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+.uiCheckButton__object + .uiCheckButton__label {
+    margin-left: 8px;
+}
+.uiCheckButton__label + .uiCheckButton__object {
+    margin-left: auto;
+    padding-left: 8px;
+}
+.uiCheckButton__input:focus-visible + .uiCheckButton__block {
+    outline: 2px dashed;
+}
+.uiCheckButton__input:checked + .uiCheckButton__block {
+    border-color: var(--primary600);
+    background-color: var(--primary50);
+}
+.uiCheckButton__input:checked + .uiCheckButton__block .uiCheckButton__object::before {
+    background-image: url('../images/icon/icon_check_checked.svg');
+}
+.uiCheckButton__input:checked + .uiCheckButton__block .uiCheckButton__label {
+    color: var(--primary600);
+    font-weight: 600;
+}
+
+/* uiCheckButton--center */
+.uiCheckButton--center .uiCheckButton__block {
+    align-items: center;
+}
+.uiCheckButton--center .uiCheckButton__label {
+    text-align: center;
+}
+
+/* uiCheckButtons */
+.uiCheckButtons {
+    display: block;
+}
+.uiCheckButtons__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.uiCheckButtons__item {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+.uiCheckButtons__item + .uiCheckButtons__item {
+    margin-left: 8px;
+}
+.uiCheckButtons__item .uiCheckButton {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.uiCheckButtons__item .uiCheckButton .uiCheckButton__block {
+    flex: 1;
+}
+
+/* infoText */
+.infoText {
+    margin: 0;
+    padding-left: 24px;
+    font-size: 13px;
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray500);
+    background: url('../images/icon/info.svg') no-repeat 0 0 / 16px 16px;
+}
+.infoText + .infoText {
+    margin-top: 8px;
+}
+
+/* basicList */
+.basicList {
+    display: block;
+}
+.basicList__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.basicList__item {
+    position: relative;
+    padding-left: 24px;
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray500);
+}
+.basicList__item::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: var(--systemGray500);
+}
+.basicList__item + .basicList__item {
+    margin-top: 20px;
 }
