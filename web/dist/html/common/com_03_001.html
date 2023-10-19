@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/page-style.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <!-- // -->
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <h1 class="titleLarge rowGroup">아파트 정보를 입력해주세요</h1>
+
+                        <div class="uiForm">
+                            <ul class="uiForm__list">
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">담보 아파트</div>
+                                    <div class="uiInvalid">
+                                        <!-- Case : 값이 없을 때 -->
+                                        <button type="button" class="uiButton uiSearchButton" title="담보 아파트 검색 레이어 팝업 열기">
+                                            <span class="uiSearchButton__text" data-placeholder="예) 잠실동 잠실아이파크"></span>
+                                        </button>
+                                        <!-- Case : 값이 있을 때 -->
+                                        <button type="button" class="uiButton uiSearchButton" title="담보 아파트 검색 레이어 팝업 열기">
+                                            <span class="uiSearchButton__text" data-placeholder="예) 잠실동 잠실아이파크">송도웰카운티1단지</span>
+                                        </button>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">평수</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <!-- select -->
+                                            <div class="uiSelect">
+                                                <input type="hidden" data-select-input="pyeong" />
+                                                <button type="button" class="uiButton uiSelect__button" title="평수 선택하기" data-layer-open="pyeong">
+                                                    <span class="uiSelect__text" data-select-view="pyeong" data-placeholder="예) 30평"></span>
+                                                </button>
+                                                <!-- layer: 주택 평수를 선택해주세요 -->
+                                                <div class="layerWrap layerWrap--toast" data-layer="pyeong" data-layer-display="flex">
+                                                    <div class="layerContainer">
+                                                        <section class="toastLayer">
+                                                            <div class="toastLayer__head">
+                                                                <h2 class="toastLayer__title">주택 평수를 선택해주세요</h2>
+                                                                <div class="toastLayer__headRight">
+                                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                                        <span class="forA11y">레이어 닫기</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="toastLayer__body">
+                                                                <div class="toastLayer__bodyInner">
+                                                                    <div class="uiSelectOptions">
+                                                                        <ul class="uiSelectOptions__list">
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="pyeong"
+                                                                                    data-select-value="value 1"
+                                                                                    data-select-text="25평"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">25평</span>
+                                                                                    <span class="uiSelectOptions__sub">공급면적 74.27m² / 전용면적 57.46m²</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="pyeong"
+                                                                                    data-select-value="value 2"
+                                                                                    data-select-text="27평"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">27평</span>
+                                                                                    <span class="uiSelectOptions__sub">공급면적 81.28m² / 전용면적 63.23m²</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="pyeong"
+                                                                                    data-select-value="value 3"
+                                                                                    data-select-text="34평"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">34평</span>
+                                                                                    <span class="uiSelectOptions__sub">공급면적 101.24m² / 전용면적 84.34m²</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="pyeong"
+                                                                                    data-select-value="value 4"
+                                                                                    data-select-text="38평"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">38평</span>
+                                                                                    <span class="uiSelectOptions__sub">공급면적 126.56m² / 전용면적 94.56m²</span>
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <!-- //layer: 주택 평수를 선택해주세요 -->
+                                            </div>
+                                            <!-- //select -->
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">상세주소</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <div class="uiInput">
+                                                <input type="text" class="uiInput__input" title="상세주소" placeholder="예) 101동 201호 " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">층수</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <!-- select -->
+                                            <div class="uiSelect">
+                                                <input type="hidden" data-select-input="floors" />
+                                                <button type="button" class="uiButton uiSelect__button" title="층수 선택하기" data-layer-open="floors">
+                                                    <span class="uiSelect__text" data-select-view="floors" data-placeholder="예) 3층 이상"></span>
+                                                </button>
+                                                <!-- layer: 주택 층수를 선택해주세요 -->
+                                                <div class="layerWrap layerWrap--toast" data-layer="floors" data-layer-display="flex">
+                                                    <div class="layerContainer">
+                                                        <section class="toastLayer">
+                                                            <div class="toastLayer__head">
+                                                                <h2 class="toastLayer__title">주택 층수를 선택해주세요</h2>
+                                                                <div class="toastLayer__headRight">
+                                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                                        <span class="forA11y">레이어 닫기</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="toastLayer__body">
+                                                                <div class="toastLayer__bodyInner">
+                                                                    <div class="uiSelectOptions">
+                                                                        <ul class="uiSelectOptions__list">
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="floors"
+                                                                                    data-select-value="value 1"
+                                                                                    data-select-text="1층"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">1층</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="floors"
+                                                                                    data-select-value="value 2"
+                                                                                    data-select-text="2층"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">2층</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="floors"
+                                                                                    data-select-value="value 3"
+                                                                                    data-select-text="3층 이상"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">3층 이상</span>
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <!-- //layer: 주택 층수를 선택해주세요 -->
+                                            </div>
+                                            <!-- //select -->
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+                            </ul>
+                        </div>
+
+                        <div class="rowGroup">
+                            <section class="rowGroup">
+                                <h2 class="titleSmall colorGray rowBlock">보유 대출정보</h2>
+
+                                <div class="uiCheckButton">
+                                    <input type="checkbox" class="uiCheckButton__input" id="holdingLoan" data-checkbox-tab="holdingLoan" />
+                                    <div class="uiCheckButton__block">
+                                        <div class="uiCheckButton__row">
+                                            <span class="uiCheckButton__object"></span>
+                                            <label for="holdingLoan" class="uiCheckButton__label">해당 주택에 담보대출이 있어요</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uiForm rowGroup" data-checkbox-tab-panel="holdingLoan">
+                                    <ul class="uiForm__list">
+                                        <!-- item -->
+                                        <li class="uiForm__item">
+                                            <div class="uiForm__title">받은 대출금액</div>
+                                            <div class="uiInvalid">
+                                                <div class="uiForm__contents">
+                                                    <div class="flexBox">
+                                                        <div class="flexBox__cell flexBox__cell--flexible">
+                                                            <div class="uiInput">
+                                                                <input
+                                                                    type="text"
+                                                                    pattern="\d*"
+                                                                    class="uiInput__input jsCommaInput"
+                                                                    title="받은 대출금액"
+                                                                    placeholder="예) 5,000"
+                                                                    data-convert-ten-thousand="holdingLoanPrice"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div class="flexBox__cell flexBox__cell--form">
+                                                            <div class="uiUnitText">만원</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="helpText" data-convert-ten-thousand-text="holdingLoanPrice"></p>
+                                            </div>
+                                        </li>
+                                        <!-- //item -->
+                                    </ul>
+                                </div>
+                            </section>
+
+                            <section class="rowGroup">
+                                <h2 class="titleSmall colorGray rowBlock">보유 임차정보</h2>
+
+                                <div class="uiCheckButton">
+                                    <input type="checkbox" class="uiCheckButton__input" id="rentDeposit" data-checkbox-tab="rentDeposit" />
+                                    <div class="uiCheckButton__block">
+                                        <div class="uiCheckButton__row">
+                                            <span class="uiCheckButton__object"></span>
+                                            <label for="rentDeposit" class="uiCheckButton__label">해당 주택에 임차보증금이 있어요</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uiForm rowGroup" data-checkbox-tab-panel="rentDeposit">
+                                    <ul class="uiForm__list">
+                                        <!-- item -->
+                                        <li class="uiForm__item">
+                                            <div class="uiForm__title">받은 임차보증금액</div>
+                                            <div class="uiInvalid">
+                                                <div class="uiForm__contents">
+                                                    <div class="flexBox">
+                                                        <div class="flexBox__cell flexBox__cell--flexible">
+                                                            <div class="uiInput">
+                                                                <input
+                                                                    type="text"
+                                                                    pattern="\d*"
+                                                                    class="uiInput__input jsCommaInput"
+                                                                    title="받은 임차보증금액"
+                                                                    placeholder="예) 5,000"
+                                                                    data-convert-ten-thousand="rentDepositPrice"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div class="flexBox__cell flexBox__cell--form">
+                                                            <div class="uiUnitText">만원</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p class="helpText" data-convert-ten-thousand-text="rentDepositPrice"></p>
+                                            </div>
+                                        </li>
+                                        <!-- //item -->
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+
+                        <!-- fix buttons -->
+                        <div class="fixBottomWrap">
+                            <div class="fixBottomWrap__area">
+                                <div class="uiButtons uiButtons--noMargin">
+                                    <ul class="uiButtons__list">
+                                        <li class="uiButtons__item">
+                                            <button type="button" class="uiButton uiBasicButton">
+                                                <span class="uiBasicButton__text">다음</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //fix buttons -->
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>

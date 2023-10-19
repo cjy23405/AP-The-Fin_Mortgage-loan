@@ -2046,6 +2046,10 @@
             }
         });
 
+        $root.find('.uiInput__input').each(function () {
+            inputedCheck($(this), '.uiInput');
+        });
+
         // accordion
         $root.find('.jsUiAccordion').each(function () {
             var $this = $(this);
@@ -2151,12 +2155,14 @@
         if ($wrap.length) {
             if (typeof val === 'string' && val.length > 0) {
                 $wrap.addClass('isInputed');
+                return true;
             } else {
                 $wrap.removeClass('isInputed');
+                return false;
             }
         }
     }
-    $doc.on('focusin.inputedCheck focusout.inputedCheck keydown.inputedCheck keyup.inputedCheck change.inputedCheck input.commaInput', '.uiInput__input', function (e) {
+    $doc.on('focusin.inputedCheck focusout.inputedCheck keydown.inputedCheck keyup.inputedCheck change.inputedCheck input.inputedCheck', '.uiInput__input', function () {
         inputedCheck($(this), '.uiInput');
     });
 
@@ -2201,8 +2207,44 @@
         var $this = $(this);
 
         $this.scrollTop(0).scrollLeft(0);
+        layerOpenedScrollToStart($this, '.fullLayer__body');
         layerOpenedScrollToStart($this, '.toastLayer__body');
     });
+
+    // search layer
+    $doc.on('focusin.searchLayer focusout.searchLayer keydown.searchLayer keyup.searchLayer change.searchLayer input.searchLayer', '.jsSearchLayerInput', function () {
+        var $this = $(this);
+        var $layer = $this.closest('.jsSearchLayer');
+        var $button = $layer.find('.jsSearchLayerSubmit');
+        var isInputed = inputedCheck($this, '.jsSearchLayer');
+
+        if (isInputed) {
+            $button.prop('disabled', false).removeAttr('disabled');
+        } else {
+            $button.prop('disabled', true).attr('disabled', '');
+        }
+    })
+        .on('click.searchLayer', '.jsSearchLayerSelfButton', function () {
+            var $this = $(this);
+            var $layer = $this.closest('.jsSearchLayer');
+            var $contents = $layer.find('.jsSearchLayerSelf');
+
+            $layer.addClass('isSelf');
+            elFocus($contents);
+        })
+        .on('click.searchLayer', '.jsSearchLayerButton', function () {
+            var $this = $(this);
+            var $layer = $this.closest('.jsSearchLayer');
+            var $contents = $layer.find('.jsSearchLayerForm');
+
+            $layer.removeClass('isSelf');
+            elFocus($contents);
+        })
+        .on('layerOpened.searchLayer', '.jsSearchLayer', function () {
+            var $this = $(this);
+
+            $this.removeClass('isSelf');
+        });
 
     // dom ready
     $(function () {
