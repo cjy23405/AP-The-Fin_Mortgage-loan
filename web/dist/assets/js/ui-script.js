@@ -593,10 +593,13 @@
             _.item.each(function () {
                 var $this = $(this);
                 var target = $this.attr('data-tab');
+                var id = 'tabpanel-' + target + '-' + _.hashCode;
+
+                if ($('#' + id).length) return;
 
                 $this
                     .attr('role', 'tabpanel')
-                    .attr('id', 'tabpanel-' + target + '-' + _.hashCode)
+                    .attr('id', id)
                     .attr('aria-labelledby', 'tabpanel-opener-' + target + '-' + _.hashCode);
             });
 
@@ -1910,7 +1913,7 @@
                     temp[0] = temp[0].replace(/^0+/g, '');
 
                     if (temp[0].length) {
-                        text = temp[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') + unit[i] + text;
+                        text = temp[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') + unit[i] + (text.length ? ' ' : '') + text;
                     }
                 }
 
@@ -1923,7 +1926,7 @@
                 if (text.match('만')) {
                     text = text.replace('만', '.' + decimal + '만');
                 } else {
-                    text = text + '0.' + decimal + '만';
+                    text = text + ' 0.' + decimal + '만';
                 }
             }
 
@@ -2026,7 +2029,6 @@
 
         // set
         checkScrollbars();
-        fixBarSet();
         checkDisabledClass($root);
         checkboxGroup.init($root);
         areaDisabled.init($root);
@@ -2110,6 +2112,9 @@
                 initialOpen: initial,
             });
         });
+
+        // fixBarSet
+        fixBarSet();
     }
     window.uiJSCommon = uiJSCommon;
 
@@ -2118,6 +2123,11 @@
         fixBarSet();
     }
     window.uiJSResize = uiJSResize;
+
+    // fixBarSet
+    $doc.on('uiTabPanelChange.fixBarSet', 'body', function () {
+        fixBarSet();
+    });
 
     // area focus
     function areaFocus(area) {

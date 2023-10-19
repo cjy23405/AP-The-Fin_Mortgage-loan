@@ -32,7 +32,7 @@
             }
             .testSection {
                 border-top: 2px solid #ccc;
-                padding: 50px 20px;
+                padding: 50px 24px;
             }
             .testSectionSub + .testSectionSub {
                 margin-top: 20px;
@@ -1622,45 +1622,45 @@
 
                     <div class="flexBox">
                         <div class="flexBox__cell flexBox__cell--flexible">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">Default (8px)</span>
                             </span>
                         </div>
                         <div class="flexBox__cell flexBox__cell--flexible">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">Default (8px)</span>
                             </span>
                         </div>
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--noMargin">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">flexBox__cell--noMargin (0px)</span>
                             </span>
                         </div>
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--miniMargin">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">flexBox__cell--miniMargin (4px)</span>
                             </span>
                         </div>
                         <!--
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--smallMargin">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">flexBox__cell--smallMargin (1px)</span>
                             </span>
                         </div>
                         -->
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--regularMargin">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">flexBox__cell--regularMargin (12px)</span>
                             </span>
                         </div>
                         <!--
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--mediumMargin">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">flexBox__cell--mediumMargin (1px)</span>
                             </span>
                         </div>
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--largeMargin">
-                            <span class="uiBasicButton uiBasicButton--tertiary">
+                            <span class="uiBasicButton uiBasicButton--small">
                                 <span class="uiBasicButton__text">flexBox__cell--largeMargin (1px)</span>
                             </span>
                         </div>
@@ -2738,6 +2738,80 @@
                         <div></div>
                         <div></div>
                         <div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection testSection--lineTab">
+                <h2 class="testTitle">lineTab</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default (링크용)</h3>
+
+                    <div class="lineTab">
+                        <ul class="lineTab__list">
+                            <li class="lineTab__item">
+                                <a href="" class="lineTab__button isActive">
+                                    <span class="lineTab__block">
+                                        <span class="lineTab__text">Tab 1</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="lineTab__item">
+                                <a href="" class="lineTab__button">
+                                    <span class="lineTab__block">
+                                        <span class="lineTab__text">Tab 2</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">탭 스크립트 적용</h3>
+
+                    <div class="jsUiTabPanel">
+                        <div class="lineTab">
+                            <ul class="lineTab__list">
+                                <li class="lineTab__item">
+                                    <a href="" class="lineTab__button" data-tab-open="lineTab_001_001">
+                                        <span class="lineTab__block">
+                                            <span class="lineTab__text">Tab 1</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="lineTab__item">
+                                    <a href="" class="lineTab__button" data-tab-open="lineTab_001_002">
+                                        <span class="lineTab__block">
+                                            <span class="lineTab__text">Tab 2</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tab 1 -->
+                        <div data-tab="lineTab_001_001">
+                            피어나기 갑 천지는 그들에게 능히 것이다. 목숨을 구할 인생에 꽃이 끓는 희망의 창공에 길지 봄바람이다. 창공에 풀이 새 불어 있다.<br /><br />
+
+                            수 피가 황금시대를 청춘이 광야에서 것이다. 거선의 가장 품고 이상 할지라도 꾸며 쓸쓸하랴? 무엇을 구하지 위하여서, 천자만홍이 든 그들에게 얼마나 가는 보이는 운다. 대한 뭇
+                            끝까지 것이다.<br /><br />
+
+                            들어 광야에서 위하여서, 청춘의 목숨을 있으며, 품으며, 심장은 못하다 위하여서. 얼마나 산야에 것은 길을 끓는다. 있으며, 미묘한 시들어 실로 평화스러운 청춘 인생에 풍부하게
+                            운다. 피가 물방아 옷을 귀는 얼음과 곳이 사라지지 가지에 아름다우냐?
+                        </div>
+                        <!-- //Tab 1 -->
+
+                        <!-- Tab 2 -->
+                        <div data-tab="lineTab_001_002">
+                            별 언덕 가을로 너무나 이름과, 듯합니다. 언덕 이런 가슴속에 소녀들의 별이 쉬이 북간도에 버리었습니다. 다 아름다운 이름을 새워 말 아침이 나는 듯합니다.<br /><br />
+
+                            쉬이 사람들의 위에도 무성할 어머니 헤는 계절이 있습니다. 봄이 시와 옥 패, 시인의 하나에 계집애들의 못 별 있습니다.<br /><br />
+
+                            이름자 시인의 비둘기, 별이 계십니다. 가난한 많은 나는 써 별에도 밤이 까닭입니다.
+                        </div>
+                        <!-- //Tab 2 -->
                     </div>
                 </div>
             </div>
