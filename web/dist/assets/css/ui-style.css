@@ -2134,34 +2134,6 @@ section + .divide {
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     color: var(--systemGray800);
 }
-.tabContents.tabContents__line {
-    margin: 20px -24px 0;
-}
-.tabContents.tabContents__line .tabContents__Header {
-    background: var(--white);
-    padding: 0;
-}
-.tabContents.tabContents__line .tabContents__Header > ul {
-    gap: 0;
-    border-bottom: 1px solid #efefef;
-}
-.tabContents.tabContents__line .tabContents__Header > ul > li {
-    text-align: center;
-    height: 47px;
-}
-.tabContents.tabContents__line .tabContents__Header > ul > li label {
-    display: inline-block;
-    line-height: 47px;
-    height: 100%;
-    border-radius: 0;
-    border-bottom: 2px solid transparent;
-}
-.tabContents.tabContents__line .tabContents__Header > ul > li input:checked + label {
-    border-color: var(--theFinBlack);
-}
-.tabContents.tabContents__line .tabContentsBodyWrap {
-    padding: 20px 24px;
-}
 
 .loanResultListItems {
     margin-bottom: 30px;
