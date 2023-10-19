@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/page-style.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <!-- // -->
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <div class="uiButtons uiButtons--noMargin">
+                            <ul class="uiButtons__list">
+                                <li class="uiButtons__item">
+                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="searchApartment">
+                                        <span class="uiBasicButton__text">담보 아파트를 검색해주세요</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- layer: 담보 아파트를 검색해주세요 -->
+                        <div class="layerWrap layerWrap--full jsSearchLayer" data-layer="searchApartment" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="fullLayer">
+                                    <div class="fullLayer__head">
+                                        <div class="fullLayer__headRight">
+                                            <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="fullLayer__body">
+                                        <div class="fullLayer__bodyInner">
+                                            <div class="rowGroup">
+                                                <h2 class="titleLarge">
+                                                    <span class="flexBox">
+                                                        <span class="flexBox__cell">담보 아파트를 검색해주세요</span>
+                                                        <span class="flexBox__cell flexBox__cell--miniMargin">
+                                                            <button type="button" class="uiButton uiIconButton uiIconButton--small uiIconButton--question" data-layer-open="searchApartmentGuide">
+                                                                <span class="forA11y">도움말</span>
+                                                            </button>
+                                                        </span>
+                                                    </span>
+                                                </h2>
+                                                <p class="textBodySmall colorGray rowItem">법정동과 아파트명으로 쉽게 찾을 수 있어요.</p>
+                                            </div>
+
+                                            <div class="uiForm">
+                                                <ul class="uiForm__list">
+                                                    <!-- item -->
+                                                    <li class="uiForm__item">
+                                                        <div class="uiForm__title">담보 아파트</div>
+                                                        <div class="uiInvalid">
+                                                            <div class="uiForm__contents">
+                                                                <div class="uiInput uiInput--search">
+                                                                    <input type="search" class="uiInput__input jsSearchLayerInput" title="검색어" placeholder="예) 잠실동 잠실아이파크" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <!-- //item -->
+                                                </ul>
+                                            </div>
+
+                                            <!-- Case : 로딩 -->
+                                            <div class="searchLoading"></div>
+                                            <!-- //Case : 로딩 -->
+
+                                            <!-- Case : 검색 결과 없음 -->
+                                            <div class="searchEmpty">
+                                                <div class="searchEmpty__illust"></div>
+                                                <p class="searchEmpty__title">검색 결과가 없어요</p>
+                                                <p class="searchEmpty__text">
+                                                    법정동, 아파트명을 다시 확인해 주세요.<br />
+                                                    KB 부동산 시세가 있는 아파트만<br />
+                                                    대출조회가 가능해요.
+                                                </p>
+                                            </div>
+                                            <!-- //Case : 검색 결과 없음 -->
+
+                                            <!-- Case : 검색 결과 있음 -->
+                                            <div class="searchResult searchResult--apartment">
+                                                <ul class="searchResult__list">
+                                                    <li class="searchResult__item">
+                                                        <button type="button" class="uiButton searchResult__link">
+                                                            <span class="searchResult__title">교동현대3차</span>
+                                                            <span class="searchResult__text">강원특별자치도 속초시 미시령로3337번길 6-43</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="searchResult__item">
+                                                        <button type="button" class="uiButton searchResult__link">
+                                                            <span class="searchResult__title">교동현대3차</span>
+                                                            <span class="searchResult__text">강원특별자치도 속초시 미시령로3337번길 6-43</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="searchResult__item">
+                                                        <button type="button" class="uiButton searchResult__link">
+                                                            <span class="searchResult__title">교동현대3차</span>
+                                                            <span class="searchResult__text">강원특별자치도 속초시 미시령로3337번길 6-43</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- //Case : 검색 결과 있음 -->
+                                        </div>
+                                    </div>
+                                    <div class="fullLayer__foot">
+                                        <div class="uiButtons uiButtons--noMargin">
+                                            <ul class="uiButtons__list">
+                                                <li class="uiButtons__item">
+                                                    <button type="button" class="uiButton uiBasicButton jsSearchLayerSubmit" disabled>
+                                                        <span class="uiBasicButton__text">검색</span>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: 담보 아파트를 검색해주세요 -->
+
+                        <!-- layer: 담보아파트 검색 방법 -->
+                        <div class="layerWrap layerWrap--toast" data-layer="searchApartmentGuide" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="toastLayer">
+                                    <div class="toastLayer__head">
+                                        <h2 class="toastLayer__title">담보아파트 검색 방법</h2>
+                                        <div class="toastLayer__headRight">
+                                            <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="toastLayer__body">
+                                        <div class="toastLayer__bodyInner">
+                                            <p class="titleSmall colorGraySecondary rowContents">
+                                                고객님의 휴대폰에서 문자메세지를 전송하시면<br />
+                                                휴대폰 번호를 안전하게 자동 등록하실 수 있습니다.
+                                            </p>
+
+                                            <p class="infoText">법정동과 아파트명 사이에 띄어쓰기가 반드시 필요해요</p>
+                                            <p class="infoText">
+                                                상위 행정구역명을 포함해서 검색할 수도 있어요<br />
+                                                (예 : 강남구 잠실아이파크)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: 담보아파트 검색 방법 -->
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <script>
+            $(function () {
+                uiJSLayer.open('searchApartment');
+            });
+        </script>
+        <!-- //script -->
+    </body>
+</html>

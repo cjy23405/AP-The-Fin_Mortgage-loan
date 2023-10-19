@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/page-style.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <!-- // -->
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <h1 class="titleLarge rowGroup">사업장 정보를 입력해주세요</h1>
+
+                        <div class="uiForm">
+                            <ul class="uiForm__list">
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">사업장명</div>
+                                    <div class="uiInvalid">
+                                        <!-- Case : 값이 없을 때 -->
+                                        <button type="button" class="uiButton uiSearchButton" title="사업장명 검색 레이어 팝업 열기">
+                                            <span class="uiSearchButton__text" data-placeholder="예) 에이피더핀"></span>
+                                        </button>
+                                        <!-- Case : 값이 있을 때 -->
+                                        <button type="button" class="uiButton uiSearchButton" title="사업장명 검색 레이어 팝업 열기">
+                                            <span class="uiSearchButton__text" data-placeholder="예) 에이피더핀">에이피더핀</span>
+                                        </button>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">개업일</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <div class="uiInput">
+                                                <input type="text" class="uiInput__input jsDateInput" title="개업일" placeholder="예) 2023.01.01" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">업종형태</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <!-- select -->
+                                            <div class="uiSelect">
+                                                <input type="hidden" data-select-input="industryType" />
+                                                <button type="button" class="uiButton uiSelect__button" title="업종형태 선택하기" data-layer-open="industryType">
+                                                    <span class="uiSelect__text" data-select-view="industryType" data-placeholder="예) 제조업"></span>
+                                                </button>
+                                                <!-- layer: 업종형태를 선택해주세요 -->
+                                                <div class="layerWrap layerWrap--toast" data-layer="industryType" data-layer-display="flex">
+                                                    <div class="layerContainer">
+                                                        <section class="toastLayer">
+                                                            <div class="toastLayer__head">
+                                                                <h2 class="toastLayer__title">업종형태를 선택해주세요</h2>
+                                                                <div class="toastLayer__headRight">
+                                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                                        <span class="forA11y">레이어 닫기</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="toastLayer__body">
+                                                                <div class="toastLayer__bodyInner">
+                                                                    <div class="uiSelectOptions">
+                                                                        <ul class="uiSelectOptions__list">
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="industryType"
+                                                                                    data-select-value="value 1"
+                                                                                    data-select-text="제조업"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">제조업</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="industryType"
+                                                                                    data-select-value="value 2"
+                                                                                    data-select-text="도소매업"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">도소매업</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="industryType"
+                                                                                    data-select-value="value 3"
+                                                                                    data-select-text="운수업"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">운수업</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="industryType"
+                                                                                    data-select-value="value 4"
+                                                                                    data-select-text="음식/숙박/교육"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">음식/숙박/교육</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="industryType"
+                                                                                    data-select-value="value 5"
+                                                                                    data-select-text="기타"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">기타</span>
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <!-- //layer: 업종형태를 선택해주세요 -->
+                                            </div>
+                                            <!-- //select -->
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+                            </ul>
+                        </div>
+
+                        <!-- fix buttons -->
+                        <div class="fixBottomWrap">
+                            <div class="fixBottomWrap__area">
+                                <div class="uiButtons uiButtons--noMargin">
+                                    <ul class="uiButtons__list">
+                                        <li class="uiButtons__item">
+                                            <button type="button" class="uiButton uiBasicButton">
+                                                <span class="uiBasicButton__text">다음</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //fix buttons -->
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>

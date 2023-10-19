@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title></title>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="./dist/assets/css/common.css" />
+        <style>
+            body {
+                margin: 0;
+            }
+            .isEmphasis {
+                font-weight: 700;
+                color: #ff706e;
+            }
+            .indexWrap {
+                box-sizing: border-box;
+                min-width: 1900px;
+                padding: 20px;
+            }
+            .indexTitle {
+                font-size: 30px;
+                line-height: 40px;
+                margin: 0 0 20px;
+            }
+            .indexLinks:before {
+                content: '';
+                display: table;
+            }
+            .indexLinks__inner {
+                margin: -10px 0 0 -10px;
+            }
+            .indexLinks__inner:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
+            .indexLinks a {
+                display: block;
+                margin: 10px 0 0 10px;
+                float: left;
+                padding: 5px 15px;
+                font-size: 14px;
+                line-height: 20px;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                background: #666;
+            }
+            .indexGnb {
+                margin: 20px 0;
+            }
+            .indexBottom {
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                min-width: 1900px;
+                box-sizing: border-box;
+                padding: 10px 20px;
+                background: rgba(0, 0, 0, 0.4);
+            }
+            .indexBottom a {
+                background-color: #066cb3;
+            }
+            .indexSection {
+                border-radius: 5px;
+                background-color: #fff;
+            }
+            .indexSection + .indexSection {
+                margin-top: 20px;
+            }
+            .indexSection--clicked {
+                -webkit-animation: indexSection-clicked 0.8s linear;
+                animation: indexSection-clicked 0.8s linear;
+            }
+            @-webkit-keyframes indexSection-clicked {
+                0% {
+                    background-color: rgba(255, 255, 255, 1);
+                }
+                30% {
+                    background-color: rgba(255, 202, 222, 1);
+                }
+                70% {
+                    background-color: rgba(255, 202, 222, 1);
+                }
+                100% {
+                    background-color: rgba(255, 255, 255, 1);
+                }
+            }
+            @keyframes indexSection-clicked {
+                0% {
+                    background-color: rgba(255, 255, 255, 1);
+                }
+                30% {
+                    background-color: rgba(255, 202, 222, 1);
+                }
+                70% {
+                    background-color: rgba(255, 202, 222, 1);
+                }
+                100% {
+                    background-color: rgba(255, 255, 255, 1);
+                }
+            }
+            .indexSection__title {
+                margin: 0;
+                padding: 5px 15px;
+                font-size: 14px;
+                line-height: 20px;
+                color: #fff;
+                border-radius: 5px 5px 0 0;
+                background: #333;
+            }
+            .indexTable > table {
+                width: 100%;
+                table-layout: fixed;
+                margin: 0;
+                padding: 0;
+                border-spacing: 0;
+                box-sizing: border-box;
+            }
+            .indexTable > table > thead > tr > th,
+            .indexTable > table > tbody > tr > th,
+            .indexTable > table > tbody > tr > td {
+                box-sizing: border-box;
+                font-size: 12px;
+                line-height: 18px;
+                text-align: left;
+                padding: 5px 10px;
+                border: 0 solid #cdcdcd;
+                border-width: 0 1px 1px 0;
+                background: none;
+                word-break: keep-all;
+                word-wrap: break-word;
+            }
+            .indexTable > table > tbody > tr:hover > th,
+            .indexTable > table > tbody > tr:hover > td {
+                background-color: #f6f6f6;
+            }
+            .indexTable > table > thead > tr > th:first-child,
+            .indexTable > table > tbody > tr > th:first-child,
+            .indexTable > table > tbody > tr > td:first-child {
+                border-left-width: 1px;
+            }
+            .indexTable > table > thead > tr > th {
+                border-top-width: 1px;
+            }
+            .indexTable > table > thead > tr > th,
+            .indexTable > table > tbody > tr > th {
+                background-color: #e8e8e8;
+            }
+            .indexTable > table > tbody > tr:last-child > td:first-child {
+                border-radius: 0 0 0 5px;
+            }
+            .indexTable > table > tbody > tr:last-child > td:last-child {
+                border-radius: 0 0 5px 0;
+            }
+            .indexStatus {
+                display: inline-block;
+                vertical-align: top;
+                padding: 3px 8px;
+                margin: -3px 0;
+                background: #999;
+                color: #fff;
+                border-radius: 5px;
+            }
+            .indexStatus--ing {
+                background-color: #cf8800;
+            }
+            .indexStatus--end {
+                background-color: #00a6a0;
+            }
+            .indexStatus--moding {
+                background-color: #ff4594;
+            }
+            .indexLog {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            .indexLog__item {
+                position: relative;
+                padding-left: 80px;
+            }
+            .indexLog__itemDate {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .indexText {
+                margin-bottom: 20px;
+            }
+        </style>
+        <!-- //style -->
+    </head>
+    <body>
+        <div class="indexWrap">
+            <h1 class="indexTitle"></h1>
+            <div class="indexGnb">
+                <div class="indexLinks">
+                    <div class="indexLinks__inner">
+                        <a href="./guide-popup.html" target="_blank">레이어 팝업 가이드</a>
+                        <a href="./guide-component.html" target="_blank">컴포넌트 가이드</a>
+                        <a href="./guide-script.html" target="_blank">스크립트 가이드</a>
+                    </div>
+                </div>
+            </div>
+            <div class="indexBottom">
+                <div class="indexLinks">
+                    <div class="indexLinks__inner" id="nav"></div>
+                </div>
+            </div>
+
+            <!--
+            <div class="indexText">기타 문구</div>
+            -->
+
+            <div class="index-datas" id="indexTable"></div>
+        </div>
+
+        <div class="index-fake-botttom"></div>
+
+        <!-- script -->
+        <script type="text/javascript" src="./dist/assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script>
+            var title = 'AP The Fin - 주택담보대출';
+            var tableData = [
+                /*
+                {
+                    depth1: '',
+                    data: [
+                        {
+                            id: '',
+                            depth2: '',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '',
+                            status: '',
+                            create: '',
+                            update: '',
+                            log: [
+                                //{ date: '', text: '', },
+                            ],
+                        },
+                    ],
+                },
+                */
+                {
+                    depth1: '공통',
+                    data: [
+                        {
+                            id: '',
+                            depth2: '로딩 레이어',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/_loading.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: '',
+                            depth2: '레이아웃',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/_layout.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: '',
+                            depth2: '얼럿 레이어 팝업',
+                            depth3: '타이틀 + 메세지 + 버튼 한개',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/_alert1.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: '',
+                            depth2: '얼럿 레이어 팝업',
+                            depth3: '메세지 + 버튼 두개',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/_alert2.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: '',
+                            depth2: '얼럿 레이어 팝업',
+                            depth3: '타이틀 + 버튼 두개',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/_alert3.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: '',
+                            depth2: '토스트 얼럿',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/_toastAlert.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_01_001',
+                            depth2: '휴대폰 본인인증',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_01_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_02_001',
+                            depth2: '주민등록번호 뒷자리',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_02_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_03_001',
+                            depth2: '아파트 정보 입력',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_03_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_03_002',
+                            depth2: '아파트 정보 입력',
+                            depth3: '담보 아파트 검색 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_03_002.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_04_001',
+                            depth2: '주담대 대출희망금액',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_04_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_05_001',
+                            depth2: '직업 선택',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_05_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_06_001',
+                            depth2: '직장 정보 입력',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_06_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_06_002',
+                            depth2: '직장 정보 입력',
+                            depth3: '직장명 검색 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_06_002.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_06_003',
+                            depth2: '사업장 정보 입력',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_06_003.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_06_004',
+                            depth2: '사업장 정보 입력',
+                            depth3: '사업장명 검색 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_06_004.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_07_001',
+                            depth2: '소득정보 입력',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_07_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_08_001',
+                            depth2: '신용점수 확인',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_08_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'com_09_001',
+                            depth2: '결과 로딩',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/common/com_09_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                    ],
+                },
+                {
+                    depth1: '주택담보대출',
+                    data: [
+                        {
+                            id: 'HRL_01_001',
+                            depth2: '소개화면',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_01_001.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_04_001',
+                            depth2: '소개화면',
+                            depth3: '대출 목적 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_01_002.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_01_003',
+                            depth2: '소개화면',
+                            depth3: '서비스 이용동의 수집 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_01_003.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_05_001',
+                            depth2: '대환대출',
+                            depth3: '마이데이터 연결 이동 안내',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_05_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_05_002',
+                            depth2: '대환대출',
+                            depth3: '대환대출 신청 불가능 시간 안내',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_05_002.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_06_001',
+                            depth2: '대환대출',
+                            depth3: '주택담보대출 계좌 선택',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_06_001.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_06_002',
+                            depth2: '대환대출',
+                            depth3: '주택담보대출 계좌 없음 안내',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_06_002.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_07_001',
+                            depth2: '대환대출',
+                            depth3: '갈아탈 계좌 선택',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_07_001.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_07_002',
+                            depth2: '대환대출',
+                            depth3: '갈아탈 수 있는 계좌 없음 안내',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_07_002.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_07_003',
+                            depth2: '대환대출',
+                            depth3: '대환대출 불가사유 안내',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_07_003.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_15_001',
+                            depth2: '대환대출',
+                            depth3: '결과 리스트',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_15_001.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_15_002',
+                            depth2: '대환대출',
+                            depth3: '미승인내역 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_15_002.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HRL_16_001',
+                            depth2: '대환대출',
+                            depth3: '상품 상세정보',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HRL/HRL_16_001.html',
+                            status: '',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'HL_12_001',
+                            depth2: '신규대출',
+                            depth3: '결과 리스트',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HL/HL_12_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'HL_12_002',
+                            depth2: '신규대출',
+                            depth3: '미승인내역 (팝업)',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HL/HL_12_002.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'HL_13_001',
+                            depth2: '신규대출',
+                            depth3: '상품 상세정보',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HL/HL_13_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'HLST_11_001',
+                            depth2: '사업자대출',
+                            depth3: '결과 리스트',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HLST/HLST_11_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'HLST_12_001',
+                            depth2: '사업자대출',
+                            depth3: '상품 상세정보',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/HLST/HLST_12_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                    ],
+                },
+                {
+                    depth1: '신용대출',
+                    data: [
+                        {
+                            id: 'CL_01_001',
+                            depth2: '소개화면',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/CL/CL_01_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'CL_04_001',
+                            depth2: '대출희망금액',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/CL/CL_04_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'CL_08_001',
+                            depth2: '추가정보 입력',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/CL/CL_08_001.html',
+                            status: 'end',
+                            create: '2023.10.20',
+                            log: [],
+                        },
+                        {
+                            id: 'CL_10_001',
+                            depth2: '결과 리스트',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/CL/CL_10_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                        {
+                            id: 'CL_11_001',
+                            depth2: '상품 상세정보',
+                            depth3: '',
+                            depth4: '',
+                            depth5: '',
+                            depth6: '',
+                            path: '/CL/CL_11_001.html',
+                            status: '',
+                            create: '',
+                            log: [],
+                        },
+                    ],
+                },
+            ];
+
+            var html = '';
+            var navHTML = '';
+            var totalIndex = 0;
+            var dates = (function () {
+                var array = [];
+
+                function add(date) {
+                    if (typeof date === 'string' && date.length && array.indexOf(date) === -1) {
+                        array.push(date);
+                    }
+                }
+
+                $.each(tableData, function (i) {
+                    var sectionData = tableData[i].data;
+                    $.each(sectionData, function (j) {
+                        add(this.create);
+                        $.each(sectionData[j].log, function (l) {
+                            add(this.date);
+                        });
+                    });
+                });
+
+                array.sort();
+
+                return array;
+            })();
+            var latestDate = dates[dates.length - 1];
+
+            $.each(tableData, function (i) {
+                var sectionIndex = i;
+                var sectionData = tableData[i].data;
+                var tableHTML = '';
+
+                $.each(sectionData, function (j) {
+                    var returnVal = function (key, secondTestKey) {
+                        var val = sectionData[j][key];
+                        var secondTestVal = sectionData[j][secondTestKey];
+                        var prevIndex = j - 1;
+                        var isPrint = true;
+                        if (prevIndex >= 0) {
+                            if (sectionData[prevIndex][key] === val) {
+                                isPrint = false;
+                            }
+                            if (typeof secondTestKey === 'string' && secondTestKey.length && !sectionData[j].depthOnly) {
+                                if (sectionData[prevIndex][key] === val && sectionData[prevIndex][secondTestKey] === secondTestVal) {
+                                    isPrint = false;
+                                } else {
+                                    isPrint = true;
+                                }
+                            }
+                        }
+                        return isPrint ? val.replace(/\n/g, '<br>') : '';
+                    };
+                    var id = returnVal('id');
+                    var depth2 = returnVal('depth2');
+                    var depth3 = returnVal('depth3');
+                    var depth4 = returnVal('depth4');
+                    var depth5 = returnVal('depth5');
+                    var depth6 = returnVal('depth6');
+                    var path = (function () {
+                        var val = sectionData[j].path;
+                        var href = '';
+                        if (val.match(/^\.\//g)) {
+                            href = val;
+                        } else {
+                            href = './dist/html' + val;
+                        }
+                        return val.length ? '<a href="' + href + '" target="_blank">' + val + '</a>' : '';
+                    })();
+                    var status = (function () {
+                        var val = sectionData[j].status;
+                        var text = '';
+                        if (val === 'ing') {
+                            text = '작업중';
+                        } else if (val === 'end') {
+                            text = '작업완료';
+                        } else if (val === 'moding') {
+                            text = '수정중';
+                        }
+                        return val.length ? '<span class="indexStatus indexStatus--' + val + '">' + text + '</span>' : '';
+                    })();
+                    var create = this.create;
+                    var update = '';
+                    var log = (function () {
+                        var val = sectionData[j].log;
+                        var length = val.length;
+                        var html = '<ul class="indexLog">';
+                        $.each(val, function (l) {
+                            var date = this.date;
+                            html +=
+                                '<li class="indexLog__item' +
+                                (date === latestDate ? ' isEmphasis' : '') +
+                                '"><div class="indexLog__itemDate">[' +
+                                date +
+                                ']</div>' +
+                                this.text.replace(/\n/g, '<br>') +
+                                '</li>';
+                            if (length - 1 === l) {
+                                update = date;
+                            }
+                        });
+                        html += '</ul>';
+
+                        return html;
+                    })();
+
+                    tableHTML +=
+                        '<tr>' +
+                        '<td>' +
+                        (j + 1) +
+                        '</td>' +
+                        '<td>' +
+                        id +
+                        '</td>' +
+                        '<td>' +
+                        depth2 +
+                        '</td>' +
+                        '<td>' +
+                        depth3 +
+                        '</td>' +
+                        '<td>' +
+                        depth4 +
+                        '</td>' +
+                        '<td>' +
+                        depth5 +
+                        '</td>' +
+                        '<td>' +
+                        depth6 +
+                        '</td>' +
+                        '<td>' +
+                        path +
+                        '</td>' +
+                        '<td>' +
+                        status +
+                        '</td>' +
+                        '<td class="' +
+                        (create === latestDate ? ' isEmphasis' : '') +
+                        '">' +
+                        create +
+                        '</td>' +
+                        '<td class="' +
+                        (update === latestDate ? ' isEmphasis' : '') +
+                        '">' +
+                        update +
+                        '</td>' +
+                        '<td>' +
+                        log +
+                        '</td>' +
+                        '</tr>';
+
+                    totalIndex++;
+                });
+
+                navHTML += '<a href="#section' + i + '">' + tableData[i].depth1 + '</a>';
+
+                html +=
+                    '<div class="indexSection" id="section' +
+                    i +
+                    '">' +
+                    '<h2 class="indexSection__title">' +
+                    tableData[i].depth1 +
+                    '</h2>' +
+                    '<div class="indexTable">' +
+                    '<table>' +
+                    '<colgroup>' +
+                    '<col width="50px" />' +
+                    '<col width="160px" />' +
+                    '<col width="160px" />' +
+                    '<col width="160px" />' +
+                    '<col width="160px" />' +
+                    '<col width="160px" />' +
+                    '<col width="160px" />' +
+                    '<col width="" />' +
+                    '<col width="100px" />' +
+                    '<col width="110px" />' +
+                    '<col width="110px" />' +
+                    '<col width="300px" />' +
+                    '</colgroup>' +
+                    '<thead>' +
+                    '<tr>' +
+                    '<th>No</th>' +
+                    '<th>ID</th>' +
+                    '<th>depth2</th>' +
+                    '<th>depth3</th>' +
+                    '<th>depth4</th>' +
+                    '<th>depth5</th>' +
+                    '<th>depth6</th>' +
+                    '<th>path</th>' +
+                    '<th>status</th>' +
+                    '<th>create</th>' +
+                    '<th>update</th>' +
+                    '<th>log</th>' +
+                    '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                    tableHTML +
+                    '</tbody>' +
+                    '</table>' +
+                    '</div>' +
+                    '</div>';
+            });
+
+            $('title, .indexTitle').text(title);
+            $('#nav').append(navHTML);
+            $('#indexTable').append(html);
+
+            var $nav = $('.indexBottom');
+            var $doc = $(document);
+            var $win = $(window);
+
+            function paddingBottom() {
+                $('.index-fake-botttom').css('height', $nav.outerHeight());
+            }
+
+            var clickedTimer = null;
+
+            $doc.on('click', '#nav a', function () {
+                var $this = $(this);
+                var href = $this.attr('href');
+                var $target = $(href);
+                var $sections = $('.indexSection');
+
+                $sections.removeClass('indexSection--clicked');
+
+                clearTimeout(clickedTimer);
+
+                clickedTimer = setTimeout(function () {
+                    $target.addClass('indexSection--clicked');
+                }, 100);
+            });
+
+            $win.on('scroll', function () {
+                var scrollLeft = $win.scrollLeft();
+                $nav.css('margin-left', -scrollLeft);
+            })
+                .on('resize', function () {
+                    paddingBottom();
+                })
+                .on('load', function () {
+                    paddingBottom();
+                });
+        </script>
+        <!-- //script -->
+    </body>
+</html>

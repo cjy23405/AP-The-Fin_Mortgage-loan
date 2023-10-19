@@ -142,6 +142,7 @@
 
                     <div class="colorEmphasis">.colorEmphasis ( primary 600 )</div>
                     <div class="colorGray">.colorGray ( gray 500 )</div>
+                    <div class="colorGraySecondary">.colorGraySecondary ( gray 700 )</div>
                 </div>
 
                 <div class="testSectionSub">
@@ -179,13 +180,13 @@
                     <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" disabled>
                         <span class="uiBasicButton__text">button</span>
                     </button>
-                    <!--
                     <button type="button" class="uiButton uiBasicButton uiBasicButton--tertiary">
                         <span class="uiBasicButton__text">button</span>
                     </button>
                     <button type="button" class="uiButton uiBasicButton uiBasicButton--tertiary" disabled>
                         <span class="uiBasicButton__text">button</span>
                     </button>
+                    <!--
                     <button type="button" class="uiButton uiBasicButton uiBasicButton--quaternary">
                         <span class="uiBasicButton__text">button</span>
                     </button>
@@ -246,13 +247,13 @@
                     <a href="" class="uiBasicButton uiBasicButton--secondary uiBasicButton--disabled">
                         <span class="uiBasicButton__text">button</span>
                     </a>
-                    <!--
                     <a href="" class="uiBasicButton uiBasicButton--tertiary">
                         <span class="uiBasicButton__text">button</span>
                     </a>
                     <a href="" class="uiBasicButton uiBasicButton--tertiary uiBasicButton--disabled">
                         <span class="uiBasicButton__text">button</span>
                     </a>
+                    <!--
                     <a href="" class="uiBasicButton uiBasicButton--quaternary">
                         <span class="uiBasicButton__text">button</span>
                     </a>
@@ -304,13 +305,12 @@
                     <button type="button" class="uiButton uiBasicButton uiBasicButton--medium">
                         <span class="uiBasicButton__text">button</span>
                     </button>
-                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium" disabled>
-                        <span class="uiBasicButton__text">button</span>
-                    </button>
-                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary">
-                        <span class="uiBasicButton__text">button</span>
-                    </button>
-                    <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary" disabled>
+                </div>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">size small</h3>
+
+                    <button type="button" class="uiButton uiBasicButton uiBasicButton--small">
                         <span class="uiBasicButton__text">button</span>
                     </button>
                 </div>
@@ -398,6 +398,13 @@
                     <button type="button" class="uiButton uiIconButton uiIconButton--search" disabled>
                         <span class="forA11y">검색</span>
                     </button>
+
+                    <button type="button" class="uiButton uiIconButton uiIconButton--small uiIconButton--question">
+                        <span class="forA11y">도움말</span>
+                    </button>
+                    <button type="button" class="uiButton uiIconButton uiIconButton--small uiIconButton--question" disabled>
+                        <span class="forA11y">도움말</span>
+                    </button>
                 </div>
 
                 <div class="testSectionSub">
@@ -408,6 +415,13 @@
                     </a>
                     <a href="" class="uiIconButton uiIconButton--search uiIconButton--disabled">
                         <span class="forA11y">검색</span>
+                    </a>
+
+                    <a href="" class="uiIconButton uiIconButton--small uiIconButton--question">
+                        <span class="forA11y">도움말</span>
+                    </a>
+                    <a href="" class="uiIconButton uiIconButton--small uiIconButton--question uiIconButton--disabled">
+                        <span class="forA11y">도움말</span>
                     </a>
                 </div>
             </div>
@@ -584,6 +598,14 @@
                         <input type="text" class="uiInput__input" title="title" placeholder="placeholder" value="입력은 되지만 스타일만 disabled" />
                     </div>
                 </div>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">검색 (입력시 아이콘 비노출)</h3>
+
+                    <div class="uiInput uiInput--search">
+                        <input type="search" class="uiInput__input" title="타이틀" placeholder="placeholder" />
+                    </div>
+                </div>
             </div>
 
             <div class="testSection testSection--select">
@@ -593,7 +615,7 @@
                     }
                 </style>
 
-                <h2 class="testTitle">select</h2>
+                <h2 class="testTitle">Select</h2>
 
                 <div class="testSectionSub">
                     <h3 class="testTitle">Default</h3>
@@ -1168,6 +1190,38 @@
                 </div>
             </div>
 
+            <div class="testSection testSection--search">
+                <style>
+                    .testSection--search .uiSearchButton + .uiSearchButton {
+                        margin-top: 10px;
+                    }
+                </style>
+
+                <h2 class="testTitle">Search Button</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <!-- Case : 값이 없을 때 -->
+                    <button type="button" class="uiButton uiSearchButton" title="OOO 검색 레이어 팝업 열기">
+                        <span class="uiSearchButton__text" data-placeholder="placeholder"></span>
+                    </button>
+                    <!-- Case : 값이 있을 때 -->
+                    <button type="button" class="uiButton uiSearchButton" title="OOO 검색 레이어 팝업 열기">
+                        <span class="uiSearchButton__text" data-placeholder="placeholder">텍스트</span>
+                    </button>
+
+                    <!-- Case : 값이 없을 때 -->
+                    <button type="button" class="uiButton uiSearchButton" title="OOO 검색 레이어 팝업 열기" disabled>
+                        <span class="uiSearchButton__text" data-placeholder="placeholder"></span>
+                    </button>
+                    <!-- Case : 값이 있을 때 -->
+                    <button type="button" class="uiButton uiSearchButton" title="OOO 검색 레이어 팝업 열기" disabled>
+                        <span class="uiSearchButton__text" data-placeholder="placeholder">텍스트</span>
+                    </button>
+                </div>
+            </div>
+
             <div class="testSection testSection--checkBox">
                 <h2 class="testTitle">CheckBox</h2>
 
@@ -1242,6 +1296,12 @@
             </div>
 
             <div class="testSection testSection--checkButton">
+                <style>
+                    .testSection--checkButton .uiCheckButton + .uiCheckButton {
+                        margin-top: 10px;
+                    }
+                </style>
+
                 <h2 class="testTitle">CheckButton</h2>
 
                 <div class="testSectionSub">
@@ -1576,12 +1636,12 @@
                                 <span class="uiBasicButton__text">flexBox__cell--noMargin (0px)</span>
                             </span>
                         </div>
-                        <!--
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--miniMargin">
                             <span class="uiBasicButton uiBasicButton--tertiary">
-                                <span class="uiBasicButton__text">flexBox__cell--miniMargin (1px)</span>
+                                <span class="uiBasicButton__text">flexBox__cell--miniMargin (4px)</span>
                             </span>
                         </div>
+                        <!--
                         <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--smallMargin">
                             <span class="uiBasicButton uiBasicButton--tertiary">
                                 <span class="uiBasicButton__text">flexBox__cell--smallMargin (1px)</span>
@@ -1738,13 +1798,13 @@
 
                                 <!-- item -->
                                 <li class="uiForm__item">
-                                    <div class="uiForm__title">타이틀</div>
+                                    <div class="uiForm__title">인풋 + 검색 버튼</div>
                                     <div class="uiInvalid">
                                         <div class="uiForm__contents">
                                             <div class="flexBox">
                                                 <div class="flexBox__cell flexBox__cell--flexible">
                                                     <div class="uiInput">
-                                                        <input type="text" class="uiInput__input" title="타이틀" placeholder="placeholder" id="invalid3" />
+                                                        <input type="search" class="uiInput__input" title="타이틀" placeholder="placeholder" id="invalid3" />
                                                     </div>
                                                 </div>
                                                 <div class="flexBox__cell flexBox__cell--form">
@@ -1752,6 +1812,35 @@
                                                         <span class="forA11y">검색</span>
                                                     </button>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">버튼형 검색 (검색 팝업 여는 용도)</div>
+                                    <div class="uiInvalid">
+                                        <!-- Case : 값이 없을 때 -->
+                                        <button type="button" class="uiButton uiSearchButton" title="OOO 검색 레이어 팝업 열기" id="invalid10">
+                                            <span class="uiSearchButton__text" data-placeholder="placeholder"></span>
+                                        </button>
+                                        <!-- Case : 값이 있을 때 -->
+                                        <button type="button" class="uiButton uiSearchButton" title="OOO 검색 레이어 팝업 열기">
+                                            <span class="uiSearchButton__text" data-placeholder="placeholder">텍스트</span>
+                                        </button>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">검색 인풋 (입력시 아이콘 비노출)</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <div class="uiInput uiInput--search">
+                                                <input type="search" class="uiInput__input" title="타이틀" placeholder="placeholder" id="invalid11" />
                                             </div>
                                         </div>
                                     </div>
@@ -1893,7 +1982,7 @@
                     <div style="margin-top: 50px">
                         <script>
                             function invalid0() {
-                                $('#invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8, #invalid9').invalid(false);
+                                $('#invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8, #invalid9, #invalid10, #invalid11').invalid(false);
                                 $('#invalid0').invalid(true, 'invalid 0 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
                             }
                             function invalid1() {
@@ -1932,11 +2021,22 @@
                                 $('#invalid0').invalid(false);
                                 $('#invalid9').invalid(true, 'invalid 9 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
                             }
+                            function invalid10() {
+                                $('#invalid0').invalid(false);
+                                $('#invalid10').invalid(true, 'invalid 10 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
+                            }
+                            function invalid11() {
+                                $('#invalid0').invalid(false);
+                                $('#invalid11').invalid(true, 'invalid 11 : 에러 메세지 에러 메세지 에러 메세지\n줄바꿈은 \\n 이용');
+                            }
                         </script>
                         <button type="button" onclick="invalid0()">
                             <span class="ui-basic-button__text">전체 에러 on</span>
                         </button>
-                        <button type="button" onclick="$('#invalid0, #invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8, #invalid9').invalid(false);">
+                        <button
+                            type="button"
+                            onclick="$('#invalid0, #invalid1, #invalid2, #invalid3, #invalid4, #invalid5, #invalid6, #invalid7, #invalid8, #invalid9, #invalid10, #invalid11').invalid(false);"
+                        >
                             <span class="ui-basic-button__text">전체 에러 off</span>
                         </button>
                         <br />
@@ -1993,6 +2093,18 @@
                         </button>
                         <button type="button" onclick="$('#invalid9').invalid(false)">
                             <span class="ui-basic-button__text">인풋7 에러 off</span>
+                        </button>
+                        <button type="button" onclick="invalid10()">
+                            <span class="ui-basic-button__text">검색 버튼 에러 on</span>
+                        </button>
+                        <button type="button" onclick="$('#invalid10').invalid(false)">
+                            <span class="ui-basic-button__text">검색 버튼 에러 off</span>
+                        </button>
+                        <button type="button" onclick="invalid11()">
+                            <span class="ui-basic-button__text">검색 인풋 에러 on</span>
+                        </button>
+                        <button type="button" onclick="$('#invalid11').invalid(false)">
+                            <span class="ui-basic-button__text">검색 인풋 에러 off</span>
                         </button>
                     </div>
                 </div>
@@ -2509,6 +2621,109 @@
                         상위 행정구역명을 포함해서 검색할 수도 있어요<br />
                         (예 : 강남구 잠실아이파크)
                     </p>
+                </div>
+            </div>
+
+            <div class="testSection testSection--searchLoading">
+                <h2 class="testTitle">searchLoading</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="searchLoading"></div>
+                </div>
+            </div>
+
+            <div class="testSection testSection--searchEmpty">
+                <h2 class="testTitle">searchEmpty</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="searchEmpty">
+                        <div class="searchEmpty__illust"></div>
+                        <p class="searchEmpty__title">검색 결과가 없어요</p>
+                        <p class="searchEmpty__text">
+                            법정동, 아파트명을 다시 확인해 주세요.<br />
+                            KB 부동산 시세가 있는 아파트만<br />
+                            대출조회가 가능해요.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection testSection--searchResult">
+                <h2 class="testTitle">searchResult</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="searchResult">
+                        <ul class="searchResult__list">
+                            <li class="searchResult__item">
+                                <button type="button" class="uiButton searchResult__link">
+                                    <span class="searchResult__title">(주)금호에이치티</span>
+                                    <span class="searchResult__text">사업자번호 4098107801</span>
+                                    <span class="searchResult__text">사업자주소 광주 광산구 용아로 717</span>
+                                </button>
+                            </li>
+                            <li class="searchResult__item">
+                                <button type="button" class="uiButton searchResult__link">
+                                    <span class="searchResult__title">(주)금호에이치티</span>
+                                    <span class="searchResult__text">사업자번호 4098107801</span>
+                                    <span class="searchResult__text">사업자주소 광주 광산구 용아로 717</span>
+                                </button>
+                            </li>
+                            <li class="searchResult__item">
+                                <button type="button" class="uiButton searchResult__link">
+                                    <span class="searchResult__title">(주)금호에이치티</span>
+                                    <span class="searchResult__text">사업자번호 4098107801</span>
+                                    <span class="searchResult__text">사업자주소 광주 광산구 용아로 717</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">아파트</h3>
+
+                    <div class="searchResult searchResult--apartment">
+                        <ul class="searchResult__list">
+                            <li class="searchResult__item">
+                                <button type="button" class="uiButton searchResult__link">
+                                    <span class="searchResult__title">교동현대3차</span>
+                                    <span class="searchResult__text">강원특별자치도 속초시 미시령로3337번길 6-43</span>
+                                </button>
+                            </li>
+                            <li class="searchResult__item">
+                                <button type="button" class="uiButton searchResult__link">
+                                    <span class="searchResult__title">교동현대3차</span>
+                                    <span class="searchResult__text">강원특별자치도 속초시 미시령로3337번길 6-43</span>
+                                </button>
+                            </li>
+                            <li class="searchResult__item">
+                                <button type="button" class="uiButton searchResult__link">
+                                    <span class="searchResult__title">교동현대3차</span>
+                                    <span class="searchResult__text">강원특별자치도 속초시 미시령로3337번길 6-43</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testSection testSection--processLoading">
+                <h2 class="testTitle">processLoading</h2>
+
+                <div class="testSectionSub">
+                    <h3 class="testTitle">Default</h3>
+
+                    <div class="processLoading">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
             </div>
 
