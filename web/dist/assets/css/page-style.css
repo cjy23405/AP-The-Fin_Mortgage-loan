@@ -8,7 +8,8 @@
     height: 262px;
 }
 
-.pageContents--HRL_01_001 .imgConPoint {
+.pageContents--HRL_01_001 .imgConPoint,
+.pageContents--CL_01_001 .imgConPoint {
     /* Properties */
     background: url(../images/illustration/con_point.png) no-repeat bottom center;
     height: 120px;
@@ -21,6 +22,12 @@
     height: 140px;
 }
 
-.pageContents--HRL_15_002 {
+.pageContents--HRL_15_002 .fullLayer__bodyInner {
     background: #f5f7f9;
+}
+
+.pageContents--CL_01_001 .visImage {
+    /* Properties */
+    background: url(../images/illustration/cl01001.png) no-repeat bottom center;
+    height: 210px;
 }
