@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -35,12 +44,12 @@
                 <article class="contentsWrap">
                     <h1 class="forA11y">갈아탈 계좌 선택</h1>
                     <div class="pageContents pageContents--HRL_07_001">
-                        <h2>갈아탈 수 없는 대출?</h2>
-                        <p>주택담보대출 갈아타기(대환대출)를 신청했으나, <br />대출이 불가능한 사유는 아래와 같아요.</p>
-                        <section>
-                            <div class="grayInfoBox infoListBox">
-                                <h3 class="grayInfoBox__title">대환대출 불가사유</h3>
-                                <ul>
+                        <h2 class="titleLarge">갈아탈 수 없는 대출?</h2>
+                        <p class="colorGray rowItemGroup textBodySmall">주택담보대출 갈아타기(대환대출)를 신청했으나, <br />대출이 불가능한 사유는 아래와 같아요.</p>
+                        <section class="rowBlock">
+                            <div class="roundBox_gray2Box">
+                                <strong class="icon_info_box16 flexBox colorGray700 titleDefault">대환대출 불가사유</strong>
+                                <ul class="infoListBox rowBlock">
                                     <li>철회권 행사가 가능한 대출</li>
                                     <li>상환프로세스가 타 기관 인터페이스를 거치는 경우</li>
                                     <li>기타 별도 프로세스가 필요한 경우(승인 필요 등)</li>

@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -35,17 +44,17 @@
                 <article class="contentsWrap">
                     <h1 class="forA11y">대환대출 신청 불가능 시간 안내</h1>
                     <div class="pageContents pageContents--HRL_05_002">
-                        <h2>아쉽게도 대출 갈아타기<br />이용시간이 끝났어요 😔</h2>
-                        <p class="infoTxt textBodySmall">대환대출 이용시간 09:00-16:00</p>
-                        <section>
-                            <div class="noContentBox">
-                                <p>공휴일을 제외한 <strong>평일 9:00-16:00</strong>에 다시 시도해주세요</p>
-                            </div>
+                        <h2 class="titleLarge">아쉽게도 대출 갈아타기<br />이용시간이 끝났어요 😔</h2>
+                        <p class="icon_info_box16 rowBlock textBodySmall flexBox colorGray">대환대출 이용시간 09:00-16:00</p>
+                        <section class="noContentBox">
+                            <p>공휴일을 제외한 <strong>평일 9:00-16:00</strong>에 다시 시도해주세요</p>
                         </section>
                         <!-- fix buttons -->
                         <div class="fixBottomWrap">
                             <div class="fixBottomWrap__area">
-                                <a href="HRL_05_001.html" class="uiButton uiTextButton">대출목적 다시 선택</a>
+                                <div class="rowContents alignCenter">
+                                    <a href="HRL_05_001.html" class="uiButton uiTextButton">대출목적 다시 선택</a>
+                                </div>
                                 <a href="HRL_01_001.html" class="uiBasicButton uiBasicButton--primary">
                                     <span class="uiBasicButton__text">주택담보대출 돌아가기</span>
                                 </a>

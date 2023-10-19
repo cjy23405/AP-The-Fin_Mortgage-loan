@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -35,20 +44,9 @@
                 <article class="contentsWrap">
                     <h1 class="forA11y">결과 리스트</h1>
                     <div class="pageContents pageContents--HRL_15_001">
-                        <section>
-                            <h2 class="textBodySmall">내 주택담보대출</h2>
-                            <div class="bankListBox_rounded bankListBox_gray">
-                                <span class="iconBank iconBank_shinhan iconBank_40"></span>
-                                <div class="flexBox">
-                                    <span>카카오뱅크 주택담보대출</span>
-                                    <strong>5.4% · 300,002,700원</strong>
-                                </div>
-                            </div>
-                        </section>
-                        <hr class="divide" />
-                        <section>
-                            <h3>갈아탈 수 있는<br /><strong>2</strong>개의 대출 상품이 있어요</h3>
-                            <p class="icon icon_apartment icon_18 textLabel1">송도웰카운티1단지</p>
+                        <h3 class="titleLarge">갈아탈 수 있는<br /><strong class="colorEmphasis">2</strong>개의 대출 상품이 있어요</h3>
+                        <p class="icon_apartment_gray_box18 textLabel1 subTextGray flexBox rowBlock">송도웰카운티1단지</p>
+                        <section class="rowGroup">
                             <div class="tabContents">
                                 <div class="tabContents__Header">
                                     <ul>
@@ -65,13 +63,12 @@
                                 <div class="tabContents__Body">
                                     <div data-checkbox-tab-panel="resultTab1">
                                         <div class="loanResultListItems">
-                                            <a href="#" class="loanResultListItem iconBank iconBank_32 iconBank_shinhan">
+                                            <a href="#" class="loanResultListItem iconBank_shinhan_box32">
                                                 <div class="loanResultInfo">
                                                     <div class="loanResultBank">
                                                         <strong class="titleMedium">신한은행</strong>
                                                         <ul class="loadResultInfoChip">
                                                             <li class="chipRed">최저금리</li>
-                                                            <li class="chipBlue">최고한도</li>
                                                         </ul>
                                                     </div>
                                                     <span>주택담보대출(은행 갈아타기 특별 금리)</span>
@@ -81,16 +78,15 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                            <a href="#" class="loanResultListItem iconBank iconBank_32 iconBank_shinhan">
+                                            <a href="#" class="loanResultListItem iconBank_hana_box32">
                                                 <div class="loanResultInfo">
                                                     <div class="loanResultBank">
-                                                        <strong class="titleMedium">신한은행</strong>
+                                                        <strong class="titleMedium">하나은행</strong>
                                                         <ul class="loadResultInfoChip">
-                                                            <li class="chipRed">최저금리</li>
                                                             <li class="chipBlue">최고한도</li>
                                                         </ul>
                                                     </div>
-                                                    <span>주택담보대출(은행 갈아타기 특별 금리)</span>
+                                                    <span>하나원큐 아파트론</span>
                                                     <div class="loanResultData">
                                                         <span>4.22%</span>
                                                         <span>4억 2,010만원</span>

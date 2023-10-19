@@ -16,6 +16,15 @@
     </head>
     <body>
         <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
             <!-- toast alert -->
             <div class="uiToastAlert" id="globalToastAlert"></div>
             <!-- //toast alert -->
@@ -35,8 +44,8 @@
                 <article class="contentsWrap">
                     <h1 class="forA11y">주택담보대출 계좌 선택</h1>
                     <div class="pageContents pageContents--HRL_05_002">
-                        <h2>금융결제원의 대출이동서비스를 통해<br />갈아탈 수 있는지 확인할까요?</h2>
-                        <section>
+                        <h2 class="titleLarge">금융결제원의 대출이동서비스를 통해<br />갈아탈 수 있는지 확인할까요?</h2>
+                        <section class="rowGroup flexBox__cell--flexible">
                             <div class="uiCheckWithBankList">
                                 <div class="uiCheckWithBankList__Header">
                                     <span>내 주택담보대출</span>
@@ -47,7 +56,7 @@
                                 </div>
                                 <ul class="uiCheckWithBankList__Body">
                                     <li>
-                                        <label class="iconBank iconBank_shinhan iconBank_40 uiCheckBox uiCheckBox_circleLine">
+                                        <label class="iconBank_kakao_box40 uiCheckBox uiCheckBox_circleLine">
                                             <input type="checkbox" name="" id="" data-checkbox-group-child="bankCheckboxGroupA" />
                                             <span>
                                                 카카오뱅크 주택담보대출
@@ -56,28 +65,30 @@
                                         </label>
                                     </li>
                                     <li>
-                                        <label class="iconBank iconBank_shinhan iconBank_40 uiCheckBox uiCheckBox_circleLine">
+                                        <label class="iconBank_kb_box40 uiCheckBox uiCheckBox_circleLine">
                                             <input type="checkbox" name="" id="" data-checkbox-group-child="bankCheckboxGroupA" />
                                             <span>
-                                                카카오뱅크 주택담보대출
-                                                <strong>19.02% · 5,002,700원</strong>
+                                                KB국민은행 주택담보대출
+                                                <strong>5.4% · 300,002,700원</strong>
                                             </span>
                                         </label>
                                     </li>
                                     <li>
-                                        <label class="iconBank iconBank_shinhan iconBank_40 uiCheckBox uiCheckBox_circleLine">
+                                        <label class="iconBank_toss_box40 uiCheckBox uiCheckBox_circleLine">
                                             <input type="checkbox" name="" id="" data-checkbox-group-child="bankCheckboxGroupA" />
                                             <span>
-                                                카카오뱅크 주택담보대출
+                                                토스뱅크 주택담보대출
                                                 <strong>19.02% · 5,002,700원</strong>
                                             </span>
                                         </label>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="grayInfoBox grayInfoBox__noIcon">
-                                <strong>마이데이터로 가져온 대출 계좌정보에서<br />주택담보대출 계좌정보만 보여드려요</strong>
-                                <span>주택 외 부동산 담보대출, 전세자금, 보금자리론 등은 주택담보대출 계좌정보에 포함되지 않아요.</span>
+                        </section>
+                        <section>
+                            <div class="roundBox_grayBox">
+                                <p class="titleDefault linePara rowBlock">마이데이터로 가져온 대출 계좌정보에서<br />주택담보대출 계좌정보만 보여드려요</p>
+                                <span class="textLabel1 colorGray">주택 외 부동산 담보대출, 전세자금, 보금자리론 등은 주택담보대출 계좌정보에 포함되지 않아요.</span>
                             </div>
                         </section>
                         <!-- fix buttons -->
