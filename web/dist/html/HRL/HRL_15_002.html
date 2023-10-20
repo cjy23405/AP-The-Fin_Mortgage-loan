@@ -34,7 +34,11 @@
                 <div class="fixTopWrap">
                     <!-- header -->
                     <header class="header">
-                        <h1 class="header__title">미승인 내역</h1>
+                        <div class="header__left">
+                            <button type="button" class="uiButton header__button header__button--back">
+                                <span class="forA11y">이전</span>
+                            </button>
+                        </div>
                         <div class="header__right">
                             <button type="button" class="uiButton header__button header__button--close">
                                 <span class="forA11y">닫기</span>
@@ -48,12 +52,20 @@
                 <!-- contents -->
                 <article class="contentsWrap">
                     <div class="pageContents">
-                        <h1 class="forA11y">결과 리스트</h1>
+                        <div class="uiButtons uiButtons--noMargin">
+                            <ul class="uiButtons__list">
+                                <li class="uiButtons__item">
+                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="unapprovedDetails">
+                                        <span class="uiBasicButton__text">미승인내역</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
 
-                        <!-- layer: 풀팝업형 -->
-                        <div class="layerWrap layerWrap--full" data-layer="HRL_15_002" data-layer-display="flex">
+                        <!-- layer: 미승인내역 -->
+                        <div class="layerWrap layerWrap--full" data-layer="unapprovedDetails" data-layer-display="flex">
                             <div class="layerContainer">
-                                <section class="fullLayer _gray2Box">
+                                <section class="fullLayer">
                                     <div class="fullLayer__head">
                                         <h2 class="fullLayer__title">미승인내역</h2>
                                         <div class="fullLayer__headRight">
@@ -62,7 +74,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="fullLayer__body">
+                                    <div class="fullLayer__body _gray2Box">
                                         <div class="fullLayer__bodyInner">
                                             <div class="bankListBox_rounded">
                                                 <span class="iconBank_kakao_box32"></span>
@@ -82,11 +94,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="fullLayer__foot"></div>
                                 </section>
                             </div>
                         </div>
-                        <!-- //layer: 풀팝업형 -->
+                        <!-- //layer: 미승인내역 -->
                     </div>
                 </article>
                 <!-- //contents -->
@@ -102,8 +113,9 @@
         <script type="text/javascript" src="../../assets/lib/highchart/modules/accessibility.js"></script>
         <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
         <script>
-            // 레이어 팝업 실행
-            uiJSLayer.open('HRL_15_002');
+            $(function () {
+                uiJSLayer.open('unapprovedDetails');
+            });
         </script>
         <!-- //script -->
     </body>
