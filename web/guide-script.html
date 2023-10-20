@@ -821,11 +821,28 @@
                     <h3 class="testTitle">Default</h3>
 
                     <input type="text" pattern="\d*" class="jsCommaInput" />
+                    <input type="text" pattern="\d*" class="jsCommaInput" data-min="-99999999" data-max="99999999" data-decimal-place="2" />
 
-                    <div class="testDescription">
-                        자동 콤마 생성 인풋에 사용, 소수점 지원
+                    <div class="testCode">&lt;input type="text" pattern="\d*" class="<mark>jsCommaInput</mark>" /&gt;</div>
 
-                        <div class="testCode">&lt;input type="text" pattern="\d*" class="<mark>jsCommaInput</mark>" /&gt;</div>
+                    <div class="testDescription">자동 콤마 생성 인풋에 사용, 소수점 지원</div>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-min</h4>
+                        <div class="testCode">&lt;input type="text" pattern="\d*" class="jsCommaInput" <mark>data-min="-99999999"</mark> /&gt;</div>
+                        <div class="testDescription">최소 값 지정</div>
+                    </div>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-max</h4>
+                        <div class="testCode">&lt;input type="text" pattern="\d*" class="jsCommaInput" <mark>data-max="99999999"</mark> /&gt;</div>
+                        <div class="testDescription">최대 값 지정</div>
+                    </div>
+
+                    <div class="testSectionChild">
+                        <h4 class="testTitle">data-decimal-place</h4>
+                        <div class="testCode">&lt;input type="text" pattern="\d*" class="jsCommaInput" <mark>data-decimal-place="2"</mark> /&gt;</div>
+                        <div class="testDescription">소수점 자릿수 제한 값 지정</div>
                     </div>
                 </div>
             </div>
@@ -837,11 +854,9 @@
 
                     <input type="text" pattern="\d*" class="jsDateInput" />
 
-                    <div class="testDescription">
-                        날짜 포멧으로 변환 해주는 인풋에 사용
+                    <div class="testCode">&lt;input type="text" pattern="\d*" class="<mark>jsDateInput</mark>" /&gt;</div>
 
-                        <div class="testCode">&lt;input type="text" pattern="\d*" class="<mark>jsDateInput</mark>" /&gt;</div>
-                    </div>
+                    <div class="testDescription">날짜 포멧으로 변환 해주는 인풋에 사용</div>
                 </div>
             </div>
 

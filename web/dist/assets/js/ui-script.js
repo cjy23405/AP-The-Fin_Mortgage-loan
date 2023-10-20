@@ -1718,6 +1718,7 @@
     // comma input
     var commaInput = {
         keyCode: null,
+        ignoreKeyCode: [8, 17, 37, 38, 39, 40, 46],
         init: function ($root) {
             if (!$root) {
                 $root = $doc;
@@ -1726,90 +1727,175 @@
                 commaInput.update($(this));
             });
         },
-        update: function ($input, keyCode, eventType) {
+        update: function ($input, eventType) {
             var _ = commaInput;
-            var ignoreKeyCode = [8, 17, 37, 38, 39, 40, 46];
 
-            if (eventType === 'keydown' && !_.keyCode) {
-                _.keyCode = keyCode;
-            }
-
-            if (ignoreKeyCode.indexOf(_.keyCode) >= 0) {
-                if (eventType === 'keyup') {
-                    _.keyCode = null;
-                }
+            if (_.ignoreKeyCode.indexOf(_.keyCode) >= 0) {
                 return;
             }
 
-            _.keyCode = null;
-
             var commaReg = /\B(?=(\d{3})+(?!\d))/g;
+            var zeroReg = /^0+/g;
+            var dotReg = /\./g;
+            var firstReg = /[^\d\.]/g;
+            var decimalReg = /\.(.*)/g;
             var el = $input.get(0);
             var val = $input.val();
-            var isNegative = Boolean(val.match(/^-/g));
-            var minus = isNegative ? '-' : '';
-            var dotI = val.replace(/[^\d\.]/g, '').search(/\./g);
-            var toVal = (function () {
-                var v = val.replace(/[^\d]/g, '');
-                var slice = '';
+            var min = (function () {
+                var r = $input.data('min');
+                return typeof r === 'number' ? r : null;
+            })();
+            var max = (function () {
+                var r = $input.data('max');
+                return typeof r === 'number' ? r : null;
+            })();
+            var decimalPlace = (function () {
+                var r = $input.data('decimal-place');
+                return typeof r === 'number' ? r : null;
+            })();
+            var selEnd = el.selectionEnd;
+            var dotI = -1;
+            var numSelBefore = '';
+            var numSelAfter = '';
+            var beforeLength = 0;
+            var numStr = (function () {
+                var r = val.replace(firstReg, '');
+                var isNegative = Boolean(val.replace(/[^\d\.\-]/g, '').match(/^-/g));
+                var beforeZero = r.match(zeroReg);
+                var beforeZeroLength = beforeZero ? beforeZero[0].length : 0;
 
-                if (dotI >= 0) {
-                    slice = v.slice(dotI, v.length);
-                    v = v.slice(0, dotI);
+                numSelBefore = val.slice(0, selEnd).replace(firstReg, '');
+                numSelAfter = val.slice(selEnd, val.length).replace(firstReg, '');
+                beforeLength = numSelBefore.length;
+
+                if (beforeLength <= beforeZeroLength) {
+                    numSelBefore = '';
+                    numSelAfter = numSelAfter.replace(zeroReg, '');
+                } else {
+                    numSelBefore = numSelBefore.replace(zeroReg, '');
                 }
 
-                v = v.replace(commaReg, ',');
+                if (beforeZeroLength) {
+                    r = r.replace(zeroReg, '');
+                }
 
-                return minus + (dotI >= 0 ? v + '.' + slice : v);
-            })();
-            var selectionEnd = el.selectionEnd;
-            var slice = (function () {
-                var sliceOrigin = val.slice(selectionEnd, val.length);
-                var sliceDotI = sliceOrigin.replace(/[^\d\.]/g, '').search(/\./g);
-                var v = sliceOrigin.replace(/[^\d]/g, '');
-                var reg = new RegExp(v + '$', 'g');
-                var search = val.replace(/[^\d]/g, '').search(reg);
-                var slice = null;
-                var isDot = false;
+                dotI = r.search(dotReg);
 
-                if (dotI >= 0) {
-                    if (search >= dotI) {
-                        slice = (sliceDotI >= 0 ? '.' : '') + v;
-                        v = '';
-                    } else if (search < dotI) {
-                        slice = v.slice(sliceDotI, v.length);
-                        v = v.slice(0, sliceDotI);
-                        isDot = true;
+                beforeLength = numSelBefore.length;
+
+                r = r.replace(dotReg, function (match, offset) {
+                    return dotI === offset ? '.' : '';
+                });
+                numSelBefore = numSelBefore.replace(dotReg, function (match, offset) {
+                    return dotI === offset ? '.' : '';
+                });
+                numSelAfter = numSelAfter.replace(dotReg, function (match, offset) {
+                    return dotI === beforeLength + offset ? '.' : '';
+                });
+
+                if (isNegative) {
+                    if (dotI >= 0) {
+                        dotI += 1;
+                    }
+
+                    if (selEnd === 0) {
+                        numSelAfter = '-' + numSelAfter;
+                    } else {
+                        numSelBefore = '-' + numSelBefore;
                     }
                 }
 
-                v = v.replace(commaReg, ',');
-
-                return isDot ? v + '.' + slice : slice ? slice : v;
+                return (isNegative ? '-' : '') + r;
             })();
-            var selectionIndex = (function () {
-                var reg = new RegExp(slice + '$');
-                var length = slice.length;
-                var search = toVal.search(reg);
+            var num = Number(numStr);
+            var isMin = typeof min === 'number' && num < min;
+            var isMax = typeof max === 'number' && num > max;
+            var isDecimal = dotI >= 0;
 
-                if (val.length === selectionEnd) {
-                    return toVal.length + 1;
-                } else if (isNegative && selectionEnd === 0) {
-                    return 0;
-                } else if (length) {
-                    return search;
+            if (isMin) {
+                num = min;
+                numStr = String(min);
+            } else if (isMax) {
+                num = max;
+                numStr = String(max);
+            }
+
+            if (isDecimal && typeof decimalPlace === 'number' && decimalPlace >= 0) {
+                numStr = numStr.replace(decimalReg, function (match, p1) {
+                    return (decimalPlace > 0 ? '.' : '') + p1.slice(0, decimalPlace);
+                });
+
+                beforeLength = numSelBefore.length;
+
+                if (dotI + 1 + decimalPlace <= beforeLength) {
+                    numSelAfter = '';
+                } else if (dotI + 1 <= beforeLength) {
+                    numSelAfter = numSelAfter.slice(0, dotI + 1 + decimalPlace - beforeLength);
                 } else {
-                    return 0;
+                    numSelAfter = numSelAfter.replace(decimalReg, function (match, p1) {
+                        return (decimalPlace > 0 ? '.' : '') + p1.slice(0, decimalPlace);
+                    });
                 }
+
+                numSelBefore = numSelBefore.replace(decimalReg, function (match, p1) {
+                    return (decimalPlace > 0 ? '.' : '') + p1.slice(0, decimalPlace);
+                });
+            }
+
+            beforeLength = numSelBefore.length;
+
+            var toVal = (function () {
+                var r = isDecimal ? numStr.slice(0, dotI) : numStr;
+                var decimal = isDecimal ? numStr.slice(dotI, numStr.length) : '';
+
+                return r.replace(commaReg, ',') + decimal;
+            })();
+            var slice = (function () {
+                var r = '';
+                var decimal = '';
+
+                if (isMin || isMax) {
+                    return '';
+                }
+
+                if (isDecimal) {
+                    if (dotI + 1 > beforeLength) {
+                        r = numSelAfter.replace(/(.*)\..*/g, '$1');
+                        decimal = numSelAfter.replace(/.*(\..*)/g, '$1');
+                    } else {
+                        decimal = numSelAfter;
+                    }
+                } else {
+                    r = numSelAfter;
+                }
+
+                return r.replace(commaReg, ',') + decimal;
+            })();
+            var toSelI = (function () {
+                var reg = new RegExp(slice + '$');
+                var search = toVal.search(reg);
+                return search;
             })();
 
-            $input.val(toVal);
-            el.setSelectionRange(selectionIndex, selectionIndex);
+            if (!eventType || eventType === 'focusin' || eventType === 'focusout') {
+                $input.val(toVal.replace(/\.+$/g, ''));
+            } else {
+                $input.val(toVal);
+                el.setSelectionRange(toSelI, toSelI);
+            }
         },
     };
-    $doc.on('focusin.commaInput focusout.commaInput keydown.commaInput keyup.commaInput change.commaInput input.commaInput', '.jsCommaInput', function (e) {
-        commaInput.update($(this), e.keyCode, e.type);
-    });
+    $doc.on('keydown.commaInput', '.jsCommaInput', function (e) {
+        if (!commaInput.keyCode) {
+            commaInput.keyCode = e.keyCode;
+        }
+    })
+        .on('keyup.commaInput', '.jsCommaInput', function (e) {
+            commaInput.keyCode = null;
+        })
+        .on('focusin.commaInput focusout.commaInput change.commaInput input.commaInput', '.jsCommaInput', function (e) {
+            commaInput.update($(this), e.type);
+        });
 
     // date input
     var dateInput = {

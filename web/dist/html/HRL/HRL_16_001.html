@@ -292,7 +292,17 @@
                                                                 <div class="flexBox">
                                                                     <div class="flexBox__cell flexBox__cell--flexible">
                                                                         <div class="uiInput">
-                                                                            <input type="text" pattern="\d*" class="uiInput__input jsCommaInput" title="연이자율" placeholder="0.00" value="4.22" />
+                                                                            <input
+                                                                                type="text"
+                                                                                pattern="\d*"
+                                                                                class="uiInput__input jsCommaInput"
+                                                                                title="연이자율"
+                                                                                placeholder="0.00"
+                                                                                data-min="0"
+                                                                                data-max="99.99"
+                                                                                data-decimal-place="2"
+                                                                                value="4.22"
+                                                                            />
                                                                         </div>
                                                                     </div>
                                                                     <div class="flexBox__cell flexBox__cell--form">
@@ -345,6 +355,9 @@
                                                                                 class="uiInput__input jsCommaInput"
                                                                                 title="대출금액"
                                                                                 placeholder="예) 5,000"
+                                                                                data-min="0"
+                                                                                data-max="99999999"
+                                                                                data-decimal-place="0"
                                                                                 data-convert-ten-thousand="sum"
                                                                                 value="42010"
                                                                             />
