@@ -34,7 +34,16 @@
                 <div class="fixTopWrap">
                     <!-- header -->
                     <header class="header">
-                        <!-- // -->
+                        <div class="header__left">
+                            <button type="button" class="uiButton header__button header__button--back">
+                                <span class="forA11y">이전</span>
+                            </button>
+                        </div>
+                        <div class="header__right">
+                            <button type="button" class="uiButton header__button header__button--close">
+                                <span class="forA11y">닫기</span>
+                            </button>
+                        </div>
                     </header>
                     <!-- //header -->
                 </div>
@@ -50,15 +59,20 @@
                         <section class="noContentBox">
                             <p>공휴일을 제외한 <strong>평일 9:00-16:00</strong>에 다시 시도해주세요</p>
                         </section>
+
                         <!-- fix buttons -->
                         <div class="fixBottomWrap">
                             <div class="fixBottomWrap__area">
-                                <div class="rowContents alignCenter">
-                                    <a href="HRL_05_001.html" class="uiButton uiTextButton">대출목적 다시 선택</a>
+                                <button type="button" class="uiButton uiTextButton rowBlockGroup">대출목적 다시 선택</button>
+                                <div class="uiButtons uiButtons--noMargin">
+                                    <ul class="uiButtons__list">
+                                        <li class="uiButtons__item">
+                                            <button type="button" class="uiButton uiBasicButton">
+                                                <span class="uiBasicButton__text">주택담보대출 돌아가기</span>
+                                            </button>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <a href="HRL_01_001.html" class="uiBasicButton uiBasicButton--primary">
-                                    <span class="uiBasicButton__text">주택담보대출 돌아가기</span>
-                                </a>
                             </div>
                         </div>
                         <!-- //fix buttons -->
