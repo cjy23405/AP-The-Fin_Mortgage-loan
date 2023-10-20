@@ -904,29 +904,33 @@ button.uiInput__input {
 .fullLayer__head {
     flex: none;
     position: relative;
-    padding: 9px 16px;
-    box-sizing: border-box;
-    min-height: 42px;
-}
-.fullLayer__headLeft {
-    position: absolute;
-    top: 9px;
-    left: 16px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 8px 56px;
 }
+.fullLayer__headLeft,
 .fullLayer__headRight {
     position: absolute;
-    top: 9px;
-    right: 16px;
+    top: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
+}
+.fullLayer__headLeft {
+    left: 16px;
+}
+.fullLayer__headRight {
+    justify-content: flex-end;
+    right: 16px;
 }
 .fullLayer__title {
     margin: 0;
     font-size: 18px;
-    line-height: var(--lineHeightDefault);
-    font-weight: 500;
+    line-height: var(--lineHeightLabel);
+    font-weight: 600;
     text-align: center;
 }
 .fullLayer__button {
@@ -1281,11 +1285,62 @@ body,
 /* header */
 .header {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: var(--pageMinWidth);
     min-height: 48px;
     box-sizing: border-box;
-    padding: 0 24px;
+    padding: 8px 56px;
     background-color: var(--white);
+}
+.header__title {
+    margin: 0;
+    font-size: 18px;
+    line-height: var(--lineHeightLabel);
+    font-weight: 600;
+    text-align: center;
+}
+.header__left,
+.header__right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.header__left {
+    left: 16px;
+}
+.header__right {
+    justify-content: flex-end;
+    right: 16px;
+}
+.header__button {
+    position: relative;
+    flex: none;
+    display: block;
+    width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    background: no-repeat 50% 50% / 100% 100%;
+}
+.header__button::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    display: block;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+.header__button--back {
+    background-image: url('../images/common/back.svg');
+}
+.header__button--close {
+    background-image: url('../images/common/close.svg');
 }
 
 /* contentsWrap */
