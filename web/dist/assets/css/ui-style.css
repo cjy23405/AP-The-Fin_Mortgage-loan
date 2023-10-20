@@ -629,6 +629,12 @@ button.uiInput__input {
 .uiRoundButton.uiRoundButton--disabled {
     color: var(--systemGray300);
 }
+.uiRoundButton.uiRoundButton__large {
+    min-height: 48px;
+    font-size: 14px;
+    line-height: var(--lineHeightLabel);
+    padding: 8px 16px;
+}
 /*
 .uiRoundButton--secondary {
     color: var(--systemGray500);
@@ -1692,6 +1698,12 @@ section + .divide {
     height: 2px;
     background: var(--systemGray500);
 }
+.infoListBox > li.infoListBox__noDot {
+    padding-left: 0;
+}
+.infoListBox > li.infoListBox__noDot::before {
+    display: none;
+}
 .infoListBox > li strong {
     font-weight: 700;
 }
@@ -1881,7 +1893,9 @@ section + .divide {
 [class*='icon_apartment_gray']::before {
     background-image: url(../images/icon/icon_apartment_gray.png);
 }
-
+[class*='icon_assured']::before {
+    background-image: url(../images/icon/icon_assured_workload.png);
+}
 [class*='icon_reg']::before {
     background-image: url(../images/icon/icon_reg.png);
 }
@@ -1893,6 +1907,9 @@ section + .divide {
 }
 [class*='icon_question']::before {
     background-image: url(../images/icon/icon_question.png);
+}
+[class*='icon_timer']::before {
+    background-image: url(../images/icon/icon_timer.png);
 }
 /* ICONS */
 .prodInfoList {
@@ -2154,9 +2171,6 @@ section + .divide {
     display: none;
 }
 
-.tabContents {
-    margin-top: 30px;
-}
 .tabContents .tabContents__Header {
     padding: 4px;
     background: var(--systemGray100);
@@ -2172,10 +2186,7 @@ section + .divide {
 .tabContents .tabContents__Header > ul > li {
     flex: 1;
 }
-.tabContents .tabContents__Header > ul > li input {
-    display: none;
-}
-.tabContents .tabContents__Header > ul > li label {
+.tabContents .tabContents__Header > ul > li .uiButton {
     color: var(--systemGray400);
     font-weight: 500;
     height: 37px;
@@ -2184,7 +2195,7 @@ section + .divide {
     justify-content: center;
     align-items: center;
 }
-.tabContents .tabContents__Header > ul > li input:checked + label {
+.tabContents .tabContents__Header > ul > li .uiButton.jsTabpanelActive {
     background: var(--white);
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     color: var(--systemGray800);
@@ -2211,39 +2222,47 @@ section + .divide {
     display: flex;
     align-items: center;
 }
-.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip {
+.loanResultListItem .loanResultInfo .loanResultBank .loanResultInfoChip {
     display: flex;
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip li {
+.loanResultListItem .loanResultInfo .loanResultBank .loanResultInfoChip li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     margin-left: 8px;
+
     font-size: 11px;
-    line-height: 14px;
-    text-align: center;
-    padding: 2px 6px;
+    height: 18px;
+    padding: 0 6px;
     border-radius: 9px;
 }
-.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip li.chipBlue {
+.loanResultListItem .loanResultInfo .loanResultBank .loanResultInfoChip li.chipBlue {
     background: var(--primary100);
     color: var(--primary600);
 }
-.loanResultListItem .loanResultInfo .loanResultBank .loadResultInfoChip li.chipRed {
+.loanResultListItem .loanResultInfo .loanResultBank .loanResultInfoChip li.chipRed {
     background: var(--systemRed100);
     color: var(--systemRed600);
 }
 .loanResultListItem .loanResultInfo > span {
     font-size: 14px;
-    line-height: 18.2px;
+    line-height: var(--lineHeightDefault);
     color: var(--systemGray500);
+    margin-top: 4px;
 }
 .loanResultListItem .loanResultInfo .loanResultData {
     display: flex;
-    justify-content: space-between;
     font-size: 20px;
     font-weight: 600;
-    margin-top: 20px;
+    line-height: var(--lineHeightLabel);
+    margin-top: 16px;
+}
+.loanResultListItem .loanResultInfo .loanResultData span:first-child {
+    width: 110px;
 }
 .loanDetailInfo {
     display: flex;
@@ -2289,6 +2308,29 @@ section + .divide {
 }
 .primaryBox strong {
     color: var(--primary600);
+}
+
+/* Visual images */
+
+.visImage__building {
+    background: url(../images/illustration/building.png) no-repeat bottom center;
+    height: 262px;
+}
+
+.visImage__conPoint {
+    background: url(../images/illustration/con_point.png) no-repeat bottom center;
+    height: 120px;
+}
+
+.visImage__mydata {
+    background: url(../images/illustration/mydata.png) no-repeat bottom center;
+    margin: 60px 0 20px;
+    height: 140px;
+}
+
+.visImage__compareLoan {
+    background: url(../images/illustration/compare_loan.png) no-repeat bottom center;
+    height: 210px;
 }
 
 /* ########## CJY ########## */

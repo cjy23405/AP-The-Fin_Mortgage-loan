@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/lib/jquery-ui/jquery-ui.min.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/ui-style.css" />
+        <link type="text/css" rel="stylesheet" href="../../assets/css/page-style.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <!-- // -->
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <h1 class="forA11y">주택담보대출 소개화면</h1>
+                    <div class="pageContents">
+                        <h2 class="headlineLarge">한 번에 비교하는<br />내게 맞는 신용대출</h2>
+                        <section class="rowGroup">
+                            <div class="visImage__compareLoan"></div>
+                            <ol class="stepListItems rowGroup">
+                                <li>
+                                    <strong class="icon_reg_box22">간단 본인인증</strong>
+                                    <span>모바일로 쉽고 빠르게 본인 확인</span>
+                                </li>
+                                <li>
+                                    <strong class="icon_assured_box22">누구나 비교 가능</strong>
+                                    <span>직장인 · 사업자 · 프리랜서 · 주부도</span>
+                                </li>
+                                <li>
+                                    <strong class="icon_balance_box22">적합한 상품 추천</strong>
+                                    <span>내 조건에 맞는 대출상품이 한 번에</span>
+                                </li>
+                            </ol>
+                        </section>
+                        <hr class="divide" />
+                        <section class="rowGroup">
+                            <h3 class="titleLarge fontWeightBold">신용점수 걱정하지 마세요</h3>
+                            <p class="titleDefault linePara rowChildGroup colorGray">여러번 조회해도 신용점수에는 영향이 없어요</p>
+                            <div class="visImage__conPoint rowGroup"></div>
+                        </section>
+                        <hr class="divide" />
+                        <section class="rowGroup">
+                            <h3 class="titleMedium fontWeightSemiBold">제휴 금융기관</h3>
+                            <div class="roundBox_shadowBox_r12 rowContents">
+                                <div class="rowGroup">
+                                    <p class="titleSmall fontWeightSemiBold">은행</p>
+                                    <ul class="bankListBox rowContents">
+                                        <li class="iconBank_shinhan_box30">신한은행</li>
+                                        <li class="iconBank_nh_box30">NH농협은행</li>
+                                        <li class="iconBank_woori_box30">우리은행</li>
+                                        <li class="iconBank_ibk_box30">기업은행</li>
+                                        <li class="iconBank_kakao_box30">전북은행</li>
+                                    </ul>
+                                </div>
+                                <div class="rowGroup">
+                                    <p class="titleSmall fontWeightSemiBold">저축은행</p>
+                                    <ul class="bankListBox rowContents">
+                                        <li class="iconBank_osb_box30">OSB저축은행</li>
+                                        <li class="iconBank_sangsanginsb_box30">상상인저축은행</li>
+                                        <li class="iconBank_jt_box30">JT저축은행</li>
+                                        <li class="iconBank_jtc_box30">JT친애저축은행</li>
+                                        <li class="iconBank_ycbank_box30">융창저축은행</li>
+                                    </ul>
+                                </div>
+                                <div class="rowGroup">
+                                    <p class="titleSmall fontWeightSemiBold">캐피탈</p>
+                                    <ul class="bankListBox rowContents">
+                                        <li class="iconBank_hkcapital_box30">한국캐피탈</li>
+                                        <li class="iconBank_bnk_box30">BNK캐피탈</li>
+                                        <li class="iconBank_kb_box30">KB캐피탈</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- fix buttons -->
+                        <div class="fixBottomWrap">
+                            <div class="fixBottomWrap__area">
+                                <div class="uiButtons uiButtons--noMargin">
+                                    <button href="" class="uiBasicButton" data-layer-open="bottomCompareLayer">
+                                        <span class="uiBasicButton__text">신용대출 비교하기</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //fix buttons -->
+                    </div>
+                    <div class="contentFooter">
+                        <div class="footerInfoWrap">
+                            <strong class="titleSmall colorGray">안내사항</strong>
+                            <ul class="infoListBox">
+                                <li class="infoListBox__noDot">(주)에이피더핀은 다수의 제휴 금융사와 대출모집 위탁 계약을 체결한 온라인 대출모집법인 입니다(등록번호: 제2022-007호)</li>
+                                <li>금융감독원 대출모집법인조회(업무자료>금융소비자보호법>대출모집법인 조회>온라인대출모집법인)에서 신원확인이 가능합니다.</li>
+                                <li>(주)에이피더핀은 대출의 승인 및 대출계약 체결에 대한 권한을 갖지 않으며, 대출의 승인 및 대출계약 체결권은 금융상품직접판매업자인 제휴 금융회사가 갖습니다.</li>
+                                <li>
+                                    (주)에이피더핀은 조회되는 대출가능 한도 및 금리는 입력된 정보를 바탕으로 제휴 금융사에서 가심사한 결과로, 정확한 정보가 반영되는 금융사 실제 대출 신청 시점에는 한도
+                                    및 금리가 달라질 수 있습니다.
+                                </li>
+                                <li>(주)에이피더핀은 본 서비스를 통한 대출계약, 대출 실행 등과 관련하여 금융소비자로부터 어떠한 금전적 대가도 받지 않습니다.</li>
+                                <li>
+                                    (주)에이피더핀은 서비스 운영과 관련하여 개인정보 보호법 및 신용정보의 이용 및 보호에 관한 법률을 준수하며, 대출과 관련하여 고객이 제공한 신용정보 또는 개인정보 등은
+                                    금융상품직접판매업자인 금융회사가 보유·관리합니다.
+                                </li>
+                                <li>
+                                    (주)에이피더핀에서 제공하는 서비스 중 대출 가능 한도와 금리 확인을 위해 진행하는 신용정보 조회는 신용점수에 영향을 주지 않습니다. 단, 단기간 여러 금융사 및
+                                    플랫폼에서 과도하게 한도 및 금리를 조회하는 경우에는 대출 가능성에 영향을 줄 수 있습니다.
+                                </li>
+                                <li>
+                                    금융소비자는 금융소비자보호법 제44조 및 제45조에 따라 금융상품직접판매업자인 제휴 금융회사 및 금융상품판매대리·중개업자인 (주)에이피더핀에 손해배상을 청구할 수
+                                    있습니다.
+                                </li>
+                                <li>
+                                    일반금융소비자는 금융소비자보호법 제19조 제1항에 따라 은행으로부터 충분한 설명을 받을 권리가 있으며, 본 대출에 관한 계약을 체결하기 전에 상품설명서 및 약관을
+                                    읽어보시기 바랍니다.
+                                </li>
+                                <li>더핀 고객센터 : help@apthefin.com</li>
+                                <li class="infoListBox__noDot">[대출 상품 안내]</li>
+                                <li>대출금리 : 연 최저 4.8% ~ 최고 19.99%</li>
+                                <li>대상차량 연식/시세 : 10년 이내 / 500만원 이상</li>
+                                <li>대출한도 : 200만원 ~ 최대 2억원 이내</li>
+                                <li>대출기간 :12/24/36/59/60/72/84/96 개월</li>
+                                <li>상환방식 : 원리금균등분할상환 / 거치후원리금균등분할상환</li>
+                                <li>취급수수료 : 없음</li>
+                                <li>중도상환 수수료율 : 없음</li>
+                                <li>지연배상금율 : 대출금리+3%(법정 최고금리 이내)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/highcharts.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/exporting.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/export-data.js"></script>
+        <script type="text/javascript" src="../../assets/lib/highchart/modules/accessibility.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>
