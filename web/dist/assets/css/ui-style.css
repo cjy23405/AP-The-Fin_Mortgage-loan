@@ -323,7 +323,7 @@ button.uiInput__input {
 }
 .uiInput__input[disabled],
 .uiInput--disabled .uiInput__input {
-    color: var(--theFinBlack);
+    color: var(--mainBlack);
 }
 .uiInput.isFocus::before,
 .uiInput.isForceFocus::before {
@@ -2144,7 +2144,7 @@ section + .divide {
     font-size: 16px;
     line-height: 1;
     margin-top: 8px;
-    color: var(--theFinBlack);
+    color: var(--mainBlack);
 }
 .uiRadioWithBankList .uiRadioWithBankList__Body label span strong {
     margin-top: 0;
@@ -2208,7 +2208,7 @@ section + .divide {
     display: flex;
     padding: 20px 0;
     text-decoration: none;
-    color: var(--theFinBlack);
+    color: var(--mainBlack);
     border-bottom: 1px solid var(--systemGray200);
 }
 .loanResultListItem .loanResultInfo {
@@ -2569,7 +2569,7 @@ section + .divide {
     border-radius: 8px;
     box-sizing: border-box;
     padding: 26px;
-    background: rgba(var(--theFinBlackRgb), 0.8);
+    background: rgba(var(--mainBlackRgb), 0.8);
     transform: translate(-50%, -50%);
 }
 .uiLoading__object {
@@ -3113,9 +3113,9 @@ section + .divide {
     right: 16px;
     bottom: 0;
     height: 2px;
-    background-color: var(--theFinBlack);
+    background-color: var(--mainBlack);
 }
 .lineTab__button.isActive .lineTab__text,
 .lineTab__button.jsTabpanelActive .lineTab__text {
-    color: var(--theFinBlack);
+    color: var(--mainBlack);
 }
