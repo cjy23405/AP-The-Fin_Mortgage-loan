@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+.themeThePin {
+    --thePinPrimary120: #fff8f5;
+    --thePinPrimary120Rgb: 255, 248, 245;
+    --thePinPrimary110: #ffede8;
+    --thePinPrimary110Rgb: 255, 237, 232;
+
+    --primary50: #ffdbd0;
+    --primary50Rgb: 255, 219, 208;
+    --primary100: #ffb59d;
+    --primary100Rgb: 255, 181, 157;
+    --primary200: #ff8b64;
+    --primary200Rgb: 255, 139, 100;
+    --primary300: #ea6a3c;
+    --primary300Rgb: 234, 106, 60;
+    --primary400: #c85226;
+    --primary400Rgb: 200, 82, 38;
+    --primary500: #b44011;
+    --primary500Rgb: 180, 64, 17;
+    --primary600: #962e01;
+    --primary600Rgb: 150, 46, 1;
+    --primary700: #832700;
+    --primary700Rgb: 131, 39, 0;
+    --primary800: #5d1900;
+    --primary800Rgb: 93, 25, 0;
+    --primary900: #390c00;
+    --primary900Rgb: 57, 12, 0;
+}

@@ -1,0 +1,35 @@
+/* ########## LHO ########## */
+
+/* ########## CJY ########## */
+
+/* uiSelect */
+.themeThePin .uiSelect--secondary .uiSelect__button::after {
+    width: 20px;
+    height: 20px;
+    background-image: url('../images--the-pin/icon/keyboard_arrow_down_blue.svg');
+}
+
+/* uiCheckButton */
+.themeThePin .uiCheckButton__input:checked + .uiCheckButton__block .uiCheckButton__object::before {
+    background-image: url('../images--the-pin/icon/icon_check_checked.svg');
+}
+
+/* searchLoading */
+.themeThePin .searchLoading::before {
+    background-image: url('../images--the-pin/common/search_loading.svg');
+}
+
+/* processLoading */
+.themeThePin .processLoading > div:nth-child(3):before {
+    border-color: var(--primary50);
+    background-color: var(--thePinPrimary120);
+    background-image: url('../images--the-pin/common/process_loading.svg');
+}
+.themeThePin .processLoading > div:nth-child(2):before {
+    border-color: var(--primary100);
+    background-color: var(--primary50);
+}
+.themeThePin .processLoading > div:nth-child(1):before {
+    border-color: var(--primary50);
+    background-color: var(--thePinPrimary120);
+}
