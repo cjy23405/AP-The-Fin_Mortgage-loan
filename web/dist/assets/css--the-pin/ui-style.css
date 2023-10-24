@@ -33,3 +33,45 @@
     border-color: var(--primary50);
     background-color: var(--thePinPrimary120);
 }
+
+/* stepListItems */
+.themeThePin .stepListItems li::before {
+    background: #ffdbd0; /* 예외 컬러 */
+}
+.themeThePin [class*='icon_reg']::before {
+    background-image: url(../images--the-pin/icon/icon_reg.png);
+}
+.themeThePin [class*='icon_apartment']::before {
+    background-image: url(../images--the-pin/icon/icon_apartment.png);
+}
+.themeThePin [class*='icon_balance']::before {
+    background-image: url(../images--the-pin/icon/icon_balance.png);
+}
+.themeThePin [class*='icon_assured']::before {
+    background-image: url(../images--the-pin/icon/icon_assured_workload.png);
+}
+
+/* visual images */
+.themeThePin .visImage__building {
+    background-image: url(../images--the-pin/illustration/building.png);
+}
+.themeThePin .visImage__conPoint {
+    background-image: url(../images--the-pin/illustration/con_point.png);
+}
+.themeThePin .visImage__compareLoan {
+    background-image: url(../images--the-pin/illustration/compare_loan.png);
+}
+
+/* checkbox */
+.themeThePin .uiCheckBox.uiCheckBox_circle > span::after {
+    background-image: url(../images--the-pin/icon/icon_check_circle_checked.svg);
+}
+.themeThePin .uiCheckBox > span::after {
+    background-image: url(../images--the-pin/icon/icon_check_checked.svg);
+}
+
+/* primarybox */
+.themeThePin .primaryBox {
+    background-color: #ffede8;
+    border-color: #ffe5e5;
+}
