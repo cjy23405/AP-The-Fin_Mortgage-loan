@@ -2,7 +2,24 @@
 
 /* ########## CJY ########## */
 
-/* uiSelect */
+/* uiBasicButton */
+.themeThePin .uiBasicButton[disabled],
+.themeThePin .uiBasicButton.uiBasicButton--disabled {
+    border-color: #ffe5e5;
+    background-color: #ffe5e5;
+}
+.themeThePin .uiBasicButton--secondary[disabled],
+.themeThePin .uiBasicButton--secondary.uiBasicButton--disabled {
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
+}
+.themeThePin .uiBasicButton--tertiary[disabled],
+.themeThePin .uiBasicButton--tertiary.uiBasicButton--disabled {
+    border-color: var(--systemGray100);
+    background-color: var(--systemGray100);
+}
+
+/* uiSelect--secondary */
 .themeThePin .uiSelect--secondary .uiSelect__button::after {
     width: 20px;
     height: 20px;
@@ -22,7 +39,7 @@
 /* processLoading */
 .themeThePin .processLoading > div:nth-child(3):before {
     border-color: var(--primary50);
-    background-color: var(--thePinPrimary120);
+    background-color: #fff2f2;
     background-image: url('../images--the-pin/common/process_loading.svg');
 }
 .themeThePin .processLoading > div:nth-child(2):before {
@@ -31,7 +48,7 @@
 }
 .themeThePin .processLoading > div:nth-child(1):before {
     border-color: var(--primary50);
-    background-color: var(--thePinPrimary120);
+    background-color: #fff2f2;
 }
 
 /* stepListItems */
