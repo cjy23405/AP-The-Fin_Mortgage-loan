@@ -1,8 +1,5 @@
 @charset "utf-8";
 
-/* libraries */
-@import '../lib/jquery-ui/jquery-ui.min.css';
-
 /* fonts */
 @import '../fonts/password/style.css';
 @import '../fonts/Pretendard/style.css';
