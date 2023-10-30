@@ -1,0 +1,25 @@
+@font-face {
+    font-family: 'D2Coding ligature';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('D2Coding ligature'),
+        url('./eot/D2Coding-ligature.eot'),
+        url('./eot/D2Coding-ligature.eot?#iefix') format('embedded-opentype'),
+        url('./woff/D2Coding-ligature.woff') format('woff'),
+        url('./woff2/D2Coding-ligature.woff2') format('woff2'),
+        url('./ttf/D2Coding-ligature.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'D2Coding ligature';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('D2Coding ligature Bold'),
+        url('./eot/D2CodingBold-ligature.eot'),
+        url('./eot/D2CodingBold-ligature.eot?#iefix') format('embedded-opentype'),
+        url('./woff/D2CodingBold-ligature.woff') format('woff'),
+        url('./woff2/D2CodingBold-ligature.woff2') format('woff2'),
+        url('./ttf/D2CodingBold-ligature.ttf') format('truetype');
+}

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ko" class="_guide">
+    <head>
+        <title>레이어 팝업 가이드</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../dist/assets/css/default.css" />
+        <!-- //style -->
+
+        <!-- guide style -->
+        <link type="text/css" rel="stylesheet" href="./assets/css/default.css" />
+        <!-- //guide style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <div class="_guideWrap">
+                <header class="_guideHeader">
+                    <h1 class="_guideHeader__title">
+                        <span class="_guideHeader__titleLink">레이어 팝업 가이드</span>
+                    </h1>
+                </header>
+
+                <div class="_guidePopupWrap">
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">최소한의 구조</h3>
+                        <div class="_guideSubSection__view">
+                            <!-- ########## view ########## -->
+
+                            <button type="button" data-layer-open="testInit">최소한의 구조</button>
+
+                            <!-- layer: 최소한의 구조 -->
+                            <div class="layerWrap" data-layer="testInit">
+                                <div class="layerContainer">
+                                    // contents
+                                    <a href="" data-layer-open="testFull">풀팝업형</a>
+                                    <a href="" data-layer-open="testToast">토스트형</a>
+                                    <button type="button" data-role="layerClose">close</button>
+                                </div>
+                            </div>
+                            <!-- //layer: 최소한의 구조 -->
+
+                            <!-- //########## view ########## -->
+                        </div>
+                        <!-- ########## code ########## -->
+                        <script type="component-code">
+                            <button type="button" data-layer-open="testInit">최소한의 구조</button>
+
+                            <!-- layer: 최소한의 구조 -->
+                            <div class="layerWrap" data-layer="testInit">
+                                <div class="layerContainer">
+                                    // contents
+                                    <a href="" data-layer-open="testFull">풀팝업형</a>
+                                    <a href="" data-layer-open="testToast">토스트형</a>
+                                    <button type="button" data-role="layerClose">close</button>
+                                </div>
+                            </div>
+                            <!-- //layer: 최소한의 구조 -->
+                        </script>
+                        <!-- //########## code ########## -->
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">풀팝업형</h3>
+                        <div class="_guideSubSection__view">
+                            <!-- ########## view ########## -->
+
+                            <button type="button" data-layer-open="testFull">풀팝업형</button>
+
+                            <!-- layer: 풀팝업형 -->
+                            <div class="layerWrap layerWrap--full" data-layer="testFull" data-layer-display="flex">
+                                <div class="layerContainer">
+                                    <section class="fullLayer">
+                                        <div class="fullLayer__head">
+                                            <div class="fullLayer__headLeft">
+                                                <button type="button" class="uiButton fullLayer__button fullLayer__button--back">
+                                                    <span class="forA11y">이전</span>
+                                                </button>
+                                            </div>
+                                            <h2 class="fullLayer__title">타이틀</h2>
+                                            <div class="fullLayer__headRight">
+                                                <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
+                                                    <span class="forA11y">레이어 닫기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="fullLayer__body">
+                                            <div class="fullLayer__bodyInner">
+                                                // contents
+                                                <a href="" data-layer-open="testToast">토스트형</a>
+                                                <a href="" data-layer-open="testAlert" data-role="layerClose">얼럿형</a>
+                                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                                            </div>
+                                        </div>
+                                        <div class="fullLayer__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 풀팝업형 -->
+
+                            <!-- //########## view ########## -->
+                        </div>
+                        <!-- ########## code ########## -->
+                        <script type="component-code">
+                            <button type="button" data-layer-open="testFull">풀팝업형</button>
+
+                            <!-- layer: 풀팝업형 -->
+                            <div class="layerWrap layerWrap--full" data-layer="testFull" data-layer-display="flex">
+                                <div class="layerContainer">
+                                    <section class="fullLayer">
+                                        <div class="fullLayer__head">
+                                            <div class="fullLayer__headLeft">
+                                                <button type="button" class="uiButton fullLayer__button fullLayer__button--back">
+                                                    <span class="forA11y">이전</span>
+                                                </button>
+                                            </div>
+                                            <h2 class="fullLayer__title">타이틀</h2>
+                                            <div class="fullLayer__headRight">
+                                                <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
+                                                    <span class="forA11y">레이어 닫기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="fullLayer__body">
+                                            <div class="fullLayer__bodyInner">
+                                                // contents
+                                                <a href="" data-layer-open="testToast">토스트형</a>
+                                                <a href="" data-layer-open="testAlert" data-role="layerClose">얼럿형</a>
+                                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                                            </div>
+                                        </div>
+                                        <div class="fullLayer__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 풀팝업형 -->
+                        </script>
+                        <!-- //########## code ########## -->
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">토스트형</h3>
+                        <div class="_guideSubSection__view">
+                            <!-- ########## view ########## -->
+
+                            <button type="button" data-layer-open="testToast">토스트형</button>
+
+                            <!-- layer: 토스트형 -->
+                            <div class="layerWrap layerWrap--toast" data-layer="testToast" data-layer-display="flex">
+                                <div class="layerContainer">
+                                    <section class="toastLayer">
+                                        <div class="toastLayer__head">
+                                            <h2 class="toastLayer__title">타이틀</h2>
+                                            <div class="toastLayer__headRight">
+                                                <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                    <span class="forA11y">레이어 닫기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__body">
+                                            <div class="toastLayer__bodyInner">
+                                                // contents
+                                                <a href="" data-layer-open="testToastFix">토스트형 높이 고정</a>
+                                                <a href="" data-layer-open="testAlert" data-role="layerClose">얼럿형</a>
+                                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 토스트형 -->
+
+                            <!-- //########## view ########## -->
+                        </div>
+                        <!-- ########## code ########## -->
+                        <script type="component-code">
+                            <button type="button" data-layer-open="testToast">토스트형</button>
+
+                            <!-- layer: 토스트형 -->
+                            <div class="layerWrap layerWrap--toast" data-layer="testToast" data-layer-display="flex">
+                                <div class="layerContainer">
+                                    <section class="toastLayer">
+                                        <div class="toastLayer__head">
+                                            <h2 class="toastLayer__title">타이틀</h2>
+                                            <div class="toastLayer__headRight">
+                                                <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                    <span class="forA11y">레이어 닫기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__body">
+                                            <div class="toastLayer__bodyInner">
+                                                // contents
+                                                <a href="" data-layer-open="testToastFix">토스트형 높이 고정</a>
+                                                <a href="" data-layer-open="testAlert" data-role="layerClose">얼럿형</a>
+                                                <div style="height: 1000px; border: 10px dotted #666">스크롤 생기게 하기 위한 더미</div>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 토스트형 -->
+                        </script>
+                        <!-- //########## code ########## -->
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">토스트형 높이 고정</h3>
+                        <div class="_guideSubSection__view">
+                            <!-- ########## view ########## -->
+
+                            <button type="button" data-layer-open="testToastFix">토스트형 높이 고정</button>
+
+                            <!-- layer: 토스트형 높이 고정 -->
+                            <div class="layerWrap layerWrap--toastFix" data-layer="testToastFix" data-layer-display="flex">
+                                <div class="layerContainer">
+                                    <section class="toastLayer">
+                                        <div class="toastLayer__head">
+                                            <h2 class="toastLayer__title">타이틀</h2>
+                                            <div class="toastLayer__headRight">
+                                                <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                    <span class="forA11y">레이어 닫기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__body">
+                                            <div class="toastLayer__bodyInner">
+                                                // contents
+                                                <a href="" data-layer-open="testAlert">얼럿형</a>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 토스트형 높이 고정 -->
+
+                            <!-- //########## view ########## -->
+                        </div>
+                        <!-- ########## code ########## -->
+                        <script type="component-code">
+                            <button type="button" data-layer-open="testToastFix">토스트형 높이 고정</button>
+
+                            <!-- layer: 토스트형 높이 고정 -->
+                            <div class="layerWrap layerWrap--toastFix" data-layer="testToastFix" data-layer-display="flex">
+                                <div class="layerContainer">
+                                    <section class="toastLayer">
+                                        <div class="toastLayer__head">
+                                            <h2 class="toastLayer__title">타이틀</h2>
+                                            <div class="toastLayer__headRight">
+                                                <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                    <span class="forA11y">레이어 닫기</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__body">
+                                            <div class="toastLayer__bodyInner">
+                                                // contents
+                                                <a href="" data-layer-open="testAlert">얼럿형</a>
+                                            </div>
+                                        </div>
+                                        <div class="toastLayer__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 토스트형 높이 고정 -->
+                        </script>
+                        <!-- //########## code ########## -->
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">얼럿형</h3>
+                        <div class="_guideSubSection__view">
+                            <!-- ########## view ########## -->
+
+                            <button type="button" data-layer-open="testAlert">얼럿형</button>
+
+                            <!-- layer: 얼럿형 -->
+                            <div class="layerWrap layerWrap--alert" data-layer="testAlert" data-dim-close="false">
+                                <div class="layerContainer">
+                                    <section class="uiAlert">
+                                        <div class="uiAlert__body">
+                                            <div class="uiAlert__bodyInner">
+                                                <h2 class="uiAlert__title">타이틀</h2>
+                                                <p class="uiAlert__message">
+                                                    여기에 내용이 표시될 예정입니다.<br />
+                                                    두 줄일 경우는 이렇게<br />
+                                                    세 줄일 경우는 이렿게 표시됩니다.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="uiAlert__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--medium" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 얼럿형 -->
+
+                            <!-- //########## view ########## -->
+                        </div>
+                        <!-- ########## code ########## -->
+                        <script type="component-code">
+                            <button type="button" data-layer-open="testAlert">얼럿형</button>
+
+                            <!-- layer: 얼럿형 -->
+                            <div class="layerWrap layerWrap--alert" data-layer="testAlert" data-dim-close="false">
+                                <div class="layerContainer">
+                                    <section class="uiAlert">
+                                        <div class="uiAlert__body">
+                                            <div class="uiAlert__bodyInner">
+                                                <h2 class="uiAlert__title">타이틀</h2>
+                                                <p class="uiAlert__message">
+                                                    여기에 내용이 표시될 예정입니다.<br />
+                                                    두 줄일 경우는 이렇게<br />
+                                                    세 줄일 경우는 이렿게 표시됩니다.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="uiAlert__foot">
+                                            <div class="uiButtons uiButtons--noMargin">
+                                                <ul class="uiButtons__list">
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--medium uiBasicButton--secondary" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                    <li class="uiButtons__item">
+                                                        <button type="button" class="uiButton uiBasicButton uiBasicButton--medium" data-role="layerClose">
+                                                            <span class="uiBasicButton__text">button</span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                            <!-- //layer: 얼럿형 -->
+                        </script>
+                        <!-- //########## code ########## -->
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Attribute</h3>
+
+                        <section class="_guideSubSection">
+                            <h4 class="_guideSubSection__title">Layer</h4>
+
+                            <script type="code-view" data-language="html">
+                                <div class="layerWrap" data-layer="layerName">
+                            </script>
+
+                            <div class="_guideTable">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="_guideTable__name">Name</th>
+                                            <th class="_guideTable__type">Type</th>
+                                            <th class="_guideTable__default">Default</th>
+                                            <th class="_guideTable__description">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="_guideTable__name">data-layer</td>
+                                            <td class="_guideTable__type">string</td>
+                                            <td class="_guideTable__default"></td>
+                                            <td class="_guideTable__description">해당 객체를 레이어 팝업으로 지정 및 레이어 팝업 이름 지정</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-layer-display</td>
+                                            <td class="_guideTable__type">string</td>
+                                            <td class="_guideTable__default">block</td>
+                                            <td class="_guideTable__description">레이어 팝업 최상위 부모의 display 스타일 속성 변경시 이용</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-layer-timer-close</td>
+                                            <td class="_guideTable__type">number</td>
+                                            <td class="_guideTable__default"></td>
+                                            <td class="_guideTable__description">레이어가 자동으로 닫히는 시간을 지정 1000 = 1초</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-focus</td>
+                                            <td class="_guideTable__type">boolean</td>
+                                            <td class="_guideTable__default">true</td>
+                                            <td class="_guideTable__description">레이어가 열릴 때 해당 레이어로 포커스 가게 하는 기능 활성 여부</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-scroll-block</td>
+                                            <td class="_guideTable__type">boolean</td>
+                                            <td class="_guideTable__default">true</td>
+                                            <td class="_guideTable__description">레이어가 열릴 때 페이지 스크롤이 막히는 기능 활성 여부</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-cycle-focus</td>
+                                            <td class="_guideTable__type">boolean</td>
+                                            <td class="_guideTable__default">true</td>
+                                            <td class="_guideTable__description">레이어 내 포커스 순환 기능 활성 여부</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-dim-close</td>
+                                            <td class="_guideTable__type">boolean</td>
+                                            <td class="_guideTable__default">true</td>
+                                            <td class="_guideTable__description">딤 영역 클릭시 닫힘 기능 활성 여부</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-opener-focus</td>
+                                            <td class="_guideTable__type">boolean</td>
+                                            <td class="_guideTable__default">true</td>
+                                            <td class="_guideTable__description">레이어 닫힌 후 오프너로 포커스 돌아가는 기능 활성 여부</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="_guideSubSection">
+                            <h4 class="_guideSubSection__title">Opener</h4>
+
+                            <script type="code-view" data-language="html">
+                                <button type="button" data-layer-open="layerName">레이어 팝업 열기</button>
+                            </script>
+
+                            <div class="_guideTable">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="_guideTable__name">Name</th>
+                                            <th class="_guideTable__type">Type</th>
+                                            <th class="_guideTable__default">Default</th>
+                                            <th class="_guideTable__description">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="_guideTable__name">data-layer-open</td>
+                                            <td class="_guideTable__type">string</td>
+                                            <td class="_guideTable__default"></td>
+                                            <td class="_guideTable__description">
+                                                해당 객체를 레이어 팝업 오프너로 지정<br />
+                                                해당하는 레이어 팝업 이름을 값으로 넣어준다
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="_guideTable__name">data-toggle</td>
+                                            <td class="_guideTable__type">boolean</td>
+                                            <td class="_guideTable__default">false</td>
+                                            <td class="_guideTable__description">토글 기능 활성 여부</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="_guideSubSection">
+                            <h4 class="_guideSubSection__title">Closer</h4>
+
+                            <script type="code-view" data-language="html">
+                                <button type="button" data-role="layerClose">레이어 팝업 닫기</button>
+                            </script>
+
+                            <div class="_guideTable">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="_guideTable__name">Name</th>
+                                            <th class="_guideTable__type">Type</th>
+                                            <th class="_guideTable__default">Default</th>
+                                            <th class="_guideTable__description">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="_guideTable__name">data-role</td>
+                                            <td class="_guideTable__type">string</td>
+                                            <td class="_guideTable__default"></td>
+                                            <td class="_guideTable__description">
+                                                'layerClose' 값을 넣어 레이어 닫기 버튼으로 지정<br />
+                                                해당 버튼 부모 레이어의 닫기 버튼으로 동작한다
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Methods</h3>
+
+                        <div class="_guideTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="_guideTable__methods">Method</th>
+                                        <th class="_guideTable__description">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="_guideTable__methods">
+                                            <script type="code-view" data-language="javascript">
+                                                uiJSLayer.open(layerName [, opener] [, speed]);
+                                            </script>
+                                        </td>
+                                        <td class="_guideTable__description">
+                                            스크립트로 레이어를 열 때 사용
+
+                                            <div class="_guideTable _guideTable--secondary">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="_guideTable__name">Name</th>
+                                                            <th class="_guideTable__type">Type</th>
+                                                            <th class="_guideTable__default">Default</th>
+                                                            <th class="_guideTable__description">Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="_guideTable__name">layerName</td>
+                                                            <td class="_guideTable__type">string</td>
+                                                            <td class="_guideTable__default"></td>
+                                                            <td class="_guideTable__description">레이어 이름</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="_guideTable__name">opener</td>
+                                                            <td class="_guideTable__type">string | HTMLElement | jQuery object</td>
+                                                            <td class="_guideTable__default">null</td>
+                                                            <td class="_guideTable__description">해당 레이어가 닫힐때 포커스 보낼 객체</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="_guideTable__name">speed</td>
+                                                            <td class="_guideTable__type">number</td>
+                                                            <td class="_guideTable__default">350</td>
+                                                            <td class="_guideTable__description">열리는 애니메이션 속도</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__methods">
+                                            <script type="code-view" data-language="javascript">
+                                                uiJSLayer.close(layerName [, speed]);
+                                            </script>
+                                        </td>
+                                        <td class="_guideTable__description">
+                                            스크립트로 레이어를 닫을 때 사용
+
+                                            <div class="_guideTable _guideTable--secondary">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="_guideTable__name">Name</th>
+                                                            <th class="_guideTable__type">Type</th>
+                                                            <th class="_guideTable__default">Default</th>
+                                                            <th class="_guideTable__description">Description</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="_guideTable__name">layerName</td>
+                                                            <td class="_guideTable__type">string</td>
+                                                            <td class="_guideTable__default"></td>
+                                                            <td class="_guideTable__description">레이어 이름</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="_guideTable__name">speed</td>
+                                                            <td class="_guideTable__type">number</td>
+                                                            <td class="_guideTable__default">350</td>
+                                                            <td class="_guideTable__description">닫히는 애니메이션 속도</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Events</h3>
+
+                        <script type="code-view" data-language="javascript">
+                            $('[data-layer="layerName"]').on('layerOpened', function(){
+                              console.log('layerOpened');
+                            });
+                        </script>
+
+                        <div class="_guideTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="_guideTable__name">Name</th>
+                                        <th class="_guideTable__arguments">Arguments</th>
+                                        <th class="_guideTable__description">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="_guideTable__name">layerBeforeOpened</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">레이어가 열리기 직전에 발생</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__name">layerOpened</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">레이어가 열릴 때 발생</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__name">layerAfterOpened</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">레이어가 열리는 애니메이션이 끝난 후 발생</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__name">layerBeforeClosed</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">레이어가 닫히기 직전에 발생</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__name">layerClosed</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">레이어가 닫힐 때 발생</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__name">layerAfterClosed</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">레이어가 닫히는 애니메이션이 끝난 후 발생</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../dist/assets/lib/jquery/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="../dist/assets/js/ui-script.js"></script>
+        <!-- //script -->
+
+        <!-- guide script -->
+        <script type="text/javascript" src="./assets/lib/monaco-editor/min/vs/loader.js"></script>
+        <script type="text/javascript" src="./assets/js/guide-script.js"></script>
+        <!-- //guide script -->
+    </body>
+</html>

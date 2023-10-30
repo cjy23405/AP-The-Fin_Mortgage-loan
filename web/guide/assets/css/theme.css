@@ -1,0 +1,125 @@
+@charset "utf-8";
+
+._guide {
+    --guideFontFamilyCode: 'D2Coding ligature', '맑은고딕', 'Malgun Gothic', 'Apple Gothic', sans-serif;
+
+    --guideBlack: #000;
+    --guideBlackRgb: 0, 0, 0;
+
+    --guideWhite: #fff;
+    --guideWhiteRgb: 255, 255, 255;
+
+    --guideGray900: #1f1f1f;
+    --guideGray900Rgb: 31, 31, 31;
+    --guideGray800: #333333;
+    --guideGray800Rgb: 51, 51, 51;
+    --guideGray700: #474747;
+    --guideGray700Rgb: 71, 71, 71;
+    --guideGray600: #5c5c5c;
+    --guideGray600Rgb: 92, 92, 92;
+    --guideGray500: #707070;
+    --guideGray500Rgb: 112, 112, 112;
+    --guideGray400: #858585;
+    --guideGray400Rgb: 133, 133, 133;
+    --guideGray300: #999999;
+    --guideGray300Rgb: 153, 153, 153;
+    --guideGray200: #adadad;
+    --guideGray200Rgb: 173, 173, 173;
+    --guideGray100: #c2c2c2;
+    --guideGray100Rgb: 194, 194, 194;
+    --guideGray50: #d6d6d6;
+    --guideGray50Rgb: 214, 214, 214;
+
+    --guidePrimary900: #11426a;
+    --guidePrimary900Rgb: 17, 66, 106;
+    --guidePrimary800: #16588d;
+    --guidePrimary800Rgb: 22, 88, 141;
+    --guidePrimary700: #1c6db0;
+    --guidePrimary700Rgb: 28, 109, 176;
+    --guidePrimary600: #2183d4;
+    --guidePrimary600Rgb: 33, 131, 212;
+    --guidePrimary500: #3d97e1;
+    --guidePrimary500Rgb: 61, 151, 225;
+    --guidePrimary400: #60aae6;
+    --guidePrimary400Rgb: 96, 170, 230;
+    --guidePrimary300: #83bdec;
+    --guidePrimary300Rgb: 131, 189, 236;
+    --guidePrimary200: #a7d0f1;
+    --guidePrimary200Rgb: 167, 208, 241;
+    --guidePrimary100: #cae3f7;
+    --guidePrimary100Rgb: 202, 227, 247;
+    --guidePrimary50: #edf6fc;
+    --guidePrimary50Rgb: 237, 246, 252;
+
+    --guideRed900: #3c1617;
+    --guideRed900Rgb: 60, 22, 23;
+    --guideRed800: #592123;
+    --guideRed800Rgb: 89, 33, 35;
+    --guideRed700: #772c2f;
+    --guideRed700Rgb: 119, 44, 47;
+    --guideRed600: #95373a;
+    --guideRed600Rgb: 149, 55, 58;
+    --guideRed500: #a63d40;
+    --guideRed500Rgb: 166, 61, 64;
+    --guideRed400: #c25b5f;
+    --guideRed400Rgb: 194, 91, 95;
+    --guideRed300: #cd797c;
+    --guideRed300Rgb: 205, 121, 124;
+    --guideRed200: #d89799;
+    --guideRed200Rgb: 216, 151, 153;
+    --guideRed100: #e3b5b6;
+    --guideRed100Rgb: 227, 181, 182;
+    --guideRed50: #eed2d3;
+    --guideRed50Rgb: 238, 210, 211;
+
+    --guideYellow900: #58390e;
+    --guideYellow900Rgb: 88, 57, 14;
+    --guideYellow800: #7c5013;
+    --guideYellow800Rgb: 124, 80, 19;
+    --guideYellow700: #9f6719;
+    --guideYellow700Rgb: 159, 103, 25;
+    --guideYellow600: #c27e1e;
+    --guideYellow600Rgb: 194, 126, 30;
+    --guideYellow500: #de932b;
+    --guideYellow500Rgb: 222, 147, 43;
+    --guideYellow400: #e3a54f;
+    --guideYellow400Rgb: 227, 165, 79;
+    --guideYellow300: #e9b772;
+    --guideYellow300Rgb: 233, 183, 114;
+    --guideYellow200: #eec995;
+    --guideYellow200Rgb: 238, 201, 149;
+    --guideYellow100: #f4dbb8;
+    --guideYellow100Rgb: 244, 219, 184;
+    --guideYellow50: #f9eddc;
+    --guideYellow50Rgb: 249, 237, 220;
+
+    --guideGreen900: #394323;
+    --guideGreen900Rgb: 57, 67, 35;
+    --guideGreen800: #505e31;
+    --guideGreen800Rgb: 80, 94, 49;
+    --guideGreen700: #67793e;
+    --guideGreen700Rgb: 103, 121, 62;
+    --guideGreen600: #7d944c;
+    --guideGreen600Rgb: 125, 148, 76;
+    --guideGreen500: #90a959;
+    --guideGreen500Rgb: 144, 169, 89;
+    --guideGreen400: #a5ba78;
+    --guideGreen400Rgb: 165, 186, 120;
+    --guideGreen300: #b7c893;
+    --guideGreen300Rgb: 183, 200, 147;
+    --guideGreen200: #c9d5ae;
+    --guideGreen200Rgb: 201, 213, 174;
+    --guideGreen100: #dbe3c9;
+    --guideGreen100Rgb: 219, 227, 201;
+    --guideGreen50: #edf1e4;
+    --guideGreen50Rgb: 237, 241, 228;
+
+    --guideError: #db5461;
+    --guideErrorRgb: 219, 84, 97;
+
+    --guideWarning: #fde74c;
+    --guideWarningRgb: 253, 231, 76;
+
+    --guideComplete: #3891a6;
+    --guideCompleteRgb: 56, 145, 166;
+}
