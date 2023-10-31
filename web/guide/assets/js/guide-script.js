@@ -523,6 +523,40 @@
         },
     };
 
+    // preview
+    var preview = {
+        init: function () {
+            $('._guidePreview').each(function () {
+                var $wrap = $(this);
+                var html = '';
+
+                html += '<div class="_guidePreview__controller">';
+                html += '  <div class="_guidePreview__block">';
+                html += '    <div class="_guidePreview__text">투명 그리드</div>';
+                html += '    <div class="_guidePreview__switch" role="button" tabindex="0"></div>';
+                html += '  </div>';
+                html += '</div>';
+
+                var $controller = $(html);
+                var $switch = $controller.find('._guidePreview__switch');
+
+                $wrap.prepend($controller);
+
+                $switch.on('click.guideJS', function (e) {
+                    var $this = $(this);
+
+                    if ($this.hasClass('isActive')) {
+                        $this.removeClass('isActive');
+                        $wrap.removeClass('isTransparent');
+                    } else {
+                        $this.addClass('isActive');
+                        $wrap.addClass('isTransparent');
+                    }
+                });
+            });
+        },
+    };
+
     // dom ready
     $(function () {
         var $html = $('html');
@@ -537,6 +571,8 @@
         componentCode.render();
 
         codeView.render();
+
+        preview.init();
 
         guideNav.render();
         guideNav.resize();
