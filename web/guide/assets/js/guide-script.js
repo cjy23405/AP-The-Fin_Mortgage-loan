@@ -319,21 +319,24 @@
             customOptions
         );
         var paths = $.extend({ vs: './assets/lib/monaco-editor/min/vs' }, customPaths);
+        var editor = {};
 
         require.config({ paths: paths });
 
         require(['vs/editor/editor.main'], function () {
-            var editor = monaco.editor.create($view.get(0), options);
+            editor.obj = monaco.editor.create($view.get(0), options);
+
+            if (!(typeof maxHeight === 'number')) return;
 
             var ignoreEvent = false;
 
             function updateHeight() {
                 var contentWidth = $view.width();
-                var contentHeight = Math.min(maxHeight, editor.getContentHeight());
+                var contentHeight = Math.min(maxHeight, editor.obj.getContentHeight());
 
                 try {
                     ignoreEvent = true;
-                    editor.layout({
+                    editor.obj.layout({
                         width: contentWidth,
                         height: contentHeight,
                     });
@@ -342,9 +345,28 @@
                 }
             }
 
-            editor.onDidContentSizeChange(updateHeight);
+            editor.obj.onDidContentSizeChange(updateHeight);
             updateHeight();
         });
+
+        return editor;
+    }
+
+    // getCode
+    function getCode(originText) {
+        var text = originText.replace(/^\n+/, '');
+        var tab = text.match(/^( *|	*)./);
+        var value = '';
+
+        if (tab) {
+            value = text.replace(new RegExp('^' + tab[1], 'g'), '').replace(new RegExp('\n' + tab[1], 'g'), '\n');
+        } else {
+            value = text;
+        }
+
+        value = value.replace(/ *$|	*$/, '').replace(/<\\\/script>/g, '</script>');
+
+        return value;
     }
 
     // setting code
@@ -352,21 +374,12 @@
         render: function () {
             $('[type="setting-code"]').each(function () {
                 var $this = $(this);
-                var text = $this.text().replace(/^\n+/, '');
-                var tab = text.match(/^( *|	*)./);
-                var value = '';
+                var text = $this.text();
+                var value = getCode(text);
                 var html = '';
                 var isSet = false;
                 var language = $this.attr('data-language');
                 var title = $this.attr('data-title');
-
-                if (tab) {
-                    value = text.replace(new RegExp('^' + tab[1], 'g'), '').replace(new RegExp('\n' + tab[1], 'g'), '\n');
-                } else {
-                    value = text;
-                }
-
-                value = value.replace(/ *$|	*$/, '').replace(/<\\\/script>/g, '</script>');
 
                 html += '<div class="_guideIndexSettingCode">';
                 html += '  <div role="button" tabindex="0" class="_guideIndexSettingCode__button">';
@@ -405,19 +418,10 @@
         render: function () {
             $('[type="component-code"]').each(function () {
                 var $this = $(this);
-                var text = $this.text().replace(/^\n+/, '');
-                var tab = text.match(/^( *|	*)./);
-                var value = '';
+                var text = $this.text();
+                var value = getCode(text);
                 var html = '';
                 var isSet = false;
-
-                if (tab) {
-                    value = text.replace(new RegExp('^' + tab[1], 'g'), '').replace(new RegExp('\n' + tab[1], 'g'), '\n');
-                } else {
-                    value = text;
-                }
-
-                value = value.replace(/ *$|	*$/, '').replace(/<\\\/script>/g, '</script>');
 
                 html += '<div class="_guideComponentCode">';
                 html += '  <div role="button" tabindex="0" class="_guideComponentCode__button">Show Code ▼</div>';
@@ -454,18 +458,9 @@
             $('[type="code-view"]').each(function () {
                 var $this = $(this);
                 var $view = $('<div class="_guideCodeView"></div>');
-                var text = $this.text().replace(/^\n+/, '');
-                var tab = text.match(/^( *|	*)./);
-                var value = '';
+                var text = $this.text();
+                var value = getCode(text);
                 var language = $this.attr('data-language');
-
-                if (tab) {
-                    value = text.replace(new RegExp('^' + tab[1], 'g'), '').replace(new RegExp('\n' + tab[1], 'g'), '\n');
-                } else {
-                    value = text;
-                }
-
-                value = value.replace(/ *$|	*$/, '').replace(/<\\\/script>/g, '</script>');
 
                 $this.after($view);
 

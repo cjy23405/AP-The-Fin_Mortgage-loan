@@ -61,6 +61,9 @@ body {
     border-radius: 4px;
     background-color: var(--guidePrimary900);
 }
+._guideHeader__navLink--secondary {
+    background-color: var(--guideRed600);
+}
 
 /* _guideIndexSection */
 ._guideIndexSection + ._guideIndexSection {
