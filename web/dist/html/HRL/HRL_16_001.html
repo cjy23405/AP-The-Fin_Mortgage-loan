@@ -184,7 +184,9 @@
                                             <div class="uiCalculator__input">
                                                 <!-- select -->
                                                 <div class="uiSelect uiSelect--secondary">
-                                                    <input type="hidden" data-select-input="calculatorMethod" />
+                                                    <!-- 2023.11.01 : mod : value 속성 추가 -->
+                                                    <input type="hidden" data-select-input="calculatorMethod" value="value 1" />
+                                                    <!-- //2023.11.01 : mod : value 속성 추가 -->
                                                     <button type="button" class="uiButton uiSelect__button" title="상환방식 선택하기" data-layer-open="calculatorMethod">
                                                         <span class="uiSelect__text" data-select-view="calculatorMethod"></span>
                                                     </button>
@@ -205,15 +207,17 @@
                                                                         <div class="uiSelectOptions">
                                                                             <ul class="uiSelectOptions__list">
                                                                                 <li class="uiSelectOptions__item">
+                                                                                    <!-- 2023.11.01 : mod : 버튼에 isSelectActive 클래스값 제거 -->
                                                                                     <button
                                                                                         type="button"
-                                                                                        class="uiButton uiSelectOptions__button isSelectActive"
+                                                                                        class="uiButton uiSelectOptions__button"
                                                                                         data-select-option="calculatorMethod"
                                                                                         data-select-value="value 1"
                                                                                         data-select-text="만기일시"
                                                                                     >
                                                                                         <span class="uiSelectOptions__text">만기일시</span>
                                                                                     </button>
+                                                                                    <!-- //2023.11.01 : mod : 버튼에 isSelectActive 클래스값 제거 -->
                                                                                 </li>
                                                                                 <li class="uiSelectOptions__item">
                                                                                     <button

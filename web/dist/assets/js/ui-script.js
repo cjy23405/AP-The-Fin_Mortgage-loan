@@ -56,6 +56,9 @@
     // common
     var $win = $(window);
     var $doc = $(document);
+    var nativeEvent = {
+        input: new Event('input'),
+    };
 
     // UiAccordion
     var UiAccordion = function (target, option) {
@@ -1482,16 +1485,20 @@
 
     // select
     var uiSelect = {
+        classNames: {
+            active: 'isSelectActive',
+        },
         init: function ($root) {
             if (!$root) {
                 $root = $doc;
             }
 
-            $root.find('[data-select-option].isSelectActive').each(function () {
-                uiSelect.optionSelected($(this));
+            $root.find('[data-select-input]').each(function () {
+                uiSelect.inputValue($(this));
             });
         },
         optionSelected: function ($selected) {
+            var _ = uiSelect;
             var name = $selected.attr('data-select-option');
             var $layer = $selected.closest('[data-layer]');
             var $input = $('[data-select-input="' + name + '"]');
@@ -1500,18 +1507,31 @@
             var selectedText = $selected.attr('data-select-text');
             var selectedVal = $selected.attr('data-select-value');
 
-            $options.removeAttr('title').removeClass('isSelectActive');
-            $selected.eq(0).attr('title', '선택됨').addClass('isSelectActive');
+            $options.removeAttr('title').removeClass(_.classNames.active);
+            $selected.eq(0).attr('title', '선택됨').addClass(_.classNames.active);
             $view.text(selectedText);
             $input.val(selectedVal);
+            $input.get(0).dispatchEvent(nativeEvent.input);
 
             if ($layer.length) {
                 uiLayer.close($layer.attr('data-layer'));
             }
         },
+        inputValue: function ($input) {
+            var _ = uiSelect;
+            var name = $input.attr('data-select-input');
+            var inputVal = $input.val();
+            var $selected = $('[data-select-option="' + name + '"][data-select-value="' + inputVal + '"]');
+
+            if ($selected.length && !$selected.hasClass(_.classNames.active)) {
+                uiSelect.optionSelected($selected);
+            }
+        },
     };
     $doc.on('click.uiSelect', '[data-select-option]', function () {
         uiSelect.optionSelected($(this));
+    }).on('input.uiSelect', '[data-select-input]', function () {
+        uiSelect.inputValue($(this));
     });
 
     // checkbox group
@@ -1877,11 +1897,15 @@
                 return search;
             })();
 
-            if (!eventType || eventType === 'focusin' || eventType === 'focusout') {
-                $input.val(toVal.replace(/\.+$/g, ''));
-            } else {
-                $input.val(toVal);
-                el.setSelectionRange(toSelI, toSelI);
+            if (!(val === toVal)) {
+                if (!eventType || eventType === 'focusin' || eventType === 'focusout') {
+                    $input.val(toVal.replace(/\.+$/g, ''));
+                    $input.get(0).dispatchEvent(nativeEvent.input);
+                } else {
+                    $input.val(toVal);
+                    $input.get(0).dispatchEvent(nativeEvent.input);
+                    el.setSelectionRange(toSelI, toSelI);
+                }
             }
         },
     };
@@ -1945,8 +1969,11 @@
             })();
             var selectionIndex = slice.length;
 
-            $input.val(toVal);
-            el.setSelectionRange(selectionIndex, selectionIndex);
+            if (!(val === toVal)) {
+                $input.val(toVal);
+                $input.get(0).dispatchEvent(nativeEvent.input);
+                el.setSelectionRange(selectionIndex, selectionIndex);
+            }
         },
     };
     $doc.on('focusin.dateInput focusout.dateInput keydown.dateInput keyup.dateInput change.dateInput input.dateInput', '.jsDateInput', function (e) {
@@ -2288,7 +2315,9 @@
         var $this = $(this);
         var $input = $this.closest('.uiInput').find('.uiInput__input');
 
-        $input.val('').focus();
+        $input.val('');
+        $input.get(0).dispatchEvent(nativeEvent.input);
+        $input.focus();
     });
 
     // layer opened scroll to start
