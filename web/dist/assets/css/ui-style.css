@@ -3137,3 +3137,10 @@ section + .divide {
 .lineTab__button.jsTabpanelActive .lineTab__text {
     color: var(--mainBlack);
 }
+
+/* clauseData */
+.clauseData::before,
+.clauseData::after {
+    content: '';
+    display: table;
+}
