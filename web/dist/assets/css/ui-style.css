@@ -1487,12 +1487,9 @@ section + .divide {
     font-weight: 500;
     line-height: var(--lineHeightDefault);
     color: var(--systemGray500);
-
-    background: url(../images/icon/icon_linkarrow.png) no-repeat center right;
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox.uiCheckBox_circle span {
     color: var(--mainBlack);
-    background: none;
 }
 .uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox span::before,
 .uiCheckBoxGroup .uiCheckBoxBody > li > .uiCheckBox span::after {
@@ -1505,39 +1502,11 @@ section + .divide {
     position: absolute;
     top: 0;
     right: 0;
+    bottom: 0;
+    width: 20px;
+    background: url(../images/icon/icon_linkarrow.png) no-repeat center right / 100% auto;
 }
-.uiCheckBoxGroup .uiCheckBoxBody > li > .uiButton::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 24px;
-    background: url(../images/icon/icon_expand.png) no-repeat;
-}
-.uiCheckBoxGroup .uiCheckBoxBody > li.jsAccordionOpened > .uiButton::before {
-    transform: rotate(180deg);
-}
-.uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons {
-    display: flex;
-    flex-direction: column;
-    /* padding: 16px 0 6px 30px; */
 
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a {
-    padding-right: 34px;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: var(--lineHeightDefault);
-    color: var(--systemGray500);
-    text-decoration: none;
-
-    background: url(../images/icon/icon_linkarrow.png) no-repeat center right;
-}
-.uiCheckBoxGroup .uiCheckBoxBody > li .uiCheckBoxButtons a + a {
-    margin-top: 10px;
-}
 .uiCheckBox.uiCheckBox__hidden span {
     padding: 0;
 }
