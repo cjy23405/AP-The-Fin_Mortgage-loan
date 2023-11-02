@@ -1809,6 +1809,7 @@ section + .divide {
     width: 48px;
     height: 48px;
 }
+/* 2023.11.02 : mod : 클래스형 은행 로고 제거
 [class*='iconBank_bnk']::before,
 [class*='iconBank_A1AAII0000']::before {
     background-image: url(../images/icon/bank/A1AAII0000.png);
@@ -1856,8 +1857,9 @@ section + .divide {
 [class*='iconBank_jt']::before {
     background-image: url(../images/icon/bank/jt.png);
 }
-[class*='iconBank_jtc']::before {
-    background-image: url(../images/icon/bank/jtc.png);
+[class*='iconBank_jtc']::before,
+[class*='iconBank_A3AAKS0000']::before {
+    background-image: url(../images/icon/bank/A3AAKS0000.png);
 }
 [class*='iconBank_kakao']::before,
 [class*='iconBank_A1AAHJ0000']::before {
@@ -1914,7 +1916,7 @@ section + .divide {
 [class*='iconBank_ycbank']::before {
     background-image: url(../images/icon/bank/ycbank.png);
 }
-
+*/
 .icon::before {
     content: '';
     display: inline-block;
