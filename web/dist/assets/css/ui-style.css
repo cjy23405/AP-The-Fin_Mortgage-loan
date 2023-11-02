@@ -1442,6 +1442,9 @@ section + .divide {
 .uiCheckBox.uiCheckBox_circle > span::after {
     background-image: url(../images/icon/icon_check_circle_checked.svg);
 }
+.uiCheckBox.uiCheckBox_circleLine > span {
+    margin-left: 4px;
+}
 .uiCheckBox.uiCheckBox_circleLine > span::before {
     background-size: 20px auto;
     background-image: url(../images/icon/icon_check_circleLine_unchecked.svg);
@@ -1725,8 +1728,8 @@ section + .divide {
     line-height: var(--lineHeightLabel);
     color: var(--systemGray500);
 }
-.bankListBox > li::before {
-    margin-right: 6px;
+.bankListBox > li > span {
+    margin-left: 6px;
 }
 /* TODO: 은행 아이콘 적용 방식 확인 */
 /* ICONS */
@@ -1773,11 +1776,46 @@ section + .divide {
     height: 48px;
 }
 /* 은행 아이콘 */
-[class*='iconBank_bnk']::before {
-    background-image: url(../images/icon/bank/bnk.png);
+[class*='imgBank_'] {
+    display: block;
+    width: 28px;
+    height: 28px;
 }
-[class*='iconBank_citi']::before {
-    background-image: url(../images/icon/bank/citi.png);
+.imgBank_box16 {
+    width: 16px;
+    height: 16px;
+}
+.imgBank_box18 {
+    width: 18px;
+    height: 18px;
+}
+.imgBank_box22 {
+    width: 22px;
+    height: 22px;
+}
+.imgBank_box30 {
+    width: 30px;
+    height: 30px;
+}
+.imgBank_box32 {
+    width: 32px;
+    height: 32px;
+}
+.imgBank_box40 {
+    width: 40px;
+    height: 40px;
+}
+.imgBank_box48 {
+    width: 48px;
+    height: 48px;
+}
+[class*='iconBank_bnk']::before,
+[class*='iconBank_A1AAII0000']::before {
+    background-image: url(../images/icon/bank/A1AAII0000.png);
+}
+[class*='iconBank_citi']::before,
+[class*='iconBank_A1AAQE0000']::before {
+    background-image: url(../images/icon/bank/A1AAQE0000.png);
 }
 [class*='iconBank_cu']::before {
     background-image: url(../images/icon/bank/cu.png);
@@ -1797,11 +1835,13 @@ section + .divide {
 [class*='iconBank_goryosb']::before {
     background-image: url(../images/icon/bank/goryosb.png);
 }
-[class*='iconBank_gwangju']::before {
-    background-image: url(../images/icon/bank/gwangju.png);
+[class*='iconBank_gwangju']::before,
+[class*='iconBank_A1AAHP0000']::before {
+    background-image: url(../images/icon/bank/A1AAHP0000.png);
 }
-[class*='iconBank_hana']::before {
-    background-image: url(../images/icon/bank/hana.png);
+[class*='iconBank_hana']::before,
+[class*='iconBank_A1AAES0000']::before {
+    background-image: url(../images/icon/bank/A1AAES0000.png);
 }
 [class*='iconBank_hanwhasbank']::before {
     background-image: url(../images/icon/bank/hanwhasbank.png);
@@ -1809,8 +1849,9 @@ section + .divide {
 [class*='iconBank_hkcapital']::before {
     background-image: url(../images/icon/bank/hkcapital.png);
 }
-[class*='iconBank_ibk']::before {
-    background-image: url(../images/icon/bank/ibk.png);
+[class*='iconBank_ibk']::before,
+[class*='iconBank_A1AAEQ0000']::before {
+    background-image: url(../images/icon/bank/A1AAEQ0000.png);
 }
 [class*='iconBank_jt']::before {
     background-image: url(../images/icon/bank/jt.png);
@@ -1818,17 +1859,21 @@ section + .divide {
 [class*='iconBank_jtc']::before {
     background-image: url(../images/icon/bank/jtc.png);
 }
-[class*='iconBank_kakao']::before {
-    background-image: url(../images/icon/bank/kakao.png);
+[class*='iconBank_kakao']::before,
+[class*='iconBank_A1AAHJ0000']::before {
+    background-image: url(../images/icon/bank/A1AAHJ0000.png);
 }
-[class*='iconBank_kb']::before {
-    background-image: url(../images/icon/bank/kb.png);
+[class*='iconBank_kb']::before,
+[class*='iconBank_A1AAEO0000']::before {
+    background-image: url(../images/icon/bank/A1AAEO0000.png);
 }
-[class*='iconBank_kbank']::before {
-    background-image: url(../images/icon/bank/kbank.png);
+[class*='iconBank_kbank']::before,
+[class*='iconBank_A1AAJB0000']::before {
+    background-image: url(../images/icon/bank/A1AAJB0000.png);
 }
-[class*='iconBank_kdb']::before {
-    background-image: url(../images/icon/bank/kdb.png);
+[class*='iconBank_kdb']::before,
+[class*='iconBank_A1AAAD0000']::before {
+    background-image: url(../images/icon/bank/A1AAAD0000.png);
 }
 [class*='iconBank_kfcc']::before {
     background-image: url(../images/icon/bank/kfcc.png);
@@ -1842,8 +1887,9 @@ section + .divide {
 [class*='iconBank_meritz']::before {
     background-image: url(../images/icon/bank/meritz.png);
 }
-[class*='iconBank_nh']::before {
-    background-image: url(../images/icon/bank/nh.png);
+[class*='iconBank_nh']::before,
+[class*='iconBank_A1AABG0000']::before {
+    background-image: url(../images/icon/bank/A1AABG0000.png);
 }
 [class*='iconBank_osb']::before {
     background-image: url(../images/icon/bank/osb.png);
@@ -1854,14 +1900,16 @@ section + .divide {
 [class*='iconBank_sc']::before {
     background-image: url(../images/icon/bank/sc.png);
 }
-[class*='iconBank_shinhan']::before {
-    background-image: url(../images/icon/bank/shinhan.png);
+[class*='iconBank_shinhan']::before,
+[class*='iconBank_A1AAER0000']::before {
+    background-image: url(../images/icon/bank/A1AAER0000.png);
 }
 [class*='iconBank_toss']::before {
     background-image: url(../images/icon/bank/toss.png);
 }
-[class*='iconBank_woori']::before {
-    background-image: url(../images/icon/bank/woori.png);
+[class*='iconBank_woori']::before,
+[class*='iconBank_A1AAEM0000']::before {
+    background-image: url(../images/icon/bank/A1AAEM0000.png);
 }
 [class*='iconBank_ycbank']::before {
     background-image: url(../images/icon/bank/ycbank.png);
@@ -2102,6 +2150,7 @@ section + .divide {
     line-height: 1;
     color: var(--systemGray700);
     padding: 0 20px 0 4px;
+    margin-left: 4px;
 }
 .uiCheckWithBankList .uiCheckWithBankList__Body label span::before,
 .uiCheckWithBankList .uiCheckWithBankList__Body label span::after {
