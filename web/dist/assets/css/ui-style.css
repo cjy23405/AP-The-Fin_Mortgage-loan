@@ -2365,6 +2365,7 @@ section + .divide {
 
 .visImage__conPoint {
     background: url(../images/illustration/con_point.png) no-repeat bottom center;
+    width: 100%;
     height: 120px;
 }
 
@@ -2377,6 +2378,12 @@ section + .divide {
 .visImage__compareLoan {
     background: url(../images/illustration/compare_loan.png) no-repeat bottom center;
     height: 210px;
+}
+
+.visImage__stretch {
+    width: 100%;
+    height: 100%;
+    background-position: center;
 }
 
 /* ########## CJY ########## */
