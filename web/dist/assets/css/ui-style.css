@@ -3179,3 +3179,18 @@ section + .divide {
     content: '';
     display: table;
 }
+
+/* pdfViewer */
+.pdfViewer {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.pdfViewer iframe {
+    display: block;
+    border: none;
+    margin: 0;
+    flex: 1;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko" class="themeThePin">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/css/default.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <div class="header__left">
+                            <button type="button" class="uiButton header__button header__button--back">
+                                <span class="forA11y">이전</span>
+                            </button>
+                        </div>
+                        <div class="header__right">
+                            <button type="button" class="uiButton header__button header__button--close">
+                                <span class="forA11y">닫기</span>
+                            </button>
+                        </div>
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <div class="uiButtons uiButtons--noMargin">
+                            <ul class="uiButtons__list">
+                                <li class="uiButtons__item">
+                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="pdfViewer">
+                                        <span class="uiBasicButton__text">PDF 뷰어 팝업</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- layer: PDF 뷰어 팝업 -->
+                        <div class="layerWrap layerWrap--full" data-layer="pdfViewer" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="fullLayer">
+                                    <div class="fullLayer__head">
+                                        <h2 class="fullLayer__title">PDF 타이틀 노출</h2>
+                                        <div class="fullLayer__headRight">
+                                            <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="pdfViewer">
+                                        <iframe
+                                            src="https://docs.google.com/gview?embedded=true&url=https://service-api-upload.s3.ap-northeast-2.amazonaws.com/terms/KINFA_creditLoan_01.pdf"
+                                            frameborder="0"
+                                        ></iframe>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: PDF 뷰어 팝업 -->
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <script>
+            $(function () {
+                uiJSLayer.open('pdfViewer');
+            });
+        </script>
+        <!-- //script -->
+    </body>
+</html>
