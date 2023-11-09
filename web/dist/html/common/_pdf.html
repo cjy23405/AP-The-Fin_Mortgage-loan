@@ -52,51 +52,35 @@
                         <div class="uiButtons uiButtons--noMargin">
                             <ul class="uiButtons__list">
                                 <li class="uiButtons__item">
-                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="unapprovedDetails">
-                                        <span class="uiBasicButton__text">미승인내역</span>
+                                    <button type="button" class="uiButton uiBasicButton" data-layer-open="pdfViewer">
+                                        <span class="uiBasicButton__text">PDF 뷰어 팝업</span>
                                     </button>
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- layer: 미승인내역 -->
-                        <div class="layerWrap layerWrap--full" data-layer="unapprovedDetails" data-layer-display="flex">
+                        <!-- layer: PDF 뷰어 팝업 -->
+                        <div class="layerWrap layerWrap--full" data-layer="pdfViewer" data-layer-display="flex">
                             <div class="layerContainer">
                                 <section class="fullLayer">
                                     <div class="fullLayer__head">
-                                        <h2 class="fullLayer__title">미승인내역</h2>
+                                        <h2 class="fullLayer__title">PDF 타이틀 노출</h2>
                                         <div class="fullLayer__headRight">
                                             <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
                                                 <span class="forA11y">레이어 닫기</span>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="fullLayer__body _gray2Box">
-                                        <div class="fullLayer__bodyInner">
-                                            <div class="bankListBox_rounded">
-                                                <!-- 2023.11.06 : mod : img 태그로 변경 -->
-                                                <img src="../../assets/images/icon/bank/A1AAHJ0000.png" class="imgBank_box32" aria-hidden="true" />
-                                                <div class="flexBox">
-                                                    <strong class="titleDefault">카카오뱅크</strong>
-                                                    <span class="textBody1 colorGray">카카오뱅크 주택담보대출</span>
-                                                    <p class="textBody2 rowItemGroup colorGray">해당 상품은 금융사 심사 결과, 대출이 어렵습니다.</p>
-                                                </div>
-                                            </div>
-                                            <div class="bankListBox_rounded">
-                                                <!-- 2023.11.06 : mod : img 태그로 변경 -->
-                                                <img src="../../assets/images/icon/bank/A1AAJB0000.png" class="imgBank_box32" aria-hidden="true" />
-                                                <div class="flexBox">
-                                                    <strong class="titleDefault">케이뱅크</strong>
-                                                    <span class="textBody1 colorGray">케이뱅크 아파트담보대출</span>
-                                                    <p class="textBody2 rowItemGroup colorGray">해당 상품은 금융사 심사 결과, 대출이 어렵습니다.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="pdfViewer">
+                                        <iframe
+                                            src="https://docs.google.com/gview?embedded=true&url=https://service-api-upload.s3.ap-northeast-2.amazonaws.com/terms/KINFA_creditLoan_01.pdf"
+                                            frameborder="0"
+                                        ></iframe>
                                     </div>
                                 </section>
                             </div>
                         </div>
-                        <!-- //layer: 미승인내역 -->
+                        <!-- //layer: PDF 뷰어 팝업 -->
                     </div>
                 </article>
                 <!-- //contents -->
@@ -108,7 +92,7 @@
         <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
         <script>
             $(function () {
-                uiJSLayer.open('unapprovedDetails');
+                uiJSLayer.open('pdfViewer');
             });
         </script>
         <!-- //script -->

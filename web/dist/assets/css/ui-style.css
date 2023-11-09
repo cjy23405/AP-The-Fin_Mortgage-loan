@@ -1809,7 +1809,7 @@ section + .divide {
     width: 48px;
     height: 48px;
 }
-/* 2023.11.02 : mod : 클래스형 은행 로고 제거
+/* 2023.11.06 : mod : 클래스형 은행 로고 제거
 [class*='iconBank_bnk']::before,
 [class*='iconBank_A1AAII0000']::before {
     background-image: url(../images/icon/bank/A1AAII0000.png);
@@ -3178,4 +3178,19 @@ section + .divide {
 .clauseData::after {
     content: '';
     display: table;
+}
+
+/* pdfViewer */
+.pdfViewer {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.pdfViewer iframe {
+    display: block;
+    border: none;
+    margin: 0;
+    flex: 1;
 }
