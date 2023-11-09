@@ -2355,6 +2355,11 @@ section + .divide {
 .primaryBox strong {
     color: var(--primary600);
 }
+.gray50Box {
+    background-color: var(--systemGray50);
+    padding: 16px;
+    border-radius: 10px;
+}
 
 /* Visual images */
 
