@@ -741,14 +741,35 @@
             var afterW = $body.width();
             $html.css('overflow', '');
             _.width = beforeW - afterW;
+
+            var $style = $('#uiScrollbarsWidthStyle');
+            var styleHtml = '';
+
+            if (_.width > 0 && !$html.hasClass('isScrollbarsWidth')) {
+                $html.addClass('isScrollbarsWidth');
+            } else if (_.width <= 0 && $html.hasClass('isScrollbarsWidth')) {
+                $html.removeClass('isScrollbarsWidth');
+            }
+
+            if (_.width > 0 && !$style.length) {
+                styleHtml += '<style type="text/css" id="uiScrollbarsWidthStyle">';
+                styleHtml += '   .isScrollBlocking.isScrollbarsWidth #wrap {';
+                styleHtml += '       margin-right: ' + _.width + 'px;';
+                styleHtml += '   }';
+                styleHtml += '   .isScrollBlocking.isScrollbarsWidth .fixTopWrap {';
+                styleHtml += '       right: ' + _.width + 'px;';
+                styleHtml += '   }';
+                styleHtml += '   .isScrollBlocking.isScrollbarsWidth .fixBottomWrap {';
+                styleHtml += '       right: ' + _.width + 'px;';
+                styleHtml += '   }';
+                styleHtml += '</style>';
+
+                $body.prepend(styleHtml);
+            } else if (_.width <= 0 && $style.length) {
+                $style.remove();
+            }
         },
     };
-    function checkScrollbars() {
-        var $html = $('html');
-        if (Boolean(scrollbarsWidth.width) && !$html.hasClass('isScrollbarsWidth')) {
-            $html.addClass('isScrollbarsWidth');
-        }
-    }
 
     // scrollBlock
     var scrollBlock = {
@@ -2141,7 +2162,7 @@
         }
 
         // set
-        checkScrollbars();
+        scrollbarsWidth.set();
         checkDisabledClass($root);
         checkboxGroup.init($root);
         areaDisabled.init($root);
@@ -2375,31 +2396,6 @@
     $(function () {
         var $html = $('html');
         var $body = $('body');
-
-        scrollbarsWidth.set();
-
-        // css set
-        if (scrollbarsWidth.width > 0) {
-            $body.prepend(
-                '<style type="text/css">' +
-                    '.isScrollBlocking.isScrollbarsWidth #wrap {' +
-                    'margin-right: ' +
-                    scrollbarsWidth.width +
-                    'px;' +
-                    '}\n' +
-                    '.isScrollBlocking.isScrollbarsWidth .fixTopWrap {' +
-                    'right: ' +
-                    scrollbarsWidth.width +
-                    'px;' +
-                    '}\n' +
-                    '.isScrollBlocking.isScrollbarsWidth .fixBottomWrap {' +
-                    'right: ' +
-                    scrollbarsWidth.width +
-                    'px;' +
-                    '}' +
-                    '</style>'
-            );
-        }
 
         // init
         uiJSCommon();
