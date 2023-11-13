@@ -58,6 +58,7 @@
     var $doc = $(document);
     var nativeEvent = {
         input: new Event('input'),
+        lastScroll: new Event('lastScroll'),
     };
 
     // UiAccordion
@@ -2172,6 +2173,7 @@
         convertTenThousandInput.init($root);
         convertYearTermInput.init($root);
         uiSelect.init($root);
+        searchLayerInit($root);
 
         $root.find('[data-layer]').each(function () {
             var $this = $(this);
@@ -2358,6 +2360,32 @@
     });
 
     // search layer
+    function searchLayerInit($root) {
+        if (!$root) {
+            $root = $doc;
+        }
+
+        $root
+            .find('.jsSearchLayerScroller')
+            .off('scroll.searchLayer')
+            .on('scroll.searchLayer', function () {
+                var $this = $(this);
+                var $layer = $this.closest('.jsSearchLayer');
+
+                if ($layer.hasClass('isSelf')) return;
+
+                var prevScrollTop = $this.data('prevScrollTop');
+                var scrollTop = $this.scrollTop();
+                var scrollHeight = $this.get(0).scrollHeight;
+                var height = $this.height();
+
+                $this.data('prevScrollTop', scrollTop);
+
+                if (prevScrollTop < scrollTop && scrollTop >= scrollHeight - height - 1) {
+                    $this.get(0).dispatchEvent(nativeEvent.lastScroll);
+                }
+            });
+    }
     $doc.on('focusin.searchLayer focusout.searchLayer keydown.searchLayer keyup.searchLayer change.searchLayer input.searchLayer', '.jsSearchLayerInput', function () {
         var $this = $(this);
         var $layer = $this.closest('.jsSearchLayer');
