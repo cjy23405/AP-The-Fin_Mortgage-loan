@@ -823,7 +823,7 @@
     window.uiJSScrollBlock = scrollBlock;
 
     // elFocus
-    var elFocus = ($el) => {
+    function elFocus($el) {
         var setTabindex = false;
 
         if (!$el.attr('tabindex')) {
@@ -836,7 +836,7 @@
         if (setTabindex) {
             $el.removeAttr('tabindex');
         }
-    };
+    }
 
     // layer
     var uiLayer = {
@@ -2259,6 +2259,32 @@
         fixBarSet();
     }
     window.uiJSResize = uiJSResize;
+
+    // uiJSScrollToElement
+    function uiJSScrollToElement(el) {
+        var $el = $(el);
+        var $layerBody = $el.closest('.fullLayer__body, .toastLayer__body');
+        var hasLayer = Boolean($layerBody.length);
+        var $scroller = (function () {
+            if (hasLayer) {
+                return $layerBody;
+            } else {
+                return $(window);
+            }
+        })();
+        var offsetTop = $el.offset().top;
+
+        if (hasLayer) {
+            offsetTop = offsetTop - $scroller.offset().top + $scroller.scrollTop();
+        } else {
+            offsetTop = offsetTop - $('.fixTopWrap').outerHeight();
+        }
+
+        offsetTop -= 20;
+
+        $scroller.scrollTop(offsetTop);
+    }
+    window.uiJSScrollToElement = uiJSScrollToElement;
 
     // fixBarSet
     $doc.on('uiTabPanelChange.fixBarSet', 'body', function () {
