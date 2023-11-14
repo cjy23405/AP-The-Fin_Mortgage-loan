@@ -70,7 +70,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="fullLayer__body">
+                                    <div class="fullLayer__body jsSearchLayerScroller">
                                         <div class="fullLayer__bodyInner">
                                             <div class="rowGroup">
                                                 <h2 class="titleLarge">
@@ -204,6 +204,26 @@
             $(function () {
                 uiJSLayer.open('searchApartment');
             });
+
+            /* DD : 마지막 스크롤 이벤트 예시
+            const { createApp, ref, onMounted } = Vue;
+
+            createApp({
+                setup() {
+                    const body = ref(null); // .jsSearchLayerScroller
+
+                    onMounted(() => {
+                        body.value.addEventListener('lastScroll', () => {
+                            console.log('lastScroll');
+                        });
+                    });
+
+                    return {
+                        body,
+                    };
+                },
+            }).mount('#wrap');
+            */
         </script>
         <!-- //script -->
     </body>

@@ -58,6 +58,7 @@
     var $doc = $(document);
     var nativeEvent = {
         input: new Event('input'),
+        lastScroll: new Event('lastScroll'),
     };
 
     // UiAccordion
@@ -822,7 +823,7 @@
     window.uiJSScrollBlock = scrollBlock;
 
     // elFocus
-    var elFocus = ($el) => {
+    function elFocus($el) {
         var setTabindex = false;
 
         if (!$el.attr('tabindex')) {
@@ -835,7 +836,7 @@
         if (setTabindex) {
             $el.removeAttr('tabindex');
         }
-    };
+    }
 
     // layer
     var uiLayer = {
@@ -2172,6 +2173,7 @@
         convertTenThousandInput.init($root);
         convertYearTermInput.init($root);
         uiSelect.init($root);
+        searchLayerInit($root);
 
         $root.find('[data-layer]').each(function () {
             var $this = $(this);
@@ -2257,6 +2259,32 @@
         fixBarSet();
     }
     window.uiJSResize = uiJSResize;
+
+    // uiJSScrollToElement
+    function uiJSScrollToElement(el) {
+        var $el = $(el);
+        var $layerBody = $el.closest('.fullLayer__body, .toastLayer__body');
+        var hasLayer = Boolean($layerBody.length);
+        var $scroller = (function () {
+            if (hasLayer) {
+                return $layerBody;
+            } else {
+                return $(window);
+            }
+        })();
+        var offsetTop = $el.offset().top;
+
+        if (hasLayer) {
+            offsetTop = offsetTop - $scroller.offset().top + $scroller.scrollTop();
+        } else {
+            offsetTop = offsetTop - $('.fixTopWrap').outerHeight();
+        }
+
+        offsetTop -= 20;
+
+        $scroller.scrollTop(offsetTop);
+    }
+    window.uiJSScrollToElement = uiJSScrollToElement;
 
     // fixBarSet
     $doc.on('uiTabPanelChange.fixBarSet', 'body', function () {
@@ -2358,6 +2386,32 @@
     });
 
     // search layer
+    function searchLayerInit($root) {
+        if (!$root) {
+            $root = $doc;
+        }
+
+        $root
+            .find('.jsSearchLayerScroller')
+            .off('scroll.searchLayer')
+            .on('scroll.searchLayer', function () {
+                var $this = $(this);
+                var $layer = $this.closest('.jsSearchLayer');
+
+                if ($layer.hasClass('isSelf')) return;
+
+                var prevScrollTop = $this.data('prevScrollTop');
+                var scrollTop = $this.scrollTop();
+                var scrollHeight = $this.get(0).scrollHeight;
+                var height = $this.height();
+
+                $this.data('prevScrollTop', scrollTop);
+
+                if (prevScrollTop < scrollTop && scrollTop >= scrollHeight - height - 1) {
+                    $this.get(0).dispatchEvent(nativeEvent.lastScroll);
+                }
+            });
+    }
     $doc.on('focusin.searchLayer focusout.searchLayer keydown.searchLayer keyup.searchLayer change.searchLayer input.searchLayer', '.jsSearchLayerInput', function () {
         var $this = $(this);
         var $layer = $this.closest('.jsSearchLayer');
