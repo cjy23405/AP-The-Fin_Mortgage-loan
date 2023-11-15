@@ -2306,6 +2306,35 @@
                             </div>
                         </section>
                     </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Events</h3>
+
+                        <script type="code-view" data-language="javascript">
+                            $('[data-checkbox-tab-panel="testCheckboxTabA1"]').on('checkboxTabChange', function(event){
+                                console.log('checkboxTabChange');
+                            });
+                        </script>
+
+                        <div class="_guideTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="_guideTable__name">Name</th>
+                                        <th class="_guideTable__arguments">Arguments</th>
+                                        <th class="_guideTable__description">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="_guideTable__name">checkboxTabChange</td>
+                                        <td class="_guideTable__arguments">(event)</td>
+                                        <td class="_guideTable__description">탭 패널이 보이거나 안보일때 발생</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </section>
 
                 <section class="_guideSection">

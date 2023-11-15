@@ -1725,9 +1725,9 @@
             var isChecked = $input.is(':checked');
 
             if (isChecked) {
-                $panel.addClass('is-opened').show();
+                $panel.addClass('isOpened').show();
             } else {
-                $panel.removeClass('is-opened').css('display', 'none');
+                $panel.removeClass('isOpened').css('display', 'none');
             }
 
             $panel.trigger('checkboxTabChange');
