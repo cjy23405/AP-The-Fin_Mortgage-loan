@@ -1165,7 +1165,9 @@
                                     }
                                     $layer.data('layerOpener', null);
                                 } else {
-                                    elFocus($html);
+                                    if (isOpenerFocusToAfterClose) {
+                                        elFocus($html);
+                                    }
                                 }
 
                                 $html.removeClass(_.classNames.htmlClosedAnimated + ' ' + _.classNames.htmlOpened + '_' + target);
