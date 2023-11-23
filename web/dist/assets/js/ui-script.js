@@ -733,7 +733,12 @@
     var scrollbarsWidth = {
         width: 0,
         set: function () {
+            var $style = $('#uiScrollbarsWidthStyle');
+
+            if ($style.length) return;
+
             var _ = scrollbarsWidth;
+            var styleHtml = '';
             var $html = $('html');
             var $body = $('body');
             $html.css('overflow', 'hidden');
@@ -743,32 +748,25 @@
             $html.css('overflow', '');
             _.width = beforeW - afterW;
 
-            var $style = $('#uiScrollbarsWidthStyle');
-            var styleHtml = '';
-
             if (_.width > 0 && !$html.hasClass('isScrollbarsWidth')) {
                 $html.addClass('isScrollbarsWidth');
             } else if (_.width <= 0 && $html.hasClass('isScrollbarsWidth')) {
                 $html.removeClass('isScrollbarsWidth');
             }
 
-            if (_.width > 0 && !$style.length) {
-                styleHtml += '<style type="text/css" id="uiScrollbarsWidthStyle">';
-                styleHtml += '   .isScrollBlocking.isScrollbarsWidth #wrap {';
-                styleHtml += '       margin-right: ' + _.width + 'px;';
-                styleHtml += '   }';
-                styleHtml += '   .isScrollBlocking.isScrollbarsWidth .fixTopWrap {';
-                styleHtml += '       right: ' + _.width + 'px;';
-                styleHtml += '   }';
-                styleHtml += '   .isScrollBlocking.isScrollbarsWidth .fixBottomWrap {';
-                styleHtml += '       right: ' + _.width + 'px;';
-                styleHtml += '   }';
-                styleHtml += '</style>';
+            styleHtml += '<style type="text/css" id="uiScrollbarsWidthStyle">';
+            styleHtml += '   .isScrollBlocking.isScrollbarsWidth #wrap {';
+            styleHtml += '       margin-right: ' + _.width + 'px;';
+            styleHtml += '   }';
+            styleHtml += '   .isScrollBlocking.isScrollbarsWidth .fixTopWrap {';
+            styleHtml += '       right: ' + _.width + 'px;';
+            styleHtml += '   }';
+            styleHtml += '   .isScrollBlocking.isScrollbarsWidth .fixBottomWrap {';
+            styleHtml += '       right: ' + _.width + 'px;';
+            styleHtml += '   }';
+            styleHtml += '</style>';
 
-                $body.prepend(styleHtml);
-            } else if (_.width <= 0 && $style.length) {
-                $style.remove();
-            }
+            $body.prepend(styleHtml);
         },
     };
 
@@ -825,6 +823,7 @@
     // elFocus
     function elFocus($el) {
         var setTabindex = false;
+        var scrollTop = $win.scrollTop();
 
         if (!$el.attr('tabindex')) {
             $el.attr('tabindex', '0');
@@ -835,6 +834,10 @@
 
         if (setTabindex) {
             $el.removeAttr('tabindex');
+        }
+
+        if ($el.is('html')) {
+            $win.scrollTop(scrollTop);
         }
     }
 

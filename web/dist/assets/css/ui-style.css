@@ -220,7 +220,7 @@
     content: '';
     display: block;
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -250,6 +250,10 @@
     font-weight: 500;
     padding: 2px 0 8px;
     text-align: left;
+}
+.uiInput__input:autofill,
+.uiInput__input:-webkit-autofill {
+    box-shadow: 0 0 0 100px var(--white) inset;
 }
 a.uiInput__input,
 button.uiInput__input {

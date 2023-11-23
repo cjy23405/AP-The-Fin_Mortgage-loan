@@ -27,6 +27,12 @@ textarea,
     text-size-adjust: none;
 }
 
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--white);
+    }
+}
+
 [type='password'] {
     font-family: 'password', var(--fontFamilyDefault);
 }
