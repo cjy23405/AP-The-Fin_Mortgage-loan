@@ -53,7 +53,14 @@
 
 /* stepListItems */
 .themeThePin .stepListItems li::before {
-    background: #ffdbd0; /* 예외 컬러 */
+    background: var(--primary500);
+    color: var(--white);
+}
+.stepListItems li strong {
+    color: var(--systemGray700);
+}
+.stepListItems_primarybox {
+    background: transparent;
 }
 .themeThePin [class*='icon_reg']::before {
     background-image: url(../images--the-pin/icon/icon_reg.png);
