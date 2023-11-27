@@ -2871,6 +2871,9 @@ section + .divide {
     color: var(--primary600);
     font-weight: 600;
 }
+.uiCheckButton__input[disabled] + .uiCheckButton__block {
+    opacity: 0.3;
+}
 
 /* uiCheckButton--center */
 .uiCheckButton--center .uiCheckButton__block {
