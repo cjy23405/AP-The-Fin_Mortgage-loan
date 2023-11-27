@@ -2344,7 +2344,7 @@
     });
 
     // input delete
-    $doc.on('focusin.inputDelete', 'input.uiInput__input, textarea.uiInput__input', function () {
+    $doc.on('focusin.inputDelete input.inputDelete', 'input.uiInput__input, textarea.uiInput__input', function () {
         var $this = $(this);
         var $wrap = $this.closest('.uiInput');
         var isNoDelete = $wrap.is('.uiInput--noDelete');
