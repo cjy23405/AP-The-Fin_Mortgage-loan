@@ -797,10 +797,10 @@ button.uiInput__input {
 .flexBox__cell + .flexBox__cell--mediumMargin {
     margin-left: 1px;
 }
-.flexBox__cell + .flexBox__cell--largeMargin {
-    margin-left: 1px;
-}
 */
+.flexBox__cell + .flexBox__cell--largeMargin {
+    margin-left: 30px;
+}
 
 /* flexBox__cell--form */
 .flexBox__cell--form {

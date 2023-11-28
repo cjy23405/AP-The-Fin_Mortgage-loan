@@ -49,7 +49,12 @@
                 <!-- contents -->
                 <article class="contentsWrap">
                     <div class="pageContents">
-                        <h1 class="titleLarge rowGroup">아파트 정보를 입력해주세요</h1>
+                        <!-- 2023.11.29 : mod : 문구 추가로 구조 변경 -->
+                        <div class="rowGroup">
+                            <h1 class="titleLarge">아파트 정보를 입력해주세요</h1>
+                            <p class="textBodySmall colorGray rowItem">아파트 동이 없는 경우 1동이라고 적어주세요</p>
+                        </div>
+                        <!-- //2023.11.29 : mod : 문구 추가로 구조 변경 -->
 
                         <div class="uiForm">
                             <ul class="uiForm__list">
@@ -159,18 +164,46 @@
                                 </li>
                                 <!-- //item -->
 
+                                <!-- 2023.11.29 : mod : 상세주소 항목 동, 호 입력 폼으로 변경 -->
                                 <!-- item -->
                                 <li class="uiForm__item">
-                                    <div class="uiForm__title">상세주소</div>
                                     <div class="uiInvalid">
-                                        <div class="uiForm__contents">
-                                            <div class="uiInput">
-                                                <input type="text" class="uiInput__input" title="상세주소" placeholder="예) 101동 201호 " />
+                                        <div class="flexBox">
+                                            <div class="flexBox__cell flexBox__cell--flexible">
+                                                <div class="uiForm__title">동</div>
+                                                <div class="uiForm__contents">
+                                                    <div class="flexBox">
+                                                        <div class="flexBox__cell flexBox__cell--flexible">
+                                                            <div class="uiInput">
+                                                                <input type="text" class="uiInput__input" title="동" placeholder="예) 101" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="flexBox__cell flexBox__cell--form">
+                                                            <div class="uiUnitText">동</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flexBox__cell flexBox__cell--flexible flexBox__cell--largeMargin">
+                                                <div class="uiForm__title">호수</div>
+                                                <div class="uiForm__contents">
+                                                    <div class="flexBox">
+                                                        <div class="flexBox__cell flexBox__cell--flexible">
+                                                            <div class="uiInput">
+                                                                <input type="text" class="uiInput__input" title="호수" placeholder="예) 301" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="flexBox__cell flexBox__cell--form">
+                                                            <div class="uiUnitText">호</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 <!-- //item -->
+                                <!-- //2023.11.29 : mod : 상세주소 항목 동, 호 입력 폼으로 변경 -->
 
                                 <!-- item -->
                                 <li class="uiForm__item">

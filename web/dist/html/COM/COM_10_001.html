@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko" class="themeThePin">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/css/default.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <div class="header__left">
+                            <button type="button" class="uiButton header__button header__button--back">
+                                <span class="forA11y">이전</span>
+                            </button>
+                        </div>
+                        <div class="header__right">
+                            <button type="button" class="uiButton header__button header__button--close">
+                                <span class="forA11y">닫기</span>
+                            </button>
+                        </div>
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <h1 class="titleLarge rowGroup">
+                            본인 및 배우자가<br />
+                            보유 중인 주택 수를 선택해주세요
+                        </h1>
+
+                        <div class="uiForm">
+                            <ul class="uiForm__list">
+                                <!-- item -->
+                                <li class="uiForm__item">
+                                    <div class="uiForm__title">주택 수</div>
+                                    <div class="uiInvalid">
+                                        <div class="uiForm__contents">
+                                            <!-- select -->
+                                            <div class="uiSelect">
+                                                <input type="hidden" data-select-input="numberOfHouses" />
+                                                <button type="button" class="uiButton uiSelect__button" title="주택 수 선택하기" data-layer-open="numberOfHouses">
+                                                    <span class="uiSelect__text" data-select-view="numberOfHouses" data-placeholder="예) 무주택"></span>
+                                                </button>
+                                                <!-- layer: 주택 수를 선택해주세요 -->
+                                                <div class="layerWrap layerWrap--toast" data-layer="numberOfHouses" data-layer-display="flex">
+                                                    <div class="layerContainer">
+                                                        <section class="toastLayer">
+                                                            <div class="toastLayer__head">
+                                                                <h2 class="toastLayer__title">주택 수를 선택해주세요</h2>
+                                                                <div class="toastLayer__headRight">
+                                                                    <button type="button" class="uiButton toastLayer__button toastLayer__button--close" data-role="layerClose">
+                                                                        <span class="forA11y">레이어 닫기</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="toastLayer__body">
+                                                                <div class="toastLayer__bodyInner">
+                                                                    <div class="uiSelectOptions">
+                                                                        <ul class="uiSelectOptions__list">
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="numberOfHouses"
+                                                                                    data-select-value="value 1"
+                                                                                    data-select-text="무주택"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">무주택</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="numberOfHouses"
+                                                                                    data-select-value="value 2"
+                                                                                    data-select-text="1주택"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">1주택</span>
+                                                                                </button>
+                                                                            </li>
+                                                                            <li class="uiSelectOptions__item">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    class="uiButton uiSelectOptions__button"
+                                                                                    data-select-option="numberOfHouses"
+                                                                                    data-select-value="value 3"
+                                                                                    data-select-text="2주택 이상"
+                                                                                >
+                                                                                    <span class="uiSelectOptions__text">2주택 이상</span>
+                                                                                </button>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                                <!-- //layer: 주택 수를 선택해주세요 -->
+                                            </div>
+                                            <!-- //select -->
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- //item -->
+                            </ul>
+                        </div>
+
+                        <!-- fix buttons -->
+                        <div class="fixBottomWrap">
+                            <div class="fixBottomWrap__area">
+                                <div class="uiButtons uiButtons--noMargin">
+                                    <ul class="uiButtons__list">
+                                        <li class="uiButtons__item">
+                                            <button type="button" class="uiButton uiBasicButton">
+                                                <span class="uiBasicButton__text">다음</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //fix buttons -->
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>
