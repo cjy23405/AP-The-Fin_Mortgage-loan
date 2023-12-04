@@ -4,8 +4,8 @@
     var userAgent = navigator.userAgent;
     var userAgentCheck = {
         ieMode: document.documentMode,
-        isIos: Boolean(userAgent.match(/iPod|iPhone|iPad/)),
-        isAndroid: Boolean(userAgent.match(/Android/)),
+        isIos: Boolean(userAgent.match(/iPod|iPhone|iPad/)) || Boolean(userAgent.match(/os=i/)),
+        isAndroid: Boolean(userAgent.match(/Android/)) || Boolean(userAgent.match(/os=a/)),
     };
     if (userAgent.match(/Edge|Edg/gi)) {
         userAgentCheck.ieMode = 'edge';
@@ -59,6 +59,10 @@
     var nativeEvent = {
         input: new Event('input'),
         lastScroll: new Event('lastScroll'),
+        keypadOpened: new Event('keypadOpened'),
+        keypadClosed: new Event('keypadClosed'),
+        legacyAndroidKeypadOpened: new Event('legacyAndroidKeypadOpened'),
+        legacyAndroidKeypadClosed: new Event('legacyAndroidKeypadClosed'),
     };
 
     // UiAccordion
@@ -840,6 +844,203 @@
             $win.scrollTop(scrollTop);
         }
     }
+
+    // keypad opened, closed event
+    var keypadEvent = {
+        viewWidth: 0,
+        viewHeight: 0,
+        winWidth: 0,
+        winHeight: 0,
+        keypadOpened: false,
+        keypadOpenedLegacy: false,
+        isFocus: {
+            ios: false,
+            android: false,
+        },
+        isClick: {
+            ios: false,
+            android: false,
+        },
+        classNames: {
+            opened: 'isNativeKeypadOpened',
+            openedLegacy: 'isLegacyNativeKeypadOpened',
+        },
+        timer: [null, null],
+        init: function () {
+            var _ = keypadEvent;
+
+            _.winWidth = $win.width();
+            _.winHeight = $win.height();
+
+            if (window.visualViewport) {
+                _.viewWidth = window.visualViewport.width;
+                _.viewHeight = window.visualViewport.height;
+
+                window.visualViewport.removeEventListener('resize', _.resize);
+                window.visualViewport.addEventListener('resize', _.resize);
+            }
+        },
+        resize: function () {
+            var isIos = userAgentCheck.isIos;
+            var isAndroid = userAgentCheck.isAndroid;
+
+            if (!isIos && !isAndroid) return;
+
+            var _ = keypadEvent;
+
+            clearTimeout(_.timer[0]);
+
+            _.timer[0] = setTimeout(function () {
+                var viewWidth = window.visualViewport.width;
+                var viewHeight = window.visualViewport.height;
+                var gapHeight = viewHeight - _.viewHeight;
+
+                if (_.viewWidth === viewWidth) {
+                    if (gapHeight < -150 && !_.keypadOpened) {
+                        _.keypadOpened = true;
+                        document.dispatchEvent(nativeEvent.keypadOpened);
+                    } else if (gapHeight > 150 && _.keypadOpened) {
+                        _.keypadOpened = false;
+                        document.dispatchEvent(nativeEvent.keypadClosed);
+                    }
+                }
+
+                _.viewWidth = viewWidth;
+                _.viewHeight = viewHeight;
+            }, 100);
+        },
+        resizeLegacy: function () {
+            var isAndroid = userAgentCheck.isAndroid;
+
+            if (!isAndroid) return;
+
+            var _ = keypadEvent;
+
+            clearTimeout(_.timer[1]);
+
+            _.timer[1] = setTimeout(function () {
+                var winWidth = $win.width();
+                var winHeight = $win.height();
+                var gapHeight = winHeight - _.winHeight;
+
+                if (_.winWidth === winWidth) {
+                    if (gapHeight < -150 && !_.keypadOpenedLegacy) {
+                        _.keypadOpenedLegacy = true;
+                        document.dispatchEvent(nativeEvent.legacyAndroidKeypadOpened);
+                    } else if (gapHeight > 150 && _.keypadOpenedLegacy) {
+                        _.keypadOpenedLegacy = false;
+                        document.dispatchEvent(nativeEvent.legacyAndroidKeypadClosed);
+                    }
+                }
+
+                _.winWidth = winWidth;
+                _.winHeight = winHeight;
+            }, 100);
+        },
+        scroll: function () {
+            var isIos = userAgentCheck.isIos;
+            var isAndroid = userAgentCheck.isAndroid;
+
+            if (!isIos && !isAndroid) return;
+
+            var $input = $('input:focus, textarea:focus');
+            var type = $input.attr('type') || '';
+            var isText = Boolean(type.match(/text|password|search|email|url|number|tel|date|time/)) || $input.is('textarea');
+
+            if (!isText) return;
+
+            var $layerBody = $input.closest('.fullLayer__body, .toastLayer__body');
+            var hasLayer = Boolean($layerBody.length);
+
+            if (hasLayer) {
+                if (isIos) {
+                    $('html')
+                        .stop()
+                        .animate(
+                            {
+                                scrollTop: $input.offset().top - 20,
+                            },
+                            100
+                        );
+                } else {
+                    uiJSScrollToElement($input, 100);
+                }
+            } else {
+                uiJSScrollToElement($input, 100);
+            }
+        },
+    };
+    $doc.on('keypadOpened.keypadEvent', function () {
+        var $html = $('html');
+        var _ = keypadEvent;
+        var className = _.classNames.opened;
+
+        if (!$html.hasClass(className)) {
+            $html.addClass(className);
+        }
+
+        if (userAgentCheck.isIos) {
+            if (_.isFocus.ios && !_.isClick.ios) {
+                _.scroll();
+            }
+
+            _.isFocus.ios = false;
+            _.isClick.ios = false;
+        }
+    })
+        .on('keypadClosed.keypadEvent', function () {
+            var $html = $('html');
+            var _ = keypadEvent;
+            var className = _.classNames.opened;
+
+            if ($html.hasClass(className)) {
+                $html.removeClass(className);
+            }
+        })
+        .on('legacyAndroidKeypadOpened.keypadEvent', function () {
+            var $html = $('html');
+            var _ = keypadEvent;
+            var className = _.classNames.openedLegacy;
+
+            if (!$html.hasClass(className)) {
+                $html.addClass(className);
+            }
+
+            if (_.isFocus.android || _.isClick.android) {
+                _.scroll();
+            }
+
+            _.isFocus.android = false;
+            _.isClick.android = false;
+        })
+        .on('legacyAndroidKeypadClosed.keypadEvent', function () {
+            var $html = $('html');
+            var _ = keypadEvent;
+            var className = _.classNames.openedLegacy;
+
+            if ($html.hasClass(className)) {
+                $html.removeClass(className);
+            }
+        })
+        .on('focusin.keypadEvent', 'input', function () {
+            var _ = keypadEvent;
+
+            if (userAgentCheck.isIos) {
+                _.isFocus.ios = true;
+            } else if (userAgentCheck.isAndroid) {
+                _.isFocus.android = true;
+                _.scroll();
+            }
+        })
+        .on('click.keypadEvent', 'input', function () {
+            var _ = keypadEvent;
+
+            if (userAgentCheck.isIos) {
+                _.isClick.ios = true;
+            } else if (userAgentCheck.isAndroid) {
+                _.isClick.android = true;
+            }
+        });
 
     // layer
     var uiLayer = {
@@ -2168,6 +2369,7 @@
         }
 
         // set
+        keypadEvent.init();
         scrollbarsWidth.set();
         checkDisabledClass($root);
         checkboxGroup.init($root);
@@ -2266,7 +2468,9 @@
     window.uiJSResize = uiJSResize;
 
     // uiJSScrollToElement
-    function uiJSScrollToElement(el) {
+    function uiJSScrollToElement(el, duration) {
+        duration = duration || 0;
+
         var $el = $(el);
         var $layerBody = $el.closest('.fullLayer__body, .toastLayer__body');
         var hasLayer = Boolean($layerBody.length);
@@ -2274,7 +2478,7 @@
             if (hasLayer) {
                 return $layerBody;
             } else {
-                return $(window);
+                return $('html');
             }
         })();
         var offsetTop = $el.offset().top;
@@ -2287,7 +2491,12 @@
 
         offsetTop -= 20;
 
-        $scroller.scrollTop(offsetTop);
+        $scroller.stop().animate(
+            {
+                scrollTop: offsetTop,
+            },
+            duration
+        );
     }
     window.uiJSScrollToElement = uiJSScrollToElement;
 
@@ -2474,6 +2683,7 @@
         .on('resize.uiJS', function () {
             uiJSResize();
             fixBarScroll();
+            keypadEvent.resizeLegacy();
         })
         .on('orientationchange.uiJS', function () {
             uiJSResize();

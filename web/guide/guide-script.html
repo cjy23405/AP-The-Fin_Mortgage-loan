@@ -304,14 +304,37 @@
                     <h2 class="_guideSection__title">uiJSScrollToElement</h2>
 
                     <script type="code-view" data-language="javascript">
-                        uiJSScrollToElement('#foo');
-                        // or
-                        uiJSScrollToElement(document.getElementById('foo'));
-                        // or
-                        uiJSScrollToElement($('#foo'));
+                        uiJSScrollToElement(element [, duration]);
                     </script>
 
                     <div class="_guideDescription">스크롤을 특정 요소로 위치 시키는 함수</div>
+
+                    <div class="_guideTable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="_guideTable__name">Name</th>
+                                    <th class="_guideTable__type">Type</th>
+                                    <th class="_guideTable__default">Default</th>
+                                    <th class="_guideTable__description">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="_guideTable__name">element</td>
+                                    <td class="_guideTable__type">string | HTMLElement | jQuery object</td>
+                                    <td class="_guideTable__default"></td>
+                                    <td class="_guideTable__description">스크롤 이동 시킬 대상 요소</td>
+                                </tr>
+                                <tr>
+                                    <td class="_guideTable__name">duration</td>
+                                    <td class="_guideTable__type">number</td>
+                                    <td class="_guideTable__default">0</td>
+                                    <td class="_guideTable__description">애니메이션 시간</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
 
                 <section class="_guideSection">
