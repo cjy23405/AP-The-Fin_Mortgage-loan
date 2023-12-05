@@ -1704,7 +1704,7 @@ section + .divide {
 
 .footerInfoWrap {
     background: var(--systemGray100);
-    padding: 24px 24px 80px;
+    padding: 24px;
 }
 .footerInfoWrap .infoListBox li {
     font-size: 12px;
@@ -1953,21 +1953,6 @@ section + .divide {
     background-image: url(../images/icon/icon_timer.png);
 }
 /* ICONS */
-.prodInfoList {
-    font-size: 14px;
-    line-height: var(--lineHeightDefault);
-    margin: 0;
-}
-.prodInfoList dt {
-    font-weight: 500;
-}
-.prodInfoList dd {
-    color: var(--systemGray500);
-    margin: 4px 0 0;
-}
-.prodInfoList dd + dt {
-    margin-top: 16px;
-}
 
 .cardAptInfo {
     /* height: 144px; */
@@ -3185,13 +3170,6 @@ section + .divide {
     color: var(--mainBlack);
 }
 
-/* clauseData */
-.clauseData::before,
-.clauseData::after {
-    content: '';
-    display: table;
-}
-
 /* pdfViewer */
 .pdfViewer {
     flex: 1;
@@ -3205,4 +3183,25 @@ section + .divide {
     border: none;
     margin: 0;
     flex: 1;
+}
+
+/* clauseData */
+.clauseData::before,
+.clauseData::after {
+    content: '';
+    display: table;
+}
+
+/* detailData */
+.detailData::before,
+.detailData::after {
+    content: '';
+    display: table;
+}
+
+/* footerData */
+.footerData::before,
+.footerData::after {
+    content: '';
+    display: table;
 }
