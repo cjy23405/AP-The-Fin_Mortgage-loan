@@ -2301,7 +2301,7 @@ section + .divide {
     padding-right: 20px;
 }
 
-@media (max-width: 370px) {
+@media (max-width: 359px) {
     .loanResultListItem .loanResultInfo {
         padding-right: 0;
         background: none;
