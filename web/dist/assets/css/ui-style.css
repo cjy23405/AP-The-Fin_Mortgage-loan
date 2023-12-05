@@ -3071,9 +3071,9 @@ section + .divide {
 /* processLoading */
 .processLoading {
     position: relative;
-    margin: auto;
-    width: 316px;
+    margin: auto -24px;
     height: 316px;
+    overflow: hidden;
 }
 .processLoading > div {
     position: absolute;
