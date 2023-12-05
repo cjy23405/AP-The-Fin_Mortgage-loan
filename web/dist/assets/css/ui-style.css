@@ -2291,14 +2291,30 @@ section + .divide {
 }
 .loanResultListItem .loanResultInfo .loanResultData {
     display: flex;
+    justify-content: space-between;
     font-size: 20px;
     font-weight: 600;
     line-height: var(--lineHeightLabel);
     margin-top: 16px;
 }
-.loanResultListItem .loanResultInfo .loanResultData span:first-child {
-    width: 110px;
+.loanResultListItem .loanResultInfo .loanResultData span:last-child {
+    padding-right: 20px;
 }
+
+@media (max-width: 370px) {
+    .loanResultListItem .loanResultInfo {
+        padding-right: 0;
+        background: none;
+        margin-left: 10px;
+    }
+    .loanResultListItem .loanResultInfo .loanResultData {
+        font-size: 16px;
+    }
+    .loanResultListItem .loanResultInfo .loanResultData span:last-child {
+        padding-right: 0;
+    }
+}
+
 .loanDetailInfo {
     display: flex;
     flex-direction: column;
