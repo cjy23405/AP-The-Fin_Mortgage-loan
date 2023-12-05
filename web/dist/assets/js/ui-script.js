@@ -58,6 +58,7 @@
     var $doc = $(document);
     var nativeEvent = {
         input: new Event('input'),
+        inputClear: new Event('inputClear'),
         lastScroll: new Event('lastScroll'),
         keypadOpened: new Event('keypadOpened'),
         keypadClosed: new Event('keypadClosed'),
@@ -2580,6 +2581,7 @@
 
         $input.val('');
         $input.get(0).dispatchEvent(nativeEvent.input);
+        $input.get(0).dispatchEvent(nativeEvent.inputClear);
         $input.focus();
     });
 
