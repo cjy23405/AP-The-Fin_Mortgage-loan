@@ -1364,8 +1364,6 @@ body,
     box-sizing: border-box;
 }
 
-/* ########## LHO ########## */
-
 section + .divide {
     display: block;
     height: 16px;
@@ -2395,8 +2393,6 @@ section + .divide {
     height: 100%;
     background-position: center;
 }
-
-/* ########## CJY ########## */
 
 /* uiSearchButton */
 .uiSearchButton {
