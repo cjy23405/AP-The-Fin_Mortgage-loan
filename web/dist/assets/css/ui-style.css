@@ -2139,8 +2139,8 @@ section + .divide {
 .uiRadioWithBankList .uiRadioWithBankList__Body label {
     display: flex;
 }
-.uiCheckWithBankList .uiCheckWithBankList__Body label span,
-.uiRadioWithBankList .uiRadioWithBankList__Body label span {
+.uiCheckWithBankList .uiCheckWithBankList__Body label > span,
+.uiRadioWithBankList .uiRadioWithBankList__Body label > span {
     position: relative;
     flex: 1;
     font-size: 13px;
@@ -2149,40 +2149,63 @@ section + .divide {
     padding: 0 20px 0 4px;
     margin-left: 4px;
 }
-.uiCheckWithBankList .uiCheckWithBankList__Body label span::before,
-.uiCheckWithBankList .uiCheckWithBankList__Body label span::after {
+.uiCheckWithBankList .uiCheckWithBankList__Body label > span::before,
+.uiCheckWithBankList .uiCheckWithBankList__Body label > span::after {
     width: 20px;
     height: 20px;
     right: 0;
     top: 5px;
     left: auto;
 }
-.uiRadioWithBankList .uiRadioWithBankList__Body label span::before {
+.uiRadioWithBankList .uiRadioWithBankList__Body label > span::before {
     width: 18px;
     height: 18px;
     right: 0;
     top: 5px;
     left: auto;
 }
-.uiRadioWithBankList .uiRadioWithBankList__Body label span::after {
+.uiRadioWithBankList .uiRadioWithBankList__Body label > span::after {
     width: 8px;
     height: 8px;
     top: 11px;
     right: 6px;
     left: auto;
 }
-.uiCheckWithBankList .uiCheckWithBankList__Body label span strong,
-.uiRadioWithBankList .uiRadioWithBankList__Body label span strong {
+.uiCheckWithBankList .uiCheckWithBankList__Body label > span strong,
+.uiRadioWithBankList .uiRadioWithBankList__Body label > span strong {
     display: block;
     font-size: 16px;
     line-height: 1;
     margin-top: 8px;
     color: var(--mainBlack);
 }
-.uiRadioWithBankList .uiRadioWithBankList__Body label span strong {
+.uiRadioWithBankList .uiRadioWithBankList__Body label > span strong {
     margin-top: 0;
     margin-bottom: 6px;
 }
+.uiRadioWithBankList .uiRadioWithBankList__Body label > span small {
+    display: block;
+    margin-top: 11px;
+    color: var(--systemGray500);
+    font-size: 13px;
+    line-height: var(--lineHeightLabel);
+}
+.uiRadioWithBankList .uiRadioWithBankList__Body .uiRadioButton {
+    align-items: flex-start;
+}
+.uiRadioWithBankList .uiRadioWithBankList__Body .uiRadioButton span::before {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.uiRadioWithBankList .uiRadioWithBankList__Body .uiRadioButton span::after {
+    top: 50%;
+    transform: scale(0) translateY(-50%);
+}
+
+.uiRadioWithBankList .uiRadioWithBankList__Body .uiRadioButton > input[type='radio']:checked + span::after {
+    transform: scale(1) translateY(-50%);
+}
+
 .uiRadioWithBankList.uiRadioWithBankList__disable {
     margin-top: 0;
 }
