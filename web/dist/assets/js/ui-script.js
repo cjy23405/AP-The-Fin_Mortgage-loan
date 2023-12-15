@@ -1,25 +1,17 @@
 // ui-script.js
 
 (function ($) {
-    var userAgent = navigator.userAgent;
-    var userAgentCheck = {
-        ieMode: document.documentMode,
-        isIos: Boolean(userAgent.match(/iPod|iPhone|iPad/)) || Boolean(userAgent.match(/os=i/)),
-        isAndroid: Boolean(userAgent.match(/Android/)) || Boolean(userAgent.match(/os=a/)),
+    var getUserAgentCheck = function () {
+        var userAgent = navigator.userAgent;
+        var obj = {
+            ieMode: userAgent.match(/Edge|Edg/gi) ? 'edge' : document.documentMode,
+            isIos: Boolean(userAgent.match(/iPod|iPhone|iPad/)) || Boolean(userAgent.match(/os=i/)),
+            isAndroid: Boolean(userAgent.match(/Android/)) || Boolean(userAgent.match(/os=a/)),
+        };
+
+        return obj;
     };
-    if (userAgent.match(/Edge|Edg/gi)) {
-        userAgentCheck.ieMode = 'edge';
-    }
-    userAgentCheck.androidVersion = (function () {
-        if (userAgentCheck.isAndroid) {
-            try {
-                var match = userAgent.match(/Android (\d+(?:\.\d+){0,2})/);
-                return match[1];
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    })();
+    var userAgentCheck = getUserAgentCheck();
     window.userAgentCheck = userAgentCheck;
 
     // min 포함 max 불포함 랜덤 정수
@@ -170,7 +162,15 @@
             var $opener = null;
             var beforeH = 0;
             var afterH = 0;
-            speed = speed instanceof Number ? Number(speed) : typeof speed === 'number' ? speed : _.options.speed;
+            speed = (function () {
+                if (speed instanceof Number) {
+                    return Number(speed);
+                } else if (typeof speed === 'number') {
+                    return speed;
+                } else {
+                    return _.options.speed;
+                }
+            })();
 
             if (!$item.hasClass(_.className.opened)) {
                 $layer = $item.find(_.layer);
@@ -220,7 +220,15 @@
             var beforeH = 0;
             var itemBeforeH = 0;
             var afterH = 0;
-            speed = speed instanceof Number ? Number(speed) : typeof speed === 'number' ? speed : _.options.speed;
+            speed = (function () {
+                if (speed instanceof Number) {
+                    return Number(speed);
+                } else if (typeof speed === 'number') {
+                    return speed;
+                } else {
+                    return _.options.speed;
+                }
+            })();
 
             if ($item.hasClass(_.className.opened)) {
                 _.blockTabKey = true;
@@ -341,6 +349,7 @@
         _.options = option;
         _.wrap = $wrap;
         _.crrTarget = '';
+        _.itemClickCheck = false;
         _.init();
         _.on();
     };
@@ -358,50 +367,7 @@
             }
 
             _.openerItems = _.opener;
-
-            _.openerList = (function () {
-                var $list = _.wrap;
-                var eachBreak = false;
-
-                if (_.opener && _.opener.length >= 2) {
-                    _.opener
-                        .eq(0)
-                        .parents()
-                        .each(function () {
-                            var $this = $(this);
-                            _.opener
-                                .eq(1)
-                                .parents()
-                                .each(function () {
-                                    var $secondThis = $(this);
-                                    var $children = $this.children();
-
-                                    if ($this.is($secondThis)) {
-                                        $list = $this;
-                                        eachBreak = true;
-
-                                        if ($children.filter(_.opener).length <= 0) {
-                                            _.openerItems = $this.children().filter(function () {
-                                                if ($(this).find(_.opener).length) {
-                                                    return true;
-                                                } else {
-                                                    return false;
-                                                }
-                                            });
-                                        }
-
-                                        return false;
-                                    }
-                                });
-
-                            if (eachBreak) {
-                                return false;
-                            }
-                        });
-                }
-
-                return $list;
-            })();
+            _.openerList = _.getOpenerList();
 
             if (_.options.item) {
                 if (typeof _.options.item === 'string') {
@@ -425,96 +391,161 @@
                 _.open(initialOpen, false);
             }
         },
+        getOpenerList: function () {
+            var _ = this;
+            var $list = _.wrap;
+            var eachBreak = false;
+
+            if (_.opener && _.opener.length >= 2) {
+                _.opener
+                    .eq(0)
+                    .parents()
+                    .each(function () {
+                        var $this = $(this);
+                        _.opener
+                            .eq(1)
+                            .parents()
+                            .each(function () {
+                                var $secondThis = $(this);
+                                var $children = $this.children();
+
+                                if ($this.is($secondThis)) {
+                                    $list = $this;
+                                    eachBreak = true;
+
+                                    if ($children.filter(_.opener).length <= 0) {
+                                        _.openerItems = $this.children().filter(function () {
+                                            return Boolean($(this).find(_.opener).length);
+                                        });
+                                    }
+
+                                    return false;
+                                }
+                            });
+
+                        if (eachBreak) {
+                            return false;
+                        }
+                    });
+            }
+
+            return $list;
+        },
         on: function () {
             var _ = this;
-            var itemClickCheck = false;
 
             if (_.opener.length && _.item.length) {
                 if (!_.openerItems.is(_.opener)) {
-                    _.openerItems.on('click.uiTabPanel' + _.hashCode, function (e) {
-                        var $this = $(this);
-                        var $target = $(e.target);
-
-                        if ($target.is($this)) {
-                            itemClickCheck = true;
-                            $target.find(_.opener).trigger('click');
-                        }
+                    _.openerItems.on('click.uiTabPanel' + _.hashCode, function () {
+                        _.openerItemsClick($(this), $(e.target));
                     });
                 }
+
                 _.opener.on('click.uiTabPanel' + _.hashCode, function (e) {
-                    var $this = $(this);
-                    var target = $this.attr('data-tab-open');
-
-                    _.open(target);
-
-                    if ($this.is('a')) {
-                        e.preventDefault();
-                    }
-
-                    if (itemClickCheck) {
-                        e.stopPropagation();
-                        itemClickCheck = false;
-                    }
+                    _.openerClick($(this), e);
                 });
+
                 $doc.on('focusin.uiTabPanel' + _.hashCode, function (e) {
-                    var $panel = ($(e.target).is(_.item) && $(e.target)) || ($(e.target).closest(_.item).length && $(e.target).closest(_.item));
+                    _.docFocusin(e);
+                })
+                    .on('keydown.uiTabPanel' + _.hashCode, function (e) {
+                        _.docKeydown(e);
+                    })
+                    .on('keyup.uiTabPanel' + _.hashCode, function (e) {
+                        _.docKeyup(e);
+                    });
+            }
+        },
+        openerItemsClick: function ($this, $target) {
+            var _ = this;
 
-                    if ($panel && !$panel.is(':hidden')) {
-                        _.open($panel.attr('data-tab'));
-                    }
-                });
-                $doc.on('keydown.uiTabPanel' + _.hashCode, function (e) {
-                    var keyCode = e.keyCode;
-                    var isFocus = Boolean(_.openerItems.filter(':focus').length);
+            if ($target.is($this)) {
+                _.itemClickCheck = true;
+                $target.find(_.opener).trigger('click');
+            }
+        },
+        openerClick: function ($this, e) {
+            var _ = this;
+            var target = $this.attr('data-tab-open');
 
-                    if (_.options.a11y && isFocus) {
-                        if ([13, 32, 35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
-                            e.preventDefault();
-                        }
-                    }
-                }).on('keyup.uiTabPanel' + _.hashCode, function (e) {
-                    var keyCode = e.keyCode;
-                    var $focusOpener = _.openerItems.filter(':focus');
-                    var isFocus = Boolean($focusOpener.length);
-                    var target = isFocus ? $focusOpener.attr('data-tab-open') : '';
+            _.open(target);
 
-                    if (_.options.a11y && isFocus) {
-                        switch (keyCode) {
-                            case 35:
-                                _.goEnd();
-                                break;
-                            case 36:
-                                _.goStart();
-                                break;
-                            case 37:
-                                _.prev();
-                                break;
-                            case 38:
-                                _.prev();
-                                break;
-                            case 39:
-                                _.next();
-                                break;
-                            case 40:
-                                _.next();
-                                break;
-                            case 13:
-                                _.open(target);
-                                break;
-                            case 32:
-                                _.open(target);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
+            if ($this.is('a')) {
+                e.preventDefault();
+            }
+
+            if (_.itemClickCheck) {
+                e.stopPropagation();
+                _.itemClickCheck = false;
+            }
+        },
+        docFocusin: function (e) {
+            var _ = this;
+            var $panel = ($(e.target).is(_.item) && $(e.target)) || ($(e.target).closest(_.item).length && $(e.target).closest(_.item));
+
+            if ($panel && !$panel.is(':hidden')) {
+                _.open($panel.attr('data-tab'));
+            }
+        },
+        docKeydown: function (e) {
+            var _ = this;
+            var keyCode = e.keyCode;
+            var isFocus = Boolean(_.openerItems.filter(':focus').length);
+
+            if (_.options.a11y && isFocus) {
+                if ([13, 32, 35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
+                    e.preventDefault();
+                }
+            }
+        },
+        docKeyup: function (e) {
+            var _ = this;
+            var keyCode = e.keyCode;
+            var $focusOpener = _.openerItems.filter(':focus');
+            var isFocus = Boolean($focusOpener.length);
+            var target = isFocus ? $focusOpener.attr('data-tab-open') : '';
+
+            if (_.options.a11y && isFocus) {
+                switch (keyCode) {
+                    case 35:
+                        _.goEnd();
+                        break;
+                    case 36:
+                        _.goStart();
+                        break;
+                    case 37:
+                        _.prev();
+                        break;
+                    case 38:
+                        _.prev();
+                        break;
+                    case 39:
+                        _.next();
+                        break;
+                    case 40:
+                        _.next();
+                        break;
+                    case 13:
+                        _.open(target);
+                        break;
+                    case 32:
+                        _.open(target);
+                        break;
+                    default:
+                        break;
+                }
             }
         },
         open: function (target, focus) {
             var _ = this;
             target = String(target);
-            focus = focus instanceof Boolean ? (String(focus) === 'false' ? false : null) : focus;
+            focus = (function () {
+                if (focus instanceof Boolean) {
+                    return String(focus) === 'false' ? false : null;
+                } else {
+                    return focus;
+                }
+            })();
             var $opener = _.opener.filter('[data-tab-open="' + target + '"]');
             var $panel = _.item.filter('[data-tab="' + target + '"]');
 
@@ -532,7 +563,7 @@
         },
         indexOpen: function (i, focus) {
             var _ = this;
-            target = Number(i);
+            i = Number(i);
             var target = _.opener.eq(i).attr('data-tab-open');
 
             _.open(target, focus);
@@ -1058,36 +1089,276 @@
             openerActive: 'jsLayerOpenerActive',
             allOpenerActive: 'jsLayerAllOpenerActive',
         },
-        open: function (target, opener, speed) {
+        getOpener: function (opener) {
+            return Boolean(opener) && $(opener).length ? $(opener) : null;
+        },
+        getDuration: function (speed) {
+            return typeof speed === 'number' ? speed : 350;
+        },
+        getHashCode: function ($layer) {
+            var code = $layer.data('uiJSHashCode');
+            if (typeof code !== 'string') {
+                code = uiGetHashCode();
+                $layer.data('uiJSHashCode', code);
+            }
+            return code;
+        },
+        getHasScrollBlock: function ($layer) {
+            if (!$layer || !$layer.length) return true;
+            var val = $layer.data('scroll-block');
+            return typeof val === 'boolean' ? val : true;
+        },
+        getIsFocus: function ($layer) {
+            var val = $layer.data('focus');
+            return typeof val === 'boolean' ? val : true;
+        },
+        getIsCycleFocus: function ($layer) {
+            var val = $layer.data('cycle-focus');
+            return typeof val === 'boolean' ? val : true;
+        },
+        getIsDimClose: function ($layer) {
+            var val = $layer.data('dim-close');
+            return typeof val === 'boolean' ? val : true;
+        },
+        getDisplay: function ($layer) {
+            var val = $layer.data('layer-display');
+            return typeof val === 'string' ? val : 'block';
+        },
+        getLabelID: function ($label, hashId) {
+            var id = $label.attr('id');
+            if (!(typeof id === 'string' && id.length)) {
+                id = hashId;
+                $label.attr('id', id);
+            }
+            return id;
+        },
+        getIsOpenerFocusToAfterClose: function ($layer) {
+            var val = $layer.data('opener-focus-to-after-close');
+            return typeof val === 'boolean' ? val : true;
+        },
+        getPreOpenLayer: function ($preOpenLayers) {
+            if (!$preOpenLayers.length) return null;
+
+            var higherZIndex = (() => {
+                var arr = [];
+                for (var i = 0; i < $preOpenLayers.length; i++) {
+                    arr.push($preOpenLayers.eq(i).css('z-index'));
+                }
+                arr.sort();
+                return arr[arr.length - 1];
+            })();
+
+            return $preOpenLayers.filter(function () {
+                var zIndex = $(this).css('z-index');
+
+                return zIndex === higherZIndex;
+            });
+        },
+        getPreOpenLayerContainer: function ($preOpenLayer) {
+            return $preOpenLayer && $preOpenLayer.length ? $preOpenLayer.find('.layerContainer') : null;
+        },
+        getPreOpenLayerOhterElements: function ($preOpenLayer) {
+            return $preOpenLayer ? $preOpenLayer.find('[data-ui-js="hidden"]') : null;
+        },
+        getIsPreOpenLayer: function ($preOpenLayer) {
+            return Boolean($preOpenLayer && $preOpenLayer.length);
+        },
+        filterOhterElements: function ($el, notOhterElements) {
+            return !$el.is('[data-layer]') && !$el.closest('[data-layer]').length && !$el.is(notOhterElements) && $el.is(':visible');
+        },
+        setCycleFocus: function ($layer, $layerContainer, isCycleFocus) {
+            var _ = uiLayer;
+
+            if (isCycleFocus) {
+                if (!$layer.children('.' + _.classNames.beforeLoop).length) {
+                    $('<div class="' + _.classNames.beforeLoop + '" tabindex="0"></div>')
+                        .on('focusin.uiLayer', function () {
+                            var $lastChild = (function () {
+                                var $el = $layerContainer.find(':last-child');
+                                var length = $el.length;
+                                return length ? $el.eq(length - 1) : null;
+                            })();
+
+                            if ($lastChild) {
+                                elFocus($lastChild);
+                            } else {
+                                $layerContainer.focus();
+                            }
+                        })
+                        .prependTo($layer);
+                }
+
+                if (!$layer.children('.' + _.classNames.afterLoop).length) {
+                    $('<div class="' + _.classNames.afterLoop + '" tabindex="0"></div>')
+                        .on('focusin.uiLayer', function () {
+                            $layerContainer.focus();
+                        })
+                        .appendTo($layer);
+                }
+            }
+        },
+        setDimClose: function ($layer, $layerContainer, target, isDimClose) {
+            var _ = uiLayer;
+            var $body = $('body');
+
+            if (isDimClose) {
+                $body.off('click.uiLayer_' + target).on('click.uiLayer_' + target, function (e) {
+                    var $target = $(e.target);
+                    var $closest = $target.closest('[data-layer]');
+
+                    if (!$layer.data('containerClick') && !($target.is('[data-layer]') && !$target.is($layer)) && !($closest.length && !$closest.is($layer))) {
+                        _.close(target);
+                    }
+
+                    $layer.data('containerClick', false);
+                });
+                $layerContainer.off('click.uiLayer_' + target).on('click.uiLayer_' + target, function (e) {
+                    $layer.data('containerClick', true);
+                });
+            }
+        },
+        setCloseScrollBlock: function (isPreOpenLayer, isPreOpenLayerHasScrollBlock, isScrollBlock) {
+            if (!isPreOpenLayer || (!isPreOpenLayerHasScrollBlock && isScrollBlock)) {
+                scrollBlock.clear();
+            } else if (isPreOpenLayerHasScrollBlock && !isScrollBlock) {
+                scrollBlock.block();
+            }
+        },
+        afterOpen: function (target, $layer, $layerContainer, $opener, $allOpener, isFocus, duration) {
             var _ = uiLayer;
             var $html = $('html');
-            var $body = $('body');
-            var $layer = $('[data-layer="' + target + '"]');
-            var $layerContainer = null;
-            var $layers = $('[data-layer]');
-            var $label = null;
-            var $inElements = null;
-            var $preOpenLayers = null;
-            var $preOpenLayersContainer = null;
+
+            if ($opener && $opener.length) {
+                $opener.addClass(_.classNames.openerActive);
+            }
+            if ($allOpener.length) {
+                $allOpener.addClass(_.classNames.allOpenerActive);
+            }
+
+            $html.addClass(_.classNames.htmlOpened + ' ' + _.classNames.htmlOpened + '_' + target);
+            $layer
+                .addClass(_.classNames.opened + ' ' + _.classNames.animated)
+                .animate(
+                    {
+                        opacity: 1,
+                    },
+                    duration,
+                    function () {
+                        if (isFocus) {
+                            $layerContainer.focus();
+                        }
+                        $layer.removeClass(_.classNames.animated).trigger('layerAfterOpened');
+                    }
+                )
+                .trigger('layerOpened');
+        },
+        afterClose: function (target, $layer, $layerContainer, $opener, isOpenerFocusToAfterClose) {
+            var _ = uiLayer;
+            var $html = $('html');
+            var $preOpenLayers = $('[data-layer].' + _.classNames.opened).not($layer);
+            var $preOpenLayer = _.getPreOpenLayer($preOpenLayers);
+            var $preOpenLayerContainer = _.getPreOpenLayerContainer($preOpenLayer);
+            var $preOpenLayerOhterElements = _.getPreOpenLayerOhterElements($preOpenLayer);
             var $ohterElements = null;
-            var $preLayersElements = null;
-            var $opener = Boolean(opener) && $(opener).length ? $(opener) : null;
-            var $allOpener = $('[data-layer-open="' + target + '"]');
-            var timer = null;
-            var hasScrollBlock = true;
-            var isFocus = true;
-            var isCycleFocus = true;
-            var isDimClose = true;
-            var speed = typeof speed === 'number' ? speed : 350;
-            var hashCode = '';
-            var labelID = '';
-            var display = 'block';
+            var isPreOpenLayer = _.getIsPreOpenLayer($preOpenLayer);
+            var isPreOpenLayerHasScrollBlock = _.getHasScrollBlock($preOpenLayer);
+            var isScrollBlock = $html.hasClass(scrollBlock.className.block);
+
+            _.closeA11ySet($preOpenLayer, $preOpenLayerContainer, $preOpenLayerOhterElements, $ohterElements);
+
+            if (!isPreOpenLayer) {
+                $html.removeClass(_.classNames.htmlOpened);
+            }
+
+            _.setCloseScrollBlock(isPreOpenLayer, isPreOpenLayerHasScrollBlock, isScrollBlock);
+
+            if (isOpenerFocusToAfterClose) {
+                if ($opener && $opener.length) {
+                    if (isPreOpenLayer && $opener.closest('[data-layer]').is($preOpenLayer)) {
+                        elFocus($opener);
+                    }
+                    if (!isPreOpenLayer) {
+                        elFocus($opener);
+                    }
+                } else {
+                    elFocus($html);
+                }
+            }
+            $layer.data('layerOpener', null);
+
+            $html.removeClass(_.classNames.htmlClosedAnimated + ' ' + _.classNames.htmlOpened + '_' + target);
+            $layerContainer.css('visibility', 'hidden');
+            $layer
+                .css('display', 'none')
+                .removeClass(_.classNames.closed + ' ' + _.classNames.animated)
+                .trigger('layerAfterClosed');
+        },
+        openA11ySet: function (target, $layer, $layerContainer, hashCode) {
+            var _ = uiLayer;
             var notOhterElements =
                 'script, link, style, base, meta, br, [aria-hidden], [inert], [data-ui-js], option, ul, dl, table, thead, tbody, tfoot, tr, colgroup, col, :empty:not([tabindex]), .uiLoading, .uiLoading *, .' +
                 _.classNames.notInert +
                 ', .' +
                 _.classNames.notInert +
                 ' *';
+            var labelID = '';
+            var $layers = $('[data-layer]');
+            var $label = $layer.find('h1, h2, h3, h4, h5, h6, p').eq(0);
+            var $inElements = $layer.find('[data-ui-js="hidden"]');
+            var $preOpenLayers = $layers.filter('.' + _.classNames.opened).not($layer);
+            var $preOpenLayersContainer = $preOpenLayers.find('.layerContainer');
+            var $preLayersElements = $preOpenLayers.find('*').filter(function () {
+                var $this = $(this);
+                return !$this.is(notOhterElements);
+            });
+            var $ohterElements = $('body *').filter(function () {
+                var $this = $(this);
+                return _.filterOhterElements($this, notOhterElements);
+            });
+
+            if ($label.length) {
+                labelID = _.getLabelID($label, target + '_' + hashCode);
+                $layerContainer.attr('aria-labelledby', labelID);
+            }
+
+            $layer.removeAttr('aria-hidden').removeAttr('inert');
+            $inElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+            $ohterElements.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
+            $preLayersElements.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
+            $preOpenLayersContainer.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
+            $preOpenLayers.attr('aria-hidden', 'true');
+
+            if (!userAgentCheck.isAndroid && !userAgentCheck.isIos) {
+                $ohterElements.attr('inert', '');
+                $preLayersElements.attr('inert', '');
+                $preOpenLayersContainer.attr('inert', '');
+                $preOpenLayers.attr('inert', '');
+            }
+
+            $layerContainer.attr('tabindex', '0').attr('role', 'dialog').attr('aria-hidden', 'false').attr('aria-modal', 'true').css('visibility', 'visible').removeAttr('hidden');
+        },
+        closeA11ySet: function ($preOpenLayer, $preOpenLayerContainer, $preOpenLayerOhterElements, $ohterElements) {
+            if ($preOpenLayer && $preOpenLayer.length) {
+                $preOpenLayerOhterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+                $preOpenLayerContainer.removeAttr('inert').attr('aria-hidden', 'false').attr('aria-modal', 'true');
+                $preOpenLayer.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+            } else {
+                $ohterElements = $('body').find('[data-ui-js="hidden"]');
+                $ohterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
+            }
+        },
+        open: function (target, opener, speed) {
+            var _ = uiLayer;
+            var $body = $('body');
+            var $layer = $('[data-layer="' + target + '"]');
+            var $layerContainer = null;
+            var $opener = _.getOpener(opener);
+            var $allOpener = $('[data-layer-open="' + target + '"]');
+            var timer = null;
+            var hasScrollBlock, isFocus, isCycleFocus, isDimClose;
+            var duration = _.getDuration(speed);
+            var hashCode = '';
+            var display = '';
 
             if ($layer.length && !$layer.hasClass(_.classNames.opened)) {
                 $layer.trigger('layerBeforeOpened');
@@ -1097,48 +1368,14 @@
                 }
 
                 $layerContainer = $layer.find('.layerContainer');
-                $label = $layer.find('h1, h2, h3, h4, h5, h6, p').eq(0);
-                $inElements = $layer.find('[data-ui-js="hidden"]');
-                $preOpenLayers = $layers.filter('.' + _.classNames.opened).not($layer);
-                $preOpenLayersContainer = $preOpenLayers.find('.layerContainer');
-                $ohterElements = $('body *').filter(function () {
-                    var $this = $(this);
-                    return !$this.is('[data-layer]') && !$this.closest('[data-layer]').length && !$this.is(notOhterElements) && $this.is(':visible');
-                });
-                $preLayersElements = $preOpenLayers.find('*').filter(function () {
-                    var $this = $(this);
-                    return !$this.is(notOhterElements);
-                });
                 timer = $layer.data('timer') || timer;
 
-                hashCode = (function () {
-                    var code = $layer.data('uiJSHashCode');
-                    if (!(typeof code === 'string')) {
-                        code = uiGetHashCode();
-                        $layer.data('uiJSHashCode', code);
-                    }
-                    return code;
-                })();
-                hasScrollBlock = (function () {
-                    var val = $layer.data('scroll-block');
-                    return typeof val === 'boolean' ? val : hasScrollBlock;
-                })();
-                isFocus = (function () {
-                    var val = $layer.data('focus');
-                    return typeof val === 'boolean' ? val : isFocus;
-                })();
-                isCycleFocus = (function () {
-                    var val = $layer.data('cycle-focus');
-                    return typeof val === 'boolean' ? val : isCycleFocus;
-                })();
-                isDimClose = (function () {
-                    var val = $layer.data('dim-close');
-                    return typeof val === 'boolean' ? val : isDimClose;
-                })();
-                display = (function () {
-                    var val = $layer.data('layer-display');
-                    return typeof val === 'string' ? val : display;
-                })();
+                hashCode = _.getHashCode($layer);
+                hasScrollBlock = _.getHasScrollBlock($layer);
+                isFocus = _.getIsFocus($layer);
+                isCycleFocus = _.getIsCycleFocus($layer);
+                isDimClose = _.getIsDimClose($layer);
+                display = _.getDisplay($layer);
 
                 _.zIndex++;
                 clearTimeout(timer);
@@ -1149,110 +1386,18 @@
 
                 $layer.data('layerOpener', $opener);
 
-                $layerContainer.attr('role', 'dialog').attr('aria-hidden', 'true').css('visibility', 'hidden').attr('hidden', '');
-
-                if ($label.length) {
-                    labelID = (function () {
-                        var id = $label.attr('id');
-                        if (!(typeof id === 'string' && id.length)) {
-                            id = target + '_' + hashCode;
-                            $label.attr('id', id);
-                        }
-                        return id;
-                    })();
-                    $layerContainer.attr('aria-labelledby', labelID);
-                }
-
-                $layer.removeAttr('aria-hidden').removeAttr('inert');
-                $inElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
-                $ohterElements.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
-                $preLayersElements.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
-                $preOpenLayersContainer.attr('aria-hidden', 'true').attr('data-ui-js', 'hidden');
-                $preOpenLayers.attr('aria-hidden', 'true');
-
-                if (!userAgentCheck.isAndroid && !userAgentCheck.isIos) {
-                    $ohterElements.attr('inert', '');
-                    $preLayersElements.attr('inert', '');
-                    $preOpenLayersContainer.attr('inert', '');
-                    $preOpenLayers.attr('inert', '');
-                }
-
-                if (isCycleFocus) {
-                    if (!$layer.children('.' + _.classNames.beforeLoop).length) {
-                        $('<div class="' + _.classNames.beforeLoop + '" tabindex="0"></div>')
-                            .on('focusin.uiLayer', function () {
-                                var $lastChild = (function () {
-                                    var $el = $layerContainer.find(':last-child');
-                                    var length = $el.length;
-                                    return length ? $el.eq(length - 1) : null;
-                                })();
-
-                                if ($lastChild) {
-                                    elFocus($lastChild);
-                                } else {
-                                    $layerContainer.focus();
-                                }
-                            })
-                            .prependTo($layer);
-                    }
-
-                    if (!$layer.children('.' + _.classNames.afterLoop).length) {
-                        $('<div class="' + _.classNames.afterLoop + '" tabindex="0"></div>')
-                            .on('focusin.uiLayer', function () {
-                                $layerContainer.focus();
-                            })
-                            .appendTo($layer);
-                    }
-                }
-
-                if (isDimClose) {
-                    $body.off('click.uiLayer_' + target).on('click.uiLayer_' + target, function (e) {
-                        var $target = $(e.target);
-                        var $closest = $target.closest('[data-layer]');
-
-                        if (!$layer.data('containerClick') && !($target.is('[data-layer]') && !$target.is($layer)) && !($closest.length && !$closest.is($layer))) {
-                            uiLayer.close(target);
-                        }
-
-                        $layer.data('containerClick', false);
-                    });
-                    $layerContainer.off('click.uiLayer_' + target).on('click.uiLayer_' + target, function (e) {
-                        $layer.data('containerClick', true);
-                    });
-                }
+                _.setCycleFocus($layer, $layerContainer, isCycleFocus);
+                _.setDimClose($layer, $layerContainer, target, isDimClose);
+                _.openA11ySet(target, $layer, $layerContainer, hashCode);
 
                 $layer.stop().removeClass(_.classNames.closed).css({
                     display: display,
                     zIndex: _.zIndex,
                 });
-                $layerContainer.attr('tabindex', '0').attr('aria-hidden', 'false').attr('aria-modal', 'true').css('visibility', 'visible').removeAttr('hidden');
 
                 timer = setTimeout(function () {
                     clearTimeout(timer);
-
-                    if ($opener && $opener.length) {
-                        $opener.addClass(_.classNames.openerActive);
-                    }
-                    if ($allOpener.length) {
-                        $allOpener.addClass(_.classNames.allOpenerActive);
-                    }
-
-                    $html.addClass(_.classNames.htmlOpened + ' ' + _.classNames.htmlOpened + '_' + target);
-                    $layer
-                        .addClass(_.classNames.opened + ' ' + _.classNames.animated)
-                        .animate(
-                            {
-                                opacity: 1,
-                            },
-                            speed,
-                            function () {
-                                if (isFocus) {
-                                    $layerContainer.focus();
-                                }
-                                $layer.removeClass(_.classNames.animated).trigger('layerAfterOpened');
-                            }
-                        )
-                        .trigger('layerOpened');
+                    _.afterOpen(target, $layer, $layerContainer, $opener, $allOpener, isFocus, duration);
                 }, 0);
 
                 $layer.data('timer', timer);
@@ -1267,22 +1412,16 @@
             var $opener = $layer.data('layerOpener');
             var $allOpener = $('[data-layer-open="' + target + '"]');
             var timer = null;
-            var speed = typeof speed === 'number' ? speed : 350;
-            var display = 'block';
-            var isOpenerFocusToAfterClose = (function () {
-                var val = $layer.data('opener-focus-to-after-close');
-                return typeof val === 'boolean' ? val : true;
-            })();
+            var duration = _.getDuration(speed);
+            var display = '';
+            var isOpenerFocusToAfterClose = _.getIsOpenerFocusToAfterClose($layer);
 
             if ($layer.length && $layer.hasClass(_.classNames.opened)) {
                 $layer.trigger('layerBeforeClosed');
 
                 $layerContainer = $layer.find('.layerContainer');
                 timer = $layer.data('timer') || timer;
-                display = (function () {
-                    var val = $layer.data('layer-display');
-                    return typeof val === 'string' ? val : display;
-                })();
+                display = _.getDisplay($layer);
 
                 clearTimeout(timer);
 
@@ -1308,79 +1447,9 @@
                             {
                                 opacity: 0,
                             },
-                            speed,
+                            duration,
                             function () {
-                                var $preOpenLayers = $('[data-layer].' + _.classNames.opened).not($layer);
-                                var $preOpenLayer = (function () {
-                                    if (!$preOpenLayers.length) return null;
-
-                                    var higherZIndex = (() => {
-                                        var arr = [];
-                                        for (var i = 0; i < $preOpenLayers.length; i++) {
-                                            arr.push($preOpenLayers.eq(i).css('z-index'));
-                                        }
-                                        arr.sort();
-                                        return arr[arr.length - 1];
-                                    })();
-
-                                    return $preOpenLayers.filter(function () {
-                                        var zIndex = $(this).css('z-index');
-
-                                        return zIndex === higherZIndex;
-                                    });
-                                })();
-                                var $preOpenLayerContainer = $preOpenLayer && $preOpenLayer.length ? $preOpenLayer.find('.layerContainer') : null;
-                                var $preOpenLayerOhterElements = $preOpenLayer ? $preOpenLayer.find('[data-ui-js="hidden"]') : null;
-                                var $ohterElements = null;
-                                var isPreOpenLayerHasScrollBlock = (function () {
-                                    if (!$preOpenLayer || !$preOpenLayer.length) return true;
-
-                                    var val = $preOpenLayer.data('scroll-block');
-
-                                    return typeof val === 'boolean' ? val : true;
-                                })();
-                                var isScrollBlock = $html.hasClass(scrollBlock.className.block);
-
-                                if ($preOpenLayer && $preOpenLayer.length) {
-                                    $preOpenLayerOhterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
-                                    $preOpenLayerContainer.removeAttr('inert').attr('aria-hidden', 'false').attr('aria-modal', 'true');
-                                    $preOpenLayer.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
-                                } else {
-                                    $ohterElements = $('body').find('[data-ui-js="hidden"]');
-
-                                    $html.removeClass(_.classNames.htmlOpened);
-                                    $ohterElements.removeAttr('aria-hidden').removeAttr('inert').removeAttr('data-ui-js');
-                                }
-
-                                if (!$preOpenLayers.length || (!isPreOpenLayerHasScrollBlock && isScrollBlock)) {
-                                    scrollBlock.clear();
-                                } else if (isPreOpenLayerHasScrollBlock && !isScrollBlock) {
-                                    scrollBlock.block();
-                                }
-
-                                if ($opener && $opener.length) {
-                                    if (isOpenerFocusToAfterClose) {
-                                        if ($preOpenLayer && $preOpenLayer.length) {
-                                            if ($opener.closest('[data-layer]').is($preOpenLayer)) {
-                                                elFocus($opener);
-                                            }
-                                        } else {
-                                            elFocus($opener);
-                                        }
-                                    }
-                                    $layer.data('layerOpener', null);
-                                } else {
-                                    if (isOpenerFocusToAfterClose) {
-                                        elFocus($html);
-                                    }
-                                }
-
-                                $html.removeClass(_.classNames.htmlClosedAnimated + ' ' + _.classNames.htmlOpened + '_' + target);
-                                $layerContainer.css('visibility', 'hidden');
-                                $layer
-                                    .css('display', 'none')
-                                    .removeClass(_.classNames.closed + ' ' + _.classNames.animated)
-                                    .trigger('layerAfterClosed');
+                                _.afterClose(target, $layer, $layerContainer, $opener, isOpenerFocusToAfterClose);
                             }
                         )
                         .trigger('layerClosed');
@@ -1628,49 +1697,58 @@
     window.uiJSLoading = loading;
 
     // fixBarSet
-    function fixBarSet() {
-        var $layoutWrap = $('.layoutWrap');
-        var $contentsWrap = $('.contentsWrap');
-        var $top = $('.fixTopWrap');
-        var $fakeTop = $('.jsFakeTop');
-        var $bottom = $('.fixBottomWrap');
-        var $fakeBottom = $('.jsFakeBottom');
-        var topH = 0;
-        var bottomH = 0;
-        var fakeTopH = 0;
-        var fakeBottomH = 0;
+    var fixBarSet = {
+        update: function () {
+            fixBarSet.setTop();
+            fixBarSet.setBottom();
+        },
+        setTop: function () {
+            var $layoutWrap = $('.layoutWrap');
+            var $top = $('.fixTopWrap');
+            var $fakeTop = $('.jsFakeTop');
+            var topH = 0;
+            var fakeTopH = 0;
 
-        if ($top.length && !$top.is(':hidden')) {
-            topH = $top.outerHeight();
-            if (!$fakeTop.length) {
-                $layoutWrap.prepend('<div class="jsFakeTop"></div>');
-                $fakeTop = $('.jsFakeTop');
+            if ($top.length && !$top.is(':hidden')) {
+                topH = $top.outerHeight();
+                if (!$fakeTop.length) {
+                    $layoutWrap.prepend('<div class="jsFakeTop"></div>');
+                    $fakeTop = $('.jsFakeTop');
+                }
+                fakeTopH = $fakeTop.height();
+                if (topH !== fakeTopH) {
+                    $fakeTop.height(topH);
+                }
+            } else {
+                $fakeTop.css('height', 0);
             }
-            fakeTopH = $fakeTop.height();
-            if (!(topH === fakeTopH)) {
-                $fakeTop.height(topH);
-            }
-        } else {
-            $fakeTop.css('height', 0);
-        }
+        },
+        setBottom: function () {
+            var $layoutWrap = $('.layoutWrap');
+            var $contentsWrap = $('.contentsWrap');
+            var $bottom = $('.fixBottomWrap');
+            var $fakeBottom = $('.jsFakeBottom');
+            var bottomH = 0;
+            var fakeBottomH = 0;
 
-        if ($bottom.length && !$bottom.is(':hidden')) {
-            bottomH = $bottom.outerHeight();
-            if (!$fakeBottom.length) {
-                $layoutWrap.append('<div class="jsFakeBottom"></div>');
-                $fakeBottom = $('.jsFakeBottom');
+            if ($bottom.length && !$bottom.is(':hidden')) {
+                bottomH = $bottom.outerHeight();
+                if (!$fakeBottom.length) {
+                    $layoutWrap.append('<div class="jsFakeBottom"></div>');
+                    $fakeBottom = $('.jsFakeBottom');
+                }
+                fakeBottomH = $fakeBottom.height();
+                if (bottomH !== fakeBottomH) {
+                    $fakeBottom.height(bottomH);
+                }
+                if (!$contentsWrap.next().is($bottom)) {
+                    $contentsWrap.after($bottom);
+                }
+            } else {
+                $fakeBottom.css('height', 0);
             }
-            fakeBottomH = $fakeBottom.height();
-            if (!(bottomH === fakeBottomH)) {
-                $fakeBottom.height(bottomH);
-            }
-            if (!$contentsWrap.next().is($bottom)) {
-                $contentsWrap.after($bottom);
-            }
-        } else {
-            $fakeBottom.css('height', 0);
-        }
-    }
+        },
+    };
 
     // fixBarScroll
     function fixBarScroll() {
@@ -1968,6 +2046,7 @@
     var commaInput = {
         keyCode: null,
         ignoreKeyCode: [8, 17, 37, 38, 39, 40, 46],
+        commaReg: /\B(?=(\d{3})+(?!\d))/g,
         init: function ($root) {
             if (!$root) {
                 $root = $doc;
@@ -1976,6 +2055,139 @@
                 commaInput.update($(this));
             });
         },
+        getMin: function ($input) {
+            var r = $input.data('min');
+            return typeof r === 'number' ? r : null;
+        },
+        getMax: function ($input) {
+            var r = $input.data('max');
+            return typeof r === 'number' ? r : null;
+        },
+        getIsMin: function (originNum, min) {
+            return typeof min === 'number' && originNum < min;
+        },
+        getIsMax: function (originNum, max) {
+            return typeof max === 'number' && originNum > max;
+        },
+        getDecimalPlace: function ($input) {
+            var r = $input.data('decimal-place');
+            return typeof r === 'number' ? r : null;
+        },
+        getBeforeZeroLength: function (numStr, zeroReg) {
+            var beforeZero = numStr.match(zeroReg);
+            var beforeZeroLength = beforeZero ? beforeZero[0].length : 0;
+            return beforeZeroLength;
+        },
+        getDot: function (decimalPlace) {
+            return typeof decimalPlace === 'number' && decimalPlace > 0 ? '.' : '';
+        },
+        getDecimal: function (str, reg, place) {
+            var _ = commaInput;
+            var dot = _.getDot(place);
+            return str.replace(reg, function (match, p1) {
+                return dot + p1.slice(0, place);
+            });
+        },
+        getToVal: function (numStr, dotI, isDecimal) {
+            var _ = commaInput;
+            var r = isDecimal ? numStr.slice(0, dotI) : numStr;
+            var decimal = isDecimal ? numStr.slice(dotI, numStr.length) : '';
+
+            return r.replace(_.commaReg, ',') + decimal;
+        },
+        getSelSlice: function (numSelAfter, dotI, beforeLength, isMin, isMax, isDecimal) {
+            var _ = commaInput;
+            var r = '';
+            var decimal = '';
+
+            if (isMin || isMax) {
+                return '';
+            }
+
+            if (isDecimal) {
+                if (dotI + 1 > beforeLength) {
+                    r = numSelAfter.replace(/(.*)\..*/g, '$1');
+                    decimal = numSelAfter.replace(/.*(\..*)/g, '$1');
+                } else {
+                    decimal = numSelAfter;
+                }
+            } else {
+                r = numSelAfter;
+            }
+
+            return r.replace(_.commaReg, ',') + decimal;
+        },
+        getToSelI: function (toVal, numSelAfter, dotI, beforeLength, isMin, isMax, isDecimal) {
+            var _ = commaInput;
+            var slice = _.getSelSlice(numSelAfter, dotI, beforeLength, isMin, isMax, isDecimal);
+            var reg = new RegExp(slice + '$');
+            var search = toVal.search(reg);
+
+            return search;
+        },
+        replaceDot: function (str, reg, dotI, addOffset) {
+            addOffset = addOffset ? addOffset : 0;
+            return str.replace(reg, function (match, offset) {
+                return dotI === addOffset + offset ? '.' : '';
+            });
+        },
+        makeDatas: function (el, val) {
+            var _ = commaInput;
+            var zeroReg = /^0+/g;
+            var dotReg = /\./g;
+            var firstReg = /[^\d\.]/g;
+            var selEnd = el.selectionEnd;
+            var dotI = -1;
+            var numSelBefore = '';
+            var numSelAfter = '';
+            var beforeLength = 0;
+            var numStr = val.replace(firstReg, '');
+            var isNegative = Boolean(val.replace(/[^\d\.\-]/g, '').match(/^-/g));
+            var beforeZeroLength = _.getBeforeZeroLength(numStr, zeroReg);
+
+            numSelBefore = val.slice(0, selEnd).replace(firstReg, '');
+            numSelAfter = val.slice(selEnd, val.length).replace(firstReg, '');
+            beforeLength = numSelBefore.length;
+
+            if (beforeLength <= beforeZeroLength) {
+                numSelBefore = '';
+                numSelAfter = numSelAfter.replace(zeroReg, '');
+            } else {
+                numSelBefore = numSelBefore.replace(zeroReg, '');
+            }
+
+            if (beforeZeroLength) {
+                numStr = numStr.replace(zeroReg, '');
+            }
+
+            dotI = numStr.search(dotReg);
+
+            beforeLength = numSelBefore.length;
+
+            numStr = _.replaceDot(numStr, dotReg, dotI);
+            numSelBefore = _.replaceDot(numSelBefore, dotReg, dotI);
+            numSelAfter = _.replaceDot(numSelAfter, dotReg, dotI, beforeLength);
+
+            if (isNegative) {
+                if (dotI >= 0) {
+                    dotI += 1;
+                }
+
+                if (selEnd === 0) {
+                    numSelAfter = '-' + numSelAfter;
+                } else {
+                    numSelBefore = '-' + numSelBefore;
+                }
+            }
+
+            return {
+                numSelBefore: numSelBefore,
+                numSelAfter: numSelAfter,
+                beforeLength: beforeLength,
+                numStr: (isNegative ? '-' : '') + numStr,
+                dotI: dotI,
+            };
+        },
         update: function ($input, eventType) {
             var _ = commaInput;
 
@@ -1983,96 +2195,31 @@
                 return;
             }
 
-            var commaReg = /\B(?=(\d{3})+(?!\d))/g;
-            var zeroReg = /^0+/g;
-            var dotReg = /\./g;
-            var firstReg = /[^\d\.]/g;
             var decimalReg = /\.(.*)/g;
             var el = $input.get(0);
             var val = $input.val();
-            var min = (function () {
-                var r = $input.data('min');
-                return typeof r === 'number' ? r : null;
-            })();
-            var max = (function () {
-                var r = $input.data('max');
-                return typeof r === 'number' ? r : null;
-            })();
-            var decimalPlace = (function () {
-                var r = $input.data('decimal-place');
-                return typeof r === 'number' ? r : null;
-            })();
-            var selEnd = el.selectionEnd;
-            var dotI = -1;
-            var numSelBefore = '';
-            var numSelAfter = '';
-            var beforeLength = 0;
-            var numStr = (function () {
-                var r = val.replace(firstReg, '');
-                var isNegative = Boolean(val.replace(/[^\d\.\-]/g, '').match(/^-/g));
-                var beforeZero = r.match(zeroReg);
-                var beforeZeroLength = beforeZero ? beforeZero[0].length : 0;
-
-                numSelBefore = val.slice(0, selEnd).replace(firstReg, '');
-                numSelAfter = val.slice(selEnd, val.length).replace(firstReg, '');
-                beforeLength = numSelBefore.length;
-
-                if (beforeLength <= beforeZeroLength) {
-                    numSelBefore = '';
-                    numSelAfter = numSelAfter.replace(zeroReg, '');
-                } else {
-                    numSelBefore = numSelBefore.replace(zeroReg, '');
-                }
-
-                if (beforeZeroLength) {
-                    r = r.replace(zeroReg, '');
-                }
-
-                dotI = r.search(dotReg);
-
-                beforeLength = numSelBefore.length;
-
-                r = r.replace(dotReg, function (match, offset) {
-                    return dotI === offset ? '.' : '';
-                });
-                numSelBefore = numSelBefore.replace(dotReg, function (match, offset) {
-                    return dotI === offset ? '.' : '';
-                });
-                numSelAfter = numSelAfter.replace(dotReg, function (match, offset) {
-                    return dotI === beforeLength + offset ? '.' : '';
-                });
-
-                if (isNegative) {
-                    if (dotI >= 0) {
-                        dotI += 1;
-                    }
-
-                    if (selEnd === 0) {
-                        numSelAfter = '-' + numSelAfter;
-                    } else {
-                        numSelBefore = '-' + numSelBefore;
-                    }
-                }
-
-                return (isNegative ? '-' : '') + r;
-            })();
-            var num = Number(numStr);
-            var isMin = typeof min === 'number' && num < min;
-            var isMax = typeof max === 'number' && num > max;
+            var min = _.getMin($input);
+            var max = _.getMax($input);
+            var decimalPlace = _.getDecimalPlace($input);
+            var makeDatas = _.makeDatas(el, val);
+            var dotI = makeDatas.dotI;
+            var numSelBefore = makeDatas.numSelBefore;
+            var numSelAfter = makeDatas.numSelAfter;
+            var beforeLength = makeDatas.beforeLength;
+            var numStr = makeDatas.numStr;
+            var originNum = Number(numStr);
+            var isMin = _.getIsMin(originNum, min);
+            var isMax = _.getIsMax(originNum, max);
             var isDecimal = dotI >= 0;
 
             if (isMin) {
-                num = min;
                 numStr = String(min);
             } else if (isMax) {
-                num = max;
                 numStr = String(max);
             }
 
             if (isDecimal && typeof decimalPlace === 'number' && decimalPlace >= 0) {
-                numStr = numStr.replace(decimalReg, function (match, p1) {
-                    return (decimalPlace > 0 ? '.' : '') + p1.slice(0, decimalPlace);
-                });
+                numStr = _.getDecimal(numStr, decimalReg, decimalPlace);
 
                 beforeLength = numSelBefore.length;
 
@@ -2081,52 +2228,18 @@
                 } else if (dotI + 1 <= beforeLength) {
                     numSelAfter = numSelAfter.slice(0, dotI + 1 + decimalPlace - beforeLength);
                 } else {
-                    numSelAfter = numSelAfter.replace(decimalReg, function (match, p1) {
-                        return (decimalPlace > 0 ? '.' : '') + p1.slice(0, decimalPlace);
-                    });
+                    numSelAfter = _.getDecimal(numSelAfter, decimalReg, decimalPlace);
                 }
 
-                numSelBefore = numSelBefore.replace(decimalReg, function (match, p1) {
-                    return (decimalPlace > 0 ? '.' : '') + p1.slice(0, decimalPlace);
-                });
+                numSelBefore = _.getDecimal(numSelBefore, decimalReg, decimalPlace);
             }
 
             beforeLength = numSelBefore.length;
 
-            var toVal = (function () {
-                var r = isDecimal ? numStr.slice(0, dotI) : numStr;
-                var decimal = isDecimal ? numStr.slice(dotI, numStr.length) : '';
+            var toVal = _.getToVal(numStr, dotI, isDecimal);
+            var toSelI = _.getToSelI(toVal, numSelAfter, dotI, beforeLength, isMin, isMax, isDecimal);
 
-                return r.replace(commaReg, ',') + decimal;
-            })();
-            var slice = (function () {
-                var r = '';
-                var decimal = '';
-
-                if (isMin || isMax) {
-                    return '';
-                }
-
-                if (isDecimal) {
-                    if (dotI + 1 > beforeLength) {
-                        r = numSelAfter.replace(/(.*)\..*/g, '$1');
-                        decimal = numSelAfter.replace(/.*(\..*)/g, '$1');
-                    } else {
-                        decimal = numSelAfter;
-                    }
-                } else {
-                    r = numSelAfter;
-                }
-
-                return r.replace(commaReg, ',') + decimal;
-            })();
-            var toSelI = (function () {
-                var reg = new RegExp(slice + '$');
-                var search = toVal.search(reg);
-                return search;
-            })();
-
-            if (!(val === toVal)) {
+            if (val !== toVal) {
                 if (!eventType || eventType === 'focusin' || eventType === 'focusout') {
                     $input.val(toVal.replace(/\.+$/g, ''));
                     $input.get(0).dispatchEvent(nativeEvent.input);
@@ -2198,7 +2311,7 @@
             })();
             var selectionIndex = slice.length;
 
-            if (!(val === toVal)) {
+            if (val !== toVal) {
                 $input.val(toVal);
                 $input.get(0).dispatchEvent(nativeEvent.input);
                 el.setSelectionRange(selectionIndex, selectionIndex);
@@ -2212,6 +2325,7 @@
     // convert ten thousand
     var convertTenThousandInput = {
         keyCode: null,
+        unit: ['만', '억', '조', '경', '해', '자', '양', '구', '간', '정', '재', '극'],
         init: function ($root) {
             if (!$root) {
                 $root = $doc;
@@ -2220,34 +2334,32 @@
                 convertTenThousandInput.update($(this));
             });
         },
-        update: function ($input) {
-            var name = $input.attr('data-convert-ten-thousand');
-            var $text = $('[data-convert-ten-thousand-text="' + name + '"]');
-            var beforeText = $text.attr('data-convert-ten-thousand-before-text');
-            var unit = ['만', '억', '조', '경', '해', '자', '양', '구', '간', '정', '재', '극'];
-            var val = $input.val();
-            var isNegative = Boolean(val.match(/^-/g));
-            var minus = isNegative ? '-' : '';
-            var dotI = val.search(/\./g);
-            var decimal = (function () {
-                if (dotI >= 0) {
-                    return val.slice(dotI, val.length).replace(/[^\d]/g, '');
-                } else {
-                    return '';
-                }
-            })();
-            var num = (function () {
-                if (dotI >= 0) {
-                    return val.slice(0, dotI).replace(/[^\d]/g, '');
-                } else {
-                    return val.replace(/[^\d]/g, '');
-                }
-            })();
+        getMinus: function (isNegative) {
+            return isNegative ? '-' : '';
+        },
+        getDecimal: function (val, dotI) {
+            if (dotI >= 0) {
+                return val.slice(dotI, val.length).replace(/[^\d]/g, '');
+            } else {
+                return '';
+            }
+        },
+        getNum: function (val, dotI) {
+            if (dotI >= 0) {
+                return val.slice(0, dotI).replace(/[^\d]/g, '');
+            } else {
+                return val.replace(/[^\d]/g, '');
+            }
+        },
+        getText: function (val, dotI) {
+            var _ = convertTenThousandInput;
             var text = '';
-            var reg = new RegExp('\\d{1,4}$');
+            var unitLength = _.unit.length;
+            var num = _.getNum(val, dotI);
+            var reg = /\d{1,4}$/;
             var temp = null;
 
-            for (var i = 0; i < unit.length; i++) {
+            for (var i = 0; i < unitLength; i++) {
                 temp = num.match(reg);
                 num = num.replace(reg, '');
 
@@ -2255,7 +2367,7 @@
                     temp[0] = temp[0].replace(/^0+/g, '');
 
                     if (temp[0].length) {
-                        text = temp[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') + unit[i] + (text.length ? ' ' : '') + text;
+                        text = temp[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',') + _.unit[i] + (text.length ? ' ' : '') + text;
                     }
                 }
 
@@ -2264,11 +2376,26 @@
                 }
             }
 
+            return text;
+        },
+        update: function ($input) {
+            var _ = convertTenThousandInput;
+            var name = $input.attr('data-convert-ten-thousand');
+            var $text = $('[data-convert-ten-thousand-text="' + name + '"]');
+            var beforeText = $text.attr('data-convert-ten-thousand-before-text');
+            var val = $input.val();
+            var isNegative = Boolean(val.match(/^-/g));
+            var minus = _.getMinus(isNegative);
+            var dotI = val.search(/\./g);
+            var decimal = _.getDecimal(val, dotI);
+            var text = _.getText(val, dotI);
+            var firstUnit = _.unit[0];
+
             if (decimal.length) {
-                if (text.match('만')) {
-                    text = text.replace('만', '.' + decimal + '만');
+                if (text.match(firstUnit)) {
+                    text = text.replace(firstUnit, '.' + decimal + firstUnit);
                 } else {
-                    text = text + ' 0.' + decimal + '만';
+                    text = text + ' 0.' + decimal + firstUnit;
                 }
             }
 
@@ -2400,16 +2527,12 @@
         $root.find('.jsUiAccordion').each(function () {
             var $this = $(this);
             var once = $this.attr('data-once') === 'true';
-            var focusInOpen = !($this.attr('data-focus-open') === 'false');
+            var focusInOpen = $this.attr('data-focus-open') !== 'false';
             var filter = function () {
                 var $thisItem = $(this);
                 var $wrap = $thisItem.closest('.jsUiAccordion');
 
-                if ($wrap.is($this)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return $wrap.is($this);
             };
             var $items = $this.find('.jsUiAccordion__item').filter(filter);
             var $openers = $this.find('.jsUiAccordion__opener').filter(filter);
@@ -2440,11 +2563,7 @@
                 var $thisItem = $(this);
                 var $wrap = $thisItem.closest('.jsUiTabPanel');
 
-                if ($wrap.is($this)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return $wrap.is($this);
             };
             var $items = $this.find('[data-tab]').filter(filter);
             var $openers = $this.find('[data-tab-open]').filter(filter);
@@ -2458,13 +2577,13 @@
         });
 
         // fixBarSet
-        fixBarSet();
+        fixBarSet.update();
     }
     window.uiJSCommon = uiJSCommon;
 
     // uiJSResize
     function uiJSResize() {
-        fixBarSet();
+        fixBarSet.update();
     }
     window.uiJSResize = uiJSResize;
 
@@ -2483,11 +2602,13 @@
             }
         })();
         var offsetTop = $el.offset().top;
+        var $fixTop = $('.fixTopWrap');
+        var fixTopH = $fixTop.length ? $fixTop.outerHeight() : 0;
 
         if (hasLayer) {
             offsetTop = offsetTop - $scroller.offset().top + $scroller.scrollTop();
         } else {
-            offsetTop = offsetTop - $('.fixTopWrap').outerHeight();
+            offsetTop = offsetTop - fixTopH;
         }
 
         offsetTop -= 20;
@@ -2503,7 +2624,7 @@
 
     // fixBarSet
     $doc.on('uiTabPanelChange.fixBarSet', 'body', function () {
-        fixBarSet();
+        fixBarSet.update();
     });
 
     // area focus
@@ -2664,9 +2785,6 @@
 
     // dom ready
     $(function () {
-        var $html = $('html');
-        var $body = $('body');
-
         // init
         uiJSCommon();
         fixBarScroll();

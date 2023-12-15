@@ -682,7 +682,7 @@ body {
 ._guideTable--secondary > table > tfoot > tr > td {
     border-color: var(--guidePrimary200);
 }
-._guideTable > table > thead > tr > th {
+._guideTable--secondary > table > thead > tr > th {
     border-color: var(--guidePrimary300);
 }
 ._guideTable--secondary > table > thead > tr > th._guideTable__name {

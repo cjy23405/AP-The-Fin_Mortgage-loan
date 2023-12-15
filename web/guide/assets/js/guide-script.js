@@ -82,6 +82,7 @@
         makeHtml: function () {
             var head = guideIndex.head;
             var data = guideIndex.data;
+            var headLength = head.length;
             var html = '';
             var colHtml = '';
             var headHtml = '';
@@ -90,7 +91,7 @@
             colHtml += '          <col style="width: 50px" />';
             headHtml += '          <th class="_guideIndexTable__no">No</th>';
 
-            for (var h = 0; h < head.length; h++) {
+            for (var h = 0; h < headLength; h++) {
                 colHtml += '          <col style="' + (head[h].width ? 'width: ' + head[h].width : '') + '" />';
                 headHtml += '          <th class="_guideIndexTable__' + head[h].name + '">' + head[h].text + '</th>';
             }
@@ -123,31 +124,12 @@
             return { data: html, nav: navHtml };
         },
         makeDataHtml: function (data) {
-            var head = guideIndex.head;
             var html = '';
 
             for (var i = 0; i < data.length; i++) {
                 html += '        <tr class="' + (data[i].status === 'delete' ? 'isDelete' : '') + '">';
                 html += '          <td class="_guideIndexTable__no">' + (i + 1) + '</td>';
-
-                for (var h = 0; h < head.length; h++) {
-                    if (head[h].name === 'path') {
-                        html += index.makePathHtml(data[i].path);
-                    } else if (head[h].name === 'status') {
-                        html += index.makeStatusHtml(data[i].status);
-                    } else if (head[h].name === 'create') {
-                        html += index.makeCreateHtml(data[i].create);
-                    } else if (head[h].name === 'update') {
-                        html += index.makeUpdateHtml(data[i].log);
-                    } else if (head[h].name === 'log') {
-                        html += index.makeLogHtml(data[i].log);
-                    } else if (head[h].name.match(/id|depth/)) {
-                        html += index.makeCellHtml(head[h].name, data[i], i, data);
-                    } else {
-                        html += '          <td class="_guideIndexTable__' + head[h].name + '">' + data[i][head[h].name].replace(/\n/g, '<br />') + '</td>';
-                    }
-                }
-
+                html += index.makeRowHtml(data[i], i, data);
                 html += '        </tr>';
 
                 if (index.count[data[i].status]) {
@@ -156,8 +138,33 @@
                     index.count[data[i].status] = 1;
                 }
 
-                if (!(data[i].status === 'delete')) {
+                if (data[i].status !== 'delete') {
                     index.count.total++;
+                }
+            }
+
+            return html;
+        },
+        makeRowHtml: function (rowData, i, data) {
+            var head = guideIndex.head;
+            var headLength = head.length;
+            var html = '';
+
+            for (var h = 0; h < headLength; h++) {
+                if (head[h].name === 'path') {
+                    html += index.makePathHtml(rowData.path);
+                } else if (head[h].name === 'status') {
+                    html += index.makeStatusHtml(rowData.status);
+                } else if (head[h].name === 'create') {
+                    html += index.makeCreateHtml(rowData.create);
+                } else if (head[h].name === 'update') {
+                    html += index.makeUpdateHtml(rowData.log);
+                } else if (head[h].name === 'log') {
+                    html += index.makeLogHtml(rowData.log);
+                } else if (head[h].name.match(/id|depth/)) {
+                    html += index.makeCellHtml(head[h].name, rowData, i, data);
+                } else {
+                    html += '          <td class="_guideIndexTable__' + head[h].name + '">' + rowData[head[h].name].replace(/\n/g, '<br />') + '</td>';
                 }
             }
 
@@ -210,6 +217,7 @@
             return html;
         },
         makeUpdateHtml: function (log) {
+            var logLength = log.length;
             var last = null;
             var html = '';
 
@@ -223,8 +231,8 @@
                 return 0;
             });
 
-            if (log.length) {
-                last = log[log.length - 1];
+            if (logLength) {
+                last = log[logLength - 1];
 
                 html += '          <td class="_guideIndexTable__update" data-date="' + last.date + '">' + last.date + '</td>';
 
@@ -238,6 +246,7 @@
             return html;
         },
         makeLogHtml: function (log) {
+            var logLength = log.length;
             var html = '';
 
             log.sort(function (a, b) {
@@ -252,18 +261,18 @@
 
             html += '          <td class="_guideIndexTable__log">';
 
-            if (log.length) {
+            if (logLength) {
                 html += '            <ul class="_guideIndexLog">';
             }
 
-            for (var i = 0; i < log.length; i++) {
+            for (var i = 0; i < logLength; i++) {
                 html += '              <li class="_guideIndexLog__item" data-date="' + log[i].date + '">';
                 html += '                <span class="_guideIndexLog__date">' + log[i].date + '</span>';
                 html += '                <span class="_guideIndexLog__text">' + log[i].text.replace(/\n/g, '<br />') + '</span>';
                 html += '              </li>';
             }
 
-            if (log.length) {
+            if (logLength) {
                 html += '            </ul>';
             }
 
@@ -290,10 +299,10 @@
 
     // monacoSet
     function monacoSet($view, value, language, maxHeight, customOptions, customPaths) {
-        if (!(typeof customOptions === 'object')) {
+        if (typeof customOptions !== 'object') {
             customOptions = {};
         }
-        if (!(typeof customPaths === 'object')) {
+        if (typeof customPaths !== 'object') {
             customPaths = {};
         }
 
@@ -326,23 +335,16 @@
         require(['vs/editor/editor.main'], function () {
             editor.obj = monaco.editor.create($view.get(0), options);
 
-            if (!(typeof maxHeight === 'number')) return;
-
-            var ignoreEvent = false;
+            if (typeof maxHeight !== 'number') return;
 
             function updateHeight() {
                 var contentWidth = $view.width();
                 var contentHeight = Math.min(maxHeight, editor.obj.getContentHeight());
 
-                try {
-                    ignoreEvent = true;
-                    editor.obj.layout({
-                        width: contentWidth,
-                        height: contentHeight,
-                    });
-                } finally {
-                    ignoreEvent = false;
-                }
+                editor.obj.layout({
+                    width: contentWidth,
+                    height: contentHeight,
+                });
             }
 
             editor.obj.onDidContentSizeChange(updateHeight);
@@ -554,9 +556,6 @@
 
     // dom ready
     $(function () {
-        var $html = $('html');
-        var $body = $('body');
-
         index.render();
         index.resize();
         index.scroll();
