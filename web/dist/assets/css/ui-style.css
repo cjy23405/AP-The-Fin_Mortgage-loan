@@ -414,6 +414,16 @@ button.uiInput__input {
 .uiBasicButton__text {
     display: block;
 }
+.uiBasicButton__icon {
+    flex: none;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: no-repeat 50% 50% / 100% 100%;
+}
+.uiBasicButton__icon--arrowR {
+    background-image: url('../images/icon/arrow_right.svg');
+}
 .uiBasicButton .onText,
 .uiBasicButton.isActive .offText {
     display: none;
@@ -3134,6 +3144,19 @@ section + .divide {
 /* footerData */
 .footerData::before,
 .footerData::after {
+    content: '';
+    display: table;
+}
+
+/* cardFooterData */
+.cardFooterData {
+    font-size: 12px;
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray500);
+    word-break: break-all;
+}
+.cardFooterData::before,
+.cardFooterData::after {
     content: '';
     display: table;
 }
