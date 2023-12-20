@@ -58,6 +58,28 @@
         legacyAndroidKeypadClosed: new Event('legacyAndroidKeypadClosed'),
     };
 
+    // noUiSlider
+    // https://refreshless.com/nouislider/
+    // init ex: $(element).noUiSlider({/* customOptions */});
+    // method ex: $(element).data('noUiSlider').reset();
+    $.fn.noUiSlider = function (customOption) {
+        var defaultOption = {
+            //
+        };
+
+        this.each(function () {
+            var option = $.extend({}, defaultOption, customOption);
+            var $this = $(this);
+
+            if ($this.data('noUiSlider') || !Boolean(window.noUiSlider)) return;
+
+            noUiSlider.create(this, option);
+            $this.data('noUiSlider', this.noUiSlider);
+        });
+
+        return $(this);
+    };
+
     // UiAccordion
     var UiAccordion = function (target, option) {
         var _ = this;
@@ -2573,6 +2595,49 @@
                 item: $items,
                 opener: $openers,
                 initialOpen: initial,
+            });
+        });
+
+        // range slider
+        $root.find('.jsRangeSlider').each(function () {
+            var $this = $(this);
+            var min = $this.data('min');
+            var max = $this.data('max');
+            var start = $this.data('start');
+            var pips = $this.data('pips');
+
+            pips = JSON.parse(
+                pips.replace(/['"]/g, function (match) {
+                    if (match === "'") {
+                        return '"';
+                    } else if (match === '"') {
+                        return "'";
+                    } else {
+                        return '';
+                    }
+                })
+            );
+
+            $this.noUiSlider({
+                start: start,
+                step: 1,
+                connect: true,
+                range: {
+                    min: min,
+                    max: max,
+                },
+                pips: {
+                    mode: 'steps',
+                    density: 100,
+                    filter: function () {
+                        return 1;
+                    },
+                    format: {
+                        to: function (value) {
+                            return pips[value];
+                        },
+                    },
+                },
             });
         });
 
