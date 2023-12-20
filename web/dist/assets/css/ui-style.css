@@ -2930,6 +2930,23 @@ section + .divide {
     line-height: var(--lineHeightDefault);
     color: var(--systemGray500);
 }
+.searchEmpty__buttonArea {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.searchEmpty__button {
+    flex: none;
+    display: block;
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 100px;
+    background-color: var(--primary600);
+}
 
 /* searchResult */
 .searchResult {
