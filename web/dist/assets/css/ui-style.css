@@ -3193,9 +3193,113 @@ section + .divide {
     color: var(--systemGray500);
     transform: translate(-50%, 0);
 }
-.uiRangeSlider .noUi-value:last-of-type {
+.uiRangeSlider .noUi-value:last-child {
     margin-left: 12px;
     transform: translate(-100%, 0);
+}
+
+/* filterTags */
+.filterTags {
+    display: flex;
+    margin: 0 -24px;
+}
+.filterTags__area {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+.filterTags__area::before,
+.filterTags__area::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+}
+.filterTags__area::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--white) 23.12%, rgba(var(--whiteRgb), 0) 100%);
+}
+.filterTags__area::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--white) 23.12%, rgba(var(--whiteRgb), 0) 100%);
+}
+.filterTags__scroller {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.filterTags__right {
+    flex: none;
+    padding-right: 24px;
+    display: flex;
+    align-items: center;
+}
+.filterTags__button {
+    flex: none;
+    display: block;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--systemGray400);
+    background: no-repeat 50% 50% / 24px 24px var(--white);
+}
+.filterTags__button--filter {
+    background-image: url('../images/icon/filter.svg');
+}
+.filterTags__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.filterTags__list::before,
+.filterTags__list::after {
+    content: '';
+    flex: none;
+    display: block;
+    width: 24px;
+}
+.filterTags__item {
+    flex: none;
+}
+.filterTags__item + .filterTags__item {
+    margin-left: 4px;
+}
+.filterTags__block {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--primary500);
+}
+.filterTags__text {
+    flex: 1;
+    display: block;
+    font-size: 14px;
+    line-height: var(--lineHeightLabel);
+    font-weight: 500;
+    color: var(--white);
+}
+.filterTags__delete {
+    flex: none;
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    margin-left: 2px;
+    background: url('../images/icon/filter_delete.svg') no-repeat 50% 50% / 100% 100%;
+}
+.filterTags__delete::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
 }
 
 /* filterCheck */
