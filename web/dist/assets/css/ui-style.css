@@ -3181,6 +3181,58 @@ section + .divide {
     transform: translate(-100%, 0);
 }
 
+/* filterCheck */
+.filterCheck::before {
+    content: '';
+    display: table;
+}
+.filterCheck__list {
+    list-style: none;
+    margin: -10px 0 0 -10px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.filterCheck__item {
+    flex: none;
+    padding: 10px 0 0 10px;
+}
+.filterCheck__block {
+    position: relative;
+}
+.filterCheck__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+.filterCheck__button {
+    display: block;
+    border-radius: 8px;
+    border: 1px solid var(--systemGray100);
+    background-color: var(--systemGray100);
+    padding: 9px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+.filterCheck__text {
+    display: block;
+    font-size: 14px;
+    line-height: var(--lineHeightLabel);
+    font-weight: 500;
+    color: var(--systemGray500);
+    transition: color 0.2s;
+}
+.filterCheck__input:focus-visible + .filterCheck__button {
+    outline: 2px dashed;
+}
+.filterCheck__input:checked + .filterCheck__button {
+    border-color: var(--primary400);
+    background-color: var(--primary50);
+}
+.filterCheck__input:checked + .filterCheck__button .filterCheck__text {
+    font-weight: 600;
+    color: var(--primary600);
+}
+
 /* pdfViewer */
 .pdfViewer {
     flex: 1;
