@@ -3500,6 +3500,79 @@ section + .divide {
     max-width: 260px;
 }
 
+/* tags */
+.tags::before {
+    content: '';
+    display: table;
+}
+.tags__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: -4px 0 0 -4px;
+    padding: 0;
+}
+.tags__item {
+    flex: none;
+    padding: 4px 0 0 4px;
+}
+.tags__block {
+    font-size: 11px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--systemGray700);
+    padding: 2px 6px;
+    border-radius: 100px;
+    background-color: var(--systemGray100);
+}
+
+/* cardList */
+.cardList {
+    display: block;
+}
+.cardList__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.cardList__item + .cardList__item {
+    margin-top: 40px;
+}
+.cardList__block {
+    display: flex;
+    align-items: flex-start;
+}
+.cardList__image {
+    flex: none;
+    width: 50px;
+    margin: 0 16px 0 8px;
+}
+.cardList__info {
+    flex: 1;
+    min-width: 0;
+}
+.cardList__name {
+    margin: 0;
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 600;
+    word-break: break-all;
+}
+.cardList__brand {
+    margin: 2px 0 0;
+    font-size: 14px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--systemGray500);
+    word-break: break-all;
+}
+.cardList .benefitSummary {
+    margin-top: 10px;
+}
+.cardList .tags {
+    margin-top: 10px;
+}
+
 /* pdfViewer */
 .pdfViewer {
     flex: 1;
