@@ -49,7 +49,538 @@
                 <!-- contents -->
                 <article class="contentsWrap">
                     <div class="pageContents">
-                        <h1 class="titleLarge rowGroup">신용카드 <span class="colorEmphasis">34</span>개를 찾았어요</h1>
+                        <h1 class="titleLarge">신용카드 <span class="colorEmphasis">34</span>개를 찾았어요</h1>
+
+                        <div class="filterTags">
+                            <div class="filterTags__area">
+                                <div class="filterTags__scroller">
+                                    <ul class="filterTags__list">
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">전체 가맹점</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">교통</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">통신</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">푸드</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">마트/편의점</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">쇼핑</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        <li class="filterTags__item">
+                                            <div class="filterTags__block">
+                                                <span class="filterTags__text">주유</span>
+                                                <button type="button" class="uiButton filterTags__delete">
+                                                    <span class="forA11y">삭제</span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="filterTags__right">
+                                <button type="button" class="uiButton filterTags__button filterTags__button--filter" data-layer-open="layerFilter">
+                                    <span class="forA11y">필터 설정</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- layer: 필터 -->
+                        <div class="layerWrap layerWrap--full" data-layer="layerFilter" data-layer-display="flex">
+                            <div class="layerContainer">
+                                <section class="fullLayer">
+                                    <div class="fullLayer__head">
+                                        <div class="fullLayer__headRight">
+                                            <button type="button" class="uiButton fullLayer__button fullLayer__button--close" data-role="layerClose">
+                                                <span class="forA11y">레이어 닫기</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="fullLayer__body">
+                                        <div class="fullLayer__bodyInner">
+                                            <h2 class="titleLarge rowGroup">
+                                                상세검색을 위한<br />
+                                                카드 특징을 선택해주세요
+                                            </h2>
+
+                                            <div>
+                                                <section class="rowGroup">
+                                                    <h2 class="titleSmall colorGray rowBlock">혜택 종류</h2>
+
+                                                    <div class="filterCheck">
+                                                        <ul class="filterCheck__list">
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_001" />
+                                                                    <label for="filterCheck001_001" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🏬 전체 가맹점</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_002" />
+                                                                    <label for="filterCheck001_002" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🚌 교통</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_003" />
+                                                                    <label for="filterCheck001_003" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">📱 통신</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_004" />
+                                                                    <label for="filterCheck001_004" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🥘 푸드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_005" />
+                                                                    <label for="filterCheck001_005" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">⛽️ 주유/자동차</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_006" />
+                                                                    <label for="filterCheck001_006" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🛒 마트/편의점</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_007" />
+                                                                    <label for="filterCheck001_007" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🎁 쇼핑/패션</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_008" />
+                                                                    <label for="filterCheck001_008" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">☕️ ️카페/베이커리</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_009" />
+                                                                    <label for="filterCheck001_009" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🎬 ️영화/문화</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_010" />
+                                                                    <label for="filterCheck001_010" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">✨ 생활/기타</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_011" />
+                                                                    <label for="filterCheck001_011" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">📚 서점/문구</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_012" />
+                                                                    <label for="filterCheck001_012" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">📝 교육/육아</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_013" />
+                                                                    <label for="filterCheck001_013" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">💰금융/공과금</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_014" />
+                                                                    <label for="filterCheck001_014" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🧳 여행/숙박</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_015" />
+                                                                    <label for="filterCheck001_015" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">🎡 레저/스포츠</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck001_016" />
+                                                                    <label for="filterCheck001_016" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">💄 뷰티</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </section>
+
+                                                <section class="rowGroup">
+                                                    <h2 class="titleSmall colorGray rowBlock">혜택 방식</h2>
+
+                                                    <div class="filterCheck">
+                                                        <ul class="filterCheck__list">
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck002_001" />
+                                                                    <label for="filterCheck002_001" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">할인</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck002_002" />
+                                                                    <label for="filterCheck002_002" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">적립</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </section>
+
+                                                <section class="rowGroup">
+                                                    <h2 class="titleSmall colorGray rowBlock">카드사</h2>
+
+                                                    <div class="filterCheck">
+                                                        <ul class="filterCheck__list">
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_001" />
+                                                                    <label for="filterCheck003_001" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">KB국민카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_002" />
+                                                                    <label for="filterCheck003_002" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">신한카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_003" />
+                                                                    <label for="filterCheck003_003" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">NH농협카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_004" />
+                                                                    <label for="filterCheck003_004" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">하나카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_005" />
+                                                                    <label for="filterCheck003_005" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">IBK기업은행</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_006" />
+                                                                    <label for="filterCheck003_006" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">우리카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_007" />
+                                                                    <label for="filterCheck003_007" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">삼성카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_008" />
+                                                                    <label for="filterCheck003_008" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">현대카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_009" />
+                                                                    <label for="filterCheck003_009" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">롯데카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                            <li class="filterCheck__item">
+                                                                <div class="filterCheck__block">
+                                                                    <input type="checkbox" class="filterCheck__input" id="filterCheck003_010" />
+                                                                    <label for="filterCheck003_010" class="filterCheck__button">
+                                                                        <span class="filterCheck__text">BC바로카드</span>
+                                                                    </label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </section>
+
+                                                <section class="rowGroup">
+                                                    <h2 class="titleSmall colorGray rowBlock">연회비 구간</h2>
+
+                                                    <div class="uiRangeSlider">
+                                                        <div
+                                                            class="jsRangeSlider"
+                                                            data-min="0"
+                                                            data-max="4"
+                                                            data-start="[0, 2]"
+                                                            data-pips="['0', '1만', '3만', '10만', '10만 초과']"
+                                                            id="annualFeeRange"
+                                                        ></div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="fullLayer__foot">
+                                        <div class="uiButtons uiButtons--noMargin">
+                                            <ul class="uiButtons__list">
+                                                <li class="uiButtons__item">
+                                                    <button type="button" class="uiButton uiBasicButton">
+                                                        <span class="uiBasicButton__text">적용하기</span>
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <!-- //layer: 필터 -->
+
+                        <!-- Case : 결과 없을 때 -->
+                        <div class="searchEmpty">
+                            <div class="searchEmpty__illust"></div>
+                            <p class="searchEmpty__title">
+                                찾으시는 카드가 없어요.<br />
+                                카드 특징을 바꾸거나 줄여보세요.
+                            </p>
+                            <div class="searchEmpty__buttonArea">
+                                <button type="button" class="uiButton searchEmpty__button">다시 검색하기</button>
+                            </div>
+                        </div>
+                        <!-- //Case : 결과 없을 때 -->
+
+                        <!-- Case : 결과 있을 때 -->
+                        <div class="cardList rowGroup">
+                            <ul class="cardList__list">
+                                <li class="cardList__item">
+                                    <div class="cardList__block">
+                                        <div class="cardList__image">
+                                            <!-- -->
+                                        </div>
+                                        <div class="cardList__info">
+                                            <div class="cardList__name">zgm.play++카드</div>
+                                            <div class="cardList__brand">NH농협카드</div>
+                                            <div class="benefitSummary">
+                                                <ul class="benefitSummary__list">
+                                                    <li class="benefitSummary__item">
+                                                        <div class="benefitSummary__block">
+                                                            <div class="benefitSummary__key">🏬 전체 가맹점</div>
+                                                            <div class="benefitSummary__val">
+                                                                <div class="benefitSummary__figure">1.3%</div>
+                                                                <div class="benefitSummary__text">할인</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="benefitSummary__item">
+                                                        <div class="benefitSummary__block">
+                                                            <div class="benefitSummary__key">🥘 ️푸드</div>
+                                                            <div class="benefitSummary__val">
+                                                                <div class="benefitSummary__figure">99.99%</div>
+                                                                <div class="benefitSummary__text">할인</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="tags">
+                                                <ul class="tags__list">
+                                                    <li class="tags__item">
+                                                        <div class="tags__block">연회비 10,000원</div>
+                                                    </li>
+                                                    <li class="tags__item">
+                                                        <div class="tags__block">전월실적 30만원 이상</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <a href="" class="cardList__link">
+                                            <span class="forA11y">상세보기</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="cardList__item">
+                                    <div class="cardList__block">
+                                        <div class="cardList__image">
+                                            <!-- -->
+                                        </div>
+                                        <div class="cardList__info">
+                                            <div class="cardList__name">My WE:SH 카드</div>
+                                            <div class="cardList__brand">KB국민카드</div>
+                                            <div class="benefitSummary">
+                                                <ul class="benefitSummary__list">
+                                                    <li class="benefitSummary__item">
+                                                        <div class="benefitSummary__block">
+                                                            <div class="benefitSummary__key">🏬 전체 가맹점</div>
+                                                            <div class="benefitSummary__val">
+                                                                <div class="benefitSummary__figure">1.3%</div>
+                                                                <div class="benefitSummary__text">할인</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="benefitSummary__item">
+                                                        <div class="benefitSummary__block">
+                                                            <div class="benefitSummary__key">🥘 ️푸드</div>
+                                                            <div class="benefitSummary__val">
+                                                                <div class="benefitSummary__figure">99.99%</div>
+                                                                <div class="benefitSummary__text">할인</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="tags">
+                                                <ul class="tags__list">
+                                                    <li class="tags__item">
+                                                        <div class="tags__block">연회비 10,000원</div>
+                                                    </li>
+                                                    <li class="tags__item">
+                                                        <div class="tags__block">전월실적 30만원 이상</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <a href="" class="cardList__link">
+                                            <span class="forA11y">상세보기</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li class="cardList__item">
+                                    <div class="cardList__block">
+                                        <div class="cardList__image">
+                                            <!-- -->
+                                        </div>
+                                        <div class="cardList__info">
+                                            <div class="cardList__name">삼성카드 & MILEAGE PLATINUM (스카이패스)</div>
+                                            <div class="cardList__brand">삼성카드</div>
+                                            <div class="benefitSummary">
+                                                <ul class="benefitSummary__list">
+                                                    <li class="benefitSummary__item">
+                                                        <div class="benefitSummary__block">
+                                                            <div class="benefitSummary__key">🏬 전체 가맹점</div>
+                                                            <div class="benefitSummary__val">
+                                                                <div class="benefitSummary__figure">1.3%</div>
+                                                                <div class="benefitSummary__text">할인</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li class="benefitSummary__item">
+                                                        <div class="benefitSummary__block">
+                                                            <div class="benefitSummary__key">🥘 ️푸드</div>
+                                                            <div class="benefitSummary__val">
+                                                                <div class="benefitSummary__figure">99.99%</div>
+                                                                <div class="benefitSummary__text">할인</div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="tags">
+                                                <ul class="tags__list">
+                                                    <li class="tags__item">
+                                                        <div class="tags__block">연회비 10,000원</div>
+                                                    </li>
+                                                    <li class="tags__item">
+                                                        <div class="tags__block">전월실적 30만원 이상</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <a href="" class="cardList__link">
+                                            <span class="forA11y">상세보기</span>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- //Case : 결과 있을 때 -->
                     </div>
                 </article>
                 <!-- //contents -->
@@ -61,6 +592,22 @@
         <!-- 2023.12.29 : add : noUiSlider 라이브러리 추가 -->
         <script type="text/javascript" src="../../assets/lib/noUiSlider/nouislider.min.js"></script>
         <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <script>
+            $(function () {
+                // DD : 연회비 set event
+                $('#annualFeeRange')
+                    .data('noUiSlider')
+                    .on('set', function (values, handle, unencoded, tap, positions, noUiSlider) {
+                        console.log('noUiSlider set', values, handle, unencoded, tap, positions, noUiSlider);
+                    });
+
+                // DD : 연회비 get
+                console.log($('#annualFeeRange').data('noUiSlider').get(true));
+
+                // DD : 연회비 set
+                $('#annualFeeRange').data('noUiSlider').set([2, 3]);
+            });
+        </script>
         <!-- //script -->
     </body>
 </html>
