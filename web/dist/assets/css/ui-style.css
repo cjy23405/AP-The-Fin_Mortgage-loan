@@ -3354,6 +3354,76 @@ section + .divide {
     color: var(--primary600);
 }
 
+/* benefitDetail */
+.benefitDetail {
+    display: block;
+}
+.benefitDetail__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.benefitDetail__item {
+    border: 1px solid var(--systemGray200);
+    border-radius: 10px;
+}
+.benefitDetail__item + .benefitDetail__item {
+    margin-top: 20px;
+}
+.benefitDetail__head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+}
+.benefitDetail__title {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    word-break: break-all;
+}
+.benefitDetail__opener {
+    flex: none;
+    margin-left: 20px;
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+.benefitDetail__opener::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url('../images/icon/benefit_opener.svg') no-repeat 50% 50% / 100% 100%;
+    transition: transform 0.3s;
+}
+.benefitDetail__opener.jsAccordionActive::before {
+    transform: rotate(180deg);
+}
+.benefitDetail__opener::after {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+}
+.benefitDetail__layer {
+    border-radius: 0 0 9px 9px;
+}
+.benefitDetail__contents {
+    border-top: 1px solid var(--systemGray200);
+    padding: 16px;
+    border-radius: 0 0 9px 9px;
+    background-color: var(--systemGray50);
+}
+
 /* pdfViewer */
 .pdfViewer {
     flex: 1;
@@ -3399,6 +3469,19 @@ section + .divide {
 }
 .cardFooterData::before,
 .cardFooterData::after {
+    content: '';
+    display: table;
+}
+
+/* benefitData */
+.benefitData {
+    font-size: 13px;
+    line-height: var(--lineHeightDefault);
+    color: var(--systemGray700);
+    word-break: break-all;
+}
+.benefitData::before,
+.benefitData::after {
     content: '';
     display: table;
 }
