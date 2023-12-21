@@ -3424,6 +3424,75 @@ section + .divide {
     background-color: var(--systemGray50);
 }
 
+/* benefitSummary */
+.benefitSummary {
+    display: block;
+}
+.benefitSummary__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid var(--systemGray200);
+    background-color: var(--systemGray50);
+    box-sizing: border-box;
+}
+.benefitSummary__item + .benefitSummary__item::before {
+    content: '';
+    display: block;
+    margin: 0 14px;
+    height: 1px;
+    background-color: var(--systemGray200);
+}
+.benefitSummary__block {
+    display: flex;
+    align-items: center;
+    padding: 6px 14px;
+}
+.benefitSummary__item:first-child .benefitSummary__block {
+    padding-top: 11px;
+}
+.benefitSummary__item:last-child .benefitSummary__block {
+    padding-bottom: 11px;
+}
+.benefitSummary__key {
+    flex: none;
+    margin-right: 8px;
+    font-size: 14px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--systemGray700);
+}
+.benefitSummary__val {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.benefitSummary__figure {
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 600;
+    color: var(--primary600);
+}
+.benefitSummary__text {
+    font-size: 13px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--systemGray700);
+}
+.benefitSummary__text + .benefitSummary__figure,
+.benefitSummary__figure + .benefitSummary__text {
+    margin-left: 2px;
+}
+
+/* benefitSummary--center */
+.benefitSummary--center .benefitSummary__list {
+    margin: 0 auto;
+    max-width: 260px;
+}
+
 /* pdfViewer */
 .pdfViewer {
     flex: 1;
