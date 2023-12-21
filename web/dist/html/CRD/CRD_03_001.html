@@ -49,6 +49,16 @@
                 <!-- contents -->
                 <article class="contentsWrap">
                     <div class="pageContents">
+                        <h1 class="forA11y">카드 상세 페이지</h1>
+
+                        <section class="rowGroup cardDetailHeader">
+                            <div class="cardImage" data-src="https://api.card-gorilla.com:8080/storage/card/87/card_img/20239/87card.png"></div>
+                            <div class="rowBlockGroup alignCenter">
+                                <h3 class="titleLarge">DA@카드의정석</h3>
+                                <p class="titleDefault colorGraySecondary">우리카드</p>
+                            </div>
+                        </section>
+
                         <div class="contentFooter">
                             <div class="footerInfoWrap">
                                 <section>
@@ -87,5 +97,18 @@
         <script type="text/javascript" src="../../assets/lib/noUiSlider/nouislider.min.js"></script>
         <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
         <!-- //script -->
+
+        <script>
+            $('.cardImage').each(function () {
+                let url = $(this).data('src');
+
+                if (url) {
+                    let img = document.createElement('img');
+                    img.src = url;
+                    img.onload = () => $(this).removeAttr('data-src').attr('aria-hidden', true).html(img);
+                    img.onerror = () => this.classList.add('noCard');
+                }
+            });
+        </script>
     </body>
 </html>

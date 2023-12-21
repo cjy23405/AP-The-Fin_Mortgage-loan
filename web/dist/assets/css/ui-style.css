@@ -2324,6 +2324,35 @@ section + .divide {
     background-position: center;
 }
 
+.cardImage {
+    position: relative;
+    width: 50px;
+    overflow: hidden;
+}
+.cardImage.noCard {
+    background: transparent url(../images/illustration/card_default.svg) no-repeat top center / 100% auto;
+}
+.cardImage::after {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-bottom: 158.577%;
+}
+.cardImage > img {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.cardImage > img + * {
+    display: none;
+}
+
+.cardDetailHeader .cardImage {
+    margin: auto;
+    width: 100px;
+}
+
 /* uiSearchButton */
 .uiSearchButton {
     position: relative;
