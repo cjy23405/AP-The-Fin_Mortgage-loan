@@ -333,6 +333,71 @@
                 </section>
 
                 <section class="_guideSection">
+                    <h2 class="_guideSection__title">.noUiSlider()</h2>
+
+                    <script type="code-view" data-language="javascript">
+                        $('.jsRangeSlider').noUiSlider(options);
+                    </script>
+
+                    <div class="_guideDescription">제이쿼리 지원이 안되는 noUiSlider 라이브러리를 제이쿼리를 통해 쓸 수 있게 만든 제이쿼리 함수</div>
+
+                    <div class="_guideTable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="_guideTable__name">Name</th>
+                                    <th class="_guideTable__type">Type</th>
+                                    <th class="_guideTable__default">Default</th>
+                                    <th class="_guideTable__description">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="_guideTable__name">options</td>
+                                    <td class="_guideTable__type">object</td>
+                                    <td class="_guideTable__default"></td>
+                                    <td class="_guideTable__description">
+                                        noUiSlider 라이브러리에서 지원하는 모든 옵션.<br />
+                                        라이브러리 문서 참고<br />
+                                        <a href="https://refreshless.com/nouislider/" target="_blank">https://refreshless.com/nouislider/</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Events</h3>
+
+                        <script type="code-view" data-language="javascript">
+                            $('.jsRangeSlider').data('noUiSlider').on('set', function(values, handle, unencoded, tap, positions, noUiSlider){
+                                console.log('noUiSlider set');
+                            });
+                        </script>
+
+                        <div class="_guideDescription">
+                            noUiSlider 라이브러리에서 지원하는 모든 이벤트 사용 가능<br />
+                            라이브러리 문서 참고<br />
+                            <a href="https://refreshless.com/nouislider/" target="_blank">https://refreshless.com/nouislider/</a>
+                        </div>
+                    </section>
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Methods</h3>
+
+                        <script type="code-view" data-language="javascript">
+                            $('.jsRangeSlider').data('noUiSlider').get(true);
+                        </script>
+
+                        <div class="_guideDescription">
+                            noUiSlider 라이브러리에서 지원하는 모든 메소드 사용 가능<br />
+                            라이브러리 문서 참고<br />
+                            <a href="https://refreshless.com/nouislider/" target="_blank">https://refreshless.com/nouislider/</a>
+                        </div>
+                    </section>
+                </section>
+
+                <section class="_guideSection">
                     <h2 class="_guideSection__title">.invalid()</h2>
 
                     <script type="code-view" data-language="javascript">
