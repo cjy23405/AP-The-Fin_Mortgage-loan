@@ -2845,10 +2845,17 @@ section + .divide {
     font-size: 13px;
     line-height: var(--lineHeightDefault);
     color: var(--systemGray500);
+    min-height: 16px;
     background: url('../images/icon/info.svg') no-repeat 0 0 / 16px 16px;
 }
 .infoText + .infoText {
     margin-top: 8px;
+}
+
+/* infoText--small */
+.infoText--small {
+    font-size: 12px;
+    line-height: var(--lineHeightDefault);
 }
 
 /* basicList */
