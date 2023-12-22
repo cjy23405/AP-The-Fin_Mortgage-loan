@@ -3310,7 +3310,7 @@ section + .divide {
 }
 .filterTags__right {
     flex: none;
-    padding-right: 24px;
+    padding: 10px 24px 10px 0;
     display: flex;
     align-items: center;
 }
@@ -3331,7 +3331,7 @@ section + .divide {
     display: flex;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 10px 0;
 }
 .filterTags__list::before,
 .filterTags__list::after {
@@ -3536,27 +3536,30 @@ section + .divide {
     padding-bottom: 11px;
 }
 .benefitSummary__key {
-    flex: none;
+    flex: 1;
+    min-width: 0;
     margin-right: 8px;
     font-size: 14px;
     line-height: var(--lineHeightDefault);
     font-weight: 500;
     color: var(--systemGray700);
+    word-break: break-all;
 }
 .benefitSummary__val {
-    flex: 1;
-    min-width: 0;
+    flex: none;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 .benefitSummary__figure {
+    min-width: 0;
     font-size: 16px;
     line-height: var(--lineHeightDefault);
     font-weight: 600;
     color: var(--primary600);
 }
 .benefitSummary__text {
+    min-width: 0;
     font-size: 13px;
     line-height: var(--lineHeightDefault);
     font-weight: 500;
@@ -3571,6 +3574,90 @@ section + .divide {
 .benefitSummary--center .benefitSummary__list {
     margin: 0 auto;
     max-width: 260px;
+}
+
+/* tags */
+.tags::before {
+    content: '';
+    display: table;
+}
+.tags__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: -4px 0 0 -4px;
+    padding: 0;
+}
+.tags__item {
+    flex: none;
+    padding: 4px 0 0 4px;
+}
+.tags__block {
+    font-size: 11px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--systemGray700);
+    padding: 2px 6px;
+    border-radius: 100px;
+    background-color: var(--systemGray100);
+}
+
+/* cardList */
+.cardList {
+    display: block;
+}
+.cardList__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.cardList__item + .cardList__item {
+    margin-top: 40px;
+}
+.cardList__block {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+}
+.cardList__image {
+    flex: none;
+    width: 50px;
+    margin: 0 16px 0 8px;
+}
+.cardList__info {
+    flex: 1;
+    min-width: 0;
+}
+.cardList__name {
+    margin: 0;
+    font-size: 16px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 600;
+    word-break: break-all;
+}
+.cardList__brand {
+    margin: 2px 0 0;
+    font-size: 14px;
+    line-height: var(--lineHeightDefault);
+    font-weight: 500;
+    color: var(--systemGray500);
+    word-break: break-all;
+}
+.cardList .benefitSummary {
+    margin-top: 10px;
+}
+.cardList .tags {
+    margin-top: 10px;
+}
+.cardList__link {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 /* pdfViewer */
