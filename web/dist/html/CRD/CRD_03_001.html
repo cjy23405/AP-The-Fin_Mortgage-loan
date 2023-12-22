@@ -53,8 +53,9 @@
 
                         <section class="rowGroup cardDetailHeader">
                             <!-- 가로 테스트 이미지  -->
-                            <div class="cardImage" data-src="https://api.card-gorilla.com:8080/storage/card/2330/card_img/24131/2330card.png"></div>
-                            <!-- <div class="cardImage" data-src="https://api.card-gorilla.com:8080/storage/card/87/card_img/20239/87card.png"></div> -->
+                            <div class="cardImage">
+                                <img src="https://api.card-gorilla.com:8080/storage/card/87/card_img/20239/87card.png" alt="" />
+                            </div>
                             <div class="rowBlockGroup alignCenter">
                                 <h3 class="titleLarge">DA@카드의정석</h3>
                                 <p class="titleDefault colorGraySecondary">우리카드</p>
@@ -317,27 +318,5 @@
         <script type="text/javascript" src="../../assets/lib/noUiSlider/nouislider.min.js"></script>
         <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
         <!-- //script -->
-
-        <script>
-            $('.cardImage').each(function () {
-                let url = $(this).data('src');
-
-                if (url) {
-                    let img = document.createElement('img');
-                    img.src = url;
-                    img.onload = () => {
-                        // 혹시나 가로 이미지가 들어왔을때
-                        if (img.width > img.height) {
-                            img.style.transform = 'matrix(0, 1, 1, 0, 0, 0)';
-                            img.style.transformOrigin = '0 0';
-                            img.style.height = $(this).width() + 'px';
-                            img.style.width = 'auto';
-                        }
-                        $(this).attr('aria-hidden', true).html(img);
-                    };
-                    img.onerror = () => this.classList.add('noCard');
-                }
-            });
-        </script>
     </body>
 </html>

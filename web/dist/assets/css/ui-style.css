@@ -2328,8 +2328,6 @@ section + .divide {
     position: relative;
     width: 50px;
     overflow: hidden;
-}
-.cardImage.noCard {
     background: transparent url(../images/illustration/card_default.svg) no-repeat top center / 100% auto;
 }
 .cardImage::after {
