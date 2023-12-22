@@ -16,7 +16,11 @@
 
     // min 포함 max 불포함 랜덤 정수
     function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
+        var range = max - min;
+        var array = new Uint32Array(1);
+        crypto.getRandomValues(array);
+        var re = array[0] / 4294967295;
+        return Math.floor(re * range) + min;
     }
 
     // 랜덤 문자열
