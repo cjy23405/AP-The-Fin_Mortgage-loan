@@ -2352,6 +2352,50 @@ section + .divide {
     margin: auto;
     width: 100px;
 }
+.cardDetailHeader .titleDefault {
+    margin-top: 4px;
+}
+.cardDetailBody {
+    margin-top: 0;
+}
+.cardDetailBody .betweenInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 0;
+    margin-top: 10px;
+}
+.cardDetailBody .betweenInfo > * {
+    width: 50%;
+}
+.cardDetailBody .betweenInfo dt {
+    font-size: 14px;
+    line-height: var(--lineHeightParagraph);
+    color: var(--systemGray500);
+}
+.cardDetailBody .betweenInfo dt.title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: var(--lineHeightDefault);
+    color: var(--mainBlack);
+}
+.cardDetailBody .betweenInfo dd {
+    margin: 0;
+    text-align: right;
+    font-weight: 500;
+}
+.cardDetailBody .betweenInfo + .betweenInfo {
+    border-top: 1px solid var(--systemGray200);
+    padding-top: 20px;
+    margin-top: 20px;
+}
+.cardDetailBody .roundBox_gray2Box {
+    margin: 30px 0;
+}
+.cardDetailBody .benefitDetail {
+    margin-top: 10px;
+}
 
 /* uiSearchButton */
 .uiSearchButton {
