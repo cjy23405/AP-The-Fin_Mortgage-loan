@@ -2167,6 +2167,9 @@ section + .divide {
 .loanResultListItems {
     margin-bottom: 30px;
 }
+.loanResultListItems > .noContentBox {
+    margin: 80px auto 0;
+}
 .loanResultListItem {
     display: flex;
     padding: 20px 0;

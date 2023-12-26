@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" class="themeThePin">
+    <head>
+        <title>AP The Fin - 주택담보대출</title>
+
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- style -->
+        <link type="text/css" rel="stylesheet" href="../../assets/css/default.css" />
+        <!-- //style -->
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- loading -->
+            <div class="uiLoading">
+                <div class="uiLoading__block">
+                    <div class="uiLoading__object"></div>
+                    <div class="uiLoading__text"></div>
+                </div>
+            </div>
+            <!-- //loading -->
+
+            <!-- toast alert -->
+            <div class="uiToastAlert" id="globalToastAlert"></div>
+            <!-- //toast alert -->
+
+            <div class="layoutWrap">
+                <!-- top area -->
+                <div class="fixTopWrap">
+                    <!-- header -->
+                    <header class="header">
+                        <div class="header__right">
+                            <button type="button" class="uiButton header__button header__button--close">
+                                <span class="forA11y">닫기</span>
+                            </button>
+                        </div>
+                    </header>
+                    <!-- //header -->
+                </div>
+                <!-- //top area -->
+
+                <!-- contents -->
+                <article class="contentsWrap">
+                    <div class="pageContents">
+                        <h1 class="forA11y">결과 리스트</h1>
+
+                        <h3 class="titleLarge">현재 갈아탈 수 있는<br />대출 상품이 없어요 😔</h3>
+                        <p class="icon_apartment_gray_box18 textLabel1 colorGray flexBox rowBlock rowBottomNone">송도웰카운티1단지</p>
+                        <section class="rowGroup">
+                            <div class="tabContents jsUiTabPanel">
+                                <div class="tabContents__Header">
+                                    <ul>
+                                        <li>
+                                            <button type="button" class="uiButton" data-tab-open="resultTab1">낮은 금리순</button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="uiButton" data-tab-open="resultTab2">높은 한도순</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tabContents__Body rowBlock">
+                                    <div data-tab="resultTab1">
+                                        <div class="loanResultListItems">
+                                            <div class="noContentBox"></div>
+                                        </div>
+                                    </div>
+                                    <div data-tab="resultTab2">
+                                        <div class="loanResultListItems">
+                                            <div class="noContentBox"></div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="uiButton uiTextButton">미승인 내역 확인하기</a>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </article>
+                <!-- //contents -->
+            </div>
+        </div>
+
+        <!-- script -->
+        <script type="text/javascript" src="../../assets/lib/jquery/jquery-3.7.1.min.js"></script>
+        <!-- 2023.12.29 : add : noUiSlider 라이브러리 추가 -->
+        <script type="text/javascript" src="../../assets/lib/noUiSlider/nouislider.min.js"></script>
+        <script type="text/javascript" src="../../assets/js/ui-script.js"></script>
+        <!-- //script -->
+    </body>
+</html>
