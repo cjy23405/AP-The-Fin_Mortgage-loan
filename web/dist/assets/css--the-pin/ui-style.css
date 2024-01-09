@@ -61,35 +61,38 @@
     background: transparent;
 }
 .themeThePin [class*='icon_reg']::before {
-    background-image: url(../images--the-pin/icon/icon_reg.png);
+    background-image: url('../images--the-pin/icon/how_to_reg.svg');
 }
 .themeThePin [class*='icon_apartment']::before {
-    background-image: url(../images--the-pin/icon/icon_apartment.png);
+    background-image: url('../images--the-pin/icon/apartment.svg');
 }
 .themeThePin [class*='icon_balance']::before {
-    background-image: url(../images--the-pin/icon/icon_balance.png);
+    background-image: url('../images--the-pin/icon/balance.svg');
 }
 .themeThePin [class*='icon_assured']::before {
-    background-image: url(../images--the-pin/icon/icon_assured_workload.png);
+    background-image: url('../images--the-pin/icon/assured_workload.svg');
 }
 
 /* visual images */
 .themeThePin .visImage__building {
-    background-image: url(../images--the-pin/illustration/building.png);
+    background-image: url('../images--the-pin/illustration/building.png');
 }
 .themeThePin .visImage__conPoint {
-    background-image: url(../images--the-pin/illustration/con_point.png);
+    background-image: url('../images--the-pin/illustration/con_point.png');
 }
 .themeThePin .visImage__compareLoan {
-    background-image: url(../images--the-pin/illustration/compare_loan.png);
+    background-image: url('../images--the-pin/illustration/compare_loan.png');
 }
 
 /* checkbox */
-.themeThePin .uiCheckBox.uiCheckBox_circle > span::after {
-    background-image: url(../images--the-pin/icon/icon_check_circle_checked.svg);
-}
 .themeThePin .uiCheckBox > span::after {
-    background-image: url(../images--the-pin/icon/icon_check_checked.svg);
+    background-image: url('../images--the-pin/icon/icon_check_checked.svg');
+}
+.themeThePin .uiCheckBox.uiCheckBox_circle > span::after {
+    background-image: url('../images--the-pin/icon/icon_check_circle_checked.svg');
+}
+.uiCheckBox.uiCheckBox_circleLine > span::after {
+    background-image: url('../images--the-pin/icon/icon_check_circle_line_checked.svg');
 }
 
 /* primarybox */

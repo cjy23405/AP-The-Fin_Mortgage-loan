@@ -2705,6 +2705,104 @@
                     </section>
                 </section>
 
+                <section class="_guideSection">
+                    <h2 class="_guideSection__title">All Check Button</h2>
+
+                    <div class="_guidePreview">
+                        <!-- ==================== view ==================== -->
+
+                        <button type="button" data-all-check="testAllCheckbox">전체 선택</button>
+
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox001" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox001">001 선택</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox002" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox002">002 선택</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox003" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox003">003 선택</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox004" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox004">004 선택</label>
+                            </li>
+                        </ul>
+
+                        <!-- //==================== view ==================== -->
+                    </div>
+                    <!-- ==================== code ==================== -->
+                    <script type="component-code">
+                        <button type="button" data-all-check="testAllCheckbox">전체 선택</button>
+
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox001" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox001">001 선택</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox002" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox002">002 선택</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox003" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox003">003 선택</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="" id="testAllCheckbox004" data-all-check-child="testAllCheckbox" />
+                                <label for="testAllCheckbox004">004 선택</label>
+                            </li>
+                        </ul>
+                    </script>
+                    <!-- //==================== code ==================== -->
+
+                    <section class="_guideSubSection">
+                        <h3 class="_guideSubSection__title">Attribute</h3>
+
+                        <script type="code-view" data-language="html">
+                            <button type="button" data-all-check="testAllCheckbox">전체 선택</button>
+
+                            <input type="checkbox" name="" id="testAllCheckbox001" data-all-check-child="testAllCheckbox" />
+                        </script>
+
+                        <div class="_guideTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="_guideTable__name">Name</th>
+                                        <th class="_guideTable__type">Type</th>
+                                        <th class="_guideTable__default">Default</th>
+                                        <th class="_guideTable__description">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="_guideTable__name">data-all-check</td>
+                                        <td class="_guideTable__type">string</td>
+                                        <td class="_guideTable__default"></td>
+                                        <td class="_guideTable__description">
+                                            전체 체크 기능을 적용 할 버튼에 지정<br />
+                                            data-all-check-child 와 동일한 명칭을 넣어주어야 같은 그룹으로 인식한다
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="_guideTable__name">data-all-check-child</td>
+                                        <td class="_guideTable__type">string</td>
+                                        <td class="_guideTable__default"></td>
+                                        <td class="_guideTable__description">
+                                            전체 체크 기능을 적용 할 체크박스에 지정<br />
+                                            data-all-check 와 동일한 명칭을 넣어주어야 같은 그룹으로 인식한다
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+
                 <nav class="_guideNav" id="guideNav">
                     <div class="_guideNav__block">
                         <ul class="_guideNav__list">

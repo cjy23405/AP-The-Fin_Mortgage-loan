@@ -55,11 +55,10 @@
                         <section class="rowGroup flexBox__cell--flexible">
                             <div class="uiCheckWithBankList">
                                 <div class="uiCheckWithBankList__Header">
-                                    <span>내 주택담보대출</span>
-                                    <label class="uiCheckBox uiCheckBox__hidden">
-                                        <input type="checkbox" data-checkbox-group="bankCheckboxGroupA" data-area-disabled="agreeNextButton" />
-                                        <span>전체 선택</span>
-                                    </label>
+                                    <!-- 2024.01.09 : mod : html 구성 변경 -->
+                                    <h3 class="myLoanTitle">내 주택담보대출</h3>
+                                    <button type="button" class="uiButton allCheckButton" data-all-check="bankCheckboxGroup">전체 선택</button>
+                                    <!-- //2024.01.09 : mod : html 구성 변경 -->
                                 </div>
                                 <ul class="uiCheckWithBankList__Body">
                                     <li>
@@ -72,10 +71,12 @@
                                                 class="imgBank_box40"
                                                 aria-hidden="true"
                                             />
-                                            <input type="checkbox" name="" id="" data-checkbox-group-child="bankCheckboxGroupA" />
+                                            <!-- 2024.01.09 : mod : data-checkbox-group-child 속성 제거 및 data-all-check-child, data-area-disabled, data-area-disabled-type 속성 추가 -->
+                                            <input type="checkbox" name="" id="" data-all-check-child="bankCheckboxGroup" data-area-disabled="nextButton" data-area-disabled-type="multi" />
                                             <span>
                                                 카카오뱅크 주택담보대출
-                                                <strong>19.02% · 5,002,700원</strong>
+                                                <!-- 2024.01.09 : mod : .inlineBlock 추가 -->
+                                                <strong>19.02% · <span class="inlineBlock">5,002,700원</span></strong>
                                             </span>
                                         </label>
                                     </li>
@@ -89,10 +90,12 @@
                                                 class="imgBank_box40"
                                                 aria-hidden="true"
                                             />
-                                            <input type="checkbox" name="" id="" data-checkbox-group-child="bankCheckboxGroupA" />
+                                            <!-- 2024.01.09 : mod : data-checkbox-group-child 속성 제거 및 data-all-check-child, data-area-disabled, data-area-disabled-type 속성 추가 -->
+                                            <input type="checkbox" name="" id="" data-all-check-child="bankCheckboxGroup" data-area-disabled="nextButton" data-area-disabled-type="multi" />
                                             <span>
                                                 KB국민은행 주택담보대출
-                                                <strong>5.4% · 300,002,700원</strong>
+                                                <!-- 2024.01.09 : mod : .inlineBlock 추가 -->
+                                                <strong>5.4% · <span class="inlineBlock">300,002,700원</span></strong>
                                             </span>
                                         </label>
                                     </li>
@@ -101,13 +104,22 @@
                                         <label class="uiCheckBox uiCheckBox_circleLine">
                                             <!-- 2023.12.19 : mod : 금융사 로고 경로 변경 및 onerror 추가 -->
                                             <img src="../../assets/images/bank/토스.png" onerror="this.src = '../../assets/images/common/bank_default.svg'" class="imgBank_box40" aria-hidden="true" />
-                                            <input type="checkbox" name="" id="" data-checkbox-group-child="bankCheckboxGroupA" />
+                                            <!-- 2024.01.09 : mod : data-checkbox-group-child 속성 제거 및 data-all-check-child, data-area-disabled, data-area-disabled-type 속성 추가 -->
+                                            <input type="checkbox" name="" id="" data-all-check-child="bankCheckboxGroup" data-area-disabled="nextButton" data-area-disabled-type="multi" />
                                             <span>
                                                 토스뱅크 주택담보대출
-                                                <strong>19.02% · 5,002,700원</strong>
+                                                <!-- 2024.01.09 : mod : .inlineBlock 추가 -->
+                                                <strong>19.02% · <span class="inlineBlock">5,002,700원</span></strong>
                                             </span>
                                         </label>
                                     </li>
+                                    <!-- 2024.01.09 : add : 버튼 추가 -->
+                                    <li>
+                                        <button type="button" class="uiButton addLoanAccount">
+                                            <span class="addLoanAccount__text">대출계좌 연결하기</span>
+                                        </button>
+                                    </li>
+                                    <!-- //2024.01.09 : add : 버튼 추가 -->
                                 </ul>
                             </div>
                         </section>
@@ -124,7 +136,8 @@
                                 <div class="uiButtons uiButtons--noMargin">
                                     <ul class="uiButtons__list">
                                         <li class="uiButtons__item">
-                                            <button type="button" class="uiButton uiBasicButton" data-area-disabled-target="agreeNextButton" disabled>
+                                            <!-- 2024.01.09 : mod : data-area-disabled-target 속성 값 수정 -->
+                                            <button type="button" class="uiButton uiBasicButton" data-area-disabled-target="nextButton" disabled>
                                                 <span class="uiBasicButton__text">다음</span>
                                             </button>
                                         </li>

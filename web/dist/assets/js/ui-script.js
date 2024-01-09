@@ -54,6 +54,7 @@
     var $doc = $(document);
     var nativeEvent = {
         input: new Event('input'),
+        change: new Event('change'),
         inputClear: new Event('inputClear'),
         lastScroll: new Event('lastScroll'),
         keypadOpened: new Event('keypadOpened'),
@@ -462,7 +463,7 @@
 
             if (_.opener.length && _.item.length) {
                 if (!_.openerItems.is(_.opener)) {
-                    _.openerItems.on('click.uiTabPanel' + _.hashCode, function () {
+                    _.openerItems.on('click.uiTabPanel' + _.hashCode, function (e) {
                         _.openerItemsClick($(this), $(e.target));
                     });
                 }
@@ -2515,6 +2516,19 @@
 
         return $(this);
     };
+
+    // all check
+    $doc.on('click.allCheck', '[data-all-check]', function () {
+        var $this = $(this);
+        var name = $this.attr('data-all-check');
+        var $inputs = $('[data-all-check-child="' + name + '"]');
+
+        $inputs.prop('checked', true).attr('checked', '').trigger('change');
+        $inputs.each(function () {
+            this.dispatchEvent(nativeEvent.input);
+            this.dispatchEvent(nativeEvent.change);
+        });
+    });
 
     // common js
     function uiJSCommon($root) {
