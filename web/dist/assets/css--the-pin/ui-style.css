@@ -54,10 +54,10 @@
     background: var(--primary500);
     color: var(--white);
 }
-.stepListItems li strong {
+.themeThePin .stepListItems li strong {
     color: var(--systemGray700);
 }
-.stepListItems_primarybox {
+.themeThePin .stepListItems_primarybox {
     background: transparent;
 }
 .themeThePin [class*='icon_reg']::before {
@@ -91,7 +91,7 @@
 .themeThePin .uiCheckBox.uiCheckBox_circle > span::after {
     background-image: url('../images--the-pin/icon/icon_check_circle_checked.svg');
 }
-.uiCheckBox.uiCheckBox_circleLine > span::after {
+.themeThePin .uiCheckBox.uiCheckBox_circleLine > span::after {
     background-image: url('../images--the-pin/icon/icon_check_circle_line_checked.svg');
 }
 
