@@ -2549,6 +2549,7 @@
         convertYearTermInput.init($root);
         uiSelect.init($root);
         searchLayerInit($root);
+        lastScrollPageInit($root);
 
         $root.find('[data-layer]').each(function () {
             var $this = $(this);
@@ -2865,6 +2866,33 @@
 
             $this.removeClass('isSelf');
         });
+
+    // last scroll page
+    function lastScrollPageInit($root) {
+        if (!$root) {
+            $root = $doc;
+        }
+
+        var $page = $root.find('.jsLastScrollPage');
+
+        if (!$page.length) return;
+
+        var prevScrollTop = 0;
+
+        $win.on('scroll.lastScrollPage', function () {
+            if ($('html').hasClass('isScrollBlocking')) return;
+
+            var scrollTop = $win.scrollTop();
+            var scrollHeight = document.documentElement.scrollHeight;
+            var height = $win.height();
+
+            if (prevScrollTop < scrollTop && scrollTop >= scrollHeight - height - 1) {
+                document.dispatchEvent(nativeEvent.lastScroll);
+            }
+
+            prevScrollTop = scrollTop;
+        });
+    }
 
     // dom ready
     $(function () {

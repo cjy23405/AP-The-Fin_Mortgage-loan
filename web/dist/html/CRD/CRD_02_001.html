@@ -48,7 +48,8 @@
 
                 <!-- contents -->
                 <article class="contentsWrap">
-                    <div class="pageContents">
+                    <!-- 2024.01.18 : mod : jsLastScrollPage 클래스 값 추가 -->
+                    <div class="pageContents jsLastScrollPage">
                         <h1 class="titleLarge">신용카드 <span class="colorEmphasis">34</span>개를 찾았어요</h1>
 
                         <div class="filterTags">
@@ -615,6 +616,20 @@
                 // DD : 연회비 set
                 $('#annualFeeRange').data('noUiSlider').set([2, 3]);
             });
+
+            /* DD : 마지막 스크롤 이벤트 예시
+            const { createApp, onMounted } = Vue;
+
+            createApp({
+                setup() {
+                    onMounted(() => {
+                        document.addEventListener('lastScroll', () => {
+                            console.log('lastScroll');
+                        });
+                    });
+                },
+            }).mount('#wrap');
+            */
         </script>
         <!-- //script -->
     </body>
