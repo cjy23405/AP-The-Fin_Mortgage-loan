@@ -1851,14 +1851,29 @@
                 uiLayer.close($layer.attr('data-layer'));
             }
         },
+        clear: function ($input) {
+            var _ = uiSelect;
+            var name = $input.attr('data-select-input');
+            var $view = $('[data-select-view="' + name + '"]');
+            var $options = $('[data-select-option="' + name + '"]');
+
+            $options.removeAttr('title').removeClass(_.classNames.active);
+            $view.text('');
+            $input.val('');
+            $input.get(0).dispatchEvent(nativeEvent.input);
+        },
         inputValue: function ($input) {
             var _ = uiSelect;
             var name = $input.attr('data-select-input');
             var inputVal = $input.val();
             var $selected = $('[data-select-option="' + name + '"][data-select-value="' + inputVal + '"]');
 
-            if ($selected.length && !$selected.hasClass(_.classNames.active)) {
-                uiSelect.optionSelected($selected);
+            if ($selected.length) {
+                if (!$selected.hasClass(_.classNames.active)) {
+                    _.optionSelected($selected);
+                }
+            } else {
+                _.clear($input);
             }
         },
     };
